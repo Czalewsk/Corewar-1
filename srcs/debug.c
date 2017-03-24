@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/24 01:42:56 by czalewsk         ###   ########.fr       */
+/*   Created: 2017/03/23 23:41:57 by czalewsk          #+#    #+#             */
+/*   Updated: 2017/03/24 01:52:19 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		main(int ac, char **av)
+void	debug_lxcontent(t_list *lst)
 {
-	t_list		*lex;
+	t_lx	*lex;
 
-	if (ac != 2)
-		return (0);
-	g_wspace = " \t";
-	g_eol = "#;\n";
-	g_delim = ":,";
-
-	ft_printf("PROGRAM STARTED\n");
-	lex = get_lex(av[1]);
-	ft_printf("get_lex OK\n");
-	set_lex(lex);
-	ft_printf("Set_lex OK\n");
-	if (!lex)
-		ft_printf("ERROR LEX IS NULL\n");
-	ft_lstiter(lex, &debug_lxcontent);
-	ft_printf("PROGRAM FINISHED\n");
-	return (0);
+	lex = lst->content;
+	ft_printf("[%2jd][%2jd] %10s | type = %d\n", lex->pos[0], lex->pos[1], lex->word, lex->type);
 }

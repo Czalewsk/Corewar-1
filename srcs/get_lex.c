@@ -12,10 +12,6 @@
 
 #include "lexer.h"
 
-const	char	*g_wspace = " \t";
-const	char	*g_eol = "#;\n";
-const	char	*g_delim = ":,";
-
 void			get_end_word(char const *s, size_t *i)
 {
 	while (s[*i] && !ft_strchr(g_wspace, s[*i]) && !ft_strchr(g_eol, s[*i])
@@ -55,16 +51,18 @@ void			fill_lst(t_list **start, char *line, size_t ln)
 	{
 		end = beg;
 		get_end_word(line, &end);
-		ft_printf("line = %d et %d\n", ln, end - beg);
-		new_lx = lx_init(ft_strsub(line + beg, 0, end - beg), ln, beg);
-		new_lx ? ft_lst_pushend(start, ft_lstnew(new_lx, sizeof(t_lx))) : NULL;
+		if (end - beg > 0)
+		{
+			new_lx = lx_init(ft_strsub(line + beg, 0, end - beg), ln, beg);
+			new_lx ? ft_lst_pushend(start, ft_lstnew(new_lx, sizeof(t_lx))) : NULL;
+			ft_memdel((void**)&new_lx);
+		}
 		if (*(line + end) && ft_strchr(g_delim, *(line + end)))
 		{
 			new_lx = lx_init(ft_strsub(line + end, 0, 1), ln, end);
 			new_lx ? ft_lst_pushend(start, ft_lstnew(new_lx, sizeof(t_lx))) : NULL;
 			ft_memdel((void**)&new_lx);
 		}
-		ft_memdel((void**)&new_lx);
 		beg = (line[end]) ? end + 1 : end;
 	}
 }

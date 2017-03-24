@@ -17,6 +17,10 @@
 # include "./../libft/libft.h"
 # include <fcntl.h>
 
+const	char	*g_wspace;
+const	char	*g_eol;
+const	char	*g_delim;
+
 typedef struct	s_lx
 {
 	int		type;
@@ -29,5 +33,9 @@ typedef struct	s_lx
 void			debug_lxcontent(t_list *lst);
 
 t_list			*get_lex(char *filename);
+
+void			set_lex(t_list *lex);
+
+int				ft_strisnumber(char *str);
 
 #endif

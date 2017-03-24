@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/23 23:41:57 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/24 01:52:19 by czalewsk         ###   ########.fr       */
+/*   Created: 2016/11/03 11:30:46 by xesnault          #+#    #+#             */
+/*   Updated: 2016/11/03 11:30:47 by xesnault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "libft.h"
 
-void	debug_lxcontent(t_list *lst)
+int				ft_strisnumber(char *str)
 {
-	t_lx	*lex;
-
-	lex = lst->content;
-	ft_printf("[%2jd][%2jd] %10s\n", lex->pos[0], lex->pos[1], lex->word);
+	if (*str == '-' || *str == '+')
+		++str;
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		++str;
+	}
+	return (1);
 }
