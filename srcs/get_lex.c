@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/24 09:03:52 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:18:52 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void			get_end_word(char const *s, size_t *i)
 {
+	if (s[(*i)] == '\"' && ++(*i))
+		while (s[(*i)] && s[(*i)] != '\"')
+			++(*i);
 	if (ft_strchr(g_delim, s[(*i)]) && ++(*i))
 		return ;
 	while (s[*i] && !ft_strchr(g_wspace, s[*i]) && !ft_strchr(g_eol, s[*i])
