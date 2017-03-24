@@ -36,6 +36,7 @@ t_lx			*lx_init(char *word, size_t ln, size_t cl)
 
 	if (!word || !(new = (t_lx*)ft_memalloc(sizeof(t_lx))))
 		return (NULL);
+	new->type = -1;
 	new->valeur = -1;
 	new->word = word;
 	new->pos[0] = ln;

@@ -37,14 +37,14 @@ void	set_lex(t_list *lst)
 			lx->type = LABEL;
 		else if (lst->next && lst->next->next && lx->word[0] == '%'
 			&& !ft_strcmp(((t_lx *)lst->next->content)->word, ":"))
-			((t_lx *)lst->next->next->content)->type = 3;
+			((t_lx *)lst->next->next->content)->type = LABEL;
 		else if (lx->word[0] == '%')
 			lx->type = DIRECT;
 		else if (lx->word[0] == 'r')
 			lx->type = REGISTRE;
 		else if (ft_strisnumber(lx->word))
 			lx->type = INDIRECT;
-		else if (lx->type == 0 && !ft_strchr(g_delim, lx->word[0]))
+		else if (lx->type == -1 && !ft_strchr(g_delim, lx->word[0]))
 			lx->type = INSTRUCTION;
 		fix_lex(lx);
 		lst = lst->next;
