@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:30:46 by xesnault          #+#    #+#             */
-/*   Updated: 2016/11/03 11:30:47 by xesnault         ###   ########.fr       */
+/*   Updated: 2017/03/24 06:01:28 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int				ft_strisnumber(char *str)
 {
+	if (!str || !(*str))
+		return (0);
 	if (*str == '-' || *str == '+')
 		++str;
 	while (*str)

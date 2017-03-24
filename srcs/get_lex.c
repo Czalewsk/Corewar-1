@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/24 02:21:55 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/24 06:07:09 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_lx			*lx_init(char *word, size_t ln, size_t cl)
 	
 	if (!word || !(new = (t_lx*)ft_memalloc(sizeof(t_lx))))
 		return (NULL);
+	new->valeur = -1;
 	new->word = word;
 	new->pos[0] = ln;
 	new->pos[1] = cl;
