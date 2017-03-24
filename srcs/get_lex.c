@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/24 06:07:09 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/24 09:03:52 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void			get_end_word(char const *s, size_t *i)
 {
+	if (ft_strchr(g_delim, s[(*i)]) && ++(*i))
+		return ;
 	while (s[*i] && !ft_strchr(g_wspace, s[*i]) && !ft_strchr(g_eol, s[*i])
-			&& !ft_strchr(g_delim, s[*i]))
-		(*i)++;
+			&& !ft_strchr(g_delim, s[(*i)]))
+		++(*i);
 }
 
 int				get_next_word(char const *s, size_t *i)
@@ -31,7 +33,7 @@ int				get_next_word(char const *s, size_t *i)
 t_lx			*lx_init(char *word, size_t ln, size_t cl)
 {
 	t_lx		*new;
-	
+
 	if (!word || !(new = (t_lx*)ft_memalloc(sizeof(t_lx))))
 		return (NULL);
 	new->valeur = -1;
@@ -58,13 +60,7 @@ void			fill_lst(t_list **start, char *line, size_t ln)
 			new_lx ? ft_lst_pushend(start, ft_lstnew(new_lx, sizeof(t_lx))) : NULL;
 			ft_memdel((void**)&new_lx);
 		}
-		if (*(line + end) && ft_strchr(g_delim, *(line + end)))
-		{
-			new_lx = lx_init(ft_strsub(line + end, 0, 1), ln, end);
-			new_lx ? ft_lst_pushend(start, ft_lstnew(new_lx, sizeof(t_lx))) : NULL;
-			ft_memdel((void**)&new_lx);
-		}
-		beg = (line[end]) ? end + 1 : end;
+		beg = end;
 	}
 }
 
