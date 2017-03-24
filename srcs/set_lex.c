@@ -26,15 +26,19 @@ static	void	fix_lex(t_lx *lex)
 
 void	set_lex_ext(t_list *lst, t_lx *lx)
 {
+	if (lst->next &&!ft_strcmp(lx->word, NAME_CMD_STRING))
+		((t_lx *)lst->next->content)->type = NAME;
+	if (lst->next &&!ft_strcmp(lx->word, COMMENT_CMD_STRING))
+		((t_lx *)lst->next->content)->type = COMMENT;
 	if (ft_strchr(g_delim, lx->word[0]))
 		lx->type = SEPARATEUR;
-	else if (lst->next && !ft_strcmp(((t_lx *)lst->next->content)->word,
-				":") && lx->word[0] != '%')
+	else if (lst->next && ft_strchr(((t_lx *)lst->next->content)->word,
+				LABEL_CHAR) && lx->word[0] != DIRECT_CHAR)
 		lx->type = LABEL;
-	else if (lst->next && lst->next->next && lx->word[0] == '%'
-		&& !ft_strcmp(((t_lx *)lst->next->content)->word, ":"))
+	else if (lst->next && lst->next->next && lx->word[0] == DIRECT_CHAR
+		&& ft_strchr(((t_lx *)lst->next->content)->word, LABEL_CHAR))
 		((t_lx *)lst->next->next->content)->type = LABEL;
-	else if (lx->word[0] == '%')
+	else if (lx->word[0] == DIRECT_CHAR)
 		lx->type = DIRECT;
 	else if (lx->word[0] == 'r')
 		lx->type = REGISTRE;
