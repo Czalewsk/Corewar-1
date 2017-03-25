@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/25 13:42:14 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/25 13:50:37 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	set_lex_ext(t_list *lst, t_lx *lx)
 		((t_lx *)lst->next->content)->type = COMMENT;
 	if (ft_strchr(g_delim, lx->word[0]))
 		lx->type = SEPARATEUR;
-	else if (lx->word[0] == DIRECT_CHAR && !lx->word[1])
+	if (lx->word[0] == DIRECT_CHAR && !lx->word[1])
 		lx->type = DIRECTCHAR;
-	else if (lst->next && ft_strchr(((t_lx *)lst->next->content)->word,
+	if (lst->next && ft_strchr(((t_lx *)lst->next->content)->word,
 				LABEL_CHAR) && lx->word[0] != DIRECT_CHAR)
 		lx->type = LABEL;
 	else if (lst->next && lst->next->next && lx->word[0] == DIRECT_CHAR
