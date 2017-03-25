@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/25 13:50:37 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/25 13:55:46 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static	void	fix_lex(t_lx *lex)
 		lex->valeur = ft_atoi(lex->word + 1);
 }
 
-void	set_lex_ext(t_list *lst, t_lx *lx)
+static	void	set_lex_ext(t_list *lst, t_lx *lx)
 {
-	if (lst->next &&!ft_strcmp(lx->word, NAME_CMD_STRING))
+	if (lst->next && !ft_strcmp(lx->word, NAME_CMD_STRING))
 		((t_lx *)lst->next->content)->type = NAME;
-	if (lst->next &&!ft_strcmp(lx->word, COMMENT_CMD_STRING))
+	if (lst->next && !ft_strcmp(lx->word, COMMENT_CMD_STRING))
 		((t_lx *)lst->next->content)->type = COMMENT;
 	if (ft_strchr(g_delim, lx->word[0]))
 		lx->type = SEPARATEUR;
@@ -48,11 +48,12 @@ void	set_lex_ext(t_list *lst, t_lx *lx)
 		lx->type = INDIRECT;
 	else if (lx->type == -1 && !ft_strchr(g_delim, lx->word[0]))
 		lx->type = INSTRUCTION;
-}	
+}
 
-void	set_lex(t_list *lst)
+void			set_lex(t_list *lst)
 {
 	t_lx	*lx;
+
 	while (lst)
 	{
 		lx = lst->content;
