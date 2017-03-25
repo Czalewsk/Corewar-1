@@ -26,9 +26,9 @@ typedef struct		s_buf
 	size_t		size;
 }			t_buf;
 
-int			write_bin(char *filenam, t_buf *buffer);
+int			write_bin(char *filename, t_buf *buffer);
 
-int			write_to_buffer(t_buf *buffer, t_buf *to_add);
+int			write_to_buffer(t_buf *buffer, void *data, size_t size);
 
 void			header_to_buffer(t_buf *buffer, header_t *header);
 

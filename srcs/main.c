@@ -38,7 +38,7 @@ int		main(int ac, char **av)
 	ft_strcpy(header.prog_name, "This is a test !");
 	ft_strcpy(header.comment, "COMMENT TEST !");
 	header_to_buffer(&buffer, &header);
-	write_bin("test.cor", &buffer);
+	write_bin("player.cor", &buffer);
 	ft_printf("PROGRAM FINISHED\n");
 	return (0);
 }
