@@ -6,6 +6,8 @@ SRCS =	main.c write_bin.c debug.c get_lex.c set_lex.c ft_strisnumber.c
 
 INCLUDES = -I includes -I libft -I libft/includes
 
+DEP = op.h Makefile includes/
+
 LIB = -L libft
 
 OBJS = $(SRCS:.c=.o)
@@ -18,7 +20,7 @@ $(NAME): mylibft $(OBJS)
 mylibft:
 	make -C libft/
 
-%.o: srcs/%.c
+%.o: srcs/%.c $(DEP)
 	gcc $(FLAGS) $(INCLUDES) -c $<
 
 clean:
