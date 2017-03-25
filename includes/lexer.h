@@ -16,7 +16,6 @@
 
 # include "./../libft/libft.h"
 # include <fcntl.h>
-# include "op.h"
 
 const	char	*g_wspace;
 const	char	*g_eol;

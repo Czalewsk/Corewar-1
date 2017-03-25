@@ -10,12 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "asm.h"
 
 int		main(int ac, char **av)
 {
 	t_list		*lex;
+	t_buf		buffer;
+	header_t	header;
 
+	buffer.size = 0;
 	if (ac != 2)
 		return (0);
 	g_wspace = " \t";
@@ -30,6 +33,12 @@ int		main(int ac, char **av)
 	if (!lex)
 		ft_printf("ERROR LEX IS NULL\n");
 	ft_lstiter(lex, &debug_lxcontent);
+	ft_memset(header.prog_name, 0, PROG_NAME_LENGTH);
+	ft_memset(header.comment, 0, COMMENT_LENGTH);
+	ft_strcpy(header.prog_name, "This is a test !");
+	ft_strcpy(header.comment, "COMMENT TEST !");
+	header_to_buffer(&buffer, &header);
+	write_bin("test.cor", &buffer);
 	ft_printf("PROGRAM FINISHED\n");
 	return (0);
 }

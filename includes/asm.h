@@ -14,14 +14,22 @@
 
 # define __ASM_H
 
-#include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
+# include "libft.h"
+# include "op.h"
+# include "lexer.h"
+# include <unistd.h>
+# include <stdlib.h>
 
 typedef struct		s_buf
 {
-	unsigned char	*data;
-	size_t			size;
-}					t_buf;
+	void		*data;
+	size_t		size;
+}			t_buf;
+
+int			write_bin(char *filenam, t_buf *buffer);
+
+int			write_to_buffer(t_buf *buffer, t_buf *to_add);
+
+void			header_to_buffer(t_buf *buffer, header_t *header);
 
 #endif
