@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 15:20:21 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 15:25:38 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	void	add_label(t_lx *lx, t_list **label)
 
 	if (!label || !(new = ft_memalloc(sizeof(t_label))))
 		return ;
-	new->name = lx->name;
+	new->name = lx->word;
 	new->index = lx->index;
 	ft_lst_pushend(label, ft_lstnew(new, sizeof(t_label)));
 	ft_memdel((void**)&new);
@@ -38,7 +38,7 @@ static	void	fix_lex(t_lx *lex, t_list **label)
 	else if (lex->type == REGISTRE && ft_strisnumber(lex->word + 1))
 		lex->valeur = ft_atoi(lex->word + 1);
 	if (lex->type == LABEL)
-		add_label(lex, label)
+		add_label(lex, label);
 }
 
 static	void	set_lex_ext(t_list *lst, t_lx *lx)
