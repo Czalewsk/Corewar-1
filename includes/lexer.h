@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 21:24:08 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/25 12:16:07 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 14:25:07 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ typedef struct	s_lx
 	size_t	pos[2];
 	size_t	index;
 }				t_lx;
+
+typedef struct	s_op
+{
+	char	*name;
+	int		nb_param;
+	int		type_param[3];
+	int		op_code;
+	int		nb_cycle;
+	char	*cmt;
+	int		octet_param;
+	int		index;
+}				t_op;
 
 void			debug_lxcontent(t_list *lst);
 
