@@ -6,11 +6,15 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 17:44:05 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 17:59:39 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+const	char	*g_wspace = " \t";
+const	char	*g_eol = "#;\n";
+const	char	*g_delim = ":,";
 
 void			get_end_word(char const *s, size_t *i)
 {
@@ -76,9 +80,6 @@ t_list			*get_lex(char *filename)
 	char	*line;
 	t_list	*lexem;
 
-	g_wspace = " \t";
-	g_eol = "#;\n";
-	g_delim = ":,";
 	ln = 0;
 	line = NULL;
 	lexem = NULL;

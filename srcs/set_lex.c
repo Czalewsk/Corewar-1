@@ -6,11 +6,13 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 15:25:38 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 18:00:08 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+extern	char	*g_delim;
 
 static	void	add_label(t_lx *lx, t_list **label)
 {
