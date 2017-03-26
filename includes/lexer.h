@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 21:24:08 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 15:02:36 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 15:30:29 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_op
 }				t_op;
 
 void			debug_lxcontent(t_list *lst);
+void			debug_labelcontent(t_list *lst);
 
 t_list			*get_lex(char *filename);
 
