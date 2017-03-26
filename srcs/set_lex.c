@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/25 13:55:46 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 14:44:32 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static	void	set_lex_ext(t_list *lst, t_lx *lx)
 		lx->type = LABEL;
 	else if (lst->next && lst->next->next && lx->word[0] == DIRECT_CHAR
 		&& ft_strchr(((t_lx *)lst->next->content)->word, LABEL_CHAR))
-		((t_lx *)lst->next->next->content)->type = LABEL;
+		((t_lx *)lst->next->next->content)->type = LABELREF;
 	else if (lx->word[0] == DIRECT_CHAR)
 		lx->type = DIRECT;
 	else if (lx->word[0] == 'r')
