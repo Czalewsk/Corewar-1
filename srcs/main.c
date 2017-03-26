@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/24 01:42:56 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 14:54:19 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@ int		main(int ac, char **av)
 	t_list		*lex;
 	t_buf		buffer;
 	header_t	header;
+	t_list		*label;
 
-	buffer.size = 0;
 	if (ac != 2)
 		return (0);
+	buffer.size = 0;
 	g_wspace = " \t";
 	g_eol = "#;\n";
 	g_delim = ":,";
+	label = NULL;
 
 	ft_printf("PROGRAM STARTED\n");
 	lex = get_lex(av[1]);
 	ft_printf("get_lex OK\n");
-	set_lex(lex);
+	set_lex(lex, &label);
 	ft_printf("Set_lex OK\n");
 	if (!lex)
 		ft_printf("ERROR LEX IS NULL\n");
