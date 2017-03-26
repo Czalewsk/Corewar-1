@@ -37,6 +37,9 @@ int		write_to_buffer(t_buf *buffer, void *data, size_t size)
 
 void		header_to_buffer(t_buf *buffer, header_t *header)
 {
+	unsigned int	idk;
+
+	idk = 0;
 	if (ft_strlen(header->prog_name) > PROG_NAME_LENGTH)
 		ft_printf("[warning] Name too long");
 	if (ft_strlen(header->comment) > COMMENT_LENGTH)
@@ -45,6 +48,8 @@ void		header_to_buffer(t_buf *buffer, header_t *header)
 		ft_printf("write magic error\n");
 	if (!write_to_buffer(buffer, header->prog_name, PROG_NAME_LENGTH))
 		ft_printf("write prog name error\n");
+	if (!write_to_buffer(buffer, &idk, sizeof(unsigned int)))
+		ft_printf("write prog size error\n");
 	if (!write_to_buffer(buffer, &(header->prog_size), sizeof(unsigned int)))
 		ft_printf("write prog size error\n");
 	if (!write_to_buffer(buffer, header->comment, COMMENT_LENGTH))

@@ -37,6 +37,8 @@ int		main(int ac, char **av)
 	ft_memset(header.comment, 0, COMMENT_LENGTH);
 	ft_strcpy(header.prog_name, "This is a test !");
 	ft_strcpy(header.comment, "COMMENT TEST !");
+	header.magic = COREWAR_EXEC_MAGIC;
+	header.prog_size = 2147483647;
 	header_to_buffer(&buffer, &header);
 	write_bin("player.cor", &buffer);
 	ft_printf("PROGRAM FINISHED\n");
