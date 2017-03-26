@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/24 17:18:52 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 17:44:05 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void			fill_lst(t_list **start, char *line, size_t ln)
 		if (end - beg > 0)
 		{
 			new_lx = lx_init(ft_strsub(line + beg, 0, end - beg), ln, beg);
-			new_lx ? ft_lst_pushend(start, ft_lstnew(new_lx, sizeof(t_lx))) : NULL;
+			new_lx ? ft_lst_pushend(start, ft_lstnew(new_lx, sizeof(t_lx)))
+				: NULL;
 			ft_memdel((void**)&new_lx);
 		}
 		beg = end;
@@ -75,6 +76,9 @@ t_list			*get_lex(char *filename)
 	char	*line;
 	t_list	*lexem;
 
+	g_wspace = " \t";
+	g_eol = "#;\n";
+	g_delim = ":,";
 	ln = 0;
 	line = NULL;
 	lexem = NULL;
@@ -86,7 +90,9 @@ t_list			*get_lex(char *filename)
 	while (get_next_line(fd, &line) > 0 && ++ln)
 	{
 		fill_lst(&lexem, line, ln);
+		ft_strdel(&line);
 	}
+	ft_strdel(&line);
 	close(fd);
 	return (lexem);
 }

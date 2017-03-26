@@ -1,8 +1,9 @@
 NAME = asm
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
-SRCS =	main.c write_bin.c debug.c get_lex.c set_lex.c ft_strisnumber.c
+SRCS =	main.c write_bin.c debug.c get_lex.c set_lex.c ft_strisnumber.c \
+		delete_lex.c
 
 INCLUDES = -I includes -I libft -I libft/includes
 

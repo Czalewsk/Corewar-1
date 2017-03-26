@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 21:24:08 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 15:30:29 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 17:07:38 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void			debug_labelcontent(t_list *lst);
 t_list			*get_lex(char *filename);
 
 void			set_lex(t_list *lex, t_list **label);
+
+void			del_lex(void *content, size_t size);
+void			del_label(void *content, size_t size);
 
 int				ft_strisnumber(char *str);
 
