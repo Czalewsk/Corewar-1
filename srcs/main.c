@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 15:30:06 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/26 16:46:14 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		main(int ac, char **av)
 	ft_lstiter(lex, &debug_lxcontent);
 	ft_lstiter(label, &debug_labelcontent);
 	ft_memset(header.prog_name, 0, PROG_NAME_LENGTH);
-	ft_memset(header.comment, 0, COMMENT_LENGTH);
+	ft_memset(header.comment, 0, COMMENT_LENGTH + 4);
 	ft_strcpy(header.prog_name, "This is a test !");
 	ft_strcpy(header.comment, "COMMENT TEST !");
 	header.magic = COREWAR_EXEC_MAGIC;

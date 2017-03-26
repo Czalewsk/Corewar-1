@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:21:45 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/23 15:21:46 by xesnault         ###   ########.fr       */
+/*   Updated: 2017/03/26 16:35:21 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		header_to_buffer(t_buf *buffer, header_t *header)
 		ft_printf("write prog size error\n");
 	if (!write_to_buffer(buffer, &(header->prog_size), sizeof(unsigned int)))
 		ft_printf("write prog size error\n");
-	if (!write_to_buffer(buffer, header->comment, COMMENT_LENGTH))
+	if (!write_to_buffer(buffer, header->comment, COMMENT_LENGTH + 4))
 		ft_printf("write comment error\n");
 
 }
