@@ -20,6 +20,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# define NB_OP 17
+
 typedef struct		s_buf
 {
 	void		*data;
@@ -30,6 +32,6 @@ int			write_bin(char *filename, t_buf *buffer);
 
 int			write_to_buffer(t_buf *buffer, void *data, size_t size);
 
-void			header_to_buffer(t_buf *buffer, header_t *header);
+void		header_to_buffer(t_buf *buffer, header_t *header);
 
 #endif

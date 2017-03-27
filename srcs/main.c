@@ -21,6 +21,7 @@ int		main(int ac, char **av)
 
 	if (ac != 2)
 		return (0);
+	buffer.data = NULL;
 	buffer.size = 0;
 	label = NULL;
 //Lexer
@@ -36,7 +37,7 @@ int		main(int ac, char **av)
 	ft_lstiter(label, &debug_labelcontent);
 //Ecriture du player
 	ft_memset(header.prog_name, 0, PROG_NAME_LENGTH);
-	ft_memset(header.comment, 0, COMMENT_LENGTH + 4);
+	ft_memset(header.comment, 0, COMMENT_LENGTH);
 	ft_strcpy(header.prog_name, "This is a test !");
 	ft_strcpy(header.comment, "COMMENT TEST !");
 	header.magic = COREWAR_EXEC_MAGIC;

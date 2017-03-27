@@ -49,10 +49,12 @@ void		header_to_buffer(t_buf *buffer, header_t *header)
 	if (!write_to_buffer(buffer, header->prog_name, PROG_NAME_LENGTH))
 		ft_printf("write prog name error\n");
 	if (!write_to_buffer(buffer, &idk, sizeof(unsigned int)))
-		ft_printf("write prog size error\n");
+		ft_printf("write name null octet error\n");
 	if (!write_to_buffer(buffer, &(header->prog_size), sizeof(unsigned int)))
 		ft_printf("write prog size error\n");
-	if (!write_to_buffer(buffer, header->comment, COMMENT_LENGTH + 4))
+	if (!write_to_buffer(buffer, header->comment, COMMENT_LENGTH))
 		ft_printf("write comment error\n");
+	if (!write_to_buffer(buffer, &idk, sizeof(unsigned int)))
+		ft_printf("write comment null octet error\n");
 
 }
