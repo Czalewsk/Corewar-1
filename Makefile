@@ -1,4 +1,5 @@
 
+
 ASM = asm
 VM = vm
 
@@ -9,11 +10,24 @@ $(ASM):
 $(VM) :
 	make -C vmdir
 
-clean: make fclean -C asm
+clean:
+	make clean -C asmdir
+	make clean -C vmdir
+
+cleanvm:
+	make clean -C vmdir
+cleanasm:
+	make clean -C asmdir
 
 fclean: clean
-	rm -f asm
-	rm -f vm
+	rm -rf asm
+	rm -f corewar
 
+fcleanasm: cleanasm
+	rm -rf asm
+
+fcleanvm:cleanvm
+	rm -rf corewar
+	
 re: fclean
 	make
