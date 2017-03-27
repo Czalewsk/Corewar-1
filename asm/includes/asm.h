@@ -26,6 +26,8 @@ typedef struct		s_buf
 	size_t		size;
 }			t_buf;
 
+void		parse(t_list *list_lex);
+
 int			write_bin(char *filename, t_buf *buffer);
 
 int			write_to_buffer(t_buf *buffer, void *data, size_t size);

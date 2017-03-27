@@ -42,6 +42,7 @@ int		main(int ac, char **av)
 	ft_strcpy(header.comment, "COMMENT TEST !");
 	header.magic = COREWAR_EXEC_MAGIC;
 	header.prog_size = 2147483647;
+	parse(lex);
 	header_to_buffer(&buffer, &header);
 	write_bin("player.cor", &buffer);
 //Free lst-> Lx && Label

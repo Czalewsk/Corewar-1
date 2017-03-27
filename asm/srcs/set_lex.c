@@ -14,33 +14,32 @@
 
 extern	char	*g_delim;
 
-static	void	add_label(t_lx *lx, t_list **label)
+static	void	add_label(t_lx *lx, t_list **label, size_t index)
 {
 	t_label		*new;
 
 	if (!label || !(new = ft_memalloc(sizeof(t_label))))
 		return ;
 	new->name = lx->word;
-	new->index = lx->index;
+	new->index = index;
 	ft_lst_pushend(label, ft_lstnew(new, sizeof(t_label)));
 	ft_memdel((void**)&new);
 }
 
 static	void	fix_lex(t_lx *lex, t_list **label)
 {
-	static int	index;
+	static size_t	index = 0;
 
 	if (!lex)
 		return ;
-	lex->index = index++;
 	if (lex->type == DIRECT && ft_strisnumber(lex->word + 1))
 		lex->valeur = ft_atoi(lex->word + 1);
 	else if (lex->type == INDIRECT)
 		lex->valeur = ft_atoi(lex->word);
 	else if (lex->type == REGISTRE && ft_strisnumber(lex->word + 1))
 		lex->valeur = ft_atoi(lex->word + 1);
-	if (lex->type == LABEL)
-		add_label(lex, label);
+	if (++index && lex->type == LABEL)
+		add_label(lex, label, index);
 }
 
 static	void	set_lex_ext(t_list *lst, t_lx *lx)

@@ -3,13 +3,13 @@ NAME = asm
 FLAGS = -Wall -Werror -Wextra -g
 
 SRCS =	main.c write_bin.c debug.c get_lex.c set_lex.c ft_strisnumber.c \
-		delete_lex.c op.c check1.c
+		delete_lex.c op.c check1.c parse.c
 
-INCLUDES = -I includes -I libft -I libft/includes
+INCLUDES = -I includes -I ../libft
 
 DEP = Makefile includes/
 
-LIB = -L libft
+LIB = -L ../libft
 
 OBJS = $(SRCS:.c=.o)
 
@@ -19,14 +19,14 @@ $(NAME): mylibft $(OBJS)
 	gcc $(LIB) $(FLAGS) $(OBJS) -o $(NAME) -lft
 
 mylibft:
-	make -C libft/
+	make -C ../libft/
 
 %.o: srcs/%.c $(DEP)
 	gcc $(FLAGS) $(INCLUDES) -c $<
 
 clean:
 	rm -f $(OBJS)
-	make -C libft/ fclean
+	make -C ../libft/ fclean
 
 fclean: clean
 	rm -f $(NAME)
