@@ -5,9 +5,9 @@ VM = vm
 all: $(ASM) $(VM)
 
 $(ASM):
-	make -C asm
+	make -C asmdir
 $(VM) :
-	make -C vm
+	make -C vmdir
 
 clean: make fclean -C asm
 
