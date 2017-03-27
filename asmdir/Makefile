@@ -1,4 +1,4 @@
-NAME = asm
+NAME = ../asm
 
 FLAGS = -Wall -Werror -Wextra -g
 
