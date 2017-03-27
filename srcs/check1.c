@@ -14,7 +14,7 @@
 
 extern t_op	g_op_tab[];
 
-int		is_instruction(char *instruction)
+t_op	*get_instruction(char *instruction)
 {
 	int		i;
 
@@ -22,17 +22,15 @@ int		is_instruction(char *instruction)
 	while (g_op_tab[i].name)
 	{
 		if (ft_strcmp(instruction, g_op_tab[i].name))
-			return (1);
+			return (g_op_tab + i);
 		++i;
 	}
-	return (0);
+	return (NULL);
 }
 
 int		is_ref(t_lx *lx, int ref)
 {
-	if (!lx)
+	if (!lx || lx->type != ref)
 		return (0);
-	if (lx->type == ref)
-		return (1);
-	return (0);
+	return (1);
 }
