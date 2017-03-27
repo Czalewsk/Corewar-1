@@ -32,4 +32,8 @@ int			write_to_buffer(t_buf *buffer, void *data, size_t size);
 
 void		header_to_buffer(t_buf *buffer, header_t *header);
 
+int			is_instruction(char *instruction);
+
+int			is_ref(t_lx *lx, int ref);
+
 #endif

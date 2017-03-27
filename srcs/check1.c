@@ -28,11 +28,11 @@ int		is_instruction(char *instruction)
 	return (0);
 }
 
-int		is_direct(t_lx *lx)
+int		is_ref(t_lx *lx, int ref)
 {
 	if (!lx)
 		return (0);
-	if (lx->type == DIRECT)
+	if (lx->type == ref)
 		return (1);
 	return (0);
 }
