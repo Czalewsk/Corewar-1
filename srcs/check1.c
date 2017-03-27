@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   check1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/24 05:35:04 by czalewsk         ###   ########.fr       */
+/*   Created: 2017/03/27 16:44:31 by xesnault          #+#    #+#             */
+/*   Updated: 2017/03/27 16:44:33 by xesnault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __ASM_H
+#include "asm.h"
 
-# define __ASM_H
+extern t_op	g_op_tab[];
 
-# include "libft.h"
-# include "op.h"
-# include "lexer.h"
-# include <unistd.h>
-# include <stdlib.h>
-
-typedef struct		s_buf
+int		is_instruction(char *instruction)
 {
-	void		*data;
-	size_t		size;
-}			t_buf;
+	int		i;
 
-int			write_bin(char *filename, t_buf *buffer);
+	i = 0;
+	while (g_op_tab[i].name)
+	{
+		if (ft_strcmp(instruction, g_op_tab[i].name))
+			return (1);
+		++i;
+	}
+	return (0);
+}
 
-int			write_to_buffer(t_buf *buffer, void *data, size_t size);
-
-void		header_to_buffer(t_buf *buffer, header_t *header);
-
-#endif
+int		is_direct(t_lx *lx)
+{
+	if (!lx)
+		return (0);
+	if (lx->type == DIRECT)
+		return (1);
+	return (0);
+}
