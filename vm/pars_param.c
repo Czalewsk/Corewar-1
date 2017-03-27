@@ -12,11 +12,18 @@ static void vm_pars_champions(int nb_param, char **tab_param, int *count)
 	{
 		if (ft_strequ("-n", tab_parm[i]))
 		{
-			
+			if (i + 2 >= nb_param 
+			 || !ft_isnumber(tab_param[i + 1])
+			 || (n_next_player = ft_atoi(tab_param[i + 1])) < 0
+			 || vm_is_valid_champ(tab_param[i + 2]))
 		}
 		else
 			n_next_player = n_free;
-		if (ft_
+		if (ft_strstr(".cor" ,tab_param[i]))
+			vm_fill_champion(tab_param[i], n_next_player);
+		else
+			finish = 1;
+		i++;
 	}
 	*count = i;
 
@@ -60,7 +67,7 @@ int	vm_pars_param(int nb_parm, char **tab_parm)
 	error = 0;
 	i = 3;
 	dump = 0;
-	if (nb_para < 4)
+	if (nb_param < 4)
 		ft_error("not enought parametre", &free_all);
 	vm_pars_dump(tab_param);
 	vm_pars_champions(nb_param, tab_param, &i);
