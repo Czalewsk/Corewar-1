@@ -38,4 +38,8 @@ t_op		*get_instruction(char *instruction);
 
 int			is_ref(t_lx *lx, int ref);
 
+int			get_line(t_lx *lx);
+
+t_lx		*get_next_lx(t_list *list_lex);
+
 #endif

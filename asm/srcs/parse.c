@@ -12,29 +12,58 @@
 
 #include "asm.h"
 
-static t_lx		*lx_next_line(t_list *list_lex, size_t last_line)
+int		parse_instruction(t_list **list_lex, t_op *op)
 {
 	t_lx	*lx;
+	lx = (*list_lex)->content;
+	
+	ft_printf("Parse instruction: %s\n", lx->word);
+	(void)list_lex;
+	(void)op;
+	return (1);
+} 
 
-	while (list_lex)
+int		parse_label(t_list *list_lex)
+{
+	t_lx	*lx;
+	lx = list_lex->content;
+
+	ft_printf("Parse label: %s\n", lx->word);
+	(void)list_lex;
+	return (1);
+}
+
+void	parse_line(t_list **list_lex)
+{
+	t_op	*op;
+	t_lx	*lx;
+	int		error;
+
+	lx = (*list_lex)->content;
+	if(is_ref(lx, LABEL))
 	{
-		lx = list_lex->content;
-		if (lx->pos[0] > last_line)
-			return (lx);
-		list_lex = list_lex->next;
+		parse_label(*list_lex);
+		if (is_ref(get_next_lx(*list_lex), LABEL)
+			&& get_line(lx) == get_line(get_next_lx(*list_lex)))
+			ft_putendl("ok");
+		*list_lex = (*list_lex)->next;
 	}
-	return (NULL);
+	else if ((op = get_instruction(((t_lx *)(*list_lex)->content)->word)))
+		error = parse_instruction(list_lex, op);
+		// Erreur
+/*	while (*list_lex && n++ < i)
+	{
+		*list_lex = (*list_lex)->next;
+	} */
 }
 
 void	parse(t_list *list_lex)
 {
-	size_t	current_line;
-	t_lx	*lx;
-
-	current_line = 0;
-	while ((lx = lx_next_line(list_lex, current_line)) != NULL)
+	//check_name_and_cmt(list_lex);
+	while (list_lex)
 	{
-		ft_printf("First word: %s\n", lx->word);
-		current_line = lx->pos[0];
+		parse_line(&list_lex);
+		while (1)
+			;
 	}
 }

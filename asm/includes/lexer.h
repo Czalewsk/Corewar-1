@@ -27,6 +27,7 @@ typedef struct	s_lx
 	char	*word;
 	size_t	pos[2];
 	size_t	octet;
+	int		error;
 }				t_lx;
 
 typedef struct	s_label
