@@ -8,8 +8,8 @@ int	main(int argc, char **argv)
 	if (pars_param())
 		ft_error(ERR_PARAM,&free_all);
 	/*
-	 *Vérifie si le nombre de parametre est bon,
-	 *Si il est ,la foncton verifie si les différents paramètres,
+	 * Vérifie si le nombre de parametre est bon,
+	 * Si il est ,la foncton verifie si les différents paramètres,
 	 * sont cohérents. Et remplis les singletons adécuat(si besoin)
 	 * verifie si les fichier players spécifié existe. Return (0) si tout s'est bien passé
 	*/ 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	fight()
 	/*
 	 * execute la partie.
-	 *,
+	 * 
 	 *
 	 *
 	 *
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 	 */
 	free_all();
 	/*
-	 *desalloue toute la mémoire restante.
+	 * desalloue toute la mémoire restante.
 	 */ 
 	return (EXIT_SUCCES);
 }
