@@ -20,14 +20,14 @@ cleanasm:
 	make clean -C asmdir
 
 fclean: clean
-	rm -rf asm
+	rm -f asm
 	rm -f corewar
 
 fcleanasm: cleanasm
-	rm -rf asm
+	rm -f asm
 
 fcleanvm:cleanvm
-	rm -rf corewar
+	rm -f corewar
 	
 re: fclean
 	make

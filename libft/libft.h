@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 14:37:53 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/09 12:35:05 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/28 04:39:30 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ char			*ft_strncat(char *s1, const char *s2, size_t n);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
-char			*ft_strstr(const char *big, const char *little);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
+char			*ft_strstr(const char *big, const char *little);
+char			*ft_strrstr(const char *big, const char *little);
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -117,7 +118,7 @@ void			ft_lst_remove_index(t_list **alst, int index,
 t_list			*ft_lst_cpy(t_list *lst, int r);
 void			ft_lstinsert_if_end(t_list **alst, t_list *new,
 		int (*f)(t_list *, t_list *));
-void			ft_error(int fd, char *msg, void *content, void (*del)(void *));
+void 			ft_error(char *str, void (*f)(void));
 char			ft_strcstr(char *str, char *chaine);
 int				ft_isdouble(char *str);
 

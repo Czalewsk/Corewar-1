@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strrstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 02:55:55 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 03:23:04 by lduval           ###   ########.fr       */
+/*   Created: 2016/11/08 11:33:57 by czalewsk          #+#    #+#             */
+/*   Updated: 2017/03/28 03:35:57 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
+#include "libft.h"
 
-char    *ft_strstr(const char *big, const char *little)
+char	*ft_strrstr(const char *big, const char *little)
 {
-	int     n;
-	int     i;
+	char	*tmp;
+	int		n;
+	int		i;
 
 	i = 0;
 	n = ft_strlen(little);
+	tmp = (char *)big + n;
 	if (n == 0)
 		return ((char*)big);
-	while (big)
+	while (big <= tmp)
 	{
-		while (big[i] == little[i])
+		while (tmp[i] == little[i])
 			if (++i == n)
-				return ((char*)big);
+				return (tmp);
 		i = 0;
-		big++;
+		tmp--;
 	}
 	return (NULL);
 }

@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   vm_champions_param.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 04:17:08 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 04:36:06 by lduval           ###   ########.fr       */
+/*   Created: 2017/03/27 20:37:55 by lduval            #+#    #+#             */
+/*   Updated: 2017/03/27 20:46:44 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void ft_error(char *str, void (*f)(void))
+int		vm_isvalid_champ()
 {
-	(*f)();
-	ft_putstr("ERROR:");
-	ft_putendl(str);
-	exit(0);
+	
 }

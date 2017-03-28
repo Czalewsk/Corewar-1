@@ -6,7 +6,7 @@
 #    By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/16 13:16:18 by czalewsk          #+#    #+#              #
-#    Updated: 2017/03/09 12:34:49 by czalewsk         ###   ########.fr        #
+#    Updated: 2017/03/28 03:27:22 by lduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ OBJ = ft_strlen.o			\
 	  ft_memdel.o			\
 	  ft_strnew.o			\
 	  ft_strdel.o			\
+	  ft_strrstr.o          \
 	  ft_strclr.o			\
 	  ft_striter.o			\
 	  ft_striteri.o			\
