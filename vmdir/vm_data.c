@@ -6,9 +6,11 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 01:41:04 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 01:41:07 by lduval           ###   ########.fr       */
+/*   Updated: 2017/03/28 04:54:48 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "vm_header.h"
 
 t_vm_data *get_data()
 {
@@ -16,14 +18,14 @@ t_vm_data *get_data()
 
 	if (!data) 
 	{
-		if (!data = (t_vm_data *)malloc(sizeof(t_vm_data)))
+		if (!(data = (t_vm_data *)malloc(sizeof(t_vm_data))))
 			ft_error("malloc failed in t_vm_data", NULL);
 		data->dump = -1;
 	}
 	return (data);
 }
 
-void free_all()
+void vm_free_all()
 {
 	t_vm_data *data;
 

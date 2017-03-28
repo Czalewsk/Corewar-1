@@ -6,13 +6,13 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:03:10 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 04:43:14 by lduval           ###   ########.fr       */
+/*   Updated: 2017/03/28 04:53:03 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_header.h"
 
-static int vm_fill_champion(char *tab_param[*i], int n)
+static int vm_fill_champion(char *champ_name, int n)
 {
 	return 0;
 }

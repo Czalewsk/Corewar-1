@@ -1,4 +1,4 @@
-NAME = ../coreware
+NAME = ../corewar
 
 FLAGS = -Wall -Werror -Wextra -g
 
