@@ -109,15 +109,13 @@ int		arg_isvalid(t_op *op, int i, t_list **list_lex)
 	{
 		*list_lex = (*list_lex)->next;
 		lx = (*list_lex)->content;
-		if (lx->type == SEPARATEUR && lx->word[0] == ':')
+		if (lx->type == SEPARATEUR && lx->word[0] == LABEL_CHAR)
 		{
 			*list_lex = (*list_lex)->next;
 			lx = (*list_lex)->content;
 		}
 	}
 	*list_lex = (*list_lex)->next;
-	if (i != op->nb_param - 1 && ((t_lx*)(*list_lex)->content)->word[0] != ',')
-		return (0);
 	if (i < op->nb_param && op->type_param[i] & get_arg_type(lx->type))
 		return (1);
 	return (0);

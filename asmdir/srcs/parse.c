@@ -23,26 +23,33 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 	ft_printf("Parse instruction: %s\n", lx->word); // DEBUG A DELETE
 	(*list_lex) = (*list_lex)->next;
 	i = 0;
-	while (lx->pos[0] != line)
+	while ((lx = (*list_lex)->content) && lx->pos[0] == line)
 	{
-		lx = (*list_lex)->content;
-		if (lx->pos[0] != line)
+		//ft_putendl("LOL on rentre dans la boucle =D");
+		if (i >= op->nb_param)
 		{
-			ft_printf("Error: Too few argument at line %d\n", line);
-			return (0);
+			ft_printf("Too much fuckin param\n");
+			break ;
 		}
 		if (arg_isvalid(op, i, list_lex))
-			ft_printf("Arg %d is ok\n", i);
+			ft_printf("Arg [%s] is ok\n", lx->word);
 		else
-			ft_printf("Arg %d is wrong\n", i);
+			ft_printf("Arg [%s] is wrong\n", lx->word);
 		++i;
+		if (!(*list_lex))
+			break ;
+		lx = (*list_lex)->content;
+		if (i < op->nb_param && lx->word[0] == SEPARATOR_CHAR)
+			(*list_lex) = (*list_lex)->next;
+		else if (i < op->nb_param && lx->word[0] != SEPARATOR_CHAR)
+		{
+			ft_printf("I need more fkin param\n");
+			return (0);
+		}
 	}
-	if (!(*list_lex))
-		return (0);
-	lx = (*list_lex)->content;
-	if (lx->pos[0] == line)
-		ft_printf("Error: Too many argument at line %d\n", line);
-	return (0);
+	if (i != op->nb_param)
+		ft_putendl("LOL add fucking return printf error");
+	return (i == op->nb_param ? 1 : 0);
 } 
 
 int		parse_label(t_list *list_lex)
