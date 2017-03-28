@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:03:10 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 04:53:03 by lduval           ###   ########.fr       */
+/*   Updated: 2017/03/28 05:25:13 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ static void vm_pars_champions(int nb_param, char **tab_param, int *i, t_vm_data 
 	{
 		if (ft_strequ("-n", tab_param[*i]))
 		{
-			if (*i + 2 >= nb_param ||!ft_strisnumber(tab_param[*i + 1])
+			if ((*i) + 2 >= nb_param || !ft_strisnumber(tab_param[*i + 1])
 			 || ((n_next_player = ft_atoi(tab_param[*i + 1])) < 0)
-			 ||  !(t = ft_strrstr(".cor", tab_param[*i])) || !*(t + 4))
+			 ||  !(t = ft_strrstr( tab_param[*i+ 2],".cor")) || (*(t + 4)))
 				ft_error("-n wrong input", &vm_free_all);
 			*i += 2;
 		}
 		else
 			n_next_player = n_free;
-		finish += ((t = ft_strrstr(".cor", tab_param[*i])) && *(t + 4)) ?
+		finish += ((t = ft_strrstr(tab_param[*i],".cor")) && !(*(t + 4))) ?
 			vm_fill_champion(tab_param[*i], n_next_player) : 1;
 		(*i)++;
 	}
@@ -59,11 +59,11 @@ static void vm_pars_dump(char **tab_param, t_vm_data *data)
 	int dump;
 
 	dump = 0;
-	if (ft_strequ(tab_param[0], "-dump"))
+	if (!ft_strequ(tab_param[1], "-dump"))
 		ft_error("first parametre must be '-dump'", &vm_free_all);
-	if (!ft_strisnumber(tab_param[1]))
+	if (!ft_strisnumber(tab_param[2]))
 		ft_error("second parametre must be a number", &vm_free_all);
-	if ((dump = ft_atoi(tab_param[1]) <= 0))
+	if ((dump = ft_atoi(tab_param[2]) <= 0))
 		ft_error("second parametre must be positive", &vm_free_all);
 	data->dump = dump;
 }
