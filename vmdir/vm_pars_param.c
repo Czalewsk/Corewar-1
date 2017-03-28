@@ -6,14 +6,15 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:03:10 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 05:25:13 by lduval           ###   ########.fr       */
+/*   Updated: 2017/03/28 05:37:08 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_header.h"
 
-static int vm_fill_champion(char *champ_name, int n)
+static int vm_fill_champion(char *champ_name, int n, t_vm_data *data)
 {
+
 	return 0;
 }
 
@@ -40,7 +41,7 @@ static void vm_pars_champions(int nb_param, char **tab_param, int *i, t_vm_data 
 		else
 			n_next_player = n_free;
 		finish += ((t = ft_strrstr(tab_param[*i],".cor")) && !(*(t + 4))) ?
-			vm_fill_champion(tab_param[*i], n_next_player) : 1;
+			vm_fill_champion(tab_param[*i], n_next_player, data) : 1;
 		(*i)++;
 	}
 }
