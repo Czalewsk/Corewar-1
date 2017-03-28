@@ -6,7 +6,7 @@
 #    By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/16 13:16:18 by czalewsk          #+#    #+#              #
-#    Updated: 2017/03/28 03:27:22 by lduval           ###   ########.fr        #
+#    Updated: 2017/03/28 04:51:41 by lduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 OBJ = ft_strlen.o			\
+	  ft_strisnumber.o		\
 	  ft_strdup.o			\
 	  ft_strcpy.o			\
 	  ft_strncpy.o			\
