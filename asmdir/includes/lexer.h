@@ -22,30 +22,30 @@ enum {DIRECT, INDIRECT, LABEL, REGISTRE, INSTRUCTION, SEPARATEUR,
 
 typedef struct	s_lx
 {
-	int		type;
-	int		valeur;
-	char	*word;
-	size_t	pos[2];
-	size_t	octet;
-	int		error;
+	int			type;
+	int			valeur;
+	char		*word;
+	size_t		pos[2];
+	size_t		octet;
+	char		*error;
 }				t_lx;
 
 typedef struct	s_label
 {
-	char	*name;
-	int		index;
+	char		*name;
+	int			index;
 }				t_label;
 
 typedef struct	s_op
 {
-	char	*name;
-	int		nb_param;
-	int		type_param[3];
-	int		op_code;
-	int		nb_cycle;
-	char	*cmt;
-	int		octet_param;
-	int		index;
+	char		*name;
+	int			nb_param;
+	int			type_param[3];
+	int			op_code;
+	int			nb_cycle;
+	char		*cmt;
+	int			octet_param;
+	int			index;
 }				t_op;
 
 void			debug_lxcontent(t_list *lst);

@@ -22,9 +22,9 @@
 
 typedef struct		s_buf
 {
-	void		*data;
-	size_t		size;
-}			t_buf;
+	void			*data;
+	size_t			size;
+}					t_buf;
 
 void		parse(t_list *list_lex);
 
@@ -34,12 +34,20 @@ int			write_to_buffer(t_buf *buffer, void *data, size_t size);
 
 void		header_to_buffer(t_buf *buffer, header_t *header);
 
-t_op		*get_instruction(char *instruction);
+t_op		*get_instruction(t_lx *lx);
 
 int			is_ref(t_lx *lx, int ref);
 
 int			get_line(t_lx *lx);
 
 t_lx		*get_next_lx(t_list *list_lex);
+
+t_list		*get_next_lst(t_list *list_lex);
+
+int			check_label_chars(char *str, char *label_chars);
+
+int			arg_isvalid(t_op *op, int i, t_list **list_lex);
+
+char		get_arg_type(int type);
 
 #endif
