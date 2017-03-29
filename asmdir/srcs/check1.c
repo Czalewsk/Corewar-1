@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 16:44:31 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 06:19:25 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 09:21:06 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int		arg_isvalid(t_op *op, int i, t_list **list_lex)
 			*list_lex = (*list_lex)->next;
 			lx = (*list_lex)->content;
 		}
+		else
+			return (0);
 	}
 	*list_lex = (*list_lex)->next;
 	if (i < op->nb_param && op->type_param[i] & get_arg_type(lx->type))
