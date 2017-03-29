@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 01:52:24 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 08:12:02 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 	i = 0;
 	while ((lx = (*list_lex)->content) && lx->pos[0] == line && !lx->error)
 	{
+		printf("0=%s|\n", lx->word);
 		if (!arg_isvalid(op, i, list_lex) && (lx->error = 1))
 			return (1);
 		++i;
@@ -40,9 +41,15 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 			break ;
 		lx = (*list_lex)->content;
 		if (i < op->nb_param && lx->word[0] == SEPARATOR_CHAR)
+		{
 			(*list_lex) = (*list_lex)->next;
+		printf("1param=%i | i=%i | word=%s|\n", op->nb_param, i, lx->word);
+		}
 		else if (i < op->nb_param && lx->word[0] != SEPARATOR_CHAR)
+		{
+		printf("2param=%i | i=%i | word=%s|\n", op->nb_param, i, lx->word);
 			break ;
+		}
 	}
 	return ((i == op->nb_param) ? 0 : set_error(i, op->nb_param, lx));
 }
@@ -62,28 +69,29 @@ void	parse_line(t_list **list_lex)
 {
 	t_op	*op;
 	t_lx	*lx;
-	int		error;
 
 	lx = (*list_lex)->content;
 	if(is_ref(lx, LABEL))
 	{
-		error = parse_label(*list_lex);
+		parse_label(*list_lex);
 		if (is_ref(get_next_lx(*list_lex), LABEL)
 			&& get_line(lx) == get_line(get_next_lx(*list_lex)))
-			ft_putendl("Error 2 label on the same line");
-		if (error)
-			ft_putendl("Error label character");
+			((t_lx*)((*list_lex)->content))->error = 16;
 		*list_lex = get_next_lst((*list_lex));
 	}
 	if ((op = get_instruction((*list_lex)->content)))
-		error += parse_instruction(list_lex, op);
+		parse_instruction(list_lex, op);
 	else
+	{
+		if (!op && ((t_lx*)((*list_lex)->content))->type == INSTRUCTION)
+			((t_lx*)((*list_lex)->content))->error = 8;
 		*list_lex = get_next_lst((*list_lex));
+	}
 }
 
 void	parse(t_list *list_lex)
 {
-	//check_name_and_cmt(list_lex);
+	check_name_and_cmt(&list_lex);
 	while (list_lex)
 	{
 		parse_line(&list_lex);

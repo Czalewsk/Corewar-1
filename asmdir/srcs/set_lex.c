@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 18:00:08 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 08:04:55 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static	void	set_lex_ext(t_list *lst, t_lx *lx)
 	else if (lst->next && lst->next->next && lx->word[0] == DIRECT_CHAR
 		&& ft_strchr(((t_lx *)lst->next->content)->word, LABEL_CHAR))
 		((t_lx *)lst->next->next->content)->type = LABELREF;
-	else if (lx->word[0] == DIRECT_CHAR)
+	else if (lx->word[0] == DIRECT_CHAR && (lx->word[1] != 32 &&
+				ft_isint(lx->word + 1)))
 		lx->type = DIRECT;
 	else if (lx->word[0] == 'r')
 		lx->type = REGISTRE;

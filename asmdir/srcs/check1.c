@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 16:44:31 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/27 16:44:33 by xesnault         ###   ########.fr       */
+/*   Updated: 2017/03/29 06:19:25 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_op	*get_instruction(t_lx *lx)
 	i = 0;
 	if (lx->type != INSTRUCTION)
 		return (0);
-	while (g_op_tab[i].name)
+	while ((g_op_tab[i]).name)
 	{
 		if (!ft_strcmp(lx->word, g_op_tab[i].name))
 			return (g_op_tab + i);
