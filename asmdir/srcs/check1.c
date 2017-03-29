@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 16:44:31 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 09:21:06 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 11:59:53 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,20 @@ t_list	*get_next_lst(t_list *list_lex)
 	return (NULL);
 }
 
-int		check_label_chars(char *str, char *label_chars)
+int		check_label_chars(t_list *lst)
 {
-	if (!str || !label_chars)
-		return (0);
-	while (*str)
+	char	*str;
+
+	while (lst)
 	{
-		if (!ft_strchr(label_chars, *str))
-			return (0);
-		++str;
+		str = ((t_label*)lst->content)->name;
+		while (*str)
+		{
+			if (!ft_strchr(LABEL_CHARS, *str))
+				return (0);
+			++str;
+		}
+		lst = lst->next;
 	}
 	return (1);
 }

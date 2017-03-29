@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 06:08:38 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 11:26:59 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct		s_buf
 	size_t			size;
 }					t_buf;
 
-void		parse(t_list *list_lex);
+void		parse(t_list *list_lex, t_list *label);
 
 int			write_bin(char *filename, t_buf *buffer);
 
@@ -44,7 +44,7 @@ t_lx		*get_next_lx(t_list *list_lex);
 
 t_list		*get_next_lst(t_list *list_lex);
 
-int			check_label_chars(char *str, char *label_chars);
+int			check_label_chars(t_list *lst);
 
 int			arg_isvalid(t_op *op, int i, t_list **list_lex);
 

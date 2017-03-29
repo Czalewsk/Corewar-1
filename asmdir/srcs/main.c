@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/29 01:22:04 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 10:38:36 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int		main(int ac, char **av)
 	ft_printf("Set_lex OK\n");
 	if (!lex)
 		ft_printf("ERROR LEX IS NULL\n");
-	parse(lex);
+//Parser
+	parse(lex, label);
 //Affichage && Debug
 	ft_lstiter(lex, &debug_lxcontent);
 	ft_lstiter(label, &debug_labelcontent);

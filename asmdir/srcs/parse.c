@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 09:22:12 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 11:20:28 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,29 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 	return ((i == op->nb_param) ? 0 : set_error(i, op->nb_param, lx));
 }
 
-int		parse_label(t_list *list_lex)
+void		parse_label(t_lx *lx, t_list *lst_lbl)
 {
-	t_lx	*lx;
+	t_label		*lbl;
 
-	lx = list_lex->content;
-	ft_printf("Parse label: %s\n", lx->word); // DEBUG A DELETE
-	if (check_label_chars(lx->word, LABEL_CHARS))
-		return (0);
-	return (1);
+	while (lst_lbl)
+	{
+		lbl = lst_lbl->content;
+		if (!ft_strcmp(lbl->name, lx->word))
+			return ;
+		lst_lbl = lst_lbl->next;
+	}
+	lx->error = 32;
 }
 
-void	parse_line(t_list **list_lex)
+void	parse_line(t_list **list_lex, t_list *label)
 {
 	t_op	*op;
 	t_lx	*lx;
 
 	lx = (*list_lex)->content;
-	if (is_ref(lx, LABEL))
+	if (is_ref(lx, LABELREF))
 	{
-		parse_label(*list_lex);
+		parse_label(lx, label);
 		if (is_ref(get_next_lx(*list_lex), LABEL)
 			&& get_line(lx) == get_line(get_next_lx(*list_lex)))
 			((t_lx*)((*list_lex)->content))->error = 16;
@@ -82,11 +85,12 @@ void	parse_line(t_list **list_lex)
 	}
 }
 
-void	parse(t_list *list_lex)
+void	parse(t_list *list_lex, t_list *label)
 {
 	check_name_and_cmt(&list_lex);
+	check_label_chars(label);
 	while (list_lex)
 	{
-		parse_line(&list_lex);
+		parse_line(&list_lex, label);
 	}
 }
