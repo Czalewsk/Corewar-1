@@ -31,7 +31,8 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 	line = lx->pos[0];
 	(*list_lex) = (*list_lex)->next;
 	i = 0;
-	while ((lx = (*list_lex)->content) && lx->pos[0] == line && !lx->error)
+	while (*list_lex && (lx = (*list_lex)->content)
+			&& lx->pos[0] == line && !lx->error)
 	{
 		if (!arg_isvalid(op, i, list_lex) && (lx->error = 1))
 			return (1);
