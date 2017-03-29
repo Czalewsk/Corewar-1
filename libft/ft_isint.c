@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/05 09:15:40 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/02/10 15:42:28 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 08:04:13 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ int		ft_isint(char *nb)
 	intmax_t	nbr;
 	int			n;
 	int			nb_len;
+	int			i;
 
+	i = 0;
 	n = 0;
 	nb_len = 0;
-	while (nb[n] == ' ')
+	while (*nb == ' ')
+		nb++;
+	if (nb[n] == '+' || nb[n] == '-')
 		n++;
-	if (nb[n] != '+' || nb[n] != '-')
-		n++;
-	while (nb[n + nb_len] && ft_isdigit(nb[nb_len + n]) && nb[n + nb_len] != 48)
+	while (nb[n + i] && nb[n + i] == 48)
+		++i;
+	while (nb[n + i + nb_len] && ft_isdigit(nb[nb_len + n + i]))
 		nb_len++;
 	if (nb_len > 10)
 		return (0);
@@ -34,7 +38,7 @@ int		ft_isint(char *nb)
 	nbr = ft_atoi(nb);
 	if (nbr < INT_MIN || nbr > INT_MAX)
 		return (0);
-	return (1);
+	return (nb_len || i ? 1 : 0);
 }
 /*
 **	intmax_t	nbr;

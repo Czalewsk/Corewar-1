@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/24 05:35:04 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 06:08:38 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ int			check_label_chars(char *str, char *label_chars);
 int			arg_isvalid(t_op *op, int i, t_list **list_lex);
 
 char		get_arg_type(int type);
+
+void		check_name_and_cmt(t_list **lst);
 
 #endif
