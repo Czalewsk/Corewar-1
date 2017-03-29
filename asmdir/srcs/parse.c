@@ -6,11 +6,20 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/27 18:07:29 by xesnault         ###   ########.fr       */
+/*   Updated: 2017/03/29 01:52:24 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+int		set_error(int i, int nb_param, t_lx *elmt)
+{
+	if (i < nb_param)
+		elmt->error = 2;
+	else if (i >= nb_param)
+		elmt->error = 4;
+	return (1);
+}
 
 int		parse_instruction(t_list **list_lex, t_op *op)
 {
@@ -20,21 +29,12 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 	
 	lx = (*list_lex)->content;
 	line = lx->pos[0];
-	ft_printf("Parse instruction: %s\n", lx->word); // DEBUG A DELETE
 	(*list_lex) = (*list_lex)->next;
 	i = 0;
-	while ((lx = (*list_lex)->content) && lx->pos[0] == line)
+	while ((lx = (*list_lex)->content) && lx->pos[0] == line && !lx->error)
 	{
-		//ft_putendl("LOL on rentre dans la boucle =D");
-		if (i >= op->nb_param)
-		{
-			ft_printf("Too much fuckin param\n");
-			break ;
-		}
-		if (arg_isvalid(op, i, list_lex))
-			ft_printf("Arg [%s] is ok\n", lx->word);
-		else
-			ft_printf("Arg [%s] is wrong\n", lx->word);
+		if (!arg_isvalid(op, i, list_lex) && (lx->error = 1))
+			return (1);
 		++i;
 		if (!(*list_lex))
 			break ;
@@ -42,15 +42,10 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 		if (i < op->nb_param && lx->word[0] == SEPARATOR_CHAR)
 			(*list_lex) = (*list_lex)->next;
 		else if (i < op->nb_param && lx->word[0] != SEPARATOR_CHAR)
-		{
-			ft_printf("I need more fkin param\n");
-			return (0);
-		}
+			break ;
 	}
-	if (i != op->nb_param)
-		ft_putendl("LOL add fucking return printf error");
-	return (i == op->nb_param ? 1 : 0);
-} 
+	return ((i == op->nb_param) ? 0 : set_error(i, op->nb_param, lx));
+}
 
 int		parse_label(t_list *list_lex)
 {

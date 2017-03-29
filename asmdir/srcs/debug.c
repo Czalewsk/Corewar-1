@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:41:57 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 15:30:58 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 00:30:54 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	debug_lxcontent(t_list *lst)
 	lex->type >= 0 ? ft_printf(" | type = %s", type[lex->type]) : 1;
 	if (lex->valeur != -1)
 		ft_printf(" | valeur = %i", lex->valeur);
+	if (lex->error)
+		ft_printf("| Erreur= {red}%i{eoc}", lex->error);
 	ft_putendl("");
 }
 

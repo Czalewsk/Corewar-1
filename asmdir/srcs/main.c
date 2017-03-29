@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 17:37:03 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/03/29 01:22:04 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		main(int ac, char **av)
 	ft_printf("Set_lex OK\n");
 	if (!lex)
 		ft_printf("ERROR LEX IS NULL\n");
+	parse(lex);
 //Affichage && Debug
 	ft_lstiter(lex, &debug_lxcontent);
 	ft_lstiter(label, &debug_labelcontent);
@@ -42,7 +43,6 @@ int		main(int ac, char **av)
 	ft_strcpy(header.comment, "COMMENT TEST !");
 	header.magic = COREWAR_EXEC_MAGIC;
 	header.prog_size = 2147483647;
-	parse(lex);
 	header_to_buffer(&buffer, &header);
 	write_bin("player.cor", &buffer);
 //Free lst-> Lx && Label

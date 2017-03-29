@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 21:24:08 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/28 04:50:02 by lduval           ###   ########.fr       */
+/*   Updated: 2017/03/29 00:20:00 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct	s_lx
 	char		*word;
 	size_t		pos[2];
 	size_t		octet;
-	char		*error;
+	int			error;
 }				t_lx;
 
 typedef struct	s_label
