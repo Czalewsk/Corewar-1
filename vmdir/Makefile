@@ -2,7 +2,11 @@ NAME = ../corewar
 
 FLAGS = -Wall -Werror -Wextra -g
 
-SRCS =	vm_main.c vm_pars_param.c vm_data.c
+SRCS =	vm_main.c\
+	vm_pars_param.c\
+	vm_data.c\
+	vm_init_map.c\
+	vm_read_champs.c\
 
 INCLUDES = -I includes -I ../libft
 

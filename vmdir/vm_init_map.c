@@ -1,5 +1,6 @@
+#include "vm_header.h"
 
-static void	vm_init_registre();
+static void	vm_init_registre()
 {
 	return;
 }
@@ -16,8 +17,6 @@ void	vm_init_arena()
 
 	data = get_data();
 	i = 0;
-	if (!(data->arena = (t_reg *)malloc(sizeof(t_reg) * MEM_SIZE)))
-		ft_error("malloc arena failed in vm_int_arena", &vm_free_all);
 	while (i < MEM_SIZE)
 	{
 		vm_init_registre();
