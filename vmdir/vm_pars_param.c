@@ -14,7 +14,20 @@
 
 static int vm_fill_champion(char *champ_name, int n, t_vm_data *data)
 {
+	t_vm_champ **champ;
+	champ = t_vm_data->tab_champ;
 
+	if (champ[n])
+		ft_error("champ number already_set", &vm_free_all);
+	if (!(champ[n] = (t_vm_champ *)malloc(sizeof(t_vm_champ))))
+		ft_erro("malloc failed in vm_fill_champion()",&vm_free_all);
+	if (!(champ([n]->name = ft_strdup(cham_name)))
+		ft_erro("malloc failed in vm_fill_champion()",&vm_free_all);
+	ft_bzero(champ[n]->registre);
+	ft_bzero(champ[n]->pc);
+	champ[n]->carry = 0;
+	champ[n]->num = n;
+	vm_read_champ(champ_name, champ[n]);
 	return 0;
 }
 
@@ -33,8 +46,9 @@ static void vm_pars_champions(int nb_param, char **tab_param, int *i, t_vm_data 
 		if (ft_strequ("-n", tab_param[*i]))
 		{
 			if ((*i) + 2 >= nb_param || !ft_strisnumber(tab_param[*i + 1])
-			 || ((n_next_player = ft_atoi(tab_param[*i + 1])) < 0)
-			 ||  !(t = ft_strrstr( tab_param[*i+ 2],".cor")) || (*(t + 4)))
+			|| ((n_next_player = ft_atoi(tab_param[*i + 1])) < 0
+			|| n_next_player >= MAX_PLAYERS) 
+			||  !(t = ft_strrstr( tab_param[*i+ 2],".cor")) || (*(t + 4)))
 				ft_error("-n wrong input", &vm_free_all);
 			*i += 2;
 		}

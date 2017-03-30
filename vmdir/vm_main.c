@@ -24,28 +24,20 @@ int	main(int argc, char **argv)
 	 * Vérifie si le nombre de parametre est bon,
 	 * Si il est ,la foncton verifie si les différents paramètres,
 	 * sont cohérents. Et remplis les singletons adécuat(si besoin)
-	 * verifie si les fichier players spécifié existe. Return (0) si tout s'est bien passé
-	*/ 
-	//if (pars_files())
-	//	ft_error(ERR_READ, &free_all);
-	/*
-	 * Pars les fichier de champion,  retrun (0) si tout s'est bien passé, -1 si il y a une erreur pendant la lecture ou si un champion est trop gros.
-	 */ 
+	 * verifie si les fichier players spécifié existe. Si ils sont correcte :Return (0) si tout s'est bien passé
+	*/  
 	//init_map();
 	/*
 	 *
-	 * Alloue l'espace mémoire pour la partie. initialise la partie graphique si cela à était spécifié dans les parametre
-	 */ 
-	//init_champ()
-	/*
-	 * place les champion sur la carte
+	 * Alloue l'espace mémoire pour la partie. initialise la partie graphique si cela à était spécifié dans les parametre, allloue les champion aux bon endroits:
+	 *
 	 */
 	//fight()
 	/*
 	 * execute la partie.
 	 * 
 	 */
-	//free_all();
+	//vm_free_all();
 	/*
 	 * desalloue toute la mémoire restante.
 	 */ 
