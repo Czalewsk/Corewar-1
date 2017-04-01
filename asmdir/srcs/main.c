@@ -38,6 +38,7 @@ int		main(int ac, char **av)
 	ft_lstiter(lex, &debug_lxcontent);
 	ft_lstiter(label, &debug_labelcontent);
 //Ecriture du player
+	write_player(&buffer, lex);
 	ft_memset(header.prog_name, 0, PROG_NAME_LENGTH);
 	ft_memset(header.comment, 0, COMMENT_LENGTH);
 	ft_strcpy(header.prog_name, "This is a test !");

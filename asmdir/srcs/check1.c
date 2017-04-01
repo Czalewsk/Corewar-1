@@ -72,6 +72,21 @@ t_list	*get_next_lst(t_list *list_lex)
 	return (NULL);
 }
 
+t_list	*get_next_field(t_list *list_lex)
+{
+	if (!list_lex)
+		return (NULL);
+	list_lex = list_lex->next;
+	while (list_lex)
+	{
+		if (!is_ref(list_lex->content, SEPARATEUR)
+				&& !is_ref(list_lex->content, DIRECTCHAR))
+			return (list_lex);
+		list_lex = list_lex->next;
+	}
+	return (NULL);
+}
+
 int		check_label_chars(t_list *lst)
 {
 	char	*str;
