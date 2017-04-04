@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 04:44:45 by lduval           ###   ########.fr       */
+/*   Updated: 2017/04/04 17:43:35 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef VM_HEADER_H
@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "../libft/libft.h"
-# include "../asmdir/include/op.h"
+# include "../asmdir/includes/op.h"
 
 typedef struct  s_vm_reg
 {
