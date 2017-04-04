@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:41:57 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/29 00:30:54 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/04 18:35:21 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	debug_lxcontent(t_list *lst)
 {
 	t_lx			*lex;
-	const	char	*type[] = {"Direct", "Indirect", "Label", "Registre",
+	const	char	*type[] = {"Direct", "Indirect", "Label Direct", "Registre",
 		"Instruction", "Separateur", "Name", "Comment", "Direct_Char",
-		"Label_ref"};
+		"Label", "Label Indirect"};
 
 	lex = lst->content;
 	ft_printf("[%3jd][%2jd] {green}%-15s{eoc}",

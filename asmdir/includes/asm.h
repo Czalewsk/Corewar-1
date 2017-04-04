@@ -44,6 +44,8 @@ t_lx		*get_next_lx(t_list *list_lex);
 
 t_list		*get_next_lst(t_list *list_lex);
 
+t_list		*get_next_field(t_list *list_lex);
+
 int			check_label_chars(t_list *lst);
 
 int			arg_isvalid(t_op *op, int i, t_list **list_lex);
@@ -51,5 +53,7 @@ int			arg_isvalid(t_op *op, int i, t_list **list_lex);
 char		get_arg_type(int type);
 
 void		check_name_and_cmt(t_list **lst);
+
+void		write_player(t_buf *buffer, t_list *list_lex);
 
 #endif
