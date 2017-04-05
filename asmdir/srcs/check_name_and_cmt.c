@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:49:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/05 23:04:20 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:07:52 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void		check_name(t_list **lst)
 	else if ((elmt->error = 0x4000))
 		while (line == ((t_lx*)((*lst)->content))->pos[0])
 			(*lst) = (*lst)->next;
-	}
 }
 
 void		check_comment(t_list **lst)
@@ -65,7 +64,6 @@ void		check_comment(t_list **lst)
 	else if ((elmt->error = 0x1000))
 		while (line == ((t_lx*)((*lst)->content))->pos[0])
 			(*lst) = (*lst)->next;
-	}
 }
 
 void		check_name_and_cmt(t_list **lst)
