@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 21:24:08 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/04 17:58:32 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/05 11:43:44 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 # define __LEXER_H
 
 # include "./../libft/libft.h"
+# include "op.h"
 # include <fcntl.h>
 
-enum {DIRECT, INDIRECT, LABEL, REGISTRE, INSTRUCTION, SEPARATEUR,
-	NAME, COMMENT, DIRECTCHAR, LABELREF, INDIR_LABEL};
+enum {DIRECT, INDIRECT, D_LABEL, REGISTRE, INSTRUCTION, SEPARATEUR,
+	NAME, COMMENT, DIRECTCHAR, LABEL, I_LABEL};
 
 typedef struct	s_lx
 {

@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 11:26:59 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/05 14:07:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 # include "lexer.h"
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef struct		s_gramm
+{
+	char		c;
+	char		*format;
+	int			(*f)(char *);
+	int			value;
+}					t_gramm;
 
 typedef struct		s_buf
 {
@@ -55,5 +63,9 @@ char		get_arg_type(int type);
 void		check_name_and_cmt(t_list **lst);
 
 void		write_player(t_buf *buffer, t_list *list_lex);
+
+int			is_labelchar(char *str);
+
+int			is_label_declaration(char *str);
 
 #endif

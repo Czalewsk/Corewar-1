@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 16:44:31 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 11:59:53 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/04 19:50:57 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	get_arg_type(int type)
 		return (2);
 	if (type == INDIRECT)
 		return (4);
-	if (type == LABELREF)
+	if (type == LABEL)
 		return (2);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 11:20:28 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/04 19:51:19 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	parse_line(t_list **list_lex, t_list *label)
 	t_lx	*lx;
 
 	lx = (*list_lex)->content;
-	if (is_ref(lx, LABELREF))
+	if (is_ref(lx, LABEL))
 	{
 		parse_label(lx, label);
-		if (is_ref(get_next_lx(*list_lex), LABEL)
+		if (is_ref(get_next_lx(*list_lex), D_LABEL)
 			&& get_line(lx) == get_line(get_next_lx(*list_lex)))
 			((t_lx*)((*list_lex)->content))->error = 16;
 		*list_lex = get_next_lst((*list_lex));

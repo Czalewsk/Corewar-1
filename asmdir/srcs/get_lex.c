@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 17:59:39 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/05 13:34:22 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,27 @@ const	char	*g_delim = ":,";
 
 void			get_end_word(char const *s, size_t *i)
 {
-	if (s[(*i)] == '\"' && ++(*i))
+	if (s[(*i)] && s[(*i)] == '\"' && ++(*i))
+		while (s[(*i)] && s[(*i)] != '\"')
+			++(*i);
+	if (s[(*i)] && ft_strchr(g_delim, s[(*i)]) && ++(*i))
+		return ;
+	while (s[(*i)] && !ft_strchr(g_wspace, s[(*i)]) && !ft_strchr(g_eol, s[(*i)])
+			&& !ft_strchr(g_delim, s[(*i)]))
+	{
+			++(*i);
+			if (s[*i] == LABEL_CHAR && ++(*i))
+				return ;
+	}
+
+/*	if (s[(*i)] == '\"' && ++(*i))
 		while (s[(*i)] && s[(*i)] != '\"')
 			++(*i);
 	if (ft_strchr(g_delim, s[(*i)]) && ++(*i))
 		return ;
 	while (s[*i] && !ft_strchr(g_wspace, s[*i]) && !ft_strchr(g_eol, s[*i])
 			&& !ft_strchr(g_delim, s[(*i)]))
-		++(*i);
+		++(*i);*/
 }
 
 int				get_next_word(char const *s, size_t *i)
@@ -67,8 +80,11 @@ void			fill_lst(t_list **start, char *line, size_t ln)
 			new_lx = lx_init(ft_strsub(line + beg, 0, end - beg), ln, beg);
 			new_lx ? ft_lst_pushend(start, ft_lstnew(new_lx, sizeof(t_lx)))
 				: NULL;
+			printf("elem=%s\n", new_lx->word);
 			ft_memdel((void**)&new_lx);
 		}
+		else
+			printf("OMG\n");
 		beg = end;
 	}
 }
