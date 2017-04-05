@@ -38,5 +38,5 @@ void	debug_labelcontent(t_list *lst)
 	t_label		*elmt;
 
 	elmt = lst->content;
-	ft_printf("[%3i] Name of label : %s\n", elmt->index, elmt->name);
+	ft_printf("[%3i] Name of label : %s\n", elmt->octet, elmt->name);
 }

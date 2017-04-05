@@ -33,7 +33,7 @@ typedef struct	s_lx
 typedef struct	s_label
 {
 	char		*name;
-	int			index;
+	int			octet;
 }				t_label;
 
 typedef struct	s_op

@@ -54,7 +54,7 @@ char		get_arg_type(int type);
 
 void		check_name_and_cmt(t_list **lst);
 
-void		write_player(t_buf *buffer, t_list *list_lex);
+void		write_player(t_buf *buffer, t_list *list_lex, t_list *label);
 
 int			is_label(char *word);
 
@@ -63,5 +63,7 @@ int			is_direct(t_list *lst);
 int			is_indirect(t_list *lst);
 
 int			write_bigendian(t_buf *buffer, int nbr, size_t nb_octet);
+
+t_label		*get_label(t_list *list_label, t_lx *lx);
 
 #endif

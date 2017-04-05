@@ -15,14 +15,17 @@
 int		main(int ac, char **av)
 {
 	t_list		*lex;
-	t_buf		buffer;
+	t_buf		buffer_header;
+	t_buf		buffer_prog;
 	header_t	header;
 	t_list		*label;
 
 	if (ac != 2)
 		return (0);
-	buffer.data = NULL;
-	buffer.size = 0;
+	buffer_header.data = NULL;
+	buffer_header.size = 0;
+	buffer_prog.data = NULL;
+	buffer_prog.size = 0;
 	label = NULL;
 //Lexer
 	ft_printf("PROGRAM STARTED\n");
@@ -44,9 +47,10 @@ int		main(int ac, char **av)
 	ft_strcpy(header.comment, "COMMENT TEST !");
 	header.magic = COREWAR_EXEC_MAGIC;
 	header.prog_size = 0x1d000000;
-	header_to_buffer(&buffer, &header);
-	write_player(&buffer, lex);
-	write_bin("player.cor", &buffer);
+	header_to_buffer(&buffer_header, &header);
+	write_player(&buffer_prog, lex, label);
+	write_to_buffer(&buffer_header, buffer_prog.data, buffer_prog.size);
+	write_bin("player.cor", &buffer_header);
 //Free lst-> Lx && Label
 	ft_lstdel(&lex, &del_lex);
 	ft_lstdel(&label, &del_label);

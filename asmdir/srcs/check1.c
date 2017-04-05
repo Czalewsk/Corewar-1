@@ -201,6 +201,20 @@ int		is_indirect(t_list *lst)
 	return (0);
 }
 
+t_label	*get_label(t_list *list_label, t_lx *lx)
+{
+	t_label		*label;
+
+	while (list_label)
+	{
+		label = list_label->content;
+		if (!ft_strcmp(lx->word, label->name))
+			return (label);
+		list_label = list_label->next;
+	}
+	return (NULL);
+}
+
 
 
 
