@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:49:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/29 06:29:46 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:04:20 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		check_name(t_list **lst)
 {
 	t_lx		*elmt;
 	size_t		line;
+	int			len;
 
 	elmt = (*lst)->content;
 	line = elmt->pos[0];
@@ -23,16 +24,17 @@ void		check_name(t_list **lst)
 	{
 		(*lst) = (*lst)->next;
 		elmt = (*lst)->content;
-		if (ft_strlen(elmt->word) > PROG_NAME_LENGTH)
+		len = ft_strlen(elmt->word);
+		if ((elmt->word[0] == '\"' && elmt->word[len - 1] == '\"'))
+			elmt->error = 0x8800;
+		else if (len > PROG_NAME_LENGTH)
 		{
 			elmt->word[PROG_NAME_LENGTH] = '\0';
 			elmt->error = 0x8000;
 		}
 		(*lst) = (*lst)->next;
 	}
-	else
-	{
-		elmt->error = 0x4000;
+	else if ((elmt->error = 0x4000))
 		while (line == ((t_lx*)((*lst)->content))->pos[0])
 			(*lst) = (*lst)->next;
 	}
@@ -42,6 +44,7 @@ void		check_comment(t_list **lst)
 {
 	t_lx		*elmt;
 	size_t		line;
+	int			len;
 
 	elmt = (*lst)->content;
 	line = elmt->pos[0];
@@ -49,16 +52,17 @@ void		check_comment(t_list **lst)
 	{
 		(*lst) = (*lst)->next;
 		elmt = (*lst)->content;
-		if (ft_strlen(elmt->word) > COMMENT_LENGTH)
+		len = ft_strlen(elmt->word);
+		if ((elmt->word[0] == '\"' && elmt->word[len - 1] == '\"'))
+			elmt->error = 0x2800;
+		else if (len > COMMENT_LENGTH)
 		{
 			elmt->word[PROG_NAME_LENGTH] = '\0';
 			elmt->error = 0x2000;
 		}
 		(*lst) = (*lst)->next;
 	}
-	else
-	{
-		elmt->error = 0x1000;
+	else if ((elmt->error = 0x1000))
 		while (line == ((t_lx*)((*lst)->content))->pos[0])
 			(*lst) = (*lst)->next;
 	}
