@@ -56,4 +56,12 @@ void		check_name_and_cmt(t_list **lst);
 
 void		write_player(t_buf *buffer, t_list *list_lex);
 
+int			is_label(char *word);
+
+int			is_direct(t_list *lst);
+
+int			is_indirect(t_list *lst);
+
+int			write_bigendian(t_buf *buffer, int nbr, size_t nb_octet);
+
 #endif

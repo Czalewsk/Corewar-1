@@ -44,7 +44,7 @@ void		header_to_buffer(t_buf *buffer, header_t *header)
 		ft_printf("[warning] Name too long");
 	if (ft_strlen(header->comment) > COMMENT_LENGTH)
 		ft_printf("[warning] Comment too long");
-	if (!write_to_buffer(buffer, &(header->magic), sizeof(unsigned int)))
+	if (!write_bigendian(buffer, header->magic, sizeof(unsigned int)))
 		ft_printf("write magic error\n");
 	if (!write_to_buffer(buffer, header->prog_name, PROG_NAME_LENGTH))
 		ft_printf("write prog name error\n");
@@ -57,4 +57,20 @@ void		header_to_buffer(t_buf *buffer, header_t *header)
 	if (!write_to_buffer(buffer, &idk, sizeof(unsigned int)))
 		ft_printf("write comment null octet error\n");
 
+}
+
+int		write_bigendian(t_buf *buffer, int nbr, size_t nb_octet)
+{
+	unsigned char	tmp[4];
+
+	buffer->data = realloc(buffer->data, buffer->size + nb_octet);
+	if (buffer->data == NULL)
+		return (0);
+	tmp[0] = (nbr >> 24) & 0xff;
+	tmp[1] = (nbr >> 16) & 0xff;
+	tmp[2] = (nbr >> 8) & 0xff;
+	tmp[3] = nbr & 0xff;
+	ft_memcpy(buffer->data + buffer->size, tmp + (4 - nb_octet), nb_octet);
+	buffer->size += nb_octet;
+	return (1);
 }

@@ -38,14 +38,14 @@ int		main(int ac, char **av)
 	ft_lstiter(lex, &debug_lxcontent);
 	ft_lstiter(label, &debug_labelcontent);
 //Ecriture du player
-	write_player(&buffer, lex);
 	ft_memset(header.prog_name, 0, PROG_NAME_LENGTH);
 	ft_memset(header.comment, 0, COMMENT_LENGTH);
 	ft_strcpy(header.prog_name, "This is a test !");
 	ft_strcpy(header.comment, "COMMENT TEST !");
 	header.magic = COREWAR_EXEC_MAGIC;
-	header.prog_size = 2147483647;
+	header.prog_size = 0x1d000000;
 	header_to_buffer(&buffer, &header);
+	write_player(&buffer, lex);
 	write_bin("player.cor", &buffer);
 //Free lst-> Lx && Label
 	ft_lstdel(&lex, &del_lex);

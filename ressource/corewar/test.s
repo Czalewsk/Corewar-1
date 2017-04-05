@@ -1,6 +1,8 @@
 .name "C and X tests"
 .comment "Don't worry, it's ok"
 
+lol:
+
 l2:		sti r1, %:live, %1
 l3:		sti r1, %:live, %1
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "asm.h"
 
 const	char	*g_wspace = " \t";
 const	char	*g_eol = "#;\n";
@@ -18,14 +18,18 @@ const	char	*g_delim = ":,";
 
 void			get_end_word(char const *s, size_t *i)
 {
-	if (s[(*i)] == '\"' && ++(*i))
+	if (s[(*i)] && s[(*i)] == '\"' && ++(*i))
 		while (s[(*i)] && s[(*i)] != '\"')
 			++(*i);
-	if (ft_strchr(g_delim, s[(*i)]) && ++(*i))
+	if (s[(*i)] && ft_strchr(g_delim, s[(*i)]) && ++(*i))
 		return ;
-	while (s[*i] && !ft_strchr(g_wspace, s[*i]) && !ft_strchr(g_eol, s[*i])
+	while (s[(*i)] && !ft_strchr(g_wspace, s[(*i)]) && !ft_strchr(g_eol, s[(*i)])
 			&& !ft_strchr(g_delim, s[(*i)]))
-		++(*i);
+	{
+			++(*i);
+			if (s[*i] == LABEL_CHAR && ++(*i))
+				return ;
+	}
 }
 
 int				get_next_word(char const *s, size_t *i)

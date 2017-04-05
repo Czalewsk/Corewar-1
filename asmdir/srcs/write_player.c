@@ -22,9 +22,8 @@ void	set_codage(unsigned char *codage, t_lx *lx, int i)
 		*codage = (*codage | (3 << (6 - i*2)));
 }
 
-void	param_to_buffer(t_buf *buffer, t_lx *lx, t_op *op)
+void	param_to_buffer(t_buf *buffer_param, t_lx *lx, t_op *op)
 {
-	(void)buffer;
 	int	nb_octet;
 
 	nb_octet = 0;
@@ -36,17 +35,21 @@ void	param_to_buffer(t_buf *buffer, t_lx *lx, t_op *op)
 		nb_octet = 1;
 	else if (lx->type == DIRECT)
 		nb_octet = 4;
+	write_bigendian(buffer_param, lx->valeur, nb_octet);
 	ft_printf("Writing param %s: %d => %d octet\n", lx->word, lx->valeur, nb_octet);
 	// Write the param to (buffer)param now
 }
 
-void	write_field(t_buf *buffer, t_list **list_lex)
+void	write_line(t_buf *buffer, t_list **list_lex)
 {
-	t_op		*op;
-	int		i;
+	t_op			*op;
+	int				i;
 	unsigned char	codage;
+	t_buf			buffer_param;
 
 	codage = 0;	
+	buffer_param.size = 0;
+	buffer_param.data = NULL;
 	if ((op = get_instruction((*list_lex)->content)))
 	{
 		i = 0;
@@ -55,24 +58,32 @@ void	write_field(t_buf *buffer, t_list **list_lex)
 		{
 			*list_lex = get_next_field(*list_lex);
 			set_codage(&codage, (*list_lex)->content, i);
-			param_to_buffer(buffer, (*list_lex)->content, op);
+			param_to_buffer(&buffer_param, (*list_lex)->content, op);
 			++i;
 		}
-		ft_printf("CODAGE %#04x\n", codage);
 		// Write instruction to buffer
+		write_to_buffer(buffer, &(op->op_code), 1);
 		// Write codage to buffer
+		if (op->octet_param)
+		{
+			write_to_buffer(buffer, &codage, 1);
+			ft_printf("CODAGE %#04x\n", codage);
+		}
 		// Write (buffer)param to buffer
+		write_to_buffer(buffer, buffer_param.data, buffer_param.size);
+		ft_printf("size = %d\n", buffer_param.size);
+		if (buffer_param.data)
+			free(buffer_param.data);
 	}
 }
 
 void	write_player(t_buf *buffer, t_list *list_lex)
 {
 	ft_printf("Writing player started\n");
-	(void)buffer;
 
 	while (list_lex)
 	{
-		write_field(buffer, &list_lex);
+		write_line(buffer, &list_lex);
 		list_lex = get_next_field(list_lex);
 	}
 	ft_printf("Writing player finished\n");
