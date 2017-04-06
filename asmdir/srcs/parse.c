@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/06 12:03:26 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/06 17:18:17 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		set_error(int i, int nb_param, t_lx *elmt)
 {
 	if (i < nb_param)
 		elmt->error = 2;
-	else if (i >= nb_param)
+	else if (i > nb_param)
 		elmt->error = 4;
 	return (1);
 }
@@ -47,7 +47,7 @@ int		parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 		else if (i < op->nb_param && lx->word[0] != SEPARATOR_CHAR)
 			break ;
 	}
-	return ((i == op->nb_param) ? 0 : set_error(i, op->nb_param, lx));
+	return ((i == op->nb_param || lx->error) ? 0 : set_error(i, op->nb_param, lx));
 }
 
 void		parse_label(t_lx *lx, t_list *lst_lbl)
