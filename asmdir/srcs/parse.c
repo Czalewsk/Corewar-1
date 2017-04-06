@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/06 11:53:28 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/06 12:03:26 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	parse_line(t_list **list_lex, t_list *label)
 	t_lx	*lx;
 
 	lx = (*list_lex)->content;
-	printf("---------------->S=%s|\n", lx->word);
 	if (lx->type == LABEL)
 	{
 		parse_label(lx, label);
