@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 16:44:31 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 11:59:53 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/06 11:05:00 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,11 @@ int		arg_isvalid(t_op *op, int i, t_list **list_lex)
 	if (!(*list_lex))
 		return (0);
 	lx = (*list_lex)->content;
-	if (lx->type == DIRECTCHAR)
+	if (lx->type == SEPARATEUR || lx->type == DIRECTCHAR)
 	{
-		*list_lex = (*list_lex)->next;
-		lx = (*list_lex)->content;
-		if (lx->type == SEPARATEUR && lx->word[0] == LABEL_CHAR)
+		if ((lx->type == SEPARATEUR || lx->type == DIRECTCHAR) &&
+				(lx->word[0] == LABEL_CHAR
+				|| (lx->word[0] == DIRECT_CHAR && lx->word[1] == LABEL_CHAR)))
 		{
 			*list_lex = (*list_lex)->next;
 			lx = (*list_lex)->content;

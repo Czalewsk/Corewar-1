@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:49:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/05 23:32:00 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/06 10:10:47 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void		check_name(t_list **lst)
 		(*lst) = (*lst)->next;
 		elmt = (*lst)->content;
 		len = ft_strlen(elmt->word);
-		printf("----------%s|\n", elmt->word);
 		if (!(elmt->word[0] == '\"' && elmt->word[len - 1] == '\"'))
 			elmt->error = 0x8800;
 		else if (len > PROG_NAME_LENGTH)
@@ -53,7 +52,6 @@ void		check_comment(t_list **lst)
 		(*lst) = (*lst)->next;
 		elmt = (*lst)->content;
 		len = ft_strlen(elmt->word);
-		printf("----------%s|\n", elmt->word);
 		if (!(elmt->word[0] == '\"' && elmt->word[len - 1] == '\"'))
 			elmt->error = 0x2800;
 		else if (len > COMMENT_LENGTH)

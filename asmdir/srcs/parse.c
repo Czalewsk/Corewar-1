@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/29 11:20:28 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/06 11:06:10 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 			break ;
 		lx = (*list_lex)->content;
 		if (i < op->nb_param && lx->word[0] == SEPARATOR_CHAR)
-			(*list_lex) = (*list_lex)->next;
+			(*list_lex) = (lx->type == SEPARATEUR &&
+				lx->word[0] != SEPARATOR_CHAR && (*list_lex)->next->next) ?
+				(*list_lex)->next->next : (*list_lex)->next;
 		else if (i < op->nb_param && lx->word[0] != SEPARATOR_CHAR)
 			break ;
 	}
