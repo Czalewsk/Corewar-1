@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/06 11:06:10 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/06 11:53:28 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		set_error(int i, int nb_param, t_lx *elmt)
 	return (1);
 }
 
-int		parse_instruction(t_list **list_lex, t_op *op)
+int		parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 {
 	t_lx	*lx;
 	int		i;
@@ -34,7 +34,7 @@ int		parse_instruction(t_list **list_lex, t_op *op)
 	while (*list_lex && (lx = (*list_lex)->content)
 			&& lx->pos[0] == line && !lx->error)
 	{
-		if (!arg_isvalid(op, i, list_lex) && (lx->error = 1))
+		if (!arg_isvalid(op, i, list_lex, label) && (lx->error = 1))
 			return (1);
 		++i;
 		if (!(*list_lex))
@@ -70,7 +70,8 @@ void	parse_line(t_list **list_lex, t_list *label)
 	t_lx	*lx;
 
 	lx = (*list_lex)->content;
-	if (is_ref(lx, LABELREF))
+	printf("---------------->S=%s|\n", lx->word);
+	if (lx->type == LABEL)
 	{
 		parse_label(lx, label);
 		if (is_ref(get_next_lx(*list_lex), LABEL)
@@ -79,7 +80,7 @@ void	parse_line(t_list **list_lex, t_list *label)
 		*list_lex = get_next_lst((*list_lex));
 	}
 	if ((op = get_instruction((*list_lex)->content)))
-		parse_instruction(list_lex, op);
+		parse_instruction(list_lex, op, label);
 	else
 	{
 		if (!op && ((t_lx*)((*list_lex)->content))->type == INSTRUCTION)
