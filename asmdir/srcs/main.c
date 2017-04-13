@@ -30,6 +30,8 @@ int		main(int ac, char **av)
 //Lexer
 	ft_printf("PROGRAM STARTED\n");
 	lex = get_lex(av[1]);
+	if (!lex)
+		return (0);
 	ft_printf("get_lex OK\n");
 	set_lex(lex, &label);
 	ft_printf("Set_lex OK\n");
@@ -41,16 +43,10 @@ int		main(int ac, char **av)
 	ft_lstiter(lex, &debug_lxcontent);
 	ft_lstiter(label, &debug_labelcontent);
 //Ecriture du player
-	ft_memset(header.prog_name, 0, PROG_NAME_LENGTH);
-	ft_memset(header.comment, 0, COMMENT_LENGTH);
-	ft_strcpy(header.prog_name, "This is a test !");
-	ft_strcpy(header.comment, "COMMENT TEST !");
-	header.magic = COREWAR_EXEC_MAGIC;
-	header.prog_size = 0x1d000000;
+	write_player(&buffer_prog, lex, label, &header);
 	header_to_buffer(&buffer_header, &header);
-	write_player(&buffer_prog, lex, label);
 	write_to_buffer(&buffer_header, buffer_prog.data, buffer_prog.size);
-	write_bin("player.cor", &buffer_header);
+	write_bin(av[1], &buffer_header);
 //Free lst-> Lx && Label
 	ft_lstdel(&lex, &del_lex);
 	ft_lstdel(&label, &del_label);

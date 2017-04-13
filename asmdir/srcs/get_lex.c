@@ -89,7 +89,7 @@ t_list			*get_lex(char *filename)
 	lexem = NULL;
 	if ((fd = open(filename, O_RDONLY)) <= 0)
 	{
-		ft_printf("Ceci n'a pas marche\n");
+		ft_printf("Ceci n'a pas marche (fichier introuvable)\n");
 		return (NULL);
 	}
 	while (get_next_line(fd, &line) > 0 && ++ln)

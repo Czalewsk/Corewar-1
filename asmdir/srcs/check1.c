@@ -87,6 +87,22 @@ t_list	*get_next_field(t_list *list_lex)
 	return (NULL);
 }
 
+t_lx	*get_lx_by_type(t_list *list_lex, int type)
+{
+	t_lx	*lx;
+	
+	if (!list_lex)
+		return (NULL);
+	while (list_lex)
+	{
+		lx = list_lex->content;
+		if (lx->type == type)
+			return (lx);
+		list_lex = list_lex->next;
+	}
+	return (NULL);
+}
+
 int		check_label_chars(t_list *lst)
 {
 	char	*str;

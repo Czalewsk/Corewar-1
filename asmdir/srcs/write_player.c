@@ -59,7 +59,7 @@ void	param_to_buffer(t_buf *buffer, t_list **list_lex, t_op *op, t_list *list_la
 		if (lx->label)
 		{
 			label = get_label(list_label, lx);
-			lx->valeur = label->octet - (buffer->size - 1 - (op->index ? 0 : 1));
+			lx->valeur = label->octet - (buffer->size - 1 - (op->octet_param ? 1 : 0));
 		}
 		write_bigendian(&buffer_param, lx->valeur, nb_octet);
 		ft_printf("Writing param %s: %d => %d octet\n", lx->word, lx->valeur, nb_octet);
@@ -111,7 +111,23 @@ void	write_line(t_buf *buffer, t_list **list_lex, t_list *list_label)
 	}
 }
 
-void	write_player(t_buf *buffer, t_list *list_lex, t_list *list_label)
+void	fill_header(header_t *header, t_list *list_lex, t_buf *buffer)
+{
+	t_lx	*lx;
+
+	header->magic = COREWAR_EXEC_MAGIC;
+	ft_memset(header->prog_name, 0, PROG_NAME_LENGTH);
+	ft_memset(header->comment, 0, COMMENT_LENGTH);
+	if (!(lx = get_lx_by_type(list_lex, NAME)))
+		return ;
+	ft_strncpy(header->prog_name, lx->word + 1, ft_strlen(lx->word) - 2);
+	if (!(lx = get_lx_by_type(list_lex, COMMENT)))
+		return ;
+	ft_strncpy(header->comment, lx->word + 1, ft_strlen(lx->word) - 2);
+	header->prog_size = buffer->size;
+}
+
+void	write_player(t_buf *buffer, t_list *list_lex, t_list *list_label, header_t *header)
 {
 	ft_printf("Writing player started\n");
 	t_list	*backup;
@@ -123,6 +139,7 @@ void	write_player(t_buf *buffer, t_list *list_lex, t_list *list_label)
 		list_lex = get_next_field(list_lex);
 	}
 	list_lex = backup;
+	fill_header(header, list_lex, buffer);
 	buffer->size = 0;
 	buffer->data = NULL;
 	while (list_lex)

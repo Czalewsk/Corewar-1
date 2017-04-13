@@ -12,16 +12,42 @@
 
 #include "asm.h"
 
+char	*transform_filename(char *filename)
+{
+	char	*tmp;
+	char	*old_filename;
+	char	*new_filename;
+
+	old_filename = ft_strnew(ft_strlen(filename) + 1);
+	new_filename = ft_strnew(ft_strlen(filename) + 10);
+	if (!old_filename || !new_filename)
+		return (NULL);
+	ft_strcpy(old_filename, filename);
+	tmp = ft_strrchr(old_filename, '.');
+	if (!tmp)
+		return (NULL);
+	*tmp = 0;
+	ft_strcpy(new_filename, old_filename);
+	ft_strcat(new_filename, "CX.cor");
+	free(old_filename);
+	return (new_filename);
+}
+
 int		write_bin(char *filename, t_buf *buffer)
 {
 	int	fd;
 	int	ret;
 
-	fd = open(filename, O_WRONLY | O_CREAT, 0664);
+	filename = transform_filename(filename);
+	if (!filename)
+		filename = ft_strdup("NameError.cor");
+	ft_printf("The new filename is {cyan}%s{eoc}\n", filename);
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (fd == -1)
 		return (0);
 	ret = write(fd, buffer->data, buffer->size);
 	close(fd);
+	free(filename);
 	return (ret);
 }
 
@@ -50,7 +76,7 @@ void		header_to_buffer(t_buf *buffer, header_t *header)
 		ft_printf("write prog name error\n");
 	if (!write_to_buffer(buffer, &idk, sizeof(unsigned int)))
 		ft_printf("write name null octet error\n");
-	if (!write_to_buffer(buffer, &(header->prog_size), sizeof(unsigned int)))
+	if (!write_bigendian(buffer, header->prog_size, sizeof(unsigned int)))
 		ft_printf("write prog size error\n");
 	if (!write_to_buffer(buffer, header->comment, COMMENT_LENGTH))
 		ft_printf("write comment error\n");
