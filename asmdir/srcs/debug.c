@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:41:57 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/04 18:35:21 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/16 18:56:43 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	debug_lxcontent(t_list *lst)
 {
 	t_lx			*lex;
-	const	char	*type[] = {"Direct", "Indirect", "Declaration Label", "Registre",
-		"Instruction", "Separateur", "Name", "Comment", "Direct_Char",
-		"Label", "Label Indirect"};
+	const	char	*type[] = {"Direct", "Indirect", "Declaration Label",
+		"Registre", "Instruction", "Separateur", "Name", "Comment",
+		"Direct_Char", "Label", "Label Indirect"};
 
 	lex = lst->content;
 	ft_printf("[%3jd][%2jd] {green}%-15s{eoc}",
@@ -31,7 +31,6 @@ void	debug_lxcontent(t_list *lst)
 		ft_printf("| Erreur= {red}%i{eoc}", lex->error);
 	ft_putendl("");
 }
-
 
 void	debug_labelcontent(t_list *lst)
 {

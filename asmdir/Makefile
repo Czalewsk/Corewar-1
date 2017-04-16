@@ -3,8 +3,9 @@ NAME = ../asm
 FLAGS = -Wall -Werror -Wextra -g
 
 SRCS =	main.c write_bin.c debug.c get_lex.c set_lex.c \
-		delete_lex.c op.c check1.c parse.c check_name_and_cmt.c \
-		write_player.c
+		delete_lex.c op.c parse.c write_player.c	   \
+		check_function.c get_function1.c			   \
+		get_function2.c is_function.c prepare_to_buff.c\
 
 INCLUDES = -I includes -I ../libft
 

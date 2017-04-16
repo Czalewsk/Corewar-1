@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/06 17:11:15 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/16 18:31:49 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static	void	fix_lex(t_lx *lex, t_list **label)
 	else if (lex->type == INDIRECT && ft_strisnumber(lex->word))
 		lex->valeur = ft_atoi(lex->word);
 	else if (lex->type == REGISTRE && ft_strisnumber(lex->word + 1))
-		if((lex->valeur = ft_atoi(lex->word + 1)) > 99)
-				lex->error = 3;
+		if ((lex->valeur = ft_atoi(lex->word + 1)) > 99)
+			lex->error = 3;
 	if (++index && lex->type == LABEL)
 		add_label(lex, label);
 }
@@ -90,6 +90,7 @@ static	void	set_lex_ext(t_list *lst, t_lx *lx)
 void			set_lex(t_list *lst, t_list **label)
 {
 	t_lx	*lx;
+
 	set_name_comment(&lst);
 	while (lst)
 	{
