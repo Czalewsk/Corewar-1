@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/17 12:35:17 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/17 12:47:27 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ void	write_player(t_buf *buffer, t_list *list_lex, t_list *list_label,
 		list_lex = get_next_field(list_lex);
 	}
 	list_lex = backup;
-	free(buffer->data);
 	fill_header(header, list_lex, buffer);
+	ft_memdel((void**)&buffer->data);
 	buffer->size = 0;
-	buffer->data = NULL;
 	while (list_lex)
 	{
 		write_line(buffer, &list_lex, list_label);
