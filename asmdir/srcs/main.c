@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/29 10:38:36 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/17 12:36:29 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		main(int ac, char **av)
 //Free lst-> Lx && Label
 	ft_lstdel(&lex, &del_lex);
 	ft_lstdel(&label, &del_label);
+	free(buffer_prog.data);
+	free(buffer_header.data);
 	ft_printf("PROGRAM FINISHED\n");
 	return (0);
 }

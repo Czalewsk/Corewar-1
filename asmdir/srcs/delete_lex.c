@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 16:58:43 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 17:38:47 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/17 09:51:39 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ void	del_label(void *content, size_t size)
 
 	(void)size;
 	elmt = content;
-//	ft_strdel(&elmt->name);
 	free(content);
 }
