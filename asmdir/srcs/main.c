@@ -12,31 +12,47 @@
 
 #include "asm.h"
 
-int		main(int ac, char **av)
+void	main_error(char *str, int forcequit)
+{
+	ft_printf("{red}%s{eoc}\n", str);
+	if (forcequit)
+		exit(1);
+}
+
+void	buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
+{
+	buffer1->data = NULL;
+	buffer1->size = 0;
+	buffer2->data = NULL;
+	buffer2->size = 0;
+}
+
+void	sp_free(t_list *lex, t_list *label, t_buf *buffer1, t_buf *buffer2)
+{
+	ft_lstdel(&lex, &del_lex);
+	ft_lstdel(&label, &del_label);
+	free(buffer1->data);
+	free(buffer2->data);
+}
+
+void	do_stuff(char *av)
 {
 	t_list		*lex;
+	t_list		*label;
 	t_buf		buffer_header;
 	t_buf		buffer_prog;
 	header_t	header;
-	t_list		*label;
 
-	if (ac != 2)
-		return (0);
-	buffer_header.data = NULL;
-	buffer_header.size = 0;
-	buffer_prog.data = NULL;
-	buffer_prog.size = 0;
+	buffer_set_zero(&buffer_header, &buffer_prog);
 	label = NULL;
 //Lexer
-	ft_printf("PROGRAM STARTED\n");
-	lex = get_lex(av[1]);
+	ft_printf("{green}PROGRAM STARTED{eoc}\n");
+	lex = get_lex(av);
 	if (!lex)
-		return (0);
-	ft_printf("get_lex OK\n");
+		main_error("get_lex error", 1);
 	set_lex(lex, &label);
-	ft_printf("Set_lex OK\n");
 	if (!lex)
-		ft_printf("ERROR LEX IS NULL\n");
+		main_error("ERROR LEX IS NULL\n", 1);
 //Parser
 	parse(lex, label);
 //Affichage && Debug
@@ -46,12 +62,23 @@ int		main(int ac, char **av)
 	write_player(&buffer_prog, lex, label, &header);
 	header_to_buffer(&buffer_header, &header);
 	write_to_buffer(&buffer_header, buffer_prog.data, buffer_prog.size);
-	write_bin(av[1], &buffer_header);
+	write_bin(av, &buffer_header);
 //Free lst-> Lx && Label
-	ft_lstdel(&lex, &del_lex);
-	ft_lstdel(&label, &del_label);
-	free(buffer_prog.data);
-	free(buffer_header.data);
-	ft_printf("PROGRAM FINISHED\n");
+	sp_free(lex, label, &buffer_header, &buffer_prog);
+	ft_printf("{green}PROGRAM FINISHED{eoc}\n");
+}
+
+int		main(int ac, char **av)
+{
+	int		i;
+
+	i = 1;
+	if (ac < 2)
+		return (0);
+	while (i < ac)
+	{
+		do_stuff(av[i]);
+		++i;
+	}
 	return (0);
 }
