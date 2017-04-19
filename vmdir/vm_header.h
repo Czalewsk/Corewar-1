@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/04/04 21:07:06 by lduval           ###   ########.fr       */
+/*   Updated: 2017/04/19 04:41:26 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef VM_HEADER_H
@@ -17,26 +17,38 @@
 # include "../libft/libft.h"
 # include "../asmdir/includes/op.h"
 
-typedef struct  s_vm_reg
+typedef struct      s_buf
 {
+	void            *data;
+	size_t          size;
+}					t_buf;
 
-}               t_vm_reg;
+typedef struct	s_vm_proc
+{
+	char		registre[REG_NUMBER * REG_SIZE + 1];
+	int			pc;
+	int			carry;
+	int			champ;
+	int			beg;
+	int			last_live;
+}				t_vm_proc;
 
 typedef struct	s_vm_champ
 {
-	char	registre[REG_NUMBER * REG_SIZE];
-	char	pc[REG_SIZE];
-	int     carry;
-	int     num;
-	char	*name;
+	int			isalive;
+	char		*name;
+	header_t	header;
+	int			num;
+	char		*prog;
+	//	t_vm_p *proc;
+}				t_vm_champ;
 
-}		t_vm_champ;
 
 typedef struct			s_vm_data
 {
 	int 		dump;
 	t_vm_champ	*tab_champ[MAX_PLAYERS];
-	t_vm_reg    arena[MEM_SIZE];
+	int		    arena[MEM_SIZE];
 }				t_vm_data;
 
 t_vm_data		*get_data();

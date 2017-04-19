@@ -5,8 +5,8 @@ FLAGS = -Wall -Werror -Wextra -g
 SRCS =	vm_main.c\
 	vm_pars_param.c\
 	vm_data.c\
-	vm_init_map.c\
 	vm_read_champ.c\
+	#vm_init_map.c\
 
 INCLUDES = -I includes -I ../libft
 

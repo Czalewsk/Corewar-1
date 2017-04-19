@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/05 09:15:40 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/29 08:04:13 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/19 00:00:31 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ int		ft_isint(char *nb)
 		return (0);
 	while (nb[n])
 		if (!ft_isdigit(nb[n++]))
+		{
 			return (0);
+		}
 	nbr = ft_atoi(nb);
 	if (nbr < INT_MIN || nbr > INT_MAX)
 		return (0);
-	return (nb_len || i ? 1 : 0);
+	return ((nb_len + i) > 0 ? 1 : 0);
 }
 /*
 **	intmax_t	nbr;

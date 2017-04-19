@@ -5,21 +5,26 @@ static void	vm_init_registre()
 	return;
 }
 
-static void vm_init_champ()
+static void vm_init_champ(t_vm_data *data)
 {
-	return;
+	int i
+	
+	i = 0;
+	while (data.tab_champ[i])
+		i++;
+	
 }
 
 void	vm_init_arena()
 {
 	t_vm_data	*data;
-	int		i;
+	int			i;
 
 	data = get_data();
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		vm_init_registre();
+		data.arena[i] = 0;
 		i++;
 	}
 	vm_init_champ();
