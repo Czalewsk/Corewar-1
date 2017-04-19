@@ -6,13 +6,13 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/06 17:18:17 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/16 16:18:50 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		set_error(int i, int nb_param, t_lx *elmt)
+int			set_error(int i, int nb_param, t_lx *elmt)
 {
 	if (i < nb_param)
 		elmt->error = 2;
@@ -21,7 +21,7 @@ int		set_error(int i, int nb_param, t_lx *elmt)
 	return (1);
 }
 
-int		parse_instruction(t_list **list_lex, t_op *op, t_list *label)
+int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 {
 	t_lx	*lx;
 	int		i;
@@ -40,14 +40,14 @@ int		parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 		if (!(*list_lex))
 			break ;
 		lx = (*list_lex)->content;
-		if (i < op->nb_param && lx->word[0] == SEPARATOR_CHAR)
+		if (i < op->nb_p && lx->word[0] == SEPARATOR_CHAR)
 			(*list_lex) = (lx->type == SEPARATEUR &&
 				lx->word[0] != SEPARATOR_CHAR && (*list_lex)->next->next) ?
 				(*list_lex)->next->next : (*list_lex)->next;
-		else if (i < op->nb_param && lx->word[0] != SEPARATOR_CHAR)
+		else if (i < op->nb_p && lx->word[0] != SEPARATOR_CHAR)
 			break ;
 	}
-	return ((i == op->nb_param || lx->error) ? 0 : set_error(i, op->nb_param, lx));
+	return ((i == op->nb_p || lx->error) ? 0 : set_error(i, op->nb_p, lx));
 }
 
 void		parse_label(t_lx *lx, t_list *lst_lbl)
@@ -64,7 +64,7 @@ void		parse_label(t_lx *lx, t_list *lst_lbl)
 	lx->error = 32;
 }
 
-void	parse_line(t_list **list_lex, t_list *label)
+void		parse_line(t_list **list_lex, t_list *label)
 {
 	t_op	*op;
 	t_lx	*lx;
@@ -88,7 +88,7 @@ void	parse_line(t_list **list_lex, t_list *label)
 	}
 }
 
-void	parse(t_list *list_lex, t_list *label)
+void		parse(t_list *list_lex, t_list *label)
 {
 	check_name_and_cmt(&list_lex);
 	check_label_chars(label);

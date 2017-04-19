@@ -6,13 +6,13 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:21:45 by xesnault          #+#    #+#             */
-/*   Updated: 2017/03/26 16:35:21 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/17 12:49:19 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char	*transform_filename(char *filename)
+char		*transform_filename(char *filename)
 {
 	char	*tmp;
 	char	*old_filename;
@@ -33,7 +33,7 @@ char	*transform_filename(char *filename)
 	return (new_filename);
 }
 
-int		write_bin(char *filename, t_buf *buffer)
+int			write_bin(char *filename, t_buf *buffer)
 {
 	int	fd;
 	int	ret;
@@ -51,7 +51,7 @@ int		write_bin(char *filename, t_buf *buffer)
 	return (ret);
 }
 
-int		write_to_buffer(t_buf *buffer, void *data, size_t size)
+int			write_to_buffer(t_buf *buffer, void *data, size_t size)
 {
 	buffer->data = realloc(buffer->data, buffer->size + size);
 	if (buffer->data == NULL)
@@ -82,10 +82,9 @@ void		header_to_buffer(t_buf *buffer, header_t *header)
 		ft_printf("write comment error\n");
 	if (!write_to_buffer(buffer, &idk, sizeof(unsigned int)))
 		ft_printf("write comment null octet error\n");
-
 }
 
-int		write_bigendian(t_buf *buffer, int nbr, size_t nb_octet)
+int			write_bigendian(t_buf *buffer, int nbr, size_t nb_octet)
 {
 	unsigned char	tmp[4];
 

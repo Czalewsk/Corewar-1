@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 21:24:08 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/04 17:58:32 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/16 18:42:20 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ typedef struct	s_label
 typedef struct	s_op
 {
 	char		*name;
-	int			nb_param;
+	int			nb_p;
 	int			type_param[3];
 	int			op_code;
 	int			nb_cycle;
 	char		*cmt;
-	int			octet_param;
+	int			octet;
 	int			index;
 }				t_op;
 

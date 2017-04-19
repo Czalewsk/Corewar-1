@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_name_and_cmt.c                               :+:      :+:    :+:   */
+/*   check_function.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:49:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/06 10:10:47 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/16 16:11:44 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,22 @@ void		check_name_and_cmt(t_list **lst)
 {
 	check_name(lst);
 	check_comment(lst);
+}
+
+int			check_label_chars(t_list *lst)
+{
+	char	*str;
+
+	while (lst)
+	{
+		str = ((t_label*)lst->content)->name;
+		while (*str)
+		{
+			if (!ft_strchr(LABEL_CHARS, *str))
+				return (0);
+			++str;
+		}
+		lst = lst->next;
+	}
+	return (1);
 }

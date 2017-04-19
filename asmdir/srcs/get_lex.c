@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/26 17:59:39 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/16 16:09:33 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void			get_end_word(char const *s, size_t *i)
 			++(*i);
 	if (s[(*i)] && ft_strchr(g_delim, s[(*i)]) && ++(*i))
 		return ;
-	while (s[(*i)] && !ft_strchr(g_wspace, s[(*i)]) && !ft_strchr(g_eol, s[(*i)])
-			&& !ft_strchr(g_delim, s[(*i)]))
+	while (s[(*i)] && !ft_strchr(g_wspace, s[(*i)])
+			&& !ft_strchr(g_eol, s[(*i)]) && !ft_strchr(g_delim, s[(*i)]))
 	{
-			++(*i);
-			if (s[*i] == LABEL_CHAR && ++(*i))
-				return ;
+		++(*i);
+		if (s[*i] == LABEL_CHAR && ++(*i))
+			return ;
 	}
 }
 

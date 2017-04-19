@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 11:19:46 by czalewsk          #+#    #+#             */
-/*   Updated: 2016/11/08 17:47:11 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/17 01:06:25 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ char	*ft_strrchr(const char *s, int c)
 	n = ft_strlen(s);
 	while (n >= 0 && s[n] != (char)c)
 		n--;
-	return ((s[n] == (char)c) ? (char*)(&s[n]) : NULL);
+	return ((n >= 0 && s[n] == (char)c) ? (char*)(&s[n]) : NULL);
 }

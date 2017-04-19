@@ -6,7 +6,8 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/19 01:47:44 by lduval           ###   ########.fr       */
+/*   Updated: 2017/04/19 06:12:39 by lduval           ###   ########.fr       */
+/*   Updated: 2017/04/16 20:49:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +55,8 @@ char		get_arg_type(int type);
 
 void		check_name_and_cmt(t_list **lst);
 
-void		write_player(t_buf *buffer, t_list *list_lex, t_list *label, header_t *header);
+void		write_player(t_buf *buffer, t_list *list_lex, t_list *label,
+		header_t *header);
 
 int			is_label(char *word);
 
@@ -69,5 +71,12 @@ t_label		*get_label(t_list *list_label, t_lx *lx);
 void		parse_label(t_lx *lx, t_list *lst_lbl);
 
 t_lx		*get_lx_by_type(t_list *list_lex, int type);
+
+void		fill_header(header_t *header, t_list *list_lex, t_buf *buffer);
+
+void		param_to_buffer(t_buf *buffer, t_list **list_lex,
+		t_op *op, t_list *list_label);
+
+void		set_codage(unsigned char *codage, t_list *list_lex, t_op *op);
 
 #endif
