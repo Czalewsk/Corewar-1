@@ -13,6 +13,7 @@
 # include <fcntl.h>
 # include "vm_header.h"
 
+
 int		ft_atoi_bigendian(unsigned char *array, int nb_octet)
 {
 	int j;
@@ -31,35 +32,21 @@ int		ft_atoi_bigendian(unsigned char *array, int nb_octet)
 void	vm_read_champ_extend(t_buf *buffer, header_t *header)
 {
 	unsigned char *p;
-	int i;
 
 	if (4 + PROG_NAME_LENGTH + 4 + COMMENT_LENGTH > buffer->size)
 		ft_error(".cor wrong", &vm_free_all);
 	p = (unsigned char *)buffer->data;
-	i = 4;
 	header->magic = ft_atoi_bigendian(p, 4);
-	//ft_memcpy(header->prog_name, p + i, PROG_NAME_LENGTH);
-	while (i < PROG_NAME_LENGTH + 1 && *(p + i))
-	{
-		header->prog_name[i] = *(p + i);
-		i++;
-	}
-	*(p + i) !=  0 ? ft_error("i never segfault the first night", &vm_free_all) : NULL;
-	while (*(p + i) == 0 && i < buffer->size)
-		i++;
-	header->prog_size = ft_atoi_bigendian(p + i, 4);
-	i += 8;
-	//ft_memcpy(header->comment, p + 4 + PROG_NAME_LENGTH + 4 + 4, COMMENT_LENGTH);
-	while (i < COMMENT_LENGTH + 1 && *(p + i))
-	{
-		header->comment[i] = *(p + i);
-		i++;
-	}
-	*(p + i) !=  0 ? ft_error("i never segfault the first night", &vm_free_all) : NULL;
-	while (*(p + i) == 0 && i < buffer->size)
-		i++;
-	ft_printf("%x, %s, %u, %s" ,header->magic, header->prog_name, header->comment, header->comment);
-}                                       
+	ft_memcpy(header->prog_name, p + 4, PROG_NAME_LENGTH);
+	header->prog_size = ft_atoi_bigendian(p + 4 + PROG_NAME_LENGTH + 4, 4);
+	ft_memcpy(header->comment, p + 4 + PROG_NAME_LENGTH + 4 + 4, COMMENT_LENGTH);
+	ft_printf("%x, %s, %u, %s\n" ,header->magic, header->prog_name, header->prog_size, header->comment);
+	ft_printf("%u\n" ,buffer->size - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16));
+	if (header->prog_size != (buffer->size - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16)))
+        ft_error("Champ size invalid", &vm_free_all);
+    if (header->prog_size > CHAMP_MAX_SIZE)
+        ft_error("Champion too bug", &vm_free_all);
+}
 void    vm_read_champ(char *path_champion, t_vm_champ *champ)
 {
 	int				fd;
@@ -67,7 +54,7 @@ void    vm_read_champ(char *path_champion, t_vm_champ *champ)
 	int 			i;
 	unsigned char	buf[512];
 	t_buf			buffer;
-	
+
 	buffer.data = NULL;
 	buffer.size = 0;
 	i = 0;
@@ -82,5 +69,6 @@ void    vm_read_champ(char *path_champion, t_vm_champ *champ)
 		buffer.size += ret;
 	}
 	vm_read_champ_extend(&buffer, &(champ->header));
+    champ->prog = ft_memdup(buffer.data + (PROG_NAME_LENGTH + COMMENT_LENGTH + 16), champ->header.prog_size);
 }
 
