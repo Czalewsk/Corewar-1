@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/16 18:31:49 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/21 17:47:04 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,51 @@ static	void	add_label(t_lx *lx, t_list **label)
 	ft_memdel((void**)&new);
 }
 
+void				find_double_quote_end(t_list **lst2, int first_double,
+		int name_cmt)
+{
+	t_lx	*lx;
+	t_list	*lst;
+	int		len;
+	int		close;
+
+	close = 0;
+	while (lst2 && *lst2 && !close)
+	{
+		lst = *lst2;
+		lx = (t_lx*)lst->content;
+		len = ft_strlen(lx->word);
+		lx->type = 6 + name_cmt;
+		if (!len || lx->word[len - 1] == '"')
+			close = 1;
+		*lst2 = (*lst2)->next;
+		if (!first_double)
+			return ;
+	}
+}
+
 void			set_name_comment(t_list **lst2)
 {
 	t_list	*lst;
 	t_lx	*lx;
+	int		close;
 
+	close = 0;
 	lst = *lst2;
 	lx = lst->content;
 	if (lst->next && !ft_strcmp(lx->word, NAME_CMD_STRING))
 	{
 		((t_lx *)lst->content)->type = INSTRUCTION;
-		((t_lx *)lst->next->content)->type = NAME;
-		*lst2 = lst->next->next;
+		*lst2 = lst->next; *((t_lx*)((*lst2)->content))->word == '"' ?
+		find_double_quote_end(lst2, 1, 0) : find_double_quote_end(lst2, 0, 0);
 		lst = *lst2;
 		lx = lst->content;
 	}
-	if (lst->next && !ft_strcmp(lx->word, COMMENT_CMD_STRING))
+	if (lst && lst->next && !ft_strcmp(lx->word, COMMENT_CMD_STRING))
 	{
 		((t_lx *)lst->content)->type = INSTRUCTION;
-		((t_lx *)lst->next->content)->type = COMMENT;
-		*lst2 = lst->next->next;
+		*lst2 = lst->next; *((t_lx*)((*lst2)->content))->word == '"' ?
+		find_double_quote_end(lst2, 1, 1) : find_double_quote_end(lst2, 0, 1);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/17 12:36:29 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/19 04:19:52 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ void	main_error(char *str, int forcequit)
 		exit(1);
 }
 
-void	buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
-{
-	buffer1->data = NULL;
-	buffer1->size = 0;
-	buffer2->data = NULL;
-	buffer2->size = 0;
-}
-
 void	sp_free(t_list *lex, t_list *label, t_buf *buffer1, t_buf *buffer2)
 {
 	ft_lstdel(&lex, &del_lex);
@@ -35,7 +27,15 @@ void	sp_free(t_list *lex, t_list *label, t_buf *buffer1, t_buf *buffer2)
 	free(buffer2->data);
 }
 
-void	do_stuff(char *av)
+void	buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
+{
+	buffer1->data = NULL;
+	buffer1->size = 0;
+	buffer2->data = NULL;
+	buffer2->size = 0;
+}
+
+void	do_stuff(int i, char *av)
 {
 	t_list		*lex;
 	t_list		*label;
@@ -46,18 +46,15 @@ void	do_stuff(char *av)
 	buffer_set_zero(&buffer_header, &buffer_prog);
 	label = NULL;
 //Lexer
-	ft_printf("{green}PROGRAM STARTED{eoc}\n");
-	lex = get_lex(av);
-	if (!lex)
-		main_error("get_lex error", 1);
+	(lex = get_lex(av)) ? 1 : main_error("get_lex error", 1);
 	set_lex(lex, &label);
-	if (!lex)
-		main_error("ERROR LEX IS NULL\n", 1);
 //Parser
 	parse(lex, label);
+//Check && Affichage des erreurs
+	//check_error(lex);
 //Affichage && Debug
-	ft_lstiter(lex, &debug_lxcontent);
-	ft_lstiter(label, &debug_labelcontent);
+	i ? ft_lstiter(lex, &debug_lxcontent) : 0;
+	i ? ft_lstiter(label, &debug_labelcontent) : 0;
 //Ecriture du player
 	write_player(&buffer_prog, lex, label, &header);
 	header_to_buffer(&buffer_header, &header);
@@ -77,7 +74,7 @@ int		main(int ac, char **av)
 		return (0);
 	while (i < ac)
 	{
-		do_stuff(av[i]);
+		do_stuff(1, av[i]);
 		++i;
 	}
 	return (0);
