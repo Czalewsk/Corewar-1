@@ -6,28 +6,13 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/22 18:30:56 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/22 19:53:37 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 extern	char	*g_delim;
-
-static	void	add_label(t_lx *lx, t_list **label)
-{
-	t_label		*new;
-	char		*tmp;
-
-	if (!label || !(new = ft_memalloc(sizeof(t_label))))
-		return ;
-	new->name = lx->word;
-	tmp = ft_strrchr(new->name, LABEL_CHAR);
-	*tmp = 0;
-	new->octet = -1;
-	ft_lst_pushend(label, ft_lstnew(new, sizeof(t_label)));
-	ft_memdel((void**)&new);
-}
 
 void			find_double_quote_end(t_list **lst2, int first_double,
 		int name_cmt)
@@ -42,10 +27,8 @@ void			find_double_quote_end(t_list **lst2, int first_double,
 	{
 		lst = *lst2;
 		lx = (t_lx*)lst->content;
-		printf("word=%s\n", lx->word);
 		len = ft_strlen(lx->word);
 		lx->type = 6 + name_cmt;
-		printf("type =%i\n", lx->type);
 		if (!len || lx->word[len - 1] == '"')
 			close = 1;
 		*lst2 = (*lst2)->next;
