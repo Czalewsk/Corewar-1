@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/22 19:55:52 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/22 20:22:36 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	do_stuff(int i, char *av)
 	set_lex(lex, &label);
 //Parser
 	parse(lex, label, &header);
-//Error Manager
-	//check_error(lex);
 //Affichage && Debug
 	i ? ft_lstiter(lex, &debug_lxcontent) : 0;
 	i ? ft_lstiter(label, &debug_labelcontent) : 0;
+//Error Manager
+	check_error(lex);
 //Ecriture du player
 	write_player(&buffer_prog, lex, label, &header);
 	header_to_buffer(&buffer_header, &header);

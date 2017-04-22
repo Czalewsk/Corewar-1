@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/22 19:54:24 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/22 20:14:00 by czalewsk         ###   ########.fr       */
 /*   Updated: 2017/04/16 20:49:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -80,5 +80,9 @@ void		param_to_buffer(t_buf *buffer, t_list **list_lex,
 void		set_codage(unsigned char *codage, t_list *list_lex, t_op *op);
 
 void		add_label(t_lx *lx, t_list **label);
+
+void		main_error(char *str, int forcequit);
+
+void		check_error(t_list *curs);
 
 #endif
