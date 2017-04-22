@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 18:53:05 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/17 12:51:44 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/22 17:41:40 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void	fill_header(header_t *header, t_list *list_lex, t_buf *buffer)
 {
-	t_lx	*lx;
+//	t_lx	*lx;
 
+	(void)list_lex;
 	header->magic = COREWAR_EXEC_MAGIC;
-	ft_memset(header->prog_name, 0, PROG_NAME_LENGTH);
-	ft_memset(header->comment, 0, COMMENT_LENGTH);
-	if (!(lx = get_lx_by_type(list_lex, NAME)))
-		return ;
-	ft_strncpy(header->prog_name, lx->word + 1, ft_strlen(lx->word) - 2);
-	if (!(lx = get_lx_by_type(list_lex, COMMENT)))
-		return ;
-	ft_strncpy(header->comment, lx->word + 1, ft_strlen(lx->word) - 2);
+//	ft_memset(header->prog_name, 0, PROG_NAME_LENGTH);
+//	ft_memset(header->comment, 0, COMMENT_LENGTH);
+//	if (!(lx = get_lx_by_type(list_lex, NAME)))
+//		return ;
+//	ft_strncpy(header->prog_name, lx->word + 1, ft_strlen(lx->word) - 2);
+//	if (!(lx = get_lx_by_type(list_lex, COMMENT)))
+//		return ;
+//	ft_strncpy(header->comment, lx->word + 1, ft_strlen(lx->word) - 2);
 	header->prog_size = buffer->size;
 }
 

@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/16 16:18:50 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/22 17:11:29 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void		parse_line(t_list **list_lex, t_list *label)
 	}
 }
 
-void		parse(t_list *list_lex, t_list *label)
+void		parse(t_list *list_lex, t_list *label, header_t *header)
 {
-	check_name_and_cmt(&list_lex);
+	check_name_and_cmt(&list_lex, header);
 	check_label_chars(label);
 	while (list_lex)
 	{

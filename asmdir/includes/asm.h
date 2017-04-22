@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/19 06:12:39 by lduval           ###   ########.fr       */
+/*   Updated: 2017/04/22 17:33:11 by czalewsk         ###   ########.fr       */
 /*   Updated: 2017/04/16 20:49:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ typedef struct		s_buf
 	size_t			size;
 }					t_buf;
 
-void		parse(t_list *list_lex, t_list *label);
+void		parse(t_list *list_lex, t_list *label, header_t *header);
 
 int			write_bin(char *filename, t_buf *buffer);
 
@@ -53,7 +53,7 @@ int			arg_isvalid(t_op *op, int i, t_list **list_lex, t_list *label);
 
 char		get_arg_type(int type);
 
-void		check_name_and_cmt(t_list **lst);
+void		check_name_and_cmt(t_list **lst, header_t *header);
 
 void		write_player(t_buf *buffer, t_list *list_lex, t_list *label,
 		header_t *header);

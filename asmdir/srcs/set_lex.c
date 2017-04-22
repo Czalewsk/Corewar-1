@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/21 17:47:04 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/22 18:30:56 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static	void	add_label(t_lx *lx, t_list **label)
 	ft_memdel((void**)&new);
 }
 
-void				find_double_quote_end(t_list **lst2, int first_double,
+void			find_double_quote_end(t_list **lst2, int first_double,
 		int name_cmt)
 {
 	t_lx	*lx;
@@ -42,8 +42,10 @@ void				find_double_quote_end(t_list **lst2, int first_double,
 	{
 		lst = *lst2;
 		lx = (t_lx*)lst->content;
+		printf("word=%s\n", lx->word);
 		len = ft_strlen(lx->word);
 		lx->type = 6 + name_cmt;
+		printf("type =%i\n", lx->type);
 		if (!len || lx->word[len - 1] == '"')
 			close = 1;
 		*lst2 = (*lst2)->next;
