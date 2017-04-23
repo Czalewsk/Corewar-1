@@ -12,8 +12,13 @@
 
 #include "asm.h"
 
-int			set_error(int i, int nb_param, t_lx *elmt)
+int			set_error(int i, int nb_param, t_lx *elmt, int value)
 {
+	if (value)
+	{
+		elmt->error = value;
+		return (1);
+	}
 	if (i < nb_param)
 		elmt->error = 2;
 	return (1);
@@ -40,12 +45,12 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 		if (!(*list_lex))
 			break ;
 		lx = (*list_lex)->content;
+		if (lx->word[0] != SEPARATOR_CHAR && lx->pos[0] == line)
+			return (set_error(i, op->nb_p, h_lx, 1));
 		if (i < op->nb_p && lx->word[0] == SEPARATOR_CHAR && (*list_lex)->next)
 			(*list_lex) = (*list_lex)->next;
-		else if (i < op->nb_p && lx->word[0] != SEPARATOR_CHAR)
-			break ;
 	}
-	return ((i == op->nb_p || lx->error) ? 0 : set_error(i, op->nb_p, h_lx));
+	return ((i == op->nb_p || lx->error) ? 0 : set_error(i, op->nb_p, h_lx, 0));
 }
 
 void		parse_label(t_lx *lx, t_list *lst_lbl)
