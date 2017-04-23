@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/23 21:44:15 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/23 21:46:42 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 	{
 		lx->error = 7;
 		//Set dans la struct le nbr de param attendu
+		*list_lex = get_next_lst((*list_lex));
 		return (0);
 	}
 	if (!arg_isvalid(list_lex, lx, op))
