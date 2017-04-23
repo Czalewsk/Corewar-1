@@ -6,37 +6,33 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 15:55:33 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/23 14:29:38 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/23 21:44:24 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		arg_isvalid(t_op *op, int i, t_list **list_lex, t_list *label)
+int		arg_isvalid(t_list **lst, t_lx *lx, t_op *op)
 {
-	t_lx	*lx;
+	int		i;
 
-	if (!(*list_lex))
+	i = 0;
+	if (!(*lst))
 		return (0);
-	lx = (*list_lex)->content;
-	if (i >= op->nb_p)
-		return (4);
-	if (lx->type == SEPARATEUR || lx->type == DIRECTCHAR)
+	while ((*lst = (*lst)->next) && i < op->nb_p)
 	{
-		if ((lx->type == SEPARATEUR || lx->type == DIRECTCHAR) &&
-				(lx->word[0] == LABEL_CHAR
-				|| (lx->word[0] == DIRECT_CHAR && lx->word[1] == LABEL_CHAR)))
+		if (*((t_lx*)(*lst)->content)->word == SEPARATOR_CHAR && (*lst)->next)
+			*lst = (*lst)->next;
+		lx = (*lst)->content;
+		if ((lx->type == DIRECTCHAR || *lx->word == LABEL_CHAR) && (*lst)->next)
 		{
-			*list_lex = (*list_lex)->next;
-			lx = (*list_lex)->content;
-			parse_label(lx, label);
+			*lst = (*lst)->next;
+			lx = (*lst)->content;
 		}
-		else
+		if (!(op->type_param[i] & get_arg_type(lx->type)))
 			return (0);
+		i++;
 	}
-	*list_lex = (*list_lex)->next;
-	if (i < op->nb_p && op->type_param[i] & get_arg_type(lx->type))
-		return (0);
 	return (1);
 }
 
