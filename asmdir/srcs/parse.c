@@ -16,8 +16,6 @@ int			set_error(int i, int nb_param, t_lx *elmt)
 {
 	if (i < nb_param)
 		elmt->error = 2;
-	else if (i > nb_param)
-		elmt->error = 4;
 	return (1);
 }
 
@@ -26,15 +24,17 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 	t_lx	*lx;
 	int		i;
 	size_t	line;
+	t_lx	*h_lx;
 
 	lx = (*list_lex)->content;
+	h_lx = lx;
 	line = lx->pos[0];
 	(*list_lex) = (*list_lex)->next;
 	i = 0;
 	while (*list_lex && (lx = (*list_lex)->content)
 			&& lx->pos[0] == line && !lx->error)
 	{
-		if (!arg_isvalid(op, i, list_lex, label))
+		if ((h_lx->error = arg_isvalid(op, i, list_lex, label)))
 			return (1);
 		++i;
 		if (!(*list_lex))
@@ -45,7 +45,7 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 		else if (i < op->nb_p && lx->word[0] != SEPARATOR_CHAR)
 			break ;
 	}
-	return ((i == op->nb_p || lx->error) ? 0 : set_error(i, op->nb_p, lx));
+	return ((i == op->nb_p || lx->error) ? 0 : set_error(i, op->nb_p, h_lx));
 }
 
 void		parse_label(t_lx *lx, t_list *lst_lbl)

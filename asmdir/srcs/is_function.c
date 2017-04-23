@@ -19,8 +19,8 @@ int		arg_isvalid(t_op *op, int i, t_list **list_lex, t_list *label)
 	if (!(*list_lex))
 		return (0);
 	lx = (*list_lex)->content;
-	if (i >= op->nb_p && (lx->error = 4))
-		return (0);
+	if (i >= op->nb_p)
+		return (4);
 	if (lx->type == SEPARATEUR || lx->type == DIRECTCHAR)
 	{
 		if ((lx->type == SEPARATEUR || lx->type == DIRECTCHAR) &&
@@ -36,8 +36,8 @@ int		arg_isvalid(t_op *op, int i, t_list **list_lex, t_list *label)
 	}
 	*list_lex = (*list_lex)->next;
 	if (i < op->nb_p && op->type_param[i] & get_arg_type(lx->type))
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int		is_label(char *word)
