@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/23 21:46:42 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/23 21:49:54 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int			check_sep(t_list *curs, t_lx *lx)
 	line = lx->pos[0];
 	while (curs && (lx = curs->content) && line == lx->pos[0])
 	{
-		if (lx->type == SEPARATOR_CHAR && !sep)
+		if (*lx->word == SEPARATOR_CHAR && !sep)
 			sep = 1;
-		else if (lx->type == SEPARATOR_CHAR && sep && (lx->error = 16))
+		else if (*lx->word == SEPARATOR_CHAR && sep && (lx->error = 16))
 			return (0); // Expected statement
 		else
 			sep = 0;
@@ -76,7 +76,10 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 	lx = (*list_lex)->content;
 	line = lx->pos[0];
 	if (!check_sep(*list_lex, lx))
+	{
+		*list_lex = get_next_lst((*list_lex));
 		return (0);
+	}
 	if ((nb_p = count_param((*list_lex)->next, lx, line)) != op->nb_p)
 	{
 		lx->error = 7;
