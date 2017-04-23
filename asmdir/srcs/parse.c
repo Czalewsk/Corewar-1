@@ -64,7 +64,7 @@ void		parse_label(t_lx *lx, t_list *lst_lbl)
 			return ;
 		lst_lbl = lst_lbl->next;
 	}
-	lx->error = 32;
+	lx->error = 2;
 }
 
 void		parse_line(t_list **list_lex, t_list *label)

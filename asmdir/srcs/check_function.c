@@ -46,11 +46,11 @@ void		find_end_dquote(t_lx *elmt, t_list **lst, int i, header_t *header)
 		tmp = (end) ? tmp : ft_strjoin_free(tmp, 1, elmt->word, 0);
 		(*lst) = (*lst)->next;
 	}
-	if (!(*lst) && (elmt->error = (i) ? 0x8000000 : 0x4000000))
+	if (!(*lst) && (elmt->error = 9))
 		return ;
 	tmp = ft_strjoin_free(tmp, 1, ft_strsub(elmt->word, 0, len - 1), 1);
 	if (len_total - 2 > ((i) ? COMMENT_LENGTH : PROG_NAME_LENGTH) &&
-			(elmt->error = i ? 0x2000000 : 0x1000000))
+			(elmt->error = i ? 12 : 11))
 		tmp[(i) ? COMMENT_LENGTH : PROG_NAME_LENGTH] = '\0';
 	fill_header_name_cmt(header, i, tmp, len_total);
 	ft_strdel(&tmp);
@@ -64,7 +64,7 @@ void		check_name_cmt(t_list **lst, int i, header_t *header)
 	if (elmt->type != INSTRUCTION || (i ?
 	ft_strcmp(elmt->word, COMMENT_CMD_STRING) :
 	ft_strcmp(elmt->word, NAME_CMD_STRING)))
-		elmt->error = i ? 0x80000000 : 0x40000000;
+		elmt->error = i ? 15 : 14;
 	else
 	{
 		(*lst) = (*lst)->next;
@@ -72,7 +72,7 @@ void		check_name_cmt(t_list **lst, int i, header_t *header)
 		if (elmt->word[0] == '\"')
 			find_end_dquote(elmt, lst, i, header);
 		else
-			elmt->error = i ? 0x20000000 : 0x10000000;
+			elmt->error = 9;
 	}
 }
 

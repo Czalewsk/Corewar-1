@@ -68,15 +68,23 @@ static	void	fix_lex(t_lx *lex, t_list **label)
 
 	if (!lex)
 		return ;
-	if (lex->type == DIRECT && ft_strisnumber(lex->word + 1))
-		lex->valeur = ft_atoi(lex->word + 1);
-	else if (lex->type == INDIRECT && ft_strisnumber(lex->word))
-		lex->valeur = ft_atoi(lex->word);
-	else if (lex->type == REGISTRE && ft_strisnumber(lex->word + 1))
-		if ((lex->valeur = ft_atoi(lex->word + 1)) > 99)
-			lex->error = 3;
 	if (++index && lex->type == LABEL)
 		add_label(lex, label);
+	if (lex->label)
+		return ;
+	else if (lex->type == DIRECT || lex->type == REGISTRE)
+	{
+		if (!ft_isint(lex->word + 1))
+			lex->error = 255;
+		lex->valeur = ft_atoi(lex->word + 1);
+
+	}
+	else if (lex->type == INDIRECT)
+	{
+		if (!ft_isint(lex->word))
+			lex->error = 255;
+		lex->valeur = ft_atoi(lex->word);
+	}
 }
 
 static	void	set_lex_ext(t_list *lst, t_lx *lx)

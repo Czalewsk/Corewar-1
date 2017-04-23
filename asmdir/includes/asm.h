@@ -27,6 +27,13 @@ typedef struct		s_buf
 	size_t			size;
 }					t_buf;
 
+typedef struct      s_tab_error
+{
+	int				code;
+	char			*str;
+	int				nb_arg;
+}					t_tab_error;
+
 void		parse(t_list *list_lex, t_list *label, header_t *header);
 
 int			write_bin(char *filename, t_buf *buffer);
