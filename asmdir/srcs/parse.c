@@ -34,7 +34,7 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 	while (*list_lex && (lx = (*list_lex)->content)
 			&& lx->pos[0] == line && !lx->error)
 	{
-		if (!arg_isvalid(op, i, list_lex, label) && (lx->error = 1))
+		if (!arg_isvalid(op, i, list_lex, label))
 			return (1);
 		++i;
 		if (!(*list_lex))

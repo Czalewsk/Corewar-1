@@ -19,6 +19,8 @@ int		arg_isvalid(t_op *op, int i, t_list **list_lex, t_list *label)
 	if (!(*list_lex))
 		return (0);
 	lx = (*list_lex)->content;
+	if (i >= op->nb_p && (lx->error = 4))
+		return (0);
 	if (lx->type == SEPARATEUR || lx->type == DIRECTCHAR)
 	{
 		if ((lx->type == SEPARATEUR || lx->type == DIRECTCHAR) &&
