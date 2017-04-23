@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 15:55:33 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/16 16:17:53 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/23 14:29:38 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int		is_indirect(t_list *lst)
 	if (!ft_strcmp(lx->word, ":"))
 	{
 		lx->type = SEPARATEUR;
+		if (!lst->next)
+			return (0);
 		lx = lst->next->content;
 		lx->type = INDIRECT;
 		lx->label = lx->word;
