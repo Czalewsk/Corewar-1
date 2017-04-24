@@ -14,7 +14,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include "libft.h"
+# include "../libft/libft.h"
 # include "op.h"
 
 typedef struct      s_buf
