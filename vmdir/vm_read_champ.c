@@ -13,7 +13,6 @@
 # include <fcntl.h>
 # include "vm_header.h"
 
-
 int		ft_atoi_bigendian(unsigned char *array, int nb_octet)
 {
 	int j;
@@ -45,19 +44,17 @@ void	vm_read_champ_extend(t_buf *buffer, header_t *header)
 	if (header->prog_size != (buffer->size - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16)))
         ft_error("Champ size invalid", &vm_free_all);
     if (header->prog_size > CHAMP_MAX_SIZE)
-        ft_error("Champion too bug", &vm_free_all);
+        ft_error("Champion too big", &vm_free_all);
 }
 void    vm_read_champ(char *path_champion, t_vm_champ *champ)
 {
 	int				fd;
 	int				ret;
-	int 			i;
 	unsigned char	buf[512];
 	t_buf			buffer;
 
 	buffer.data = NULL;
 	buffer.size = 0;
-	i = 0;
 	if ((fd = open(path_champion, O_RDONLY)) < 0)
 		ft_error("Can't open file", &vm_free_all);
 	while ((ret = read(fd, buf, 1)) > 0)
@@ -70,5 +67,7 @@ void    vm_read_champ(char *path_champion, t_vm_champ *champ)
 	}
 	vm_read_champ_extend(&buffer, &(champ->header));
     champ->prog = ft_memdup(buffer.data + (PROG_NAME_LENGTH + COMMENT_LENGTH + 16), champ->header.prog_size);
+    close(fd);
+    free(buffer.data);
 }
 
