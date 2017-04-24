@@ -3,18 +3,18 @@
 static void	vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 {
     //vm_print_arena();
-    //ft_printf("%d, %d\n", pos, champ->header.prog_size);
+    ft_printf("%d, %d\n", pos, champ->header.prog_size);
     if (!data->tab_proc)
     {
         data->tab_proc = (t_vm_proc *)malloc(sizeof(t_vm_proc));
         data->nb_proc = 1;
-        memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
+        ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
     }
     else
     {
         data->tab_proc = (t_vm_proc *)realloc(data->tab_proc, sizeof(t_vm_proc) * (data->nb_proc + 1));
         data->nb_proc++;
-        memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
+        ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
     }
     vm_print_arena();
 
@@ -35,10 +35,9 @@ static void vm_init_champ(t_vm_data *data)
 	i = n;
 	while (data->tab_champ[n])
 		++n;
-    ++n;
     while (data->tab_champ[i])
     {
-        //ft_printf("%d, %d\n", i, n);
+        ft_printf("%d, %d\n", i, n);
         vm_init_proc(data, data->tab_champ[i], (i * MEM_SIZE)/n);
         i++;
     }
