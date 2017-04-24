@@ -3,7 +3,7 @@
 static void	vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 {
     //vm_print_arena();
-    ft_printf("%d, %d\n", pos, champ->header.prog_size);
+    //ft_printf("%d, %d\n", pos, champ->header.prog_size);
     if (!data->tab_proc)
     {
         data->tab_proc = (t_vm_proc *)malloc(sizeof(t_vm_proc));

@@ -16,12 +16,14 @@ void vm_print_arena(void)
 {
     t_vm_data   *dat;
     int         i;
+    char        c;
 
     dat = get_data();
     i = 0;
     while (i < MEM_SIZE)
     {
-        ft_printf("%d: %2x\n", i,dat->arena[i]);
+        c = dat->arena[i];
+        ft_printf("%d: %02x\n", i,c);
         i++;
     }
 }
