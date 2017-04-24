@@ -57,18 +57,24 @@ int			check_sep(t_list *curs, t_lx *lx)
 
 	sep = 0;
 	line = lx->pos[0];
+	if (((t_lx *)curs->content)->word[0] == SEPARATOR_CHAR && (lx->error = 16))
+		return (0);
 	while (curs && (lx = curs->content) && line == lx->pos[0])
 	{
-		if (*lx->word == SEPARATOR_CHAR && !sep)
-		{
+		if (*lx->word == SEPARATOR_CHAR && !sep && (sep = 1))
 			last_sep = lx;
-			sep = 1;
-		}
 		else if (*lx->word == SEPARATOR_CHAR && sep && (lx->error = 16))
 			return (0); // Expected statement
 		else
+		{
+			if ((lx->type == DIRECTCHAR || *lx->word == LABEL_CHAR) && curs->next)
+				curs = curs->next;
 			sep = 0;
+		}
 		curs = curs->next;
+		if (curs && ((t_lx *)curs->content)->pos[0] == line)
+			if (!sep && ((t_lx *)curs->content)->word[0] != SEPARATOR_CHAR && (lx->error = 16))
+				return (0);
 	}
 	sep ? last_sep->error = 17 : 0;
 	return (1);
@@ -82,7 +88,7 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 
 	lx = (*list_lex)->content;
 	line = lx->pos[0];
-	if (!check_sep(*list_lex, lx))
+	if (!check_sep((*list_lex)->next, lx))
 	{
 		*list_lex = get_next_lst((*list_lex));
 		return (0);
