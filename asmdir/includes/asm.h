@@ -34,6 +34,20 @@ typedef struct      s_tab_error
 	int				nb_arg;
 }					t_tab_error;
 
+typedef struct		s_vm_champ
+{
+	int				isalive;
+	char			*name;
+	header_t		header;
+	int				num;
+	unsigned char	*prog;
+	//	t_vm_p *proc;
+}					t_vm_champ;
+
+void		write_player_reverse(char *av, t_vm_champ *champ);
+
+void        vm_read_champ(char *champ_name,t_vm_champ *data);
+
 void		parse(t_list *list_lex, t_list *label, header_t *header);
 
 int			write_bin(char *filename, t_buf *buffer);

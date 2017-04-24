@@ -65,16 +65,37 @@ void	do_stuff(int i, char *av)
 	ft_printf("{green}PROGRAM FINISHED{eoc}\n");
 }
 
+void	do_stuff_reverse(char *av)
+{
+	t_vm_champ	*champ;
+
+	if (!(champ = (t_vm_champ *)malloc(sizeof(t_vm_champ))))
+		return ;
+	vm_read_champ(av, champ);
+	write_player_reverse(av, champ);
+}
+
 int		main(int ac, char **av)
 {
+	int		mode;
 	int		i;
 
+	mode = 0;
 	i = 1;
 	if (ac < 2)
 		return (0);
 	while (i < ac)
 	{
-		do_stuff(1, av[i]);
+		if (av[i][0] == '-')
+		{
+			ft_printf("Arg %s\n", av[i]);
+			if (!ft_strcmp(av[i], "-r"))
+				mode = 1;
+		}
+		else if (mode == 0)
+			do_stuff(1, av[i]);
+		else if (mode == 1)
+			do_stuff_reverse(av[i]);
 		++i;
 	}
 	return (0);

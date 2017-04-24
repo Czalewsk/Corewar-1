@@ -23,6 +23,8 @@ void		fill_header_name_cmt(header_t *header, int i, char *tmp,
 			header->prog_name[0] = '\0';
 		return ;
 	}
+	i ? ft_memset(header->comment, 0, COMMENT_LENGTH) :
+	ft_memset(header->prog_name, 0, PROG_NAME_LENGTH);
 	i ? ft_strcpy(header->comment, tmp + 1) :
 		ft_strcpy(header->prog_name, tmp + 1);
 }
