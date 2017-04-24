@@ -75,14 +75,14 @@ static	void	fix_lex(t_lx *lex, t_list **label)
 	else if (lex->type == DIRECT || lex->type == REGISTRE)
 	{
 		if (!ft_isint(lex->word + 1))
-			lex->error = 255;
+			lex->error = 4;
 		lex->valeur = ft_atoi(lex->word + 1);
 
 	}
 	else if (lex->type == INDIRECT)
 	{
 		if (!ft_isint(lex->word))
-			lex->error = 255;
+			lex->error = 4;
 		lex->valeur = ft_atoi(lex->word);
 	}
 }

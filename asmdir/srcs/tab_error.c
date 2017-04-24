@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-t_tab_error		g_tab_error[17] =
+t_tab_error		g_tab_error[18] =
 {
 	{1, "Syntax error", 0},
 	{2, "Label undefined", 0},
@@ -29,5 +29,7 @@ t_tab_error		g_tab_error[17] =
 	{13, "Prog too big", 0},
 	{14, "Missing name", 0},
 	{15, "Missing comment", 0},
-	{17, NULL, 0}
+	{16, "Expected statement", 0},
+	{17, "Missing label name", 0},
+	{18, NULL, 0}
 };

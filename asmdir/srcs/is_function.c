@@ -30,7 +30,7 @@ int		arg_isvalid(t_list **lst, t_lx *lx, t_op *op, t_list *label)
 		{
 			*lst = (*lst)->next;
 			if ((((t_lx*)((*lst)->content))->pos[1] - col - ft_strlen(lx->word)
-		!= 0 && (lx->error = 25)) || (!parse_label((*lst)->content, label)))
+		!= 0 && (lx->error = 17)) || (!parse_label((*lst)->content, label)))
 				return (1);
 			lx = (*lst)->content;
 		}
@@ -89,7 +89,10 @@ int		is_indirect(t_list *lst)
 		if (!lst->next)
 			return (0);
 		lx = lst->next->content;
-		lx->type = INDIRECT;
+		if (lx->word[0] == SEPARATOR_CHAR)
+			lx->type = SEPARATEUR;
+		else
+			lx->type = INDIRECT;
 		lx->label = lx->word;
 		return (1);
 	}
