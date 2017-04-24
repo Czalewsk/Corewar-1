@@ -38,7 +38,7 @@ static void vm_init_champ(t_vm_data *data)
     ++n;
     while (data->tab_champ[i])
     {
-        ft_printf("%d, %d\n", i, n);
+        //ft_printf("%d, %d\n", i, n);
         vm_init_proc(data, data->tab_champ[i], (i * MEM_SIZE)/n);
         i++;
     }
