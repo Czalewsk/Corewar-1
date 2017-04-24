@@ -72,8 +72,8 @@ int			check_sep(t_list *curs, t_lx *lx)
 			sep = 0;
 		}
 		curs = curs->next;
-		if (curs && ((t_lx *)curs->content)->pos[0] == line)
-			if (!sep && ((t_lx *)curs->content)->word[0] != SEPARATOR_CHAR && (lx->error = 16))
+		if (curs && ((t_lx *)curs->content)->pos[0] == line && !sep
+		&& ((t_lx *)curs->content)->word[0] != SEPARATOR_CHAR && (lx->error = 18))
 				return (0);
 	}
 	sep ? last_sep->error = 17 : 0;
