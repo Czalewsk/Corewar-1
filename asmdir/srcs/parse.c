@@ -65,12 +65,9 @@ int			check_sep(t_list *curs, t_lx *lx)
 			last_sep = lx;
 		else if (*lx->word == SEPARATOR_CHAR && sep && (lx->error = 16))
 			return (0); // Expected statement
-		else
-		{
+		else if (!(sep = 0))
 			if ((lx->type == DIRECTCHAR || *lx->word == LABEL_CHAR) && curs->next)
 				curs = curs->next;
-			sep = 0;
-		}
 		curs = curs->next;
 		if (curs && ((t_lx *)curs->content)->pos[0] == line && !sep
 		&& ((t_lx *)curs->content)->word[0] != SEPARATOR_CHAR && (lx->error = 18))
