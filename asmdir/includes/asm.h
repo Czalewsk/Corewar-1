@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/23 21:27:37 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/24 08:12:52 by czalewsk         ###   ########.fr       */
 /*   Updated: 2017/04/16 20:49:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -56,7 +56,7 @@ t_list		*get_next_field(t_list *list_lex);
 
 int			check_label_chars(t_list *lst);
 
-int			arg_isvalid(t_list **list_lex, t_lx *lx, t_op *op);
+int			arg_isvalid(t_list **list_lex, t_lx *lx, t_op *op, t_list *label);
 
 char		get_arg_type(int type);
 
@@ -75,7 +75,7 @@ int			write_bigendian(t_buf *buffer, int nbr, size_t nb_octet);
 
 t_label		*get_label(t_list *list_label, t_lx *lx);
 
-void		parse_label(t_lx *lx, t_list *lst_lbl);
+int			parse_label(t_lx *lx, t_list *lst_lbl);
 
 t_lx		*get_lx_by_type(t_list *list_lex, int type);
 
