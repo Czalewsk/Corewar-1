@@ -22,8 +22,9 @@ void vm_print_arena(void)
     i = 0;
     while (i < MEM_SIZE)
     {
-
-        ft_printf("%d: %.2x\n", i ,  dat->arena[i]);
+        if (i%64 == 0)
+            ft_printf("\n");
+        ft_printf("%.2x",dat->arena[i]);
         //ft_printf("%d: %02x\n", i ,  dat->arena[i]);
         i++;
     }
@@ -44,6 +45,7 @@ int	main(int argc, char **argv)
 	 * verifie si les fichier players spécifié existe. Si ils sont correcte :Return (0) si tout s'est bien passé
 	*/
 	vm_init_arena();
+	vm_print_arena();
 	/*
 	 *
 	 * Alloue l'espace mémoire pour la partie. initialise la partie graphique si cela à était spécifié dans les parametre, allloue les champion aux bon endroits:
