@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 15:55:33 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/24 08:13:08 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/24 08:49:02 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		arg_isvalid(t_list **lst, t_lx *lx, t_op *op, t_list *label)
 {
 	int		i;
+	size_t		col;
 
 	i = 0;
 	if (!(*lst))
@@ -24,12 +25,14 @@ int		arg_isvalid(t_list **lst, t_lx *lx, t_op *op, t_list *label)
 		if (*((t_lx*)(*lst)->content)->word == SEPARATOR_CHAR && (*lst)->next)
 			*lst = (*lst)->next;
 		lx = (*lst)->content;
+		col = lx->pos[1];
 		if ((lx->type == DIRECTCHAR || *lx->word == LABEL_CHAR) && (*lst)->next)
 		{
 			*lst = (*lst)->next;
-			lx = (*lst)->content;
-			if (!parse_label(lx, label))
+			if ((((t_lx*)((*lst)->content))->pos[1] - col - ft_strlen(lx->word)
+		!= 0 && (lx->error = 25)) || (!parse_label((*lst)->content, label)))
 				return (1);
+			lx = (*lst)->content;
 		}
 		if (!(op->type_param[i] & get_arg_type(lx->type)))
 			return (0);

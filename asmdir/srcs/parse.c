@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/24 08:11:43 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/24 08:18:47 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int			count_param(t_list *lst, t_lx *lx, size_t line)
 			lx = lst->content;
 		}
 		lst = lst->next;
+		if (lx->pos[0] != line)
+			break ;
 		i++;
 	}
 	return (i);
