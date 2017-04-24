@@ -47,7 +47,7 @@ typedef struct			s_vm_data
 {
 	int             dump;
 	t_vm_champ      *tab_champ[MAX_PLAYERS + 1];
-	unsigned char   *arena[MEM_SIZE];
+	unsigned char   arena[MEM_SIZE];
 	t_vm_proc       *tab_proc;
 	int             nb_proc;
 }				t_vm_data;

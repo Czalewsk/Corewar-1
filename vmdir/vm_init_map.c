@@ -8,13 +8,13 @@ static void	vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
     {
         data->tab_proc = (t_vm_proc *)malloc(sizeof(t_vm_proc));
         data->nb_proc = 1;
-        ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
+        memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
     }
     else
     {
         data->tab_proc = (t_vm_proc *)realloc(data->tab_proc, sizeof(t_vm_proc) * (data->nb_proc + 1));
         data->nb_proc++;
-        ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
+        memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
     }
     vm_print_arena();
 

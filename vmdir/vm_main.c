@@ -23,9 +23,8 @@ void vm_print_arena(void)
     while (i < MEM_SIZE)
     {
 
-        c = dat->arena[i];
-        //ft_printf("%d: %02x\n", i ,  c);
-        ft_printf("%d: %02x\n", i ,  dat->arena[i]);
+        ft_printf("%d: %.2x\n", i ,  dat->arena[i]);
+        //ft_printf("%d: %02x\n", i ,  dat->arena[i]);
         i++;
     }
 }
