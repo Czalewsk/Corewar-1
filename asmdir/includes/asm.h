@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/24 08:12:52 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/25 11:10:41 by czalewsk         ###   ########.fr       */
 /*   Updated: 2017/04/16 20:49:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -29,9 +29,9 @@ typedef struct		s_buf
 
 typedef struct      s_tab_error
 {
-	int				code;
-	char			*str;
+	char			*msg;
 	int				nb_arg;
+	int				warning;
 }					t_tab_error;
 
 typedef struct		s_vm_champ

@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/24 08:18:47 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/25 08:47:19 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ int			check_sep(t_list *curs, t_lx *lx)
 			last_sep = lx;
 		else if (*lx->word == SEPARATOR_CHAR && sep && (lx->error = 16))
 			return (0); // Expected statement
-		else if (!(sep = 0))
-			if ((lx->type == DIRECTCHAR || *lx->word == LABEL_CHAR) && curs->next)
-				curs = curs->next;
+		else if (!(sep = 0) && (lx->type == DIRECTCHAR
+					|| *lx->word == LABEL_CHAR) && curs->next)
+			curs = curs->next;
 		curs = curs->next;
-		if (curs && ((t_lx *)curs->content)->pos[0] == line && !sep
-		&& ((t_lx *)curs->content)->word[0] != SEPARATOR_CHAR && (lx->error = 18))
-				return (0);
+		if (curs && ((t_lx *)curs->content)->pos[0] == line && !sep &&
+		((t_lx *)curs->content)->word[0] != SEPARATOR_CHAR && (lx->error = 18))
+			return (0);
 	}
 	sep ? last_sep->error = 17 : 0;
 	return (1);
@@ -151,7 +151,5 @@ void		parse(t_list *list_lex, t_list *label, header_t *header)
 	check_name_and_cmt(&list_lex, header);
 	check_label_chars(label);
 	while (list_lex)
-	{
 		parse_line(&list_lex, label);
-	}
 }

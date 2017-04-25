@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/22 19:53:37 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/25 11:20:04 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ static	void	fix_lex(t_lx *lex, t_list **label)
 		return ;
 	else if (lex->type == DIRECT || lex->type == REGISTRE)
 	{
-	//	if (!ft_isint(lex->word + 1))
-	//		lex->error = 4;
+		if (!ft_isint(lex->word + 1))
+			lex->error = 19;
 		lex->valeur = ft_atoi(lex->word + 1);
 
 	}
 	else if (lex->type == INDIRECT)
 	{
-	//	if (!ft_isint(lex->word))
-	//		lex->error = 4;
+		if (!ft_isint(lex->word))
+			lex->error = 19;
 		lex->valeur = ft_atoi(lex->word);
 	}
 }

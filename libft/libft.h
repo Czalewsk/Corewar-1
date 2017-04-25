@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 14:37:53 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/28 04:51:06 by lduval           ###   ########.fr       */
+/*   Updated: 2017/04/25 08:39:15 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,9 @@ void			ft_lst_remove_index(t_list **alst, int index,
 t_list			*ft_lst_cpy(t_list *lst, int r);
 void			ft_lstinsert_if_end(t_list **alst, t_list *new,
 		int (*f)(t_list *, t_list *));
-void 			ft_error(char *str, void (*f)(void));
+void			ft_error(char *str, void (*f)(void));
 char			ft_strcstr(char *str, char *chaine);
 int				ft_isdouble(char *str);
+long int		ft_atol(const char *str);
 
 #endif

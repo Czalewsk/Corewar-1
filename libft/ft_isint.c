@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/05 09:15:40 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/19 00:00:31 by lduval           ###   ########.fr       */
+/*   Updated: 2017/04/25 08:39:38 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_isint(char *nb)
 {
-	intmax_t	nbr;
+	long int	nbr;
 	int			n;
 	int			nb_len;
 	int			i;
@@ -34,10 +34,8 @@ int		ft_isint(char *nb)
 		return (0);
 	while (nb[n])
 		if (!ft_isdigit(nb[n++]))
-		{
 			return (0);
-		}
-	nbr = ft_atoi(nb);
+	nbr = ft_atol(nb);
 	if (nbr < INT_MIN || nbr > INT_MAX)
 		return (0);
 	return ((nb_len + i) > 0 ? 1 : 0);

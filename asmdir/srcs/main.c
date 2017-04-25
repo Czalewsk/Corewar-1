@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/22 20:22:36 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/25 09:01:07 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	do_stuff_reverse(char *av)
 {
 	t_vm_champ	*champ;
 
-	if (!(champ = (t_vm_champ *)malloc(sizeof(t_vm_champ))))
+	if (!(champ = (t_vm_champ *)ft_memalloc(sizeof(t_vm_champ))))
 		return ;
 	vm_read_champ(av, champ);
 	write_player_reverse(av, champ);

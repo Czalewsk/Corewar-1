@@ -6,7 +6,7 @@
 #    By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/16 13:16:18 by czalewsk          #+#    #+#              #
-#    Updated: 2017/03/28 04:51:41 by lduval           ###   ########.fr        #
+#    Updated: 2017/04/25 08:49:41 by czalewsk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,7 +127,8 @@ OBJ = ft_strlen.o			\
 	  ft_lstinsert_if_end.o	\
 	  ft_error.o			\
 	  ft_strcstr.o			\
-	  ft_isdouble.o
+	  ft_isdouble.o			\
+	  ft_atol.o
 
 all : $(NAME)
 
