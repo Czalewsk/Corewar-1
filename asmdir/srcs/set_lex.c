@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/25 11:20:04 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/25 12:24:12 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,24 @@ void			set_name_comment(t_list **lst2)
 static	void	fix_lex(t_lx *lex, t_list **label)
 {
 	static size_t	index = 0;
+	int				decalage;
 
+	decalage = 0;
 	if (!lex)
 		return ;
 	if (++index && lex->type == LABEL)
 		add_label(lex, label);
 	if (lex->label)
 		return ;
-	else if (lex->type == DIRECT || lex->type == REGISTRE)
+	if (lex->type == DIRECT || lex->type == REGISTRE)
+		decalage = 1;
+	if (lex->type == DIRECT || lex->type == REGISTRE || lex->INDIRECT)
 	{
-		if (!ft_isint(lex->word + 1))
+		if (!ft_strisnumber(lex->word + decalage))
+			lex->error = 4;
+		else if (!ft_isint(lex->word + decalage))
 			lex->error = 19;
 		lex->valeur = ft_atoi(lex->word + 1);
-
-	}
-	else if (lex->type == INDIRECT)
-	{
-		if (!ft_isint(lex->word))
-			lex->error = 19;
-		lex->valeur = ft_atoi(lex->word);
 	}
 }
 
