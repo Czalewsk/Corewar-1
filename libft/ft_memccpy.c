@@ -23,7 +23,7 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	{
 		((UC*)dst)[i] = ((UC*)src)[l];
 		if ((UC)c == ((UC*)src)[l])
-			return (&dst[i + 1]);
+			return (dst + i + 1);
 		i++;
 		l++;
 	}

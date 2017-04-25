@@ -41,9 +41,7 @@ void			set_name_comment(t_list **lst2)
 {
 	t_list	*lst;
 	t_lx	*lx;
-	int		close;
 
-	close = 0;
 	lst = *lst2;
 	lx = lst->content;
 	if (lst->next && !ft_strcmp(lx->word, NAME_CMD_STRING))

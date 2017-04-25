@@ -15,14 +15,9 @@
 void	write_instruction(t_buf *buffer, t_list **list_lex, t_op *op,
 		t_list *list_label)
 {
-	int				i;
-	t_buf			buffer_param;
 	unsigned char	codage;
 
 	codage = 0;
-	i = 0;
-	buffer_param.data = NULL;
-	buffer_param.size = 0;
 	write_to_buffer(buffer, &(op->op_code), 1);
 	set_codage(&codage, *list_lex, op);
 	if (op->octet)

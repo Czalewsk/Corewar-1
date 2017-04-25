@@ -14,8 +14,7 @@
 
 void	rm_content(void *curs, size_t size)
 {
-	if (size)
-		;
+	(void)size;
 	free(((t_str*)curs)->buff);
 	free(curs);
 }

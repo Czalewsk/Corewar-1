@@ -26,10 +26,8 @@ t_list			**ft_strsplit_lst(char const *s, char c)
 {
 	t_list		**start;
 	size_t		i;
-	size_t		n;
 
 	i = 0;
-	n = 0;
 	if (!s || !c)
 		return (NULL);
 	if (!(start = (t_list**)malloc(sizeof(t_list**))))
