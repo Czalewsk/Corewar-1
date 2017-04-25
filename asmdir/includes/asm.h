@@ -44,6 +44,8 @@ typedef struct		s_vm_champ
 	//	t_vm_p *proc;
 }					t_vm_champ;
 
+int			ft_atoi_bigendian(unsigned char *array, int nb_octet);
+
 void		write_player_reverse(char *av, t_vm_champ *champ);
 
 void        vm_read_champ(char *champ_name,t_vm_champ *data);
