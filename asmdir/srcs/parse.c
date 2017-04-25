@@ -6,76 +6,11 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/25 08:47:19 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/25 19:43:34 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-int			set_error(int i, int nb_param, t_lx *elmt, int value)
-{
-	if (value)
-	{
-		elmt->error = value;
-		return (1);
-	}
-	if (i < nb_param)
-		elmt->error = 2;
-	return (1);
-}
-
-int			count_param(t_list *lst, t_lx *lx, size_t line)
-{
-	int		i;
-
-	i = 0;
-	if (!lst)
-		return (0);
-	while (lst && (lx = lst->content) && line == lx->pos[0])
-	{
-		if (*((t_lx*)lst->content)->word == SEPARATOR_CHAR && lst->next)
-			lst = lst->next;
-		lx = lst->content;
-		if ((lx->type == DIRECTCHAR || *lx->word == LABEL_CHAR) && lst->next)
-		{
-			lst = lst->next;
-			lx = lst->content;
-		}
-		lst = lst->next;
-		if (lx->pos[0] != line)
-			break ;
-		i++;
-	}
-	return (i);
-}
-
-int			check_sep(t_list *curs, t_lx *lx)
-{
-	size_t		line;
-	int			sep;
-	t_lx		*last_sep;
-
-	sep = 0;
-	line = lx->pos[0];
-	if (((t_lx *)curs->content)->word[0] == SEPARATOR_CHAR && (lx->error = 16))
-		return (0);
-	while (curs && (lx = curs->content) && line == lx->pos[0])
-	{
-		if (*lx->word == SEPARATOR_CHAR && !sep && (sep = 1))
-			last_sep = lx;
-		else if (*lx->word == SEPARATOR_CHAR && sep && (lx->error = 16))
-			return (0); // Expected statement
-		else if (!(sep = 0) && (lx->type == DIRECTCHAR
-					|| *lx->word == LABEL_CHAR) && curs->next)
-			curs = curs->next;
-		curs = curs->next;
-		if (curs && ((t_lx *)curs->content)->pos[0] == line && !sep &&
-		((t_lx *)curs->content)->word[0] != SEPARATOR_CHAR && (lx->error = 18))
-			return (0);
-	}
-	sep ? last_sep->error = 17 : 0;
-	return (1);
-}
 
 int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 {
@@ -139,7 +74,7 @@ void		parse_line(t_list **list_lex, t_list *label)
 	else
 	{
 		if (lx->type == SEPARATEUR)
-			lx->error = 1; // Separateur au debut de ligne
+			lx->error = 1;
 		else if (!op && ((t_lx*)((*list_lex)->content))->type == INSTRUCTION)
 			((t_lx*)((*list_lex)->content))->error = 8;
 		*list_lex = get_next_lst((*list_lex));

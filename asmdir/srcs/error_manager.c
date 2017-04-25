@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 20:14:32 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/25 11:55:37 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/25 19:33:57 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ void				check_error(t_list *curs)
 	if (force_quit)
 		main_error("Error in lexer/parser\nProgramm hasn't finished", 1);
 }
-

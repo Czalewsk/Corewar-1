@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 15:55:33 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/24 08:49:02 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/25 19:34:24 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		arg_isvalid(t_list **lst, t_lx *lx, t_op *op, t_list *label)
 {
-	int		i;
+	int			i;
 	size_t		col;
 
 	i = 0;
