@@ -27,6 +27,7 @@ void	del_label(void *content, size_t size)
 	t_label		*elmt;
 
 	(void)size;
+	(void)elmt;
 	elmt = content;
 	free(content);
 }

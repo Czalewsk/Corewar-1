@@ -16,8 +16,7 @@ void		conv_pourcent(t_flags *meta, va_list *ap)
 {
 	int		i;
 
-	if (ap)
-		;
+	(void)ap;
 	i = 1;
 	if (meta->mtag == 1)
 		fill_buffer_char('%');

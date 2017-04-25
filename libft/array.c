@@ -54,9 +54,7 @@ void		ft_array_del_elmt(t_array *array, size_t index,
 		void (*del)(void **))
 {
 	void **elmt;
-	void **last;
 
-	last = array->content + array->size;
 	elmt = (array->content + index);
 	if (index > array->size)
 		return ;

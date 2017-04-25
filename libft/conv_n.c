@@ -16,8 +16,7 @@ void		conv_n(t_flags *meta, va_list *ap)
 {
 	int *i;
 
-	if (meta)
-		;
+	(void)meta;
 	i = (int*)va_arg(*ap, int*);
 	*i = fill_buffer_str(NULL);
 }
