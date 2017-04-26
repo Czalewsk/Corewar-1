@@ -46,6 +46,7 @@ void	vm_read_champ_extend(t_buf *buffer, header_t *header)
     if (header->prog_size > CHAMP_MAX_SIZE)
         ft_error("Champion too big", &vm_free_all);
 }
+
 void    vm_read_champ(char *path_champion, t_vm_champ *champ)
 {
 	int				fd;
@@ -70,4 +71,3 @@ void    vm_read_champ(char *path_champion, t_vm_champ *champ)
     close(fd);
     free(buffer.data);
 }
-

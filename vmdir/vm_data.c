@@ -29,6 +29,12 @@ t_vm_data	*get_data(void)
             i++;
         }
         data->tab_proc = NULL;
+        data->option = 0;
+        data->nbr_lives = 0;
+        data->cycletodie = CYCLE_TO_DIE;
+        data->lastcycledec = 0;
+        data->nbr_cycle = 0,
+        data->nb_proc = 0;
 	}
 	return (data);
 }

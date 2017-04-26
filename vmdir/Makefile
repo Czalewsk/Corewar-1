@@ -7,6 +7,7 @@ SRCS =	vm_main.c\
 	vm_data.c\
 	vm_read_champ.c\
 	vm_init_map.c\
+	vm_fight.c
 
 INCLUDES = -I includes -I ../libft
 

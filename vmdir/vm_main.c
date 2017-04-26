@@ -14,9 +14,8 @@
 
 void vm_print_arena(void)
 {
-    t_vm_data   *dat;
-    int         i;
-    unsigned char        c;
+    t_vm_data           *dat;
+    int                 i;
 
     dat = get_data();
     i = 0;
@@ -28,6 +27,7 @@ void vm_print_arena(void)
         //ft_printf("%d: %02x\n", i ,  dat->arena[i]);
         i++;
     }
+    ft_putendl("");
 }
 
 int	main(int argc, char **argv)
@@ -45,7 +45,8 @@ int	main(int argc, char **argv)
 	 * verifie si les fichier players spécifié existe. Si ils sont correcte :Return (0) si tout s'est bien passé
 	*/
 	vm_init_arena();
-	vm_print_arena();
+	//vm_print_arena();
+	vm_fight();
 	/*
 	 *
 	 * Alloue l'espace mémoire pour la partie. initialise la partie graphique si cela à était spécifié dans les parametre, allloue les champion aux bon endroits:
@@ -54,7 +55,7 @@ int	main(int argc, char **argv)
 	//fight()
 	/*
 	 * execute la partie.
-	 *
+	 **/
 
 	//vm_free_all();
 	/*

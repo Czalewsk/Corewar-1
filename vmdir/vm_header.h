@@ -17,6 +17,8 @@
 # include "../libft/libft.h"
 # include "op.h"
 
+# define VM_OPT_G 1
+
 typedef struct      s_buf
 {
 	void            *data;
@@ -42,20 +44,26 @@ typedef struct	s_vm_champ
 	unsigned char *prog;
 }				t_vm_champ;
 
-
 typedef struct			s_vm_data
 {
+    int             nbr_cycle;
+    int             nbr_lives;
+    int             cycletodie;
+    int             lastcycledec;
+    unsigned int    option;
 	int             dump;
 	t_vm_champ      *tab_champ[MAX_PLAYERS + 1];
 	unsigned char   arena[MEM_SIZE];
-	t_vm_proc       *tab_proc;
+	t_list         *tab_proc;
 	int             nb_proc;
-}				t_vm_data;
+}			    	t_vm_data;
 
 t_vm_data		*get_data();
 void			vm_free_all();
-void vm_print_arena(void);
+void            vm_print_arena(void);
 
+void            vm_fight(void);
+void            vm_init_arena();
 int				vm_pars_param(int nb_parm, char **tab_parm);
 void            vm_read_champ(char *champ_name,t_vm_champ *data);
 

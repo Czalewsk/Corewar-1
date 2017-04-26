@@ -26,7 +26,7 @@ void		ft_lst_remove_if(t_list **alst, int (*f)(t_list *elem),
 		{
 			*prev = cur->next;
 			cur->next = NULL;
-			del(cur->content, cur->content_size);
+			del ? del(cur->content, cur->content_size) : NULL;
 			free(cur);
 			cur = *prev;
 		}

@@ -2,26 +2,22 @@
 
 static void	vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 {
-    //vm_print_arena();
-    ft_printf("%d, %d\n", pos, champ->header.prog_size);
-    if (!data->tab_proc)
-    {
-        data->tab_proc = (t_vm_proc *)malloc(sizeof(t_vm_proc));
-        data->nb_proc = 1;
-        ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
-    }
-    else
-    {
-        data->tab_proc = (t_vm_proc *)realloc(data->tab_proc, sizeof(t_vm_proc) * (data->nb_proc + 1));
-        data->nb_proc++;
-        ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
-    }
-    data->tab_proc[(data->nb_proc - 1)].beg = pos;
-    data->tab_proc[data->nb_proc - 1].carry = 0;
-    data->tab_proc[data->nb_proc - 1].champ = champ->num;
-    data->tab_proc[data->nb_proc - 1].last_live = 0;
-    data->tab_proc[data->nb_proc - 1].pc = pos;
-    data->tab_proc[data->nb_proc - 1].registre[1] = champ->num;
+    t_list *temp;
+    t_vm_proc proc;
+
+    proc.beg = pos;
+    proc.carry = 0;
+    proc.champ = champ->num;
+    proc.last_live = 0;
+    proc.pc = pos;
+    // mettre les registre a 0 avec bzero
+    proc.registre[1] = champ->num;
+    //ft_printf("%d, %d\n", pos, champ->header.prog_size);
+    if (!(temp = ft_lstnew(&proc, sizeof(t_vm_proc))))
+        ft_error("proc list malloc failed", &vm_free_all);
+    data->nb_proc++;
+    ft_lstadd(&(data->tab_proc), temp);
+    ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
 }
 
 static void vm_init_champ(t_vm_data *data)

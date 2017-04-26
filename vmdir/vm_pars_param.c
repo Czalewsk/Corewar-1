@@ -86,16 +86,22 @@ static void vm_pars_champions(int nb_param, char **tab_param, int *i, t_vm_data 
 			n_next_player = get_next_player(data);
 		finish += ((t = ft_strrstr(tab_param[*i],".cor")) && !(*(t + 4))) ?
 			vm_fill_champion(tab_param[*i], n_next_player, data) : 1;
-		(*i)++;
+		(*i) += finish ? 0 : 1;
 	}
 }
 
 static void vm_pars_option(int nb_param, char **tab_param, int i, t_vm_data *data)
 {
-	return ;
 	while (i < nb_param)
 	{
-
+        if (ft_strequ(tab_param[i], "-g") /*&& ((data->option & 1) != 0)*/)
+            data->option |= 1;
+        else
+        {
+            ft_printf("%s ",tab_param[i]);
+            ft_error("illegal option, or already set", &vm_free_all);
+        }
+        i++;
 	}
 }
 
@@ -108,9 +114,10 @@ static void vm_pars_dump(char **tab_param, t_vm_data *data)
 		ft_error("first parameter must be '-dump'", &vm_free_all);
 	if (!ft_strisnumber(tab_param[2]))
 		ft_error("second parameter must be a number", &vm_free_all);
-	if ((dump = ft_atoi(tab_param[2]) <= 0))
+	if ((dump = ft_atoi(tab_param[2])) <= 0)
 		ft_error("second parameter must be positive", &vm_free_all);
 	data->dump = dump;
+
 }
 
 /*
