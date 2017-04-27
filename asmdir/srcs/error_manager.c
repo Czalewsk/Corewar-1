@@ -49,7 +49,7 @@ char				*set_arg_msg(t_op *op, int arg_index)
 	type_param = arg;
 	arg = arg - ((arg >> 1) & 0x55555555);    // reuse input as temporary
 	arg = (arg & 0x33333333) + ((arg >> 2) & 0x33333333);   // temp
-	bit_one = ((arg + (arg >> 4) & 0xF0F0F0F) * 0x1010101) >> 24; // count
+	bit_one = (((arg + (arg >> 4)) & 0xF0F0F0F) * 0x1010101) >> 24; // count
 	while (bit_one-- > 0 && !(i = 0))
 	{
 		while (i < 3)
