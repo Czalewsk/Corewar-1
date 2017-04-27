@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 20:14:32 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/27 10:22:15 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/27 11:28:50 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,10 @@ void				check_error(t_list *curs)
 	int		force_quit;
 	t_lx	*lx;
 	char	*msg[3];
-	int		i;
 
 	force_quit = 0;
 	while (curs && !force_quit)
 	{
-		i = 0;
 		lx = curs->content;
 		if (lx->error > 0)
 		{
