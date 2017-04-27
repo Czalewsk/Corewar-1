@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/25 19:43:34 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/27 10:07:58 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 	if ((nb_p = count_param((*list_lex)->next, lx, line)) != op->nb_p)
 	{
 		lx->error = 7;
-		//Set dans la struct le nbr de param attendu
+		lx->param_error = nb_p;
 		*list_lex = get_next_lst((*list_lex));
 		return (0);
 	}
