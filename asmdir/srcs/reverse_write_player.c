@@ -14,50 +14,39 @@
 
 extern t_op	g_op_tab[];
 
-static int	get_nb_octet(unsigned char codage, int i, t_op *op)
-{
-
-	if (codage == 0 && op->index)
-		return (2);
-	else if (codage == 0)
-		return (4);
-	else if (((codage >> (6 - i * 2)) & 0x03) == 1)
-		return (1);
-	else if (((codage >> (6 - i * 2)) & 0x03) == 2 && op->index)
-		return (2);
-	else if (((codage >> (6 - i * 2)) & 0x03) == 2)
-		return (4);
-	else if (((codage >> (6 - i * 2)) & 0x03) == 3)
-		return (2);
-	return (0);
-}
-
-static char	*r_parse_param(unsigned char *prog, unsigned int *i, unsigned char codage, t_op *op)
+static char	*r_parse_param(unsigned char *prog,
+	unsigned int *i, unsigned char codage, t_op *op)
 {
 	int 	j;
 	char	*text;
+	int		value;
 
 	j = 0;
-	text = "";
-	(void)text;
+	text = ft_strdup(" ");
 	while (j < op->nb_p)
 	{
-		if (get_nb_octet(codage, j, op) == 1)
-			ft_printf("arg: %hhd ", ft_atoi_bigendian(prog + *i, get_nb_octet(codage, j, op)));
-		else if (get_nb_octet(codage, j, op) == 2)
-			ft_printf("arg: %hd ", ft_atoi_bigendian(prog + *i, get_nb_octet(codage, j, op)));
-		else if (get_nb_octet(codage, j, op) == 4)
-			ft_printf("arg: %d ", ft_atoi_bigendian(prog + *i, get_nb_octet(codage, j, op)));
-		*i = *i + get_nb_octet(codage, j, op);
+		if (j != 0)
+			text = ft_strjoin_free(text, 1, ", ", 0);
+		text = ft_strjoin_free(text, 1, r_get_prefix(codage, j), 1);
+		value = ft_atoi_bigendian(prog + *i, r_get_nb_octet(codage, j, op));
+		if (r_get_nb_octet(codage, j, op) == 1)
+			text = ft_strjoin_free(text, 1, ft_itoa(value), 1);
+		else if (r_get_nb_octet(codage, j, op) == 2)
+			text = ft_strjoin_free(text, 1, ft_itoa((short int)value), 1);
+		else if (r_get_nb_octet(codage, j, op) == 4)
+			text = ft_strjoin_free(text, 1, ft_itoa(value), 1);
+		*i = *i + r_get_nb_octet(codage, j, op);
 		++j;
 	}
-	return (NULL);
+	return (text);
 }
 
-static int	r_parse_instruction(unsigned char *prog, unsigned int *i)
+static int	r_parse_instruction(unsigned char *prog,
+	unsigned int *i, char **text)
 {
 	int 			j;
 	unsigned char	codage;
+	char			*text_param;
 
 	j = 0;
 	codage = 0;
@@ -65,11 +54,13 @@ static int	r_parse_instruction(unsigned char *prog, unsigned int *i)
 	{
 		if (prog[*i] == g_op_tab[j].op_code)
 		{
-			ft_printf("%s ", g_op_tab[j].name);
+			*text = ft_strjoin_free(*text, 1, g_op_tab[j].name, 0);
 			if (g_op_tab[j].octet && (++(*i)))
 				codage = prog[*i];
 			++(*i);
-			r_parse_param(prog, i, codage, g_op_tab + j);
+			text_param = r_parse_param(prog, i, codage, g_op_tab + j);
+			*text = ft_strjoin_free(*text, 1, text_param, 1);
+			*text = ft_strjoin_free(*text, 1, "\n", 0);
 			return (1);
 		}
 		++j;
@@ -82,7 +73,8 @@ static char	*header_to_str(t_vm_champ *champ)
 	char	*text;
 
 	text = "# ";
-	text = ft_strjoin_free(text, 0, ft_itoa_base(champ->header.magic, "0123456789abcdef"), 1);
+	text = ft_strjoin_free(text, 0,
+		ft_itoa_base(champ->header.magic, "0123456789abcdef"), 1);
 	text = ft_strjoin_free(text, 1, "\n.name \"", 0);
 	text = ft_strjoin_free(text, 1, champ->header.prog_name, 0);
 	text = ft_strjoin_free(text, 1, "\"\n.comment \"", 0);
@@ -95,21 +87,30 @@ static void	prog_to_str(char **text, t_vm_champ *champ)
 	unsigned int	i;
 
 	i = 0;
-	(void)text;
 	while (i < champ->header.prog_size)
 	{
-		if (!r_parse_instruction(champ->prog, &i))
-			ft_printf("%.2x ", champ->prog[i]);
+		if (!r_parse_instruction(champ->prog, &i, text))
+		{
+			ft_printf("Error: Unknown instruction {%.2x} at byte %d ",
+				champ->prog[i], i);
+			return ;
+		}
 	}
 }
 
 void		write_player_reverse(char *av, t_vm_champ *champ)
 {
 	char	*text;
-	(void)av;
-	(void)champ;
 
+	text = NULL;
 	text = header_to_str(champ);
 	prog_to_str(&text, champ);
 	ft_printf("%s\n", text);
+	if (text)
+	{
+		r_write_to_file(av, text);
+		free(text);
+	}
+	else
+		ft_printf("Can't write the content\n");
 }

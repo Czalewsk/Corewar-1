@@ -113,4 +113,12 @@ int			check_sep(t_list *curs, t_lx *lx);
 
 int			count_param(t_list *lst, t_lx *lx, size_t line);
 
+char		*transform_filename(char *filename, char *extension);
+
+int			r_get_nb_octet(unsigned char codage, int i, t_op *op);
+
+char		*r_get_prefix(unsigned char codage, int i);
+
+int			r_write_to_file(char *filename, char *content);
+
 #endif

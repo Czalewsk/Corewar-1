@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-char		*transform_filename(char *filename)
+char		*transform_filename(char *filename, char *extension)
 {
 	char	*tmp;
 	char	*old_filename;
@@ -28,7 +28,7 @@ char		*transform_filename(char *filename)
 		return (NULL);
 	*tmp = 0;
 	ft_strcpy(new_filename, old_filename);
-	ft_strcat(new_filename, "CX.cor");
+	ft_strcat(new_filename, extension);
 	free(old_filename);
 	return (new_filename);
 }
@@ -38,7 +38,7 @@ int			write_bin(char *filename, t_buf *buffer)
 	int	fd;
 	int	ret;
 
-	filename = transform_filename(filename);
+	filename = transform_filename(filename, "CX.cor");
 	if (!filename)
 		filename = ft_strdup("NameError.cor");
 	ft_printf("The new filename is {cyan}%s{eoc}\n", filename);

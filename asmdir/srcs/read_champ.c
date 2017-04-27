@@ -39,7 +39,6 @@ void	vm_read_champ_extend(t_buf *buffer, header_t *header)
 	ft_memcpy(header->prog_name, p + 4, PROG_NAME_LENGTH);
 	header->prog_size = ft_atoi_bigendian(p + 4 + PROG_NAME_LENGTH + 4, 4);
 	ft_memcpy(header->comment, p + 4 + PROG_NAME_LENGTH + 4 + 4, COMMENT_LENGTH);
-	ft_printf("%x, %s, %u, %s\n" ,header->magic, header->prog_name, header->prog_size, header->comment);
 	if (header->prog_size != (buffer->size - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16)))
         ft_error("Champ size invalid", NULL);
     if (header->prog_size > CHAMP_MAX_SIZE)
