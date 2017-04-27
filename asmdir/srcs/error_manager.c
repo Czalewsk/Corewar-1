@@ -17,7 +17,7 @@ extern	t_op		g_op_tab[];
 extern	char		*type[];
 extern	t_list		*g_files;
 
-const	char	*type_arg[3] = {"Register", "Direct", "Indirect"};
+const	char	*type_arg[4] = {"Register", "Direct", "Indirect"};
 
 char				*get_type_wrong_arg(t_list *curs, int wrong)
 {
@@ -26,14 +26,14 @@ char				*get_type_wrong_arg(t_list *curs, int wrong)
 	while (wrong-- && curs)
 	{
 		curs = curs->next;
-		lx = curs->content;
-		while (curs && (lx->type == SEPARATEUR || lx->type == DIRECTCHAR))
+		lx = (curs->content) ? curs->content : NULL;
+		while (curs && lx && (lx->type == SEPARATEUR || lx->type == DIRECTCHAR))
 		{
 			curs = curs->next;
-			lx = curs->content;
+			lx = (curs->content) ? curs->content : NULL;
 		}
 	}
-	return (ft_strdup(type_arg[lx->type + 1]));
+	return (ft_strdup(type[lx->type]));
 }
 
 char				*set_arg_msg(t_op *op, int arg_index)
@@ -45,7 +45,7 @@ char				*set_arg_msg(t_op *op, int arg_index)
 	int				type_param;
 
 	msg = ft_strdup("");
-	arg = op->type_param[arg_index];
+	arg = op->type_param[arg_index - 1];
 	type_param = arg;
 	arg = arg - ((arg >> 1) & 0x55555555);    // reuse input as temporary
 	arg = (arg & 0x33333333) + ((arg >> 2) & 0x33333333);   // temp
@@ -53,13 +53,16 @@ char				*set_arg_msg(t_op *op, int arg_index)
 	while (bit_one-- > 0 && !(i = 0))
 	{
 		while (i < 3)
-			if (type_param & ++i)
+		{
+			if (type_param & (1 << i))
 			{
 				type_param ^= i;
-				msg = ft_strjoin_free(msg, 1, (char*)type_arg[i - 1], 0);
+				msg = ft_strjoin_free(msg, 1, (char*)type_arg[i], 0);
 				break ;
 			}
-		msg = (bit_one) ? ft_strjoin_free(msg, 1, " or ", 0) : msg;
+			i++;
+		}
+		msg = (bit_one > 1) ? ft_strjoin_free(msg, 1, " or ", 0) : msg;
 	}
 	return (msg);
 }
