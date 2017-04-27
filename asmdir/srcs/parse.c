@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/27 11:45:53 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:00:28 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			parse_instruction(t_list **list_lex, t_op *op, t_list *label)
 		*list_lex = get_next_lst((*list_lex));
 		return (0);
 	}
-	if (!arg_isvalid(list_lex, lx, op, label))
+	if ((lx->param_error = arg_isvalid(list_lex, lx, op, label)) != -1)
 	{
 		lx->error = 6;
 		return (0);

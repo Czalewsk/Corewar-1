@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 20:14:32 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/27 13:30:59 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:34:51 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,59 @@ extern	t_op		g_op_tab[];
 extern	char		*type[];
 extern	t_list		*g_files;
 
-void				set_error_msg(t_lx *lx, char *msg[])
+const	char	*type_arg[3] = {"Register", "Direct", "Indirect"};
+
+char				*get_type_wrong_arg(t_list *curs, int wrong)
+{
+	t_lx	*lx;
+
+	while (wrong-- && curs)
+	{
+		curs = curs->next;
+		lx = curs->content;
+		while (curs && (lx->type == SEPARATEUR || lx->type == DIRECTCHAR))
+		{
+			curs = curs->next;
+			lx = curs->content;
+		}
+	}
+	return (ft_strdup(type_arg[lx->type + 1]));
+}
+
+char				*set_arg_msg(t_op *op, int arg_index)
+{
+	unsigned int	arg;
+	unsigned int	bit_one; // store the total here
+	char			*msg;
+	int				i;
+	int				type_param;
+
+	msg = ft_strdup("");
+	arg = op->type_param[arg_index];
+	type_param = arg;
+	arg = arg - ((arg >> 1) & 0x55555555);    // reuse input as temporary
+	arg = (arg & 0x33333333) + ((arg >> 2) & 0x33333333);   // temp
+	bit_one = ((arg + (arg >> 4) & 0xF0F0F0F) * 0x1010101) >> 24; // count
+	while (bit_one-- > 0 && !(i = 0))
+	{
+		while (i < 3)
+			if (type_param & ++i)
+			{
+				type_param ^= i;
+				msg = ft_strjoin_free(msg, 1, (char*)type_arg[i - 1], 0);
+				break ;
+			}
+		msg = (bit_one) ? ft_strjoin_free(msg, 1, " or ", 0) : msg;
+	}
+	return (msg);
+}
+
+void				set_error_msg(t_lx *lx, char *msg[], t_list *curs)
 {
 	if ((g_tab_error[lx->error - 1]).nb_arg)
 	{
 		if (lx->error == 6)
-			msg[0] = ft_strdup(type[lx->type]);
+			msg[0] = get_type_wrong_arg(curs, lx->param_error);
 		else
 			msg[0] = ft_strdup(lx->word);
 	}
@@ -31,7 +78,7 @@ void				set_error_msg(t_lx *lx, char *msg[])
 		if (lx->error == 7 )
 			msg[1] = ft_itoa(lx->param_error);
 		else
-			msg[1] = ft_itoa((get_instruction(lx))->type_param[0]);
+			msg[1] = set_arg_msg((get_instruction(lx)), lx->param_error);
 	}
 	if ((g_tab_error[lx->error - 1]).nb_arg > 2)
 	{
@@ -58,7 +105,7 @@ void				check_error(t_list *curs)
 			else
 				ft_printf("{yellow}Warning  ");
 			if (g_tab_error[lx->error - 1].nb_arg)
-				set_error_msg(lx, msg);
+				set_error_msg(lx, msg, curs);
 			ft_printf("Line [%3i] col[%3i] {eoc}: ", lx->pos[0], lx->pos[1]);
 			ft_printf(g_tab_error[lx->error - 1].msg, msg[0], msg[1], msg[2]);
 			write(1, "\n", 1);
