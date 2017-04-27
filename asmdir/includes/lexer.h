@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 21:24:08 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/16 18:42:20 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/27 10:07:37 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct	s_lx
 	size_t		pos[2];
 	char		*label;
 	int			error;
+	int			param_error;
 }				t_lx;
 
 typedef struct	s_label
