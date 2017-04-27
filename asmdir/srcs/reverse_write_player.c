@@ -91,7 +91,7 @@ static void	prog_to_str(char **text, t_vm_champ *champ)
 	{
 		if (!r_parse_instruction(champ->prog, &i, text))
 		{
-			ft_printf("Error: Unknown instruction {%.2x} at byte %d ",
+			ft_printf("{red}Error: Unknown instruction {%.2x} at byte %d{eoc}\n",
 				champ->prog[i], i);
 			return ;
 		}
@@ -112,5 +112,5 @@ void		write_player_reverse(char *av, t_vm_champ *champ)
 		free(text);
 	}
 	else
-		ft_printf("Can't write the content\n");
+		ft_printf("{red}Can't write the content{eoc}\n");
 }
