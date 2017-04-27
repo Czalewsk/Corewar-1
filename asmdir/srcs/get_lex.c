@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/16 16:09:33 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/27 13:23:24 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 const	char	*g_wspace = " \t";
 const	char	*g_eol = "#;\n";
 const	char	*g_delim = ":,";
+t_list			*g_files;
 
 void			get_end_word(char const *s, size_t *i)
 {
@@ -87,6 +88,7 @@ t_list			*get_lex(char *filename)
 	ln = 0;
 	line = NULL;
 	lexem = NULL;
+	g_files = NULL;
 	if ((fd = open(filename, O_RDONLY)) <= 0)
 	{
 		ft_printf("Ceci n'a pas marche (fichier introuvable)\n");
@@ -95,9 +97,11 @@ t_list			*get_lex(char *filename)
 	while (get_next_line(fd, &line) > 0 && ++ln)
 	{
 		fill_lst(&lexem, line, ln);
-		ft_strdel(&line);
+		ft_lst_pushend(&g_files, ft_lstnew(&line, sizeof(&line)));
+	//	ft_strdel(&line);
 	}
-	ft_strdel(&line);
+	ft_lst_pushend(&g_files, ft_lstnew(&line, sizeof(&line)));
+//	ft_strdel(&line);
 	close(fd);
 	return (lexem);
 }

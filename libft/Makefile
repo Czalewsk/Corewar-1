@@ -6,7 +6,7 @@
 #    By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/16 13:16:18 by czalewsk          #+#    #+#              #
-#    Updated: 2017/04/25 08:49:41 by czalewsk         ###   ########.fr        #
+#    Updated: 2017/04/27 12:24:04 by czalewsk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,7 +128,8 @@ OBJ = ft_strlen.o			\
 	  ft_error.o			\
 	  ft_strcstr.o			\
 	  ft_isdouble.o			\
-	  ft_atol.o
+	  ft_atol.o				\
+	  ft_lst_return_index.o
 
 all : $(NAME)
 
