@@ -100,8 +100,7 @@ t_list			*get_lex(char *filename)
 		ft_lst_pushend(&g_files, ft_lstnew(&line, sizeof(&line)));
 	//	ft_strdel(&line);
 	}
-	ft_lst_pushend(&g_files, ft_lstnew(&line, sizeof(&line)));
-//	ft_strdel(&line);
+	ft_strdel(&line);
 	close(fd);
 	return (lexem);
 }

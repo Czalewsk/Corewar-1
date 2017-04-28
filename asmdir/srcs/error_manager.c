@@ -67,26 +67,28 @@ char				*set_arg_msg(t_op *op, int arg_index)
 	return (msg);
 }
 
-void				set_error_msg(t_lx *lx, char *msg[], t_list *curs)
+int				set_error_msg(t_lx *lx, char *msg[], t_list *curs)
 {
-	if ((g_tab_error[lx->error - 1]).nb_arg)
+	int		nb_arg;
+
+	nb_arg = g_tab_error[lx->error - 1].nb_arg;
+	if (nb_arg)
 	{
 		if (lx->error == 6)
 			msg[0] = get_type_wrong_arg(curs, lx->param_error);
 		else
 			msg[0] = ft_strdup(lx->word);
 	}
-	if ((g_tab_error[lx->error - 1]).nb_arg > 1)
+	if (nb_arg > 1)
 	{
 		if (lx->error == 7 )
 			msg[1] = ft_itoa(lx->param_error);
 		else
 			msg[1] = set_arg_msg((get_instruction(lx)), lx->param_error);
 	}
-	if ((g_tab_error[lx->error - 1]).nb_arg > 2)
-	{
+	if (nb_arg > 2)
 		msg[2] = ft_itoa((get_instruction(lx))->nb_p);
-	}
+	return (nb_arg);
 }
 
 void				check_error(t_list *curs)
@@ -94,7 +96,9 @@ void				check_error(t_list *curs)
 	int		force_quit;
 	t_lx	*lx;
 	char	*msg[3];
+	int		nb_free;
 
+	nb_free = 0;
 	force_quit = 0;
 	while (curs)
 	{
@@ -108,13 +112,15 @@ void				check_error(t_list *curs)
 			else
 				ft_printf("{yellow}Warning  ");
 			if (g_tab_error[lx->error - 1].nb_arg)
-				set_error_msg(lx, msg, curs);
+				nb_free = set_error_msg(lx, msg, curs);
 			ft_printf("Line [%3i] col[%3i] {eoc}: ", lx->pos[0], lx->pos[1]);
 			ft_printf(g_tab_error[lx->error - 1].msg, msg[0], msg[1], msg[2]);
 			write(1, "\n", 1);
 			ft_printf("%s\n", *(char**)
 					(ft_lst_return_index(g_files, lx->pos[0] - 1)->content));
 			write(1, "\n", 1);
+			while (nb_free)
+				ft_strdel(&(msg[--nb_free]));
 		}
 		curs = curs->next;
 	}

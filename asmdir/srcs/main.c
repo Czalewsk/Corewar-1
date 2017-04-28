@@ -12,19 +12,34 @@
 
 #include "asm.h"
 
-void	main_error(char *str, int forcequit)
+t_list			*lex;
+t_list			*label;
+t_buf			buffer_header;
+t_buf			buffer_prog;
+
+extern	t_list	*g_files;
+
+void	del_g_files(void *content, size_t size)
 {
-	ft_printf("{red}%s{eoc}\n", str);
-	if (forcequit)
-		exit(1);
+	(void)size;
+	free(content);
 }
 
 void	sp_free(t_list *lex, t_list *label, t_buf *buffer1, t_buf *buffer2)
 {
 	ft_lstdel(&lex, &del_lex);
 	ft_lstdel(&label, &del_label);
+	ft_lstdel(&g_files, &del_g_files);
 	free(buffer1->data);
 	free(buffer2->data);
+}
+
+void	main_error(char *str, int forcequit)
+{
+	ft_printf("{red}%s{eoc}\n", str);
+	sp_free(lex, label, &buffer_header, &buffer_prog);
+	if (forcequit)
+		exit(1);
 }
 
 void	buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
@@ -37,10 +52,6 @@ void	buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
 
 void	do_stuff(int i, char *av)
 {
-	t_list		*lex;
-	t_list		*label;
-	t_buf		buffer_header;
-	t_buf		buffer_prog;
 	header_t	header;
 
 	buffer_set_zero(&buffer_header, &buffer_prog);
