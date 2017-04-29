@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/25 09:01:07 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/29 10:31:35 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ extern	t_list	*g_files;
 void	del_g_files(void *content, size_t size)
 {
 	(void)size;
+	ft_strdel((char**)content);
 	free(content);
 }
 
@@ -50,6 +51,11 @@ void	buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
 	buffer2->size = 0;
 }
 
+void	print_line(t_list *lst)
+{
+	ft_printf("%s\n", *(char**)lst->content);
+}
+
 void	do_stuff(int i, char *av)
 {
 	header_t	header;
@@ -64,6 +70,7 @@ void	do_stuff(int i, char *av)
 //Affichage && Debug
 	i ? ft_lstiter(lex, &debug_lxcontent) : 0;
 	i ? ft_lstiter(label, &debug_labelcontent) : 0;
+	i ? ft_lstiter(g_files, &print_line) : 0;
 //Error Manager
 	check_error(lex);
 //Ecriture du player
