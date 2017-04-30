@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 19:41:14 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/25 19:41:45 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/30 13:12:23 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int			check_sep(t_list *curs, t_lx *lx)
 		((t_lx *)curs->content)->word[0] != SEPARATOR_CHAR && (lx->error = 18))
 			return (0);
 	}
-	sep ? last_sep->error = 17 : 0;
+	sep ? last_sep->error = 22 : 0;
 	return (1);
 }
