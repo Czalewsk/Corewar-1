@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/27 17:00:28 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/30 12:22:20 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void		parse_line(t_list **list_lex, t_list *label)
 			((t_lx*)((*list_lex)->content))->error = 8;
 		*list_lex = get_next_lst((*list_lex));
 	}
-	if ((op = get_instruction((*list_lex)->content)))
+	if ((*list_lex) && (op = get_instruction((*list_lex)->content)))
 		parse_instruction(list_lex, op, label);
-	else
+	else if (*list_lex)
 	{
 		if (lx->type == SEPARATEUR)
 			lx->error = 1;
