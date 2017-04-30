@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 15:55:33 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/27 17:26:50 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/30 12:07:08 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		arg_isvalid(t_list **lst, t_lx *lx, t_op *op, t_list *label)
 			*lst = (*lst)->next;
 			if ((((t_lx*)((*lst)->content))->pos[1] - col - ft_strlen(lx->word)
 		!= 0 && (lx->error = 21)) || (!parse_label((*lst)->content, label)))
-				return (i + 1);
+				return (-1);
 			lx = (*lst)->content;
 		}
 		if (!(op->type_param[i] & get_arg_type(lx->type)))
