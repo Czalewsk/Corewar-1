@@ -31,8 +31,10 @@ void	sp_free(t_list *lex, t_list *label, t_buf *buffer1, t_buf *buffer2)
 	ft_lstdel(&lex, &del_lex);
 	ft_lstdel(&label, &del_label);
 	ft_lstdel(&g_files, &del_g_files);
-	free(buffer1->data);
-	free(buffer2->data);
+	if (buffer1->data)
+		free(buffer1->data);
+	if (buffer2->data)
+		free(buffer2->data);
 }
 
 void	main_error(char *str, int forcequit)
@@ -95,10 +97,10 @@ void	do_stuff_reverse(char *av)
 
 int		main(int ac, char **av)
 {
-	int		mode;
+	int		arg;
 	int		i;
 
-	mode = 0;
+	arg = 0;
 	i = 1;
 	if (ac < 2)
 		return (0);
@@ -106,13 +108,12 @@ int		main(int ac, char **av)
 	{
 		if (av[i][0] == '-')
 		{
-			ft_printf("Arg %s\n", av[i]);
 			if (!ft_strcmp(av[i], "-r"))
-				mode = 1;
+				arg = arg | 1;
 		}
-		else if (mode == 0)
+		else if (arg == 0)
 			do_stuff(1, av[i]);
-		else if (mode == 1)
+		else if (arg & 1)
 			do_stuff_reverse(av[i]);
 		++i;
 	}
