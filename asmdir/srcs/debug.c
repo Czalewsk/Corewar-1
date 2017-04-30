@@ -6,13 +6,13 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:41:57 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/27 10:13:13 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/29 10:39:18 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-	const	char	*type[] = {"Direct", "Indirect", "Declaration Label",
+	const	char	*g_type[] = {"Direct", "Indirect", "Declaration Label",
 		"Registre", "Instruction", "Separateur", "Name", "Comment",
 		"Direct_Char", "Label", "Label Indirect"};
 
@@ -23,7 +23,7 @@ void	debug_lxcontent(t_list *lst)
 	lex = lst->content;
 	ft_printf("[%3jd][%2jd] {green}%-15s{eoc}",
 			lex->pos[0], lex->pos[1], lex->word);
-	lex->type >= 0 ? ft_printf(" | type = %s", type[lex->type]) : 1;
+	lex->type >= 0 ? ft_printf(" | type = %s", g_type[lex->type]) : 1;
 	if (lex->label)
 		ft_printf(" | valeur = [%s]", lex->label);
 	else if (lex->valeur != -1)

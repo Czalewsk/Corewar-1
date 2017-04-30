@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 20:14:32 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/27 17:34:51 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/04/30 11:13:51 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 extern	t_tab_error	g_tab_error[];
 extern	t_op		g_op_tab[];
-extern	char		*type[];
+extern	char		*g_type[];
 extern	t_list		*g_files;
 
-const	char	*type_arg[4] = {"Register", "Direct", "Indirect"};
+const	char		*g_type_arg[4] = {"Register", "Direct", "Indirect"};
 
 char				*get_type_wrong_arg(t_list *curs, int wrong)
 {
@@ -33,41 +33,39 @@ char				*get_type_wrong_arg(t_list *curs, int wrong)
 			lx = (curs->content) ? curs->content : NULL;
 		}
 	}
-	return (ft_strdup(type[lx->type]));
+	return (ft_strdup(g_type[lx->type]));
 }
 
 char				*set_arg_msg(t_op *op, int arg_index)
 {
 	unsigned int	arg;
-	unsigned int	bit_one; // store the total here
+	unsigned int	bit_one;
 	char			*msg;
 	int				i;
-	int				type_param;
 
 	msg = ft_strdup("");
 	arg = op->type_param[arg_index - 1];
-	type_param = arg;
-	arg = arg - ((arg >> 1) & 0x55555555);    // reuse input as temporary
-	arg = (arg & 0x33333333) + ((arg >> 2) & 0x33333333);   // temp
-	bit_one = (((arg + (arg >> 4)) & 0xF0F0F0F) * 0x1010101) >> 24; // count
-	while (bit_one-- > 0 && !(i = 0))
+	arg = arg - ((arg >> 1) & 0x55555555);
+	arg = (arg & 0x33333333) + ((arg >> 2) & 0x33333333);
+	bit_one = (((arg + (arg >> 4)) & 0xF0F0F0F) * 0x1010101) >> 24;
+	arg = op->type_param[arg_index - 1];
+	while (bit_one-- > 0 && (i = -1))
 	{
-		while (i < 3)
+		while (++i < 3)
 		{
-			if (type_param & (1 << i))
+			if (arg & (1 << i))
 			{
-				type_param ^= i;
-				msg = ft_strjoin_free(msg, 1, (char*)type_arg[i], 0);
+				arg ^= (1 << i);
+				msg = ft_strjoin_free(msg, 1, (char*)g_type_arg[i], 0);
 				break ;
 			}
-			i++;
 		}
-		msg = (bit_one > 1) ? ft_strjoin_free(msg, 1, " or ", 0) : msg;
+		msg = (bit_one > 0) ? ft_strjoin_free(msg, 1, " or ", 0) : msg;
 	}
 	return (msg);
 }
 
-int				set_error_msg(t_lx *lx, char *msg[], t_list *curs)
+int					set_error_msg(t_lx *lx, char *msg[], t_list *curs)
 {
 	int		nb_arg;
 
@@ -81,7 +79,7 @@ int				set_error_msg(t_lx *lx, char *msg[], t_list *curs)
 	}
 	if (nb_arg > 1)
 	{
-		if (lx->error == 7 )
+		if (lx->error == 7)
 			msg[1] = ft_itoa(lx->param_error);
 		else
 			msg[1] = set_arg_msg((get_instruction(lx)), lx->param_error);
