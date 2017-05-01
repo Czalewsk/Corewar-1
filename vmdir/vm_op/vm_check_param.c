@@ -4,7 +4,7 @@ int vm_check_param(int ocp, unsigned int n_op)
     unsigned int tocp;
 
     i = 0;
-    if (ocp & 1 == 1 || (ocp >> 1) & 1 == 1)
+    if ((ocp & 1) == 1 || ((ocp >> 1) & 1) == 1)
         return (i);
     ocp >>= 2;
     while (i < 3 && ocp > 0)

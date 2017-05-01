@@ -7,7 +7,7 @@ void vm_lld(t_vm_data *data, t_vm_proc *proc, int pos)
     int ocp;
 
     ocp = (int)data->arena[(pos + 1) % MEM_SIZE];
-    proc->pc += vm_get_nb_octet(nb_octet, ocp, 1);
+    proc->pc += vm_get_nb_octet(nb_octet, ocp, 12);
     if (ocp != 24 || ocp != 28)
         return ;
     param[0] = vm_get_param(data , (pos + 2) % MEM_SIZE, nb_octet[0]);
