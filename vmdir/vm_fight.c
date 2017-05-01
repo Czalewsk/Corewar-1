@@ -1,5 +1,4 @@
 #include "vm_header.h"
-#include "lexer.h"
 #include "vm_op/vm_op.h"
 
 t_op    op_tab[17] =

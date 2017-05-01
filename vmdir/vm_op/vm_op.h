@@ -3,6 +3,18 @@
 
 #include "../vm_header.h"
 
+typedef struct	s_op
+{
+	char		*name;
+	int			nb_p;
+	int			type_param[3];
+	int			op_code;
+	int			nb_cycle;
+	char		*cmt;
+	int			octet;
+	int			index;
+}				t_op;
+
 int     vm_get_param(t_vm_data *data, int pos, int size_param);
 void    vm_live(t_vm_data *data, t_vm_proc *proc, int pos);
 void    vm_ld(t_vm_data *data, t_vm_proc *proc, int pos);
