@@ -20,8 +20,8 @@ void vm_add(t_vm_data *data, t_vm_proc *proc, int pos)
     if (ft_intisbetween_inc(param[0], 0, 15) && ft_intisbetween_inc(param[1], 0, 15)
         && ft_intisbetween_inc(param[2], 0, 15))
     {
-        i = ft_atoi_bigendian(proc->registre + (param[0] * 4), 4) + ft_atoi_bigendian(proc->registre + (param[1] * 4), 4);
-        ft_memcpy(proc->registre + param[2] * 4, i, 4);
+        i = ft_atoi_bigendian(proc->registre + (param[0] * REG_SIZE), REG_SIZE) + ft_atoi_bigendian(proc->registre + (param[1] * REG_SIZE), REG_SIZE);
+        ft_memcpy(proc->registre + param[2] * REG_SIZE, i, REG_SIZE);
     }
     proc->carry = (int)(i == 0);
 }
