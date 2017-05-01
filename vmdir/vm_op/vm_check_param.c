@@ -1,6 +1,7 @@
 int vm_check_param(int ocp, unsigned int n_op)
 {
     int i;
+    unsigned int tocp;
 
     i = 0;
     if (ocp & 1 == 1 || (ocp >> 1) & 1 == 1)
@@ -10,7 +11,7 @@ int vm_check_param(int ocp, unsigned int n_op)
     {
         if (i >= op_tab[n_op].nb_p)
             return (0);
-        tocp = (ocp >> (2 * i)) & 3
+        tocp = (ocp) & 3;
         if (tocp == 1 && ((op_tab[n_op].type_param[i]) & T_REG) == 0)
             return (0);
         else if (tocp == 2 && ((op_tab[n_op].type_param[i]) & T_DIR) == 0)
@@ -19,6 +20,8 @@ int vm_check_param(int ocp, unsigned int n_op)
             return (0);
         else if (tocp == 0)
             return (0);
+        i++;
+        ocp >>= 2;
     }
-    return(i == op_tab[n_op].nb_p)
+    return(i == op_tab[n_op].nb_p);
 }
