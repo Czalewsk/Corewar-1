@@ -23,5 +23,5 @@ int     vm_get_nb_octet(int *nb_octet, int ocp, int nop);
             i++;
         }
     }
-    return (noct + 1);
+    return (noct + 2);
 }

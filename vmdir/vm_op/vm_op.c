@@ -1,15 +1,7 @@
 
 #include "vm_op.h"
 
-void    vm_ld(t_vm_data *data, t_vm_proc *proc, int pos)
-{
-	return ;
-}
 void    vm_st(t_vm_data *data, t_vm_proc *proc, int pos)
-{
-	return ;
-}
-void    vm_sub(t_vm_data *data, t_vm_proc *proc, int pos)
 {
 	return ;
 }

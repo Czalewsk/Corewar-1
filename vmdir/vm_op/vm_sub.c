@@ -7,7 +7,7 @@ void vm_add(t_vm_data *data, t_vm_proc *proc, int pos)
     int nb_octet[3];
     int ocp;
 
-    ocp = (int)data->arena[pos % MEM_SIZE];
+    ocp = (int)data->arena[(pos + 1) % MEM_SIZE];
     proc->pc += vm_get_nb_octet(nb_octet, ocp, 4);
     if (ocp != 84)
         return ;
