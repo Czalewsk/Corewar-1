@@ -6,15 +6,15 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:41:57 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/29 10:39:18 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/01 10:53:53 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-	const	char	*g_type[] = {"Direct", "Indirect", "Declaration Label",
-		"Registre", "Instruction", "Separateur", "Name", "Comment",
-		"Direct_Char", "Label", "Label Indirect"};
+const	char	*g_type[] = {"Direct", "Indirect", "Declaration Label",
+	"Registre", "Instruction", "Separateur", "Name", "Comment",
+	"Direct_Char", "Label", "Label Indirect"};
 
 void	debug_lxcontent(t_list *lst)
 {

@@ -6,18 +6,18 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/17 12:47:27 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/01 11:11:50 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-extern t_op	g_op_tab[];
+extern	t_op	g_op_tab[];
 
-static char	*r_parse_param(unsigned char *prog,
+static	char	*r_parse_param(unsigned char *prog,
 	unsigned int *i, unsigned char codage, t_op *op)
 {
-	int 	j;
+	int		j;
 	char	*text;
 	int		value;
 
@@ -41,10 +41,10 @@ static char	*r_parse_param(unsigned char *prog,
 	return (text);
 }
 
-static int	r_parse_instruction(unsigned char *prog,
+static	int		r_parse_instruction(unsigned char *prog,
 	unsigned int *i, char **text)
 {
-	int 			j;
+	int				j;
 	unsigned char	codage;
 	char			*text_param;
 
@@ -68,7 +68,7 @@ static int	r_parse_instruction(unsigned char *prog,
 	return (0);
 }
 
-static char	*header_to_str(t_vm_champ *champ)
+static	char	*header_to_str(t_vm_champ *champ)
 {
 	char	*text;
 
@@ -82,7 +82,8 @@ static char	*header_to_str(t_vm_champ *champ)
 	text = ft_strjoin_free(text, 1, "\"\n\n", 0);
 	return (text);
 }
-static void	prog_to_str(char **text, t_vm_champ *champ)
+
+static	void	prog_to_str(char **text, t_vm_champ *champ)
 {
 	unsigned int	i;
 
@@ -91,14 +92,15 @@ static void	prog_to_str(char **text, t_vm_champ *champ)
 	{
 		if (!r_parse_instruction(champ->prog, &i, text))
 		{
-			ft_printf("{red}Error: Unknown instruction {%.2x} at byte %d{eoc}\n",
+			ft_printf("{red}Error: Unknown instruction {%.2x} at byte\
+					%d{eoc}\n",
 				champ->prog[i], i);
 			return ;
 		}
 	}
 }
 
-void		write_player_reverse(char *av, t_vm_champ *champ)
+void			write_player_reverse(char *av, t_vm_champ *champ)
 {
 	char	*text;
 

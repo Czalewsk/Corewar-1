@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/17 12:47:27 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/01 11:02:49 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 extern t_op	g_op_tab[];
 
-int		r_get_nb_octet(unsigned char codage, int i, t_op *op)
+int			r_get_nb_octet(unsigned char codage, int i, t_op *op)
 {
-
 	if (codage == 0 && op->index)
 		return (2);
 	else if (codage == 0)
@@ -32,7 +31,7 @@ int		r_get_nb_octet(unsigned char codage, int i, t_op *op)
 	return (0);
 }
 
-char	*r_get_prefix(unsigned char codage, int i)
+char		*r_get_prefix(unsigned char codage, int i)
 {
 	char	*str;
 
@@ -43,13 +42,12 @@ char	*r_get_prefix(unsigned char codage, int i)
 		str = ft_strdup("%");
 	else if (((codage >> (6 - i * 2)) & 0x03) == IND_CODE)
 		str = ft_strdup("");
-
 	if (str)
 		return (str);
 	return (ft_strdup("ERROR"));
 }
 
-int	r_write_to_file(char *filename, char *content)
+int			r_write_to_file(char *filename, char *content)
 {
 	int	fd;
 	int	ret;

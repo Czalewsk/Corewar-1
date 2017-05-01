@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/29 10:31:35 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/01 11:39:52 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ t_buf			buffer_prog;
 
 extern	t_list	*g_files;
 
-void	del_g_files(void *content, size_t size)
+void			del_g_files(void *content, size_t size)
 {
 	(void)size;
 	ft_strdel((char**)content);
 	free(content);
 }
 
-void	sp_free(t_list *lex, t_list *label, t_buf *buffer1, t_buf *buffer2)
+void			sp_free(t_list *lex, t_list *label, t_buf *buffer1,
+		t_buf *buffer2)
 {
 	ft_lstdel(&lex, &del_lex);
 	ft_lstdel(&label, &del_label);
@@ -37,7 +38,7 @@ void	sp_free(t_list *lex, t_list *label, t_buf *buffer1, t_buf *buffer2)
 		free(buffer2->data);
 }
 
-void	main_error(char *str, int forcequit)
+void			main_error(char *str, int forcequit)
 {
 	ft_printf("{red}%s{eoc}\n", str);
 	sp_free(lex, label, &buffer_header, &buffer_prog);
@@ -45,7 +46,7 @@ void	main_error(char *str, int forcequit)
 		exit(1);
 }
 
-void	buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
+void			buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
 {
 	buffer1->data = NULL;
 	buffer1->size = 0;
@@ -53,12 +54,12 @@ void	buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
 	buffer2->size = 0;
 }
 
-void	print_line(t_list *lst)
+void			print_line(t_list *lst)
 {
 	ft_printf("%s\n", *(char**)lst->content);
 }
 
-void	do_stuff(int i, char *av)
+void			do_stuff(int i, char *av)
 {
 	header_t	header;
 
@@ -74,7 +75,8 @@ void	do_stuff(int i, char *av)
 	i ? ft_lstiter(label, &debug_labelcontent) : 0;
 	i ? ft_lstiter(g_files, &print_line) : 0;
 //Error Manager
-	check_error(lex);
+	if (check_error(lex))
+		main_error("Error in lexer/parser\nProgramm hasn't finished", 1);
 //Ecriture du player
 	write_player(&buffer_prog, lex, label, &header);
 	header_to_buffer(&buffer_header, &header);
@@ -85,7 +87,7 @@ void	do_stuff(int i, char *av)
 	ft_printf("{green}PROGRAM FINISHED{eoc}\n");
 }
 
-void	do_stuff_reverse(char *av)
+void			do_stuff_reverse(char *av)
 {
 	t_vm_champ	*champ;
 
@@ -95,7 +97,7 @@ void	do_stuff_reverse(char *av)
 	write_player_reverse(av, champ);
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	int		arg;
 	int		i;

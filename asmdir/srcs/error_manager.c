@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 20:14:32 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/30 11:13:51 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/01 11:40:46 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ extern	t_op		g_op_tab[];
 extern	char		*g_type[];
 extern	t_list		*g_files;
 
-const	char		*g_type_arg[4] = {"Register", "Direct", "Indirect"};
+const	char	*g_type_arg[4] = {"Register", "Direct", "Indirect"};
 
-char				*get_type_wrong_arg(t_list *curs, int wrong)
+char			*get_type_wrong_arg(t_list *curs, int wrong)
 {
 	t_lx	*lx;
 
@@ -36,7 +36,7 @@ char				*get_type_wrong_arg(t_list *curs, int wrong)
 	return (ft_strdup(g_type[lx->type]));
 }
 
-char				*set_arg_msg(t_op *op, int arg_index)
+char			*set_arg_msg(t_op *op, int arg_index)
 {
 	unsigned int	arg;
 	unsigned int	bit_one;
@@ -65,7 +65,7 @@ char				*set_arg_msg(t_op *op, int arg_index)
 	return (msg);
 }
 
-int					set_error_msg(t_lx *lx, char *msg[], t_list *curs)
+int				set_error_msg(t_lx *lx, char *msg[], t_list *curs)
 {
 	int		nb_arg;
 
@@ -89,39 +89,31 @@ int					set_error_msg(t_lx *lx, char *msg[], t_list *curs)
 	return (nb_arg);
 }
 
-void				check_error(t_list *curs)
+int				check_error(t_list *curs)
 {
 	int		force_quit;
 	t_lx	*lx;
 	char	*msg[3];
 	int		nb_free;
 
-	nb_free = 0;
 	force_quit = 0;
-	while (curs)
+	while (curs && (lx = curs->content))
 	{
-		lx = curs->content;
 		if (lx->error > 0)
 		{
-			if (!g_tab_error[lx->error - 1].warning)
-				force_quit = 1;
-			if (!g_tab_error[lx->error - 1].warning)
-				ft_printf("{red}Error  ");
-			else
-				ft_printf("{yellow}Warning  ");
-			if (g_tab_error[lx->error - 1].nb_arg)
-				nb_free = set_error_msg(lx, msg, curs);
+			force_quit = (!g_tab_error[lx->error - 1].warning) ? 1 : 0;
+			g_tab_error[lx->error - 1].warning ? ft_printf("{yellow}Warning  ")
+				: ft_printf("{red}Error  ");
+			nb_free = (g_tab_error[lx->error - 1].nb_arg) ?
+					set_error_msg(lx, msg, curs) : 0;
 			ft_printf("Line [%3i] col[%3i] {eoc}: ", lx->pos[0], lx->pos[1]);
 			ft_printf(g_tab_error[lx->error - 1].msg, msg[0], msg[1], msg[2]);
-			write(1, "\n", 1);
-			ft_printf("%s\n", *(char**)
+			ft_printf("\n%s\n\n", *(char**)
 					(ft_lst_return_index(g_files, lx->pos[0] - 1)->content));
-			write(1, "\n", 1);
 			while (nb_free)
 				ft_strdel(&(msg[--nb_free]));
 		}
 		curs = curs->next;
 	}
-	if (force_quit)
-		main_error("Error in lexer/parser\nProgramm hasn't finished", 1);
+	return (force_quit);
 }

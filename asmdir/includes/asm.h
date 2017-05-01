@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/27 12:20:07 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/01 11:47:40 by czalewsk         ###   ########.fr       */
 /*   Updated: 2017/04/16 20:49:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -107,7 +107,7 @@ void		add_label(t_lx *lx, t_list **label);
 
 void		main_error(char *str, int forcequit);
 
-void		check_error(t_list *curs);
+int			check_error(t_list *curs);
 
 int			check_sep(t_list *curs, t_lx *lx);
 

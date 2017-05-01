@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:36:55 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/29 10:28:56 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/01 10:55:00 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ t_list			*get_lex(char *filename)
 	{
 		fill_lst(&lexem, line, ln);
 		ft_lst_pushend(&g_files, ft_lstnew(&line, sizeof(&line)));
-	//	ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	close(fd);
