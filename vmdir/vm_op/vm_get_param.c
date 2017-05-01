@@ -6,11 +6,11 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 11:38:40 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/01 10:24:28 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/01 11:44:13 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm_header.h"
+#include "vm_op.h"
 
 int			vm_get_param(t_vm_data *data, int pos, int length)
 {

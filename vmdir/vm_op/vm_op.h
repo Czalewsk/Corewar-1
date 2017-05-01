@@ -15,6 +15,8 @@ typedef struct	s_op
 	int			index;
 }				t_op;
 
+int		ft_atoi_bigendian(unsigned char *array, int nb_octet);
+
 int     vm_get_param(t_vm_data *data, int pos, int size_param);
 void    vm_live(t_vm_data *data, t_vm_proc *proc, int pos);
 void    vm_ld(t_vm_data *data, t_vm_proc *proc, int pos);
