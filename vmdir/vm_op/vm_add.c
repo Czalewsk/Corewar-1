@@ -7,7 +7,7 @@ void vm_add(t_vm_data *data, t_vm_proc *proc, int pos)
     int nb_octet[3];
     int ocp;
 
-    ocp = data->arena[pos % MEM_SIZE];
+    ocp = (int)data->arena[pos % MEM_SIZE];
     proc->pc += vm_get_nb_octet(nb_octet, ocp, 3);
     if (ocp != 84)
         return ;
@@ -24,5 +24,4 @@ void vm_add(t_vm_data *data, t_vm_proc *proc, int pos)
         ft_memcpy(proc->registre + param[2] * 4, i, 4);
     }
     proc->carry = (int)(i == 0);
-    proc->pc += 4;
 }
