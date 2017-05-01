@@ -10,7 +10,7 @@ int vm_check_param(int ocp, unsigned int n_op)
     {
         if (i >= op_tab[n_op].nb_p)
             return (0);
-        tocp = (ocp >> (2 * i + 1)) & 3
+        tocp = (ocp >> (2 * i)) & 3
         if (tocp == 1 && ((op_tab[n_op].type_param[i]) & T_REG) == 0)
             return (0);
         else if (tocp == 2 && ((op_tab[n_op].type_param[i]) & T_DIR) == 0)
