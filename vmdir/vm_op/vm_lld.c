@@ -15,7 +15,7 @@ void vm_ld(t_vm_data *data, t_vm_proc *proc, int pos)
     i = 1;
     if (ft_intisbetween_inc(param[1], 0, 15))
     {
-        i = (ocp == 28) ? vm_get_param(data, (pos) + (param[0] % IDX_MOD), 4) : param[0];
+        i = (ocp == 28) ? vm_get_param(data, (pos) + (param[0]), 4) : param[0];
         ft_memcpy(proc->registre + param[1] * REG_SIZE, &i, REG_SIZE);
     }
     proc->carry = (int)(i == 0);
