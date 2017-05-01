@@ -9,10 +9,6 @@ void    vm_st(t_vm_data *data, t_vm_proc *proc, int pos)
 {
 	return ;
 }
-void    vm_add(t_vm_data *data, t_vm_proc *proc, int pos)
-{
-	return ;
-}
 void    vm_sub(t_vm_data *data, t_vm_proc *proc, int pos)
 {
 	return ;
