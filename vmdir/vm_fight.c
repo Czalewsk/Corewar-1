@@ -73,11 +73,6 @@ static void vm_exec_proc(t_vm_data  *data)
     }
 }
 
-int     vm_get_param(t_vm_data *data, int pos, int size_param)
-{
-    return 1;
-}
-
 static int vm_check_last_live(t_list *l)
 {
     t_vm_data   *data;
