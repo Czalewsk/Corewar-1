@@ -10,6 +10,7 @@ static void	vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
     proc.champ = champ->num;
     proc.last_live = 0;
     proc.pc = pos;
+    proc.in_proc = 0;
     // mettre les registre a 0 avec bzero
     proc.registre[1] = champ->num;
     //ft_printf("%d, %d\n", pos, champ->header.prog_size);

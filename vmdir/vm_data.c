@@ -35,6 +35,7 @@ t_vm_data	*get_data(void)
         data->lastcycledec = 0;
         data->nbr_cycle = 0,
         data->nb_proc = 0;
+        data->winner = NULL;
 	}
 	return (data);
 }
