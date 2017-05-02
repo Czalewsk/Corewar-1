@@ -86,15 +86,20 @@ void		check_name_and_cmt(t_list **lst, header_t *header)
 
 int			check_label_chars(t_list *lst)
 {
-	char	*str;
+	char		*str;
+	t_label		*label;
 
 	while (lst)
 	{
-		str = ((t_label*)lst->content)->name;
+		label = lst->content;
+		str = label->name;
 		while (*str)
 		{
 			if (!ft_strchr(LABEL_CHARS, *str))
+			{
+				label->lx->error = 10;
 				return (0);
+			}
 			++str;
 		}
 		lst = lst->next;

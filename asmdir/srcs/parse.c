@@ -66,7 +66,7 @@ void		parse_line(t_list **list_lex, t_list *label)
 		parse_label(lx, label);
 		if (is_ref(get_next_lx(*list_lex), LABEL)
 				&& get_line(lx) == get_line(get_next_lx(*list_lex)))
-			((t_lx*)((*list_lex)->content))->error = 8;
+			((t_lx*)((*list_lex)->content))->error = 23;
 		*list_lex = get_next_lst((*list_lex));
 	}
 	if ((*list_lex) && (op = get_instruction((*list_lex)->content)))

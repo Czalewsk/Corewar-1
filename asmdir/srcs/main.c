@@ -29,9 +29,12 @@ void			del_g_files(void *content, size_t size)
 void			sp_free(t_list *lex, t_list *label, t_buf *buffer1,
 		t_buf *buffer2)
 {
-	ft_lstdel(&lex, &del_lex);
-	ft_lstdel(&label, &del_label);
-	ft_lstdel(&g_files, &del_g_files);
+	if (lex)
+		ft_lstdel(&lex, &del_lex);
+	if (label)
+		ft_lstdel(&label, &del_label);
+	if (g_files)
+		ft_lstdel(&g_files, &del_g_files);
 	if (buffer1->data)
 		free(buffer1->data);
 	if (buffer2->data)
@@ -104,9 +107,7 @@ int				main(int ac, char **av)
 
 	arg = 0;
 	i = 1;
-	if (ac < 2)
-		return (0);
-	while (i < ac)
+	while (i < ac && ac > 1)
 	{
 		if (av[i][0] == '-')
 		{

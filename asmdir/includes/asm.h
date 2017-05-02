@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/05/01 11:47:40 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/02 09:36:38 by czalewsk         ###   ########.fr       */
 /*   Updated: 2017/04/16 20:49:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -120,5 +120,7 @@ int			r_get_nb_octet(unsigned char codage, int i, t_op *op);
 char		*r_get_prefix(unsigned char codage, int i);
 
 int			r_write_to_file(char *filename, char *content);
+
+void		underline_error(t_lx *lx, t_list *curs);
 
 #endif

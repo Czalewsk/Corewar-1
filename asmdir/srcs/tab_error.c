@@ -36,5 +36,6 @@ t_tab_error		g_tab_error[27] =
 	{20, "Instruction %s is unknown", 1, 0},
 	{21, "White space between LABEL_CHAR and label", 0, 0},
 	{22, "Separator \"%s\" at the end of the line", 1, 0},
+	{23, "Multiple label define on the same line", 0, 0},
 	{0, NULL, 0, 0}
 };
