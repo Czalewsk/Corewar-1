@@ -7,7 +7,8 @@ SRCS =	main.c write_bin.c debug.c get_lex.c set_lex.c \
 		check_function.c get_function1.c			   \
 		get_function2.c is_function.c prepare_to_buff.c\
 		error_manager.c label.c tab_error.c read_champ.c \
-		reverse_write_player.c reverse_function.c check_line.c
+		reverse_write_player.c reverse_function.c check_line.c \
+		underline_error.c
 
 INCLUDES = -I includes -I ../libft
 

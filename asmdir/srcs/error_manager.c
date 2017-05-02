@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 20:14:32 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/01 11:40:46 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/02 09:35:24 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,10 @@ int				check_error(t_list *curs)
 			force_quit = (!g_tab_error[lx->error - 1].warning) ? 1 : 0;
 			g_tab_error[lx->error - 1].warning ? ft_printf("{yellow}Warning  ")
 				: ft_printf("{red}Error  ");
-			nb_free = (g_tab_error[lx->error - 1].nb_arg) ?
-					set_error_msg(lx, msg, curs) : 0;
+			nb_free = set_error_msg(lx, msg, curs);
 			ft_printf("Line [%3i] col[%3i] {eoc}: ", lx->pos[0], lx->pos[1]);
 			ft_printf(g_tab_error[lx->error - 1].msg, msg[0], msg[1], msg[2]);
-			ft_printf("\n%s\n\n", *(char**)
-					(ft_lst_return_index(g_files, lx->pos[0] - 1)->content));
+			underline_error(lx, curs);
 			while (nb_free)
 				ft_strdel(&(msg[--nb_free]));
 		}
