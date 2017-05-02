@@ -19,7 +19,6 @@ void	check_if_already_exist(t_lx *lx, t_list *list_label)
 	while (list_label)
 	{
 		label = list_label->content;
-		ft_printf("%s et %s\n", label->name, lx->word);
 		if (strcmp(label->name, lx->word) == 0)
 			lx->error = 8;
 		list_label = list_label->next;
