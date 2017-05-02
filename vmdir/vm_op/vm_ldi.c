@@ -1,5 +1,5 @@
 #include "vm_op.h"
-void vm_and(t_vm_data *data, t_vm_proc *proc, int pos)
+void vm_ldi(t_vm_data *data, t_vm_proc *proc, int pos)
 {
     int i = 0;
     int param[3];
@@ -7,15 +7,14 @@ void vm_and(t_vm_data *data, t_vm_proc *proc, int pos)
     unsigned int ocp;
 
     ocp = (unsigned int)data->arena[(pos + 1) % MEM_SIZE];
-    proc->pc += vm_get_nb_octet(nb_octet, ocp, 5);
-    if (!vm_check_param(ocp, 5))
+    proc->pc += vm_get_nb_octet(nb_octet, ocp, 9);
+    if (!vm_check_param(ocp, 9))
         return ;
     param[0] = vm_get_param(data , (pos + 2) % MEM_SIZE, nb_octet[0]);
     param[1] = vm_get_param(data, (pos + 2 + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
     param[2] = vm_get_param(data, pos + 2 + nb_octet[0]+ nb_octet[1], nb_octet[2])
     i = 1;
-    if (ft_intisbetween_inc(param[2], 0, 15) && (((ocp >> 2) & 3) != 1 || ft_intisbetween_in(param[0], 0 ,15))
-        && ((ocp >> 4) & 3) != 1 || ft_intisbetween_inc(param[1], 0, 15))
+    if (ft_intisbetween_inc(param[2], 0, 15) && (((ocp >> 2) & 3) != 1 || ft_intisbetween_in(param[0], 0 ,15)))
     {
         while (i < 3)
         {
@@ -25,8 +24,8 @@ void vm_and(t_vm_data *data, t_vm_proc *proc, int pos)
                 (((ocp >> (2 * (i + 1))) & 3) == 2) ? NULL: ft_memcpy(param[i], vm_get_param(data, pos + (param[i] % IDX_MOD), REG_SIZE));
             i++;
         }
-        i = param[0] & param[1];
-        ft_memcpy(proc->registre + param[2] * REG_SIZE, &i, REG_SIZE);
+        i = param[0] + param[1];
+        ft_memcpy(proc->registre + param[2] * REG_SIZE, data->arena + pos + (i % IDX_MOD), REG_SIZE);
     }
     proc->carry = (int)(i == 0);
 }
