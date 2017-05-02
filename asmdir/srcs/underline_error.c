@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:34:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/02 11:43:29 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/02 13:03:54 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 extern	t_list		*g_files;
 
-t_lx			*get_wrong_arg(t_lx *lx, t_list **curs, int wrong)
+t_lx				*get_wrong_arg(t_lx *lx, t_list **curs, int wrong)
 {
 	while (wrong-- && (*curs))
 	{
 		(*curs) = (*curs)->next;
 		lx = ((*curs)->content) ? (*curs)->content : NULL;
-		while (*curs && lx && (lx->type == SEPARATEUR || lx->type == DIRECTCHAR))
+		while (*curs && lx &&
+				(lx->type == SEPARATEUR || lx->type == DIRECTCHAR))
 		{
 			(*curs) = (*curs)->next;
 			lx = ((*curs)->content) ? (*curs)->content : NULL;
@@ -29,24 +30,45 @@ t_lx			*get_wrong_arg(t_lx *lx, t_list **curs, int wrong)
 	return (lx);
 }
 
-size_t				find_end_error(t_lx *lx, t_list *curs, char *line, size_t begin)
+size_t				underline_particular_case(t_lx *lx, t_list *curs,
+		char *line)
+{
+	if (lx->error == 18)
+	{
+		return (curs->next && curs->next->next &&
+		((t_lx*)curs->next->next)->pos[1] == lx->pos[0] ?
+		((t_lx*)curs->next->next)->pos[1] : ft_strlen(line));
+	}
+	if (lx->error == 7)
+		return (ft_strlen(line));
+	return (0);
+}
+
+size_t				find_end_error(t_lx *lx, t_list *curs, char *line,
+		size_t begin)
 {
 	size_t		end;
 	size_t		i;
 	size_t		index_end;
+	size_t		end_last_char;
 
 	i = 0;
 	end = 0;
-	if (curs->next && ((t_lx*)(curs->next->content))->pos[0] == lx->pos[0])
+	if ((index_end = underline_particular_case(lx, curs, line)))
+		(void)begin;
+	else if (curs->next && ((t_lx*)(curs->next->content))->pos[0] == lx->pos[0])
 		index_end = ((t_lx*)(curs->next->content))->pos[1];
 	else
 		index_end = ft_strlen(line);
-	while ((line + i) && i <= index_end)
-		end += (line[i++] == '\t') ? 8 - (end % 8) : 1;
-	return ((begin > end) ? 0 : end - begin - 1);
+	while ((line + i) && i < index_end)
+	{
+		end += (line[i] == '\t') ? 8 - (end % 8) : 1;
+		end_last_char = (ft_isprint(line[i++])) ? end : end_last_char;
+	}
+	return ((begin > end_last_char) ? 0 : end_last_char - begin);
 }
 
-int				find_begin_error(t_lx *lx, t_list **curs, char *line)
+int					find_begin_error(t_lx *lx, t_list **curs, char *line)
 {
 	size_t	i;
 	int		spaces;
@@ -62,10 +84,10 @@ int				find_begin_error(t_lx *lx, t_list **curs, char *line)
 	return (spaces);
 }
 
-void			underline_error(t_lx *lx, t_list *curs)
+void				underline_error(t_lx *lx, t_list *curs)
 {
 	char			*line;
-	size_t				begin;
+	size_t			begin;
 	const	char	tild[21] = "~~~~~~~~~~~~~~~~~~~~~";
 	int				end;
 
@@ -76,8 +98,7 @@ void			underline_error(t_lx *lx, t_list *curs)
 	ft_printf("%s\n", line);
 	begin = find_begin_error(lx, &curs, line);
 	end = find_end_error(lx, curs, line, begin);
-//	ft_printf("begin = %i | end = %i\n", begin, end);
-	ft_printf("{green}%*c", begin,'~');
+	ft_printf("{green}%*c", begin, '~');
 	while (end > 0)
 	{
 		write(1, &tild, (end % 20));
@@ -85,4 +106,3 @@ void			underline_error(t_lx *lx, t_list *curs)
 	}
 	ft_printf("{eoc}\n\n");
 }
-
