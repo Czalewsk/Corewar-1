@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:34:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/02 11:29:00 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/02 11:42:10 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int				find_begin_error(t_lx *lx, t_list **curs, char *line)
 void			underline_error(t_lx *lx, t_list *curs)
 {
 	char			*line;
-	size_t			i;
 	size_t				begin;
 	const	char	tild[21] = "~~~~~~~~~~~~~~~~~~~~~";
 	int				end;
