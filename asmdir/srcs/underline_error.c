@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:34:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/02 13:03:54 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/02 13:46:29 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ t_lx				*get_wrong_arg(t_lx *lx, t_list **curs, int wrong)
 size_t				underline_particular_case(t_lx *lx, t_list *curs,
 		char *line)
 {
-	if (lx->error == 18)
+	if (lx->error == 18 || lx->error == 21)
 	{
-		return (curs->next && curs->next->next &&
-		((t_lx*)curs->next->next)->pos[1] == lx->pos[0] ?
-		((t_lx*)curs->next->next)->pos[1] : ft_strlen(line));
+		return ((curs->next && curs->next->next &&
+		((t_lx*)curs->next->next->content)->pos[0] == lx->pos[0]) ?
+		((t_lx*)curs->next->next->content)->pos[1] : ft_strlen(line));
 	}
 	if (lx->error == 7)
 		return (ft_strlen(line));
@@ -55,7 +55,9 @@ size_t				find_end_error(t_lx *lx, t_list *curs, char *line,
 	i = 0;
 	end = 0;
 	if ((index_end = underline_particular_case(lx, curs, line)))
+	{
 		(void)begin;
+	}
 	else if (curs->next && ((t_lx*)(curs->next->content))->pos[0] == lx->pos[0])
 		index_end = ((t_lx*)(curs->next->content))->pos[1];
 	else
@@ -92,7 +94,8 @@ void				underline_error(t_lx *lx, t_list *curs)
 	int				end;
 
 	write(1, "\n", 1);
-	if (lx->error == 11 || lx->error == 12)
+	if (lx->error == 11 || lx->error == 12 || lx->error == 14 ||
+			lx->error == 15)
 		return ;
 	line = *(char**)ft_lst_return_index(g_files, lx->pos[0] - 1)->content;
 	ft_printf("%s\n", line);
