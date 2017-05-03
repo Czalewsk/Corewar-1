@@ -47,15 +47,17 @@ int			find_end_dquote(t_lx *elmt, t_list **lst, int i, header_t *header)
 		tmp = (end) ? tmp : ft_strjoin_free(tmp, 1, elmt->word, 0);
 		(*lst) = (*lst)->next;
 	}
-	if (!(*lst))
-		return (0);
-	tmp = ft_strjoin_free(tmp, 1, ft_strsub(elmt->word, 0, len - 1), 1);
-	if (len_total - 2 > ((i) ? COMMENT_LENGTH : PROG_NAME_LENGTH) &&
-(elmt->error = i ? 12 : 11))
-		tmp[(i) ? COMMENT_LENGTH : PROG_NAME_LENGTH] = '\0';
-	fill_header_name_cmt(header, i, tmp, len_total);
+	if (*lst)
+	{
+		tmp = ft_strjoin_free(tmp, 1, ft_strsub(elmt->word, 0, len - 1), 1);
+		if (len_total - 2 > ((i) ? COMMENT_LENGTH : PROG_NAME_LENGTH) &&
+		(elmt->error = i ? 12 : 11))
+			tmp[(i) ? COMMENT_LENGTH : PROG_NAME_LENGTH] = '\0';
+		fill_header_name_cmt(header, i, tmp, l;
+		otal);
+	}
 	ft_strdel(&tmp);
-	return (1);
+	return (*lst ? 1 : 0);
 }
 
 void		check_name_cmt(t_list **lst, int i, header_t *header)

@@ -1,1 +1,21 @@
-Nothing to do best team ever fuck the world
+With "test/06-missing_comment.s"
+
+Warning  Line [  3] col[  0] : Missing comment
+==2873== Conditional jump or move depends on uninitialised value(s)
+==2873==    at 0x404519: ft_strlen (in /home/zalewski.cedric/Documents/42/Corewar/asm)
+==2873==    by 0x400E00: header_to_buffer (write_bin.c:71)
+==2873==    by 0x400A06: do_stuff (main.c:85)
+==2873==    by 0x400B4B: main (main.c:118)
+==2873== 
+The new filename is test/06-missing_commentCX.cor
+==2873== Syscall param write(buf) points to uninitialised byte(s)
+==2873==    at 0x4F31C30: __write_nocancel (in /usr/lib64/libc-2.24.so)
+==2873==    by 0x400CFC: write_bin (write_bin.c:48)
+==2873==    by 0x400A35: do_stuff (main.c:87)
+==2873==    by 0x400B4B: main (main.c:118)
+==2873==  Address 0x521d2bc is 140 bytes inside a block of size 2,215 alloc'd
+==2873==    at 0x4C2FC47: realloc (vg_replace_malloc.c:785)
+==2873==    by 0x400D4F: write_to_buffer (write_bin.c:56)
+==2873==    by 0x400A21: do_stuff (main.c:86)
+==2873==    by 0x400B4B: main (main.c:118)
+
