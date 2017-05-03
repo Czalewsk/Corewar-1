@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 14:37:53 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/03 14:40:14 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/03 14:44:10 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+int				ft_intisbetween_inc(int value, int inf, int sup);
+int				ft_atoi_bigendian(unsigned char *array, int nb_octet);
 int				ft_strisnumber(char *str);
 int				ft_atoi(const char *str);
 int				ft_isalnum(int c);

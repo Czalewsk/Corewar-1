@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi_bigendian.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/27 22:48:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/03 09:10:51 by lduval           ###   ########.fr       */
+/*   Created: 2017/05/03 11:53:33 by lduval            #+#    #+#             */
+/*   Updated: 2017/05/03 11:53:49 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm_header.h"
-
-void	vm_print_arena(void)
+int		ft_atoi_bigendian(unsigned char *array, int nb_octet)
 {
-	t_vm_data		*dat;
-	int				i;
+	int j;
+	int	i;
 
-	dat = get_data();
 	i = 0;
-	while (i < MEM_SIZE)
+	j = 0;
+	while (i  < nb_octet)
 	{
-		if (i % 64 == 0)
-			ft_printf("\n");
-		ft_printf("%.2x", dat->arena[i]);
-		//ft_printf("%d: %02x\n", i ,  dat->arena[i]);
+		j = (j << 8) + array[i];
 		i++;
 	}
-	ft_putendl("");
-}
-
-int		main(int argc, char **argv)
-{
-	vm_pars_param(argc, argv);
-	vm_init_arena();
-	vm_fight();
-	return (EXIT_SUCCESS);
+	return (j);
 }
