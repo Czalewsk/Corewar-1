@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:49:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/22 19:49:28 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/03 14:19:55 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		fill_header_name_cmt(header_t *header, int i, char *tmp,
 		ft_strcpy(header->prog_name, tmp + 1);
 }
 
-void		find_end_dquote(t_lx *elmt, t_list **lst, int i, header_t *header)
+int			find_end_dquote(t_lx *elmt, t_list **lst, int i, header_t *header)
 {
 	int		len;
 	int		len_total;
@@ -39,23 +39,23 @@ void		find_end_dquote(t_lx *elmt, t_list **lst, int i, header_t *header)
 	end = 0;
 	len_total = 0;
 	tmp = ft_strdup("");
-	while (*lst && !end)
+	while (*lst && !end && (elmt = (*lst)->content))
 	{
-		elmt = (*lst)->content;
 		len = ft_strlen(elmt->word);
 		len_total += len;
 		end = len_total > 1 && elmt->word[len - 1] == '\"' ? 1 : 0;
 		tmp = (end) ? tmp : ft_strjoin_free(tmp, 1, elmt->word, 0);
 		(*lst) = (*lst)->next;
 	}
-	if (!(*lst) && (elmt->error = 9))
-		return ;
+	if (!(*lst))
+		return (0);
 	tmp = ft_strjoin_free(tmp, 1, ft_strsub(elmt->word, 0, len - 1), 1);
 	if (len_total - 2 > ((i) ? COMMENT_LENGTH : PROG_NAME_LENGTH) &&
-			(elmt->error = i ? 12 : 11))
+(elmt->error = i ? 12 : 11))
 		tmp[(i) ? COMMENT_LENGTH : PROG_NAME_LENGTH] = '\0';
 	fill_header_name_cmt(header, i, tmp, len_total);
 	ft_strdel(&tmp);
+	return (1);
 }
 
 void		check_name_cmt(t_list **lst, int i, header_t *header)
@@ -66,13 +66,14 @@ void		check_name_cmt(t_list **lst, int i, header_t *header)
 	if (elmt->type != INSTRUCTION || (i ?
 	ft_strcmp(elmt->word, COMMENT_CMD_STRING) :
 	ft_strcmp(elmt->word, NAME_CMD_STRING)))
-		elmt->error = i ? 15 : 14;
+		elmt->error += i ? 15 : 14;
 	else
 	{
 		(*lst) = (*lst)->next;
 		elmt = (*lst)->content;
 		if (elmt->word[0] == '\"')
-			find_end_dquote(elmt, lst, i, header);
+			elmt->error = find_end_dquote(elmt, lst, i, header) ?
+				elmt->error : 24;
 		else
 			elmt->error = 9;
 	}
