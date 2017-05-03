@@ -6,29 +6,14 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 00:15:13 by lduval            #+#    #+#             */
-/*   Updated: 2017/04/19 06:08:16 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/03 11:55:49 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <fcntl.h>
 # include "vm_header.h"
 
-int		ft_atoi_bigendian(unsigned char *array, int nb_octet)
-{
-	int j;
-	int	i;
-
-	i = 0;
-	j = 0;
-	while (i  < nb_octet)
-	{
-		j = (j << 8) + array[i];
-		i++;
-	}
-	return (j);
-}
-
-void	vm_read_champ_extend(t_buf *buffer, header_t *header)
+void	vm_read_champ_extend(t_buf *buffer, t_header *header)
 {
 	unsigned char *p;
 

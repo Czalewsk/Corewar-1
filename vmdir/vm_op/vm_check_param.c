@@ -1,27 +1,41 @@
-int vm_check_param(int ocp, unsigned int n_op)
-{
-    int i;
-    unsigned int tocp;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_check_param.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/03 09:37:29 by lduval            #+#    #+#             */
+/*   Updated: 2017/05/03 12:09:54 by lduval           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-    i = 0;
-    if ((ocp & 1) == 1 || ((ocp >> 1) & 1) == 1)
-        return (i);
-    ocp >>= 2;
-    while (i < 3 && ocp > 0)
-    {
-        if (i >= op_tab[n_op].nb_p)
-            return (0);
-        tocp = (ocp) & 3;
-        if (tocp == 1 && ((op_tab[n_op].type_param[i]) & T_REG) == 0)
-            return (0);
-        else if (tocp == 2 && ((op_tab[n_op].type_param[i]) & T_DIR) == 0)
-            return (0);
-        else if (tocp == 3 && ((op_tab[n_op].type_param[i]) & T_IND) == 0)
-            return (0);
-        else if (tocp == 0)
-            return (0);
-        i++;
-        ocp >>= 2;
-    }
-    return(i == op_tab[n_op].nb_p);
+#include "vm_op.h"
+
+int	vm_check_param(int ocp, unsigned int n_op)
+{
+	int				i;
+	unsigned int	tocp;
+
+	i = 0;
+	if ((ocp & 1) == 1 || ((ocp >> 1) & 1) == 1)
+		return (i);
+	ocp >>= 2;
+	while (i < 3 && ocp > 0)
+	{
+		if (i >= g_op_tab[n_op].nb_p)
+			return (0);
+		tocp = (ocp) & 3;
+		if (tocp == 1 && ((g_op_tab[n_op].type_param[i]) & T_REG) == 0)
+			return (0);
+		else if (tocp == 2 && ((g_op_tab[n_op].type_param[i]) & T_DIR) == 0)
+			return (0);
+		else if (tocp == 3 && ((g_op_tab[n_op].type_param[i]) & T_IND) == 0)
+			return (0);
+		else if (tocp == 0)
+			return (0);
+		i++;
+		ocp >>= 2;
+	}
+	return (i == g_op_tab[n_op].nb_p);
 }
