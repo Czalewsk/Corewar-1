@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/01 11:39:52 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/04 10:11:41 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ void			main_error(char *str, int forcequit)
 		exit(1);
 }
 
-void			buffer_set_zero(t_buf *buffer1, t_buf *buffer2)
+void			buffer_init(t_buf *buffer1, t_buf *buffer2,
+		header_t *header, char *name)
 {
 	buffer1->data = NULL;
 	buffer1->size = 0;
 	buffer2->data = NULL;
 	buffer2->size = 0;
+	ft_strcpy(header->prog_name, "DEFAULT_NAME_");
+	ft_strncat(header->prog_name, name, PROG_NAME_LENGTH);
+	ft_strcpy(header->comment, "DEFAULT_CMT");
 }
 
 void			print_line(t_list *lst)
@@ -66,7 +70,7 @@ void			do_stuff(int i, char *av)
 {
 	header_t	header;
 
-	buffer_set_zero(&buffer_header, &buffer_prog);
+	buffer_init(&buffer_header, &buffer_prog, &header, av);
 	label = NULL;
 //Lexer
 	(lex = get_lex(av)) ? 1 : main_error("get_lex error", 1);

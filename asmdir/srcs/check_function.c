@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:49:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/03 14:19:55 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/04 10:07:50 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,7 @@ void		fill_header_name_cmt(header_t *header, int i, char *tmp,
 		int len_total)
 {
 	if (len_total < 3)
-	{
-		if (i)
-			header->comment[0] = '\0';
-		else
-			header->prog_name[0] = '\0';
 		return ;
-	}
 	i ? ft_memset(header->comment, 0, COMMENT_LENGTH) :
 	ft_memset(header->prog_name, 0, PROG_NAME_LENGTH);
 	i ? ft_strcpy(header->comment, tmp + 1) :
@@ -53,8 +47,7 @@ int			find_end_dquote(t_lx *elmt, t_list **lst, int i, header_t *header)
 		if (len_total - 2 > ((i) ? COMMENT_LENGTH : PROG_NAME_LENGTH) &&
 		(elmt->error = i ? 12 : 11))
 			tmp[(i) ? COMMENT_LENGTH : PROG_NAME_LENGTH] = '\0';
-		fill_header_name_cmt(header, i, tmp, l;
-		otal);
+		fill_header_name_cmt(header, i, tmp, len_total);
 	}
 	ft_strdel(&tmp);
 	return (*lst ? 1 : 0);
