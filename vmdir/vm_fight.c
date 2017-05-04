@@ -6,14 +6,14 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/03 11:42:36 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/04 15:36:37 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_header.h"
 #include "vm_op/vm_op.h"
 
-extern	t_op op_tab[];
+extern	t_op g_op_tab[];
 
 void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int) =
 {
@@ -54,7 +54,7 @@ static void	vm_exec_proc(t_vm_data *data)
 				tmproc->pc++;
 			tmproc->next_op = data->arena[(tmproc->beg + tmproc->pc) % MEM_SIZE];
 			tmproc->in_proc = (tmproc->next_op >= 0 && tmproc->next_op < 17) ?
-				op_tab[tmproc->next_op].nb_cycle : 0;
+				g_op_tab[tmproc->next_op].nb_cycle : 0;
 		}
 		else
 			(tmproc->in_proc)--;

@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:21:22 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/03 12:08:11 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/04 14:56:35 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	vm_and(t_vm_data *data, t_vm_proc *proc, int pos)
 	int				param[3];
 	int				nb_octet[3];
 	unsigned int	ocp;
+	int				tmp;
 
 	i = 0;
 	ocp = (unsigned int)data->arena[(pos + 1) % MEM_SIZE];
@@ -36,7 +37,10 @@ void	vm_and(t_vm_data *data, t_vm_proc *proc, int pos)
 			if (((ocp >> (2 * (i + 1))) & 3) == 1)
 				param[i] = ft_atoi_bigendian(proc->registre + (param[i] * REG_SIZE), REG_SIZE);
 			else
-				(((ocp >> (2 * (i + 1))) & 3) == 2) ? NULL : ft_memcpy(param[i], vm_get_param(data, pos + (param[i] % IDX_MOD), REG_SIZE), REG_SIZE);
+			{
+				tmp = vm_get_param(data, pos + (param[i] % IDX_MOD) ,REG_SIZE);
+				(((ocp >> (2 * (i + 1))) & 3) == 2) ? NULL : ft_memcpy(param + i, &tmp ,  REG_SIZE);
+			}
 			i++;
 		}
 		i = param[0] & param[1];

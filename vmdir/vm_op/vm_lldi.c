@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:48:36 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/03 12:24:02 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/04 14:57:39 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	vm_lldi(t_vm_data *data, t_vm_proc *proc, int pos)
 			if (((ocp >> (2 * (i + 1))) & 3) == 1)
 				param[i] = ft_atoi_bigendian(proc->registre + (param[i] * REG_SIZE), REG_SIZE);
 			else
-				(((ocp >> (2 * (i + 1))) & 3) == 2) ? false :
-					(tmp = vm_get_param(data, pos + (param[i] % IDX_MOD)) && ft_memcpy(param + i, &tmp , REG_SIZE), REG_SIZE);
+				(((ocp >> (2 * (i + 1))) & 3) == 2) ? 0 :
+					(tmp = vm_get_param(data, pos + (param[i] % IDX_MOD), REG_SIZE)) && ft_memcpy(param + i, &tmp ,REG_SIZE);
 			i++;
 		}
 		i = param[0] + param[1];

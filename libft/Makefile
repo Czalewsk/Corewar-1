@@ -6,7 +6,7 @@
 #    By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/16 13:16:18 by czalewsk          #+#    #+#              #
-#    Updated: 2017/05/03 14:40:44 by czalewsk         ###   ########.fr        #
+#    Updated: 2017/05/04 15:31:42 by lduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,7 +130,10 @@ OBJ = ft_strlen.o			\
 	  ft_isdouble.o			\
 	  ft_atol.o				\
 	  ft_lst_return_index.o	\
-	  ft_isprint_wsp.o
+	  ft_isprint_wsp.o		\
+	  ft_atoi_bigendian.o	\
+	  ft_intisbetween_inc.o \
+
 
 all : $(NAME)
 
