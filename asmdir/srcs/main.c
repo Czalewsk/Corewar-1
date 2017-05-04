@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/04 10:11:41 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/04 10:16:53 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void			buffer_init(t_buf *buffer1, t_buf *buffer2,
 	buffer1->size = 0;
 	buffer2->data = NULL;
 	buffer2->size = 0;
+	ft_memset(header->comment, 0, COMMENT_LENGTH);
+	ft_memset(header->prog_name, 0, PROG_NAME_LENGTH);
 	ft_strcpy(header->prog_name, "DEFAULT_NAME_");
 	ft_strncat(header->prog_name, name, PROG_NAME_LENGTH);
 	ft_strcpy(header->comment, "DEFAULT_CMT");
