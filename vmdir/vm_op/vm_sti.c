@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:58:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/04 15:46:13 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 20:24:51 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	vm_sti(t_vm_data *data, t_vm_proc *proc, int pos)
 	unsigned int	ocp;
 	int				tmp;
 	i = 0;
-	ocp = (unsigned int)data->arena[(pos + 1) % MEM_SIZE];
+	ocp = data->arena[(pos + 1) % MEM_SIZE];
 	proc->pc += vm_get_nb_octet(nb_octet, ocp, 10);
 	if (!vm_check_param(ocp, 10))
 		return ;

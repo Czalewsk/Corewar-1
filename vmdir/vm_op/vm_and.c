@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:21:22 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 19:31:38 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/05 19:52:09 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	vm_and(t_vm_data *data, t_vm_proc *proc, int pos)
 	i = 0;
 	ocp = (unsigned int)data->arena[(pos + 1) % MEM_SIZE];
 	proc->pc += vm_get_nb_octet(nb_octet, ocp, 5);
+	ft_printf("LOL\n");
 	if (!vm_check_param(ocp, 5))
 		return ;
 	ft_printf("nb_octet[0]=%i\n", nb_octet[0]);
