@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:46:29 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 17:22:11 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 18:57:26 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		vm_live(t_vm_data *data, t_vm_proc *proc, int pos)
 	i = 0;
 	nchamp = NULL;
 	live = vm_get_param(data, pos + 1, 4);
+
 	while (NULL == nchamp && data->tab_champ[i])
 	{
 		if (data->tab_champ[i]->num == live)

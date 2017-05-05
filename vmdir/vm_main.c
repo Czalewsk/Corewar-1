@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 22:48:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 18:44:19 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/05 19:02:03 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ void	vm_print_arena(void)
 
 	dat = get_data();
 	tmp = (dat->tab_proc);
+	ft_putendl("");
 	while (tmp)
 	{
 		n = -1;
 		tproc = tmp->content;
+		ft_printf("PC={red}%i{eoc}\n", tproc->pc);
 		while (++n < 16)
 			ft_printf("REG[%i]=%i\n", n, ((int*)tproc->registre)[n]);
-				ft_putendl("");
+		ft_putendl("");
 		tmp = tmp->next;
 	}
 	i = 0;
