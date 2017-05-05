@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 17:52:02 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 18:43:41 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct		s_buf
 
 typedef struct		s_vm_proc
 {
-	unsigned char	registre[REG_NUMBER * REG_SIZE + 1];
+	unsigned char	registre[REG_SIZE * (REG_NUMBER + 1)];
 	int				pc;
 	int				carry;
 	int				champ;

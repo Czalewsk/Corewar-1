@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 22:48:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 17:51:59 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 18:44:19 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,19 @@ void	vm_print_arena(void)
 	char *l;
 	t_list	*tmp;
 	t_vm_proc *tproc;
+	int		n;
 
 	dat = get_data();
+	tmp = (dat->tab_proc);
+	while (tmp)
+	{
+		n = -1;
+		tproc = tmp->content;
+		while (++n < 16)
+			ft_printf("REG[%i]=%i\n", n, ((int*)tproc->registre)[n]);
+				ft_putendl("");
+		tmp = tmp->next;
+	}
 	i = 0;
 	if (!j)
 	{
@@ -45,12 +56,6 @@ void	vm_print_arena(void)
 	}
 	else
 		j--;
-	tmp = (dat->tab_proc);
-	while (tmp)
-	{
-		tproc = 
-		tmp = tmp->next;
-	}
 }	
 
 int		main(int argc, char **argv)
