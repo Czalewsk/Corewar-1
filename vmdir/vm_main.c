@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 22:48:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 15:16:43 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 17:51:59 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	vm_print_arena(void)
 	int				i;
 	static int		j = 0;
 	char *l;
+	t_list	*tmp;
+	t_vm_proc *tproc;
 
 	dat = get_data();
 	i = 0;
@@ -32,7 +34,6 @@ void	vm_print_arena(void)
 			ft_printf("%.2x ", dat->arena[i]);
 			if (dat->col_arena[i] != 0)
 				ft_printf("\033[0m");
-
 			//ft_printf("%d: %02x\n", i ,  dat->arena[i]);
 			i++;
 		}
@@ -44,6 +45,12 @@ void	vm_print_arena(void)
 	}
 	else
 		j--;
+	tmp = (dat->tab_proc);
+	while (tmp)
+	{
+		tproc = 
+		tmp = tmp->next;
+	}
 }	
 
 int		main(int argc, char **argv)

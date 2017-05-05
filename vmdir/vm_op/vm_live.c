@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:46:29 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 14:57:38 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 17:22:11 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		vm_live(t_vm_data *data, t_vm_proc *proc, int pos)
 		if (nchamp)
 			ft_printf("un processus dit que le joueur %s est en vie\n", nchamp);
 		else
-			ft_printf("un processus dit qu'un joueur inconnue de numero %d est en vie", live);
+			ft_printf("un processus dit qu'un joueur inconnue de numero %d est en vie\n", live);
 	}
 	proc->pc += 5;
 	proc->last_live = data->nbr_cycle;

@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 14:49:44 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 17:19:12 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	proc.last_live = 0;
 	proc.pc = pos;
 	proc.in_proc = 0;
+	proc.next_op = champ->prog[0];
 	// mettre les registre a 0 avec bzero
 	proc.registre[1] = champ->num;
 	//ft_printf("%d, %d\n", pos, champ->header.prog_size);

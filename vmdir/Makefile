@@ -2,32 +2,32 @@ NAME = ../corewar
 
 FLAGS = -Wall -Werror -Wextra -g
 
-SRCS =	vm_main.c\
-		op.c\
-	vm_pars_param.c\
-	vm_data.c\
-	vm_read_champ.c\
-	vm_init_map.c\
-	vm_fight.c\
-	vm_op/vm_live.c\
-	vm_op/vm_get_param.c\
-	vm_op/vm_add.c\
-	vm_op/vm_and.c\
-	vm_op/vm_check_param.c\
-	vm_op/vm_fork.c\
-	vm_op/vm_get_nb_octet.c\
-	vm_op/vm_ld.c\
-	vm_op/vm_ldi.c\
-	vm_op/vm_lld.c\
-	vm_op/vm_lldi.c\
-	vm_op/vm_or.c\
-	vm_op/vm_st.c\
-	vm_op/vm_sti.c\
-	vm_op/vm_sub.c\
-	vm_op/vm_xor.c\
-	vm_op/vm_zjmp.c\
-	vm_op/vm_aff.c\
-	vm_op/vm_lfork.c
+SRCS =	vm_main.c \
+		op.c \
+		vm_pars_param.c \
+		vm_data.c \
+		vm_read_champ.c \
+		vm_init_map.c \
+		vm_fight.c \
+		vm_op/vm_live.c \
+		vm_op/vm_get_param.c \
+		vm_op/vm_add.c \
+		vm_op/vm_and.c \
+		vm_op/vm_check_param.c \
+		vm_op/vm_fork.c \
+		vm_op/vm_get_nb_octet.c \
+		vm_op/vm_ld.c \
+		vm_op/vm_ldi.c \
+		vm_op/vm_lld.c \
+		vm_op/vm_lldi.c \
+		vm_op/vm_or.c \
+		vm_op/vm_st.c \
+		vm_op/vm_sti.c \
+		vm_op/vm_sub.c \
+		vm_op/vm_xor.c \
+		vm_op/vm_zjmp.c \
+		vm_op/vm_aff.c \
+		vm_op/vm_lfork.c
 
 INCLUDES = -I includes -I ../libft
 
@@ -45,8 +45,8 @@ $(NAME): mylibft $(OBJS)
 mylibft:
 	make -C ../libft/
 
-%.o: srcs/%.c $(DEP)
-	gcc $(FLAGS) $(INCLUDES) -c $<
+%.o: %.c
+	gcc $(FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
