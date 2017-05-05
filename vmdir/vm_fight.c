@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/04 15:36:37 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 14:57:22 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ void		vm_fight(void)
 			vm_check_live_proces(data);
 		if (data->option & VM_OPT_G)
 		{
-			//system("clear");
-			//vm_print_arena();
+			system("clear");
+			vm_print_arena();
 			//ft_putnbr(i);
 			ft_printf("nbr_cycle: %d, nbr_proc: %d", data->nbr_cycle, data->nb_proc);
 			ft_putendl("");

@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/03 01:45:13 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 14:49:44 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 {
 	t_list		*temp;
 	t_vm_proc	proc;
+	static int	i = 1;
 
 	proc.beg = pos;
 	proc.carry = 0;
@@ -31,6 +32,8 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	data->nb_proc++;
 	ft_lstadd(&(data->tab_proc), temp);
 	ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
+	ft_memset(data->col_arena + pos, i, champ->header.prog_size);
+	i++;
 }
 
 static void		vm_init_champ(t_vm_data *data)
