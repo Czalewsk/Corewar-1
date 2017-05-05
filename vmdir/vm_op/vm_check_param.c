@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:37:29 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/03 12:09:54 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/05 23:28:46 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	vm_check_param(int ocp, unsigned int n_op)
 	{
 		if (i >= g_op_tab[n_op].nb_p)
 			return (0);
-		tocp = (ocp) & 3;
+		tocp = (ocp >> ((2 - i) * 2)) & 3;
 		if (tocp == 1 && ((g_op_tab[n_op].type_param[i]) & T_REG) == 0)
 			return (0);
 		else if (tocp == 2 && ((g_op_tab[n_op].type_param[i]) & T_DIR) == 0)
@@ -35,7 +35,6 @@ int	vm_check_param(int ocp, unsigned int n_op)
 		else if (tocp == 0)
 			return (0);
 		i++;
-		ocp >>= 2;
 	}
 	return (i == g_op_tab[n_op].nb_p);
 }

@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:58:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 20:24:51 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/05 23:35:41 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	vm_sti(t_vm_data *data, t_vm_proc *proc, int pos)
 		return ;
 	param[0] = vm_get_param(data, (pos + 2) % MEM_SIZE, nb_octet[0]);
 	param[1] = vm_get_param(data, (pos + 2 + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
-	param[2] = vm_get_param(data, pos + 2 + nb_octet[0] + nb_octet[1], nb_octet[2]);
+	param[2] = vm_get_param(data, (pos + 2 + nb_octet[0] + nb_octet[1]) % MEM_SIZE, nb_octet[2]);
 	i = 1;
 	if (ft_intisbetween_inc(param[0], 0, 15) && (((ocp >> 4) & 3) != 1 || ft_intisbetween_inc(param[1], 0, 15)))
 	{
@@ -42,7 +42,7 @@ void	vm_sti(t_vm_data *data, t_vm_proc *proc, int pos)
 		i++;
 		}
 		i = param[1] + param[2];
-		ft_memcpy(data->arena + pos + (i % IDX_MOD), proc->registre + param[0] * REG_SIZE, REG_SIZE);
+		ft_memcpy(data->arena + ((pos + i) % IDX_MOD), proc->registre + param[0] * REG_SIZE, REG_SIZE);
 	}
 	proc->carry = (int)(i == 0);
 }

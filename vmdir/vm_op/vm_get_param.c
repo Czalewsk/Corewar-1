@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 11:38:40 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/05 20:28:28 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/05 23:26:58 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,18 @@
 int			vm_get_param(t_vm_data *data, int pos, int length)
 {
 	int					res;
-	unsigned	char	value[5];
+	unsigned char	value[9];
 	int					i;
 
-	i = 4;
 	res = 0;
 	if (!data || length <= 0 || length > 4)
 		return (0);
-	value[4] = '\0';
+	i = length;
+	value[i] = '\0';
 	while (--i >= 0)
 	{
-		if (i < length)
-		{
-			value[i] = data->arena[(pos + i) % MEM_SIZE];
-		}
-		else
-			value[i] = 0;
+		value[i] = (int)data->arena[(pos + (i)) % MEM_SIZE];
 	}
-	res = ft_atoi_base((char*)value, "0123456789abcdef");
+	res = ft_atoi_bigendian(value, length);
 	return (res);
 }
