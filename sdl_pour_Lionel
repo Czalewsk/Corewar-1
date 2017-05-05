@@ -1,0 +1,13 @@
+-Télécharger les sources ici: https://www.libsdl.org/download-2.0.php
+
+-Extraire et mettre dans le dossier désirer
+
+-Rentrer dans le dossier
+
+-Entrer "./configure" puis "make"
+
+(- Si tu veux l'installer sur dans les fichiers ton système tu peux faire "make install" mais on en aura pas besoin je crois)
+
+-Le header SDL.h se trouve dans "includes" et les libs dont tu as besoin se trouvent dans "build" et "build/.libs"
+
+Je n'ai testé que sous linux (Ubuntu)
