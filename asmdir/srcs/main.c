@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/04 10:16:53 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/06 15:13:47 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ int				main(int ac, char **av)
 		else if (arg & 2)
 			do_stuff_reverse(av[i]);
 	}
+	free(get_gdata());
 	return (0);
 }
