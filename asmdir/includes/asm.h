@@ -45,6 +45,15 @@ typedef struct		s_vm_champ
 	//	t_vm_p *proc;
 }					t_vm_champ;
 
+typedef struct		s_gdata
+{
+	t_list			*lex;
+	t_list			*label;
+	t_buf			buffer_header;
+	t_buf			buffer_prog;
+	t_list			*g_files;
+}					t_gdata;
+
 int			ft_atoi_bigendian(unsigned char *array, int nb_octet);
 
 void		write_player_reverse(char *av, t_vm_champ *champ);
@@ -121,10 +130,14 @@ char		*r_get_prefix(unsigned char codage, int i);
 
 int			r_write_to_file(char *filename, char *content);
 
-void		underline_error(t_lx *lx, t_list *curs);
+void		underline_error(t_lx *lx, t_list *curs, t_gdata *gdata);
 
 void		debug_print_line(t_list *lst);
 
 void		del_g_files(void *content, size_t size);
+
+void		get_arg(int *arg, char *av, int *nb_arg);
+
+t_gdata		*get_gdata();
 
 #endif

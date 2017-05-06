@@ -15,7 +15,6 @@
 extern	t_tab_error	g_tab_error[];
 extern	t_op		g_op_tab[];
 extern	char		*g_type[];
-extern	t_list		*g_files;
 
 const	char	*g_type_arg[4] = {"Register", "Direct", "Indirect"};
 
@@ -99,6 +98,7 @@ int				check_error(t_list *curs)
 	force_quit = 0;
 	while (curs && (lx = curs->content))
 	{
+		lx->error = (lx->error > 29) ? 29 : lx->error; // A delete
 		if (lx->error > 0)
 		{
 			force_quit = (!g_tab_error[lx->error - 1].warning) ? 1 : 0;
@@ -107,7 +107,7 @@ int				check_error(t_list *curs)
 			nb_free = set_error_msg(lx, msg, curs);
 			ft_printf("Line [%3i] col[%3i] {eoc}: ", lx->pos[0], lx->pos[1]);
 			ft_printf(g_tab_error[lx->error - 1].msg, msg[0], msg[1], msg[2]);
-			underline_error(lx, curs);
+			underline_error(lx, curs, get_gdata());
 			while (nb_free)
 				ft_strdel(&(msg[--nb_free]));
 		}
