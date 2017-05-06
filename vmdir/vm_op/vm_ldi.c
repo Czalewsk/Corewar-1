@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:43:54 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/04 15:47:03 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/06 12:38:21 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,20 @@ void	vm_ldi(t_vm_data *data, t_vm_proc *proc, int pos)
 	{
 		while (i < 3)
 		{
-			if (((ocp >> (2 * (i + 1))) & 3) == 1)
-				param[i] = ft_atoi_bigendian(proc->registre + (param[i] * REG_SIZE), REG_SIZE);
-			else
+			if (nb_octet[i] == 1)
+				ft_memcpy(&(param[i]), proc->registre + (param[i] * REG_SIZE), REG_SIZE);
+			else if (nb_octet[i] == 2)
 			{
 				tmp = vm_get_param(data, pos + (param[i] % IDX_MOD) ,REG_SIZE);
-				(((ocp >> (2 * (i + 1))) & 3) == 2) ? NULL : ft_memcpy(param + i, &tmp ,  REG_SIZE);
+				ft_printf("\n%d", tmp);
+				ft_memcpy(&(param[i]), &tmp , REG_SIZE);
 			}
 			i++;
 		}
 		i = param[0] + param[1];
-		ft_memcpy(proc->registre + param[2] * REG_SIZE, data->arena + pos + (i % IDX_MOD), REG_SIZE);
+		tmp = vm_get_param(data, pos + (i % IDX_MOD), REG_SIZE);
+		ft_memcpy(proc->registre + param[2] * REG_SIZE, &tmp, REG_SIZE);
 	}
 	proc->carry = (int)(i == 0);
 }
+
