@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 11:38:40 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/06 07:12:15 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/06 09:51:21 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			vm_set_param(t_vm_data *data, int pos,unsigned char *s, int length)
 	i = 0;
 	while (i <  length)
 	{
-		data->arena[(pos + i) % MEM_SIZE] = s[i];
+		data->arena[(pos + length - (i + 1)) % MEM_SIZE] = s[i];
 		i++;
 	}
 }
