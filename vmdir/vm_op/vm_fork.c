@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:36:51 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/06 16:54:53 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/06 17:00:25 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	vm_fork(t_vm_data *data, t_vm_proc *proc, int pos)
 		ft_error("proc list malloc failed", &vm_free_all);
 	data->nb_proc++;
 	ft_lstadd(&(data->tab_proc), temp);
-	vm_set_param(data->arena + fork.beg, proc->prog, proc->progsize);
+	vm_set_param(data, fork.beg, proc->prog, proc->progsize);
 }
