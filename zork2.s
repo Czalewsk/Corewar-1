@@ -12,3 +12,5 @@ st r1, r4
 add r2 , r4 ,r3
 
 sub r3, r1 ,r5
+
+and %1,  %3 ,r6
