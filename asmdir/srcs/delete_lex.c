@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 16:58:43 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/17 09:51:39 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/06 14:58:21 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void			sp_free(void)
 {
 	t_gdata	*gdata;
 
-	gdata = get_gdata();
+	if(!(gdata = get_gdata()))
+		return ;
 	if (gdata->lex)
 		ft_lstdel(&(gdata->lex), &del_lex);
 	if (gdata->label)
@@ -54,4 +55,5 @@ void			sp_free(void)
 		free(gdata->buffer_header.data);
 	if (gdata->buffer_prog.data)
 		free(gdata->buffer_prog.data);
+	free(gdata);
 }
