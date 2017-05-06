@@ -14,8 +14,10 @@
 
 void ft_error(char *str, void (*f)(void))
 {
-	(*f)();
-	ft_putstr("ERROR:");
-	ft_putendl(str);
+	if (f)
+		(*f)();
+	ft_putstr("ERROR: ");
+	if (str)
+		ft_putendl(str);
 	exit(0);
 }

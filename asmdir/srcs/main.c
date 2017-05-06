@@ -19,13 +19,6 @@ t_buf			buffer_prog;
 
 extern	t_list	*g_files;
 
-void			del_g_files(void *content, size_t size)
-{
-	(void)size;
-	ft_strdel((char**)content);
-	free(content);
-}
-
 void			sp_free(t_list *lex, t_list *label, t_buf *buffer1,
 		t_buf *buffer2)
 {
@@ -63,11 +56,6 @@ void			buffer_init(t_buf *buffer1, t_buf *buffer2,
 	ft_strcpy(header->comment, "DEFAULT_CMT");
 }
 
-void			print_line(t_list *lst)
-{
-	ft_printf("%s\n", *(char**)lst->content);
-}
-
 void			do_stuff(int i, char *av)
 {
 	header_t	header;
@@ -75,17 +63,18 @@ void			do_stuff(int i, char *av)
 	buffer_init(&buffer_header, &buffer_prog, &header, av);
 	label = NULL;
 //Lexer
-	(lex = get_lex(av)) ? 1 : main_error("get_lex error", 1);
+	if ((lex = get_lex(av)) == NULL)
+		return (main_error("get_lex error", 0));
 	set_lex(lex, &label);
 //Parser
 	parse(lex, label, &header);
 //Affichage && Debug
 	i ? ft_lstiter(lex, &debug_lxcontent) : 0;
 	i ? ft_lstiter(label, &debug_labelcontent) : 0;
-	i ? ft_lstiter(g_files, &print_line) : 0;
+	i ? ft_lstiter(g_files, &debug_print_line) : 0;
 //Error Manager
 	if (check_error(lex))
-		main_error("Error in lexer/parser\nProgramm hasn't finished", 1);
+		return (main_error("Error in lexer/parser", 0));
 //Ecriture du player
 	write_player(&buffer_prog, lex, label, &header);
 	header_to_buffer(&buffer_header, &header);
@@ -93,7 +82,6 @@ void			do_stuff(int i, char *av)
 	write_bin(av, &buffer_header);
 //Free lst-> Lx && Label
 	sp_free(lex, label, &buffer_header, &buffer_prog);
-	ft_printf("{green}PROGRAM FINISHED{eoc}\n");
 }
 
 void			do_stuff_reverse(char *av)
@@ -106,25 +94,34 @@ void			do_stuff_reverse(char *av)
 	write_player_reverse(av, champ);
 }
 
+void			get_arg(int *arg, char *av, int *nb_arg)
+{
+	if (!ft_strcmp(av, "-d"))
+		*arg = *arg | 1;
+	else if (!ft_strcmp(av, "-r"))
+		*arg =* arg | 2;
+	++(*nb_arg);
+}
+
 int				main(int ac, char **av)
 {
 	int		arg;
 	int		i;
+	int		nb_arg;
 
 	arg = 0;
-	i = 1;
-	while (i < ac && ac > 1)
+	i = 0;
+	nb_arg = 0;
+	while (++i < ac && ac > 1 && av[i][0] == '-')
+		get_arg(&arg, av[i], &nb_arg);
+	--i;
+	while (++i < ac && ac > 1)
 	{
-		if (av[i][0] == '-')
-		{
-			if (!ft_strcmp(av[i], "-r"))
-				arg = arg | 1;
-		}
-		else if (arg == 0)
-			do_stuff(1, av[i]);
-		else if (arg & 1)
+		ft_printf("[%d/%d] %s:\n", i - nb_arg, (ac - 1) - nb_arg, av[i]);	
+		if (!(arg & 2))
+			do_stuff(arg & 1, av[i]);
+		else if (arg & 2)
 			do_stuff_reverse(av[i]);
-		++i;
 	}
 	return (0);
 }

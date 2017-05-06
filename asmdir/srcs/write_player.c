@@ -19,7 +19,6 @@ void	write_instruction(t_buf *buffer, t_list **list_lex, t_op *op,
 
 	codage = 0;
 	write_to_buffer(buffer, &(op->op_code), 1);
-	ft_printf("size is %d\n", buffer->size);
 	set_codage(&codage, *list_lex, op);
 	if (op->octet)
 		write_to_buffer(buffer, &codage, 1);
