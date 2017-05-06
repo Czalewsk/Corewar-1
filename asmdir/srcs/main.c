@@ -12,44 +12,10 @@
 
 #include "asm.h"
 
-t_gdata			*get_gdata()
-{
-	static t_gdata	*gdata = NULL;
-
-	if (gdata)
-		return (gdata);
-	gdata = (t_gdata *)malloc(sizeof(t_gdata));
-	if (!gdata)
-		ft_printf("{red}CRITICAL ERROR\n{eoc}");
-	gdata->g_files = NULL;
-	return (gdata);
-}
-
-void			sp_free(t_list *lex, t_list *label, t_buf *buffer1,
-		t_buf *buffer2)
-{
-	t_gdata	*gdata;
-
-	gdata = get_gdata();
-	if (lex)
-		ft_lstdel(&lex, &del_lex);
-	if (label)
-		ft_lstdel(&label, &del_label);
-	if (gdata->g_files)
-		ft_lstdel(&(gdata->g_files), &del_g_files);
-	if (buffer1->data)
-		free(buffer1->data);
-	if (buffer2->data)
-		free(buffer2->data);
-}
-
 void			main_error(char *str, int forcequit)
 {
-	t_gdata	*gdata;
-
-	gdata = get_gdata();
 	ft_printf("{red}%s{eoc}\n", str);
-	sp_free(gdata->lex, gdata->label, &(gdata->buffer_header), &(gdata->buffer_prog));
+	sp_free();
 	if (forcequit)
 		exit(1);
 }
@@ -92,10 +58,11 @@ void			do_stuff(int i, char *av)
 //Ecriture du player
 	write_player(&(gdata->buffer_prog), gdata->lex, gdata->label, &header);
 	header_to_buffer(&(gdata->buffer_header), &header);
-	write_to_buffer(&(gdata->buffer_header), gdata->buffer_prog.data, gdata->buffer_prog.size);
+	write_to_buffer(&(gdata->buffer_header), gdata->buffer_prog.data,
+		gdata->buffer_prog.size);
 	write_bin(av, &(gdata->buffer_header));
 //Free lst-> Lx && Label
-	sp_free(gdata->lex, gdata->label, &(gdata->buffer_header), &(gdata->buffer_prog));
+	sp_free();
 }
 
 void			do_stuff_reverse(char *av)

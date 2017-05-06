@@ -138,6 +138,8 @@ void		del_g_files(void *content, size_t size);
 
 void		get_arg(int *arg, char *av, int *nb_arg);
 
-t_gdata		*get_gdata();
+t_gdata		*get_gdata(void);
+
+void		sp_free(void);
 
 #endif
