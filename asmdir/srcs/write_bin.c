@@ -43,11 +43,11 @@ int			write_bin(char *filename, t_buf *buffer)
 		filename = ft_strdup("NameError.cor");
 	ft_printf("Writing output program to {cyan}%s{eoc}\n", filename);
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	free(filename);
 	if (fd == -1)
 		return (0);
 	ret = write(fd, buffer->data, buffer->size);
 	close(fd);
-	free(filename);
 	return (ret);
 }
 

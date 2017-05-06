@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/05/03 14:34:25 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/06 14:26:15 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_tab_error		g_tab_error[50] =
 {
 	{1, "Syntax error", 0, 0},
 	{2, "Label undefined", 0, 0},
-	{3, "No such register", 0, 0},
+	{3, "Register %s don\'t exist", 1, 1},
 	{4, "Wrong value", 0, 0},
 	{5, "Unknown instruction", 0, 0},
 	{6, "Invalid argument, got {U}%s{eoc} expected {U}%s{eoc}", 2, 0},

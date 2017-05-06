@@ -12,8 +12,6 @@
 
 #include "asm.h"
 
-extern	t_list		*g_files;
-
 t_lx				*get_wrong_arg(t_lx *lx, t_list **curs, int wrong)
 {
 	while (wrong-- && (*curs))
@@ -87,7 +85,7 @@ int					find_begin_error(t_lx *lx, t_list **curs, char *line)
 	return (spaces);
 }
 
-void				underline_error(t_lx *lx, t_list *curs)
+void				underline_error(t_lx *lx, t_list *curs, t_gdata *gdata)
 {
 	char			*line;
 	size_t			begin;
@@ -100,7 +98,7 @@ void				underline_error(t_lx *lx, t_list *curs)
 	if (lx->error == 11 || lx->error == 12 || lx->error == 14 ||
 			lx->error == 15 || lx->error == 29)
 		return ;
-	line = *(char**)ft_lst_return_index(g_files, lx->pos[0] - 1)->content;
+	line = *(char**)ft_lst_return_index(gdata->g_files, lx->pos[0] - 1)->content;
 	ft_printf("%s\n", line);
 	begin = find_begin_error(lx, &curs, line);
 	c = (lx->error == 24 || lx->error == 22) ? '^' : '~';

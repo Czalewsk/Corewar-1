@@ -15,7 +15,6 @@
 const	char	*g_wspace = " \t";
 const	char	*g_eol = "#;\n";
 const	char	*g_delim = ":,";
-t_list			*g_files;
 
 void			get_end_word(char const *s, size_t *i)
 {
@@ -84,11 +83,12 @@ t_list			*get_lex(char *filename)
 	size_t	ln;
 	char	*line;
 	t_list	*lexem;
+	t_gdata	*gdata;
 
 	ln = 0;
 	line = NULL;
 	lexem = NULL;
-	g_files = NULL;
+	gdata = get_gdata();
 	if ((fd = open(filename, O_RDONLY)) <= 0)
 	{
 		ft_printf("Ceci n'a pas marche (fichier introuvable)\n");
@@ -97,7 +97,7 @@ t_list			*get_lex(char *filename)
 	while (get_next_line(fd, &line) > 0 && ++ln)
 	{
 		fill_lst(&lexem, line, ln);
-		ft_lst_pushend(&g_files, ft_lstnew(&line, sizeof(&line)));
+		ft_lst_pushend(&(gdata->g_files), ft_lstnew(&line, sizeof(&line)));
 	}
 	ft_strdel(&line);
 	close(fd);
