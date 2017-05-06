@@ -1,6 +1,7 @@
 .name "zork"
 .comment "I'M ALIIIIVE"
 
+st r1, 12
 
-st r1, 5
+ld %5, r2
 

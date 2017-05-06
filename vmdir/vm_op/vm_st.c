@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:57:47 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/06 07:36:02 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/06 09:06:23 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	vm_st(t_vm_data *data, t_vm_proc *proc, int pos)
 	if (ft_intisbetween_inc(param[0], 0, 15) && ((ocp != 80) || ft_intisbetween_inc(param[1], 0, 15)))
 	{
 			i = ft_atoi_bigendian(proc->registre + (param[0] * REG_SIZE), REG_SIZE);
-			ft_printf("1 : %d, 2 : %d, !:%d, @:%d, i:%d" ,param[0], param[1], nb_octet[0], nb_octet[1], i);
 			tmp =  ((pos + (param[1] % IDX_MOD)) % MEM_SIZE);
 			(ocp == 80) ? ft_memcpy(proc->registre + param[1] * REG_SIZE, &i, REG_SIZE) :
 			vm_set_param(data, tmp , (unsigned char *)&i, REG_SIZE);
