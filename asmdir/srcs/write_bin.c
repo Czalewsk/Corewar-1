@@ -41,7 +41,7 @@ int			write_bin(char *filename, t_buf *buffer)
 	filename = transform_filename(filename, "CX.cor");
 	if (!filename)
 		filename = ft_strdup("NameError.cor");
-	ft_printf("The new filename is {cyan}%s{eoc}\n", filename);
+	ft_printf("Writing output program to {cyan}%s{eoc}\n", filename);
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (fd == -1)
 		return (0);

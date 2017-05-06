@@ -40,3 +40,8 @@ void	debug_labelcontent(t_list *lst)
 	elmt = lst->content;
 	ft_printf("[%3i] Name of label : %s\n", elmt->octet, elmt->name);
 }
+
+void	debug_print_line(t_list *lst)
+{
+	ft_printf("%s\n", *(char**)lst->content);
+}

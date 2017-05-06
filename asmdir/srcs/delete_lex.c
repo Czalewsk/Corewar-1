@@ -12,6 +12,13 @@
 
 #include "lexer.h"
 
+void			del_g_files(void *content, size_t size)
+{
+	(void)size;
+	ft_strdel((char**)content);
+	free(content);
+}
+
 void	del_lex(void *content, size_t size)
 {
 	t_lx	*elmt;

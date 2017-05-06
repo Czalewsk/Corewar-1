@@ -123,4 +123,8 @@ int			r_write_to_file(char *filename, char *content);
 
 void		underline_error(t_lx *lx, t_list *curs);
 
+void		debug_print_line(t_list *lst);
+
+void		del_g_files(void *content, size_t size);
+
 #endif
