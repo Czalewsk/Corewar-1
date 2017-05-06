@@ -6,13 +6,13 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 11:53:33 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/03 11:53:49 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/06 07:08:34 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_atoi_bigendian(unsigned char *array, int nb_octet)
 {
-	int j;
+	unsigned int j;
 	int	i;
 
 	i = 0;

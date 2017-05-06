@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:54:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/03 12:16:47 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/06 06:57:28 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 extern	t_op g_op_tab[];
 
+void	vm_set_param(t_vm_data *data, int pos,unsigned char *s, int length);
 int		vm_check_param(int ocp, unsigned int n_op);
 int		vm_get_nb_octet(int *nb_octet, unsigned int ocp, int nop);
 int		vm_get_param(t_vm_data *data, int pos, int size_param);

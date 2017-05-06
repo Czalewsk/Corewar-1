@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 18:58:21 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/06 02:34:51 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	vm_exec_proc(t_vm_data *data)
 		}
 		else
 			(tmproc->in_proc)--;
+		data->col_arena[tmproc->pc + tmproc->beg] += 4;
 		tmp = tmp->next;
 	}
 }
