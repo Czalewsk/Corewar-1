@@ -12,33 +12,12 @@
 
 #include "asm.h"
 
-char		*transform_filename(char *filename, char *extension)
-{
-	char	*tmp;
-	char	*old_filename;
-	char	*new_filename;
-
-	old_filename = ft_strnew(ft_strlen(filename) + 1);
-	new_filename = ft_strnew(ft_strlen(filename) + 10);
-	if (!old_filename || !new_filename)
-		return (NULL);
-	ft_strcpy(old_filename, filename);
-	tmp = ft_strrchr(old_filename, '.');
-	if (!tmp)
-		return (NULL);
-	*tmp = 0;
-	ft_strcpy(new_filename, old_filename);
-	ft_strcat(new_filename, extension);
-	free(old_filename);
-	return (new_filename);
-}
-
 int			write_bin(char *filename, t_buf *buffer)
 {
 	int	fd;
 	int	ret;
 
-	filename = transform_filename(filename, "CX.cor");
+	filename = ft_cfextension(filename, "CX.cor");
 	if (!filename)
 		filename = ft_strdup("NameError.cor");
 	ft_printf("Writing output program to {cyan}%s{eoc}\n", filename);

@@ -20,13 +20,17 @@ void			main_error(char *str, int forcequit)
 		exit(1);
 }
 
-void			buffer_init(t_buf *buffer1, t_buf *buffer2,
-		header_t *header, char *name)
+void			buffer_init(header_t *header, char *name)
 {
-	buffer1->data = NULL;
-	buffer1->size = 0;
-	buffer2->data = NULL;
-	buffer2->size = 0;
+	t_gdata	*gdata;
+
+	gdata = get_gdata();
+	gdata->label = NULL;
+	gdata->g_files = NULL;
+	gdata->buffer_header.data = NULL;
+	gdata->buffer_header.size = 0;
+	gdata->buffer_prog.data = NULL;
+	gdata->buffer_prog.size = 0;
 	ft_memset(header->comment, 0, COMMENT_LENGTH);
 	ft_memset(header->prog_name, 0, PROG_NAME_LENGTH);
 	ft_strcpy(header->prog_name, "DEFAULT_NAME_");
@@ -40,8 +44,8 @@ void			do_stuff(int i, char *av)
 	t_gdata		*gdata;
 
 	gdata = get_gdata();
-	buffer_init(&(gdata->buffer_header), &(gdata->buffer_prog), &header, av);
-	gdata->label = NULL;
+	buffer_init(&header, av);
+	
 //Lexer
 	if ((gdata->lex = get_lex(av)) == NULL)
 		return (main_error("get_lex error", 0));

@@ -19,3 +19,6 @@ The new filename is test/06-missing_commentCX.cor
 ==2873==    by 0x400A21: do_stuff (main.c:86)
 ==2873==    by 0x400B4B: main (main.c:118)
 
+
+
+Regarde l'erreur du fichier n°29
