@@ -21,6 +21,5 @@ t_gdata			*get_gdata(void)
 	gdata = (t_gdata *)malloc(sizeof(t_gdata));
 	if (!gdata)
 		ft_printf("{red}CRITICAL ERROR\n{eoc}");
-	gdata->g_files = NULL;
 	return (gdata);
 }

@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:21:45 by xesnault          #+#    #+#             */
-/*   Updated: 2017/05/06 18:43:31 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/07 16:30:32 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			write_bin(char *filename, t_buf *buffer)
 	int	fd;
 	int	ret;
 
-	filename = transform_filename(filename, "CX.cor");
+	filename = ft_cfextension(filename, "CX.cor");
 	if (!filename)
 		filename = ft_strdup("NameError.cor");
 	ft_printf("Writing output program to {cyan}%s{eoc}\n", filename);

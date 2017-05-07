@@ -133,6 +133,7 @@ OBJ = ft_strlen.o			\
 	  ft_isprint_wsp.o		\
 	  ft_atoi_bigendian.o	\
 	  ft_intisbetween_inc.o \
+	  ft_cfextension.o		\
 
 
 all : $(NAME)

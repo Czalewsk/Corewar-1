@@ -127,5 +127,6 @@ int				ft_isdouble(char *str);
 long int		ft_atol(const char *str);
 t_list		*ft_lst_return_index(t_list *lst, size_t index);
 int				ft_isprint_wsp(int c);
+char			*ft_cfextension(char *filename, char *extension);
 
 #endif

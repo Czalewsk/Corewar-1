@@ -52,7 +52,7 @@ int			r_write_to_file(char *filename, char *content)
 	int	fd;
 	int	ret;
 
-	filename = transform_filename(filename, "CX.s");
+	filename = ft_cfextension(filename, "CX.s");
 	if (!filename)
 		filename = ft_strdup("NameError.s");
 	ft_printf("The new filename is {cyan}%s{eoc}\n", filename);
