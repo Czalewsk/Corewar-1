@@ -6,13 +6,13 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:48:36 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/06 16:52:43 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/07 17:46:25 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_op.h"
 
-void	vm_ldi(t_vm_data *data, t_vm_proc *proc, int pos)
+void	vm_lldi(t_vm_data *data, t_vm_proc *proc, int pos)
 {
 	int				i;
 	int				param[3];

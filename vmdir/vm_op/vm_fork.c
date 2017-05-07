@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:36:51 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/06 17:00:25 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/07 23:03:57 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	vm_fork(t_vm_data *data, t_vm_proc *proc, int pos)
 	t_list		*temp;
 	t_vm_proc	fork;
 
+	proc->pc += 2;
 	param = vm_get_param(data, pos + 1, 2);
 	fork.beg = (proc->beg + proc->pc + (param % IDX_MOD)) % MEM_SIZE;
 	fork.carry = proc->carry;
@@ -31,5 +32,4 @@ void	vm_fork(t_vm_data *data, t_vm_proc *proc, int pos)
 		ft_error("proc list malloc failed", &vm_free_all);
 	data->nb_proc++;
 	ft_lstadd(&(data->tab_proc), temp);
-	vm_set_param(data, fork.beg, proc->prog, proc->progsize);
 }
