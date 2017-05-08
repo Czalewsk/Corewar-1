@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 22:48:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/08 02:49:10 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/08 15:05:11 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	vm_print_arena(void)
 {
 	t_vm_data		*dat;
 	int				i;
-	//static int		j = 0;
-//	char *l;
+	static int		j = 0;
+	char *l;
 	t_list	*tmp;
 //	t_vm_proc *tproc;
 	//int		n;
@@ -36,8 +36,8 @@ void	vm_print_arena(void)
 		tmp = tmp->next;
 	}*/
 	i = 0;
-/*	if (0 == j)
-	{*/
+	if (0 == j)
+	{
 		while (i < MEM_SIZE)
 		{
 			if (i % 64 == 0)
@@ -51,13 +51,13 @@ void	vm_print_arena(void)
 			i++;
 		}
 		ft_putendl("");
-/*		j =  get_next_line(0, &l);
+		j =  get_next_line(0, &l);
 		j = (j > -1) ? ft_atoi(l) : 0;
 		j = j < 0 ? -j : j;
 		free(l);
 	}
 	else
-		j--;*/
+		j--;
 }	
 
 int		main(int argc, char **argv)

@@ -6,13 +6,13 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 11:38:40 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/08 09:29:14 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/08 18:19:56 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_op.h"
 
-int			vm_get_param(t_vm_data *data, int pos, int length)
+int			vm_get_param(t_vm_data *data, unsigned int pos, int length)
 {
 	int					res;
 	unsigned char	value[5];

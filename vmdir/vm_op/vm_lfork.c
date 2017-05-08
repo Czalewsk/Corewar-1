@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 15:40:19 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/07 21:37:16 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/08 15:33:55 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	vm_lfork(t_vm_data *data, t_vm_proc *proc, int pos)
 	t_list		*temp;
 	t_vm_proc	fork;
 
-	proc->pc += 2;
+	proc->pc += 3;
 	param = vm_get_param(data, pos + 1, 2);
 	fork.beg = (proc->beg + proc->pc + param) % MEM_SIZE;
 	fork.carry = proc->carry;

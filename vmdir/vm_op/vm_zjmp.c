@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 10:05:46 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/08 09:03:39 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/08 15:28:07 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	vm_zjmp(t_vm_data *data, t_vm_proc *proc, int pos)
 { 
-	proc->pc += (proc->carry == 1) ? vm_get_param(data, pos + 1, 2) : 2;
+	proc->pc += (proc->carry == 1) ? vm_get_param(data, pos + 1, 2) : 3;
 }
