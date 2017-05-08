@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/06 02:34:51 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/08 08:55:32 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	vm_exec_proc(t_vm_data *data)
 	while (tmp)
 	{
 		tmproc = (t_vm_proc *)tmp->content;
+		data->col_arena[(tmproc->pc + tmproc->beg) % MEM_SIZE] -= 4;
 		if (!tmproc->in_proc)
 		{
 			if (tmproc->next_op > 0 && tmproc->next_op < 17)
@@ -58,7 +59,7 @@ static void	vm_exec_proc(t_vm_data *data)
 		}
 		else
 			(tmproc->in_proc)--;
-		data->col_arena[tmproc->pc + tmproc->beg] += 4;
+		data->col_arena[(tmproc->pc + tmproc->beg) % MEM_SIZE] += 4;
 		tmp = tmp->next;
 	}
 }
@@ -104,11 +105,12 @@ void		vm_fight(void)
 			vm_check_live_proces(data);
 		if (data->option & VM_OPT_G)
 		{
-//			system("clear");
+			system("clear");
 			vm_print_arena();
 			//ft_putnbr(i);
 			ft_printf("nbr_cycle: %d, nbr_proc: %d", data->nbr_cycle, data->nb_proc);
 			ft_putendl("");
+			usleep(20000);
 			i++;
 		}
 		if (((data->nbr_cycle) == (data->dump)) || 0 == data->nb_proc)

@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:58:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/06 16:41:37 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/08 09:29:41 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	vm_sti(t_vm_data *data, t_vm_proc *proc, int pos)
 		}
 		ft_printf("1 : %d, 2 : %d, 3 %d\n!:%d, @:%d, #:%d i:%d" ,param[0], param[1],param[2], nb_octet[0], nb_octet[1], nb_octet[2], i);
 		i = param[1] + param[2];
-		vm_set_param(data, ((pos + i) % IDX_MOD), proc->registre + param[0] * REG_SIZE, REG_SIZE);
+		vm_set_param(data, (((pos + i)) % IDX_MOD), proc->registre + param[0] * REG_SIZE, REG_SIZE);
 	}
 	proc->carry = (int)(i == 0);
 }

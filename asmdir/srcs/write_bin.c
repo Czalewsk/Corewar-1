@@ -6,11 +6,40 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:21:45 by xesnault          #+#    #+#             */
-/*   Updated: 2017/05/04 10:07:31 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/07 16:30:32 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+char		*transform_filename(char *filename, char *extension)
+{
+	char	*tmp;
+	char	*old_filename;
+	char	*new_filename;
+
+	old_filename = ft_strnew(ft_strlen(filename) + 1);
+	new_filename = ft_strnew(ft_strlen(filename) + 10);
+	if (!old_filename || !new_filename)
+	{
+		ft_strdel(&old_filename);
+		ft_strdel(&new_filename);
+		return (NULL);
+	}
+	ft_strcpy(old_filename, filename);
+	tmp = ft_strrchr(old_filename, '.');
+	if (!tmp)
+	{
+		ft_strdel(&old_filename);
+		ft_strdel(&new_filename);
+		return (NULL);
+	}
+	*tmp = 0;
+	ft_strcpy(new_filename, old_filename);
+	ft_strcat(new_filename, extension);
+	free(old_filename);
+	return (new_filename);
+}
 
 int			write_bin(char *filename, t_buf *buffer)
 {

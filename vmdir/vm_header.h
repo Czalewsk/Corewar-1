@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 18:43:41 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/08 02:25:01 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct		s_vm_data
 	t_vm_champ		*tab_champ[MAX_PLAYERS + 1];
 	unsigned char	arena[MEM_SIZE];
 	unsigned char	col_arena[MEM_SIZE];
+	unsigned char	col_base[MEM_SIZE];
 	t_list			*tab_proc;
 	int				nb_proc;
 	char			*winner;

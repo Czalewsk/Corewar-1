@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 11:38:40 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/06 09:51:21 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/08 09:29:14 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int			vm_get_param(t_vm_data *data, int pos, int length)
 		i--;
 	}
 	res = ft_atoi_bigendian(value, length);
-	return (res);
+	return ((length == 2) ? (short)res : res);
 }
 
-void			vm_set_param(t_vm_data *data, int pos,unsigned char *s, int length)
+void			vm_set_param(t_vm_data *data, unsigned int pos,unsigned char *s, int length)
 {
 	int			i;
 	
@@ -43,4 +43,3 @@ void			vm_set_param(t_vm_data *data, int pos,unsigned char *s, int length)
 		i++;
 	}
 }
-
