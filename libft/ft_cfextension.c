@@ -34,6 +34,8 @@ static char		*get_path_without_filename(char *path)
 		return (NULL);
 	if ((tmp = ft_strrchr(path_wfn, '/')) && *(tmp + 1))
 		*(tmp + 1) = 0;
+	else
+		path_wfn[0] = 0;
 	return (path_wfn);
 }
 
