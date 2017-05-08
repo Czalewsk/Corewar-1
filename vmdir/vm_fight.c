@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/08 03:06:31 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/08 08:55:32 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void		vm_fight(void)
 			//ft_putnbr(i);
 			ft_printf("nbr_cycle: %d, nbr_proc: %d", data->nbr_cycle, data->nb_proc);
 			ft_putendl("");
-			usleep(17000);
+			usleep(20000);
 			i++;
 		}
 		if (((data->nbr_cycle) == (data->dump)) || 0 == data->nb_proc)
