@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:48:36 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 01:51:27 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/10 02:16:40 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	vm_lldi(t_vm_data *data, t_vm_proc *proc, int pos)
 	unsigned int	ocp;
 	int				tmp;
 
-	i = 0;
 	ocp = (unsigned int)data->arena[(pos + 1) % MEM_SIZE];
 	proc->pc += vm_get_nb_octet(nb_octet, ocp, 13);
 	if (!vm_check_param(ocp, 13))
@@ -28,7 +27,7 @@ void	vm_lldi(t_vm_data *data, t_vm_proc *proc, int pos)
 	param[0] = vm_get_param(data, (pos + 2) % MEM_SIZE, nb_octet[0]);
 	param[1] = vm_get_param(data, (pos + 2 + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
 	param[2] = vm_get_param(data, pos + 2 + nb_octet[0] + nb_octet[1], nb_octet[2]);
-	i = 1;
+	tmp = 1;
 	if (ft_intisbetween_inc(param[2], 0, 15) && (nb_octet[0] != 1 || ft_intisbetween_inc(param[0], 0, 15)) && (nb_octet[1] != 1 || ft_intisbetween_inc(param[1], 0 , 15)))
 	{
 		i = 0;
