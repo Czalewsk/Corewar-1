@@ -18,12 +18,12 @@ void	vm_print_arena(void)
 	int				i;
 	static int		j = 0;
 	char *l;
-	t_list	*tmp;
+//	t_list	*tmp;
 //	t_vm_proc *tproc;
 	//int		n;
 	
 	dat = get_data();
-	tmp = (dat->tab_proc);
+//	tmp = (dat->tab_proc);
 	ft_putendl("");
 	/*while (tmp)
 	{
