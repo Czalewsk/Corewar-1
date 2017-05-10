@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 09:45:43 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/10 10:03:06 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct		s_vm_proc
 	int				pc;
 	int				carry;
 	int				champ;
-	int				beg;
 	int				last_live;
 	int				in_proc;
 	char			next_op;

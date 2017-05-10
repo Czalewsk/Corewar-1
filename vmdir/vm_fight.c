@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 09:13:25 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/10 10:02:25 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,23 @@ static void	vm_exec_proc(t_vm_data *data)
 	while (tmp)
 	{
 		tmproc = (t_vm_proc *)tmp->content;
-		data->col_arena[(tmproc->pc + tmproc->beg) % MEM_SIZE] -= 4;
+		data->col_arena[(tmproc->pc) % MEM_SIZE] -= 4;
 		if (!tmproc->in_proc)
 		{
 			if (tmproc->next_op > 0 && tmproc->next_op < 17)
 				(*g_vm_exec_op[(int)tmproc->next_op - 1])(data,
-						tmproc, (tmproc->beg + tmproc->pc));
+						tmproc, (tmproc->pc));
 			else
 				tmproc->pc++;
 			if (tmproc->pc < 0)
 				tmproc->pc += MEM_SIZE;
-			tmproc->next_op = data->arena[(tmproc->beg + tmproc->pc) % MEM_SIZE];
+			tmproc->next_op = data->arena[(tmproc->pc) % MEM_SIZE];
 			tmproc->in_proc = (tmproc->next_op > 0 && tmproc->next_op < 17) ?
 				g_op_tab[(int)tmproc->next_op - 1].nb_cycle : 0;
 		}
 		else
 			(tmproc->in_proc)--;
-		data->col_arena[(tmproc->pc + tmproc->beg) % MEM_SIZE] += 4;
+		data->col_arena[(tmproc->pc) % MEM_SIZE] += 4;
 		tmp = tmp->next;
 	}
 }
