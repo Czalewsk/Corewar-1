@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:55:52 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/06 11:33:40 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/10 03:19:12 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	vm_or(t_vm_data *data, t_vm_proc *proc, int pos)
 	param[1] = vm_get_param(data, (pos + 2 + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
 	param[2] = vm_get_param(data, (pos + 2 + nb_octet[0] + nb_octet[1]) % MEM_SIZE, nb_octet[2]);
 	i = 1;
-ft_printf("1: %d, 2: %d, 3: %d\n!: %d, @: %d, #: %d i: %d" ,param[0], param[1],param[2], nb_octet[0], nb_octet[1], nb_octet[2], i);
 	if (ft_intisbetween_inc(param[2], 0, 15) && (nb_octet[0] != 1 || ft_intisbetween_inc(param[0], 0, 15))
 			&& (nb_octet[1] != 1 || ft_intisbetween_inc(param[1], 0, 15)))
 	{

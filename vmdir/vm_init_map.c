@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/08 02:39:46 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/10 09:24:16 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	ft_lstadd(&(data->tab_proc), temp);
 	ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
 	ft_memset(data->col_arena + pos, i, champ->header.prog_size);
-	ft_memset(data->col_base + pos, i, champ->header.prog_size);
 	data->col_arena[pos] += 4;
 	i++;
 }

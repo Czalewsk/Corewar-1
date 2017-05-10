@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/08 18:26:59 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/10 09:13:25 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	vm_exec_proc(t_vm_data *data)
 						tmproc, (tmproc->beg + tmproc->pc));
 			else
 				tmproc->pc++;
+			if (tmproc->pc < 0)
+				tmproc->pc += MEM_SIZE;
 			tmproc->next_op = data->arena[(tmproc->beg + tmproc->pc) % MEM_SIZE];
 			tmproc->in_proc = (tmproc->next_op > 0 && tmproc->next_op < 17) ?
 				g_op_tab[(int)tmproc->next_op - 1].nb_cycle : 0;
@@ -103,15 +105,20 @@ void		vm_fight(void)
 	{
 		if (!(data->nbr_cycle % data->cycletodie))
 			vm_check_live_proces(data);
-		if (data->option & VM_OPT_G)
+		if (data->option)
 		{
-			system("clear");
-			vm_print_arena();
-			//ft_putnbr(i);
-			ft_printf("nbr_cycle: %d, nbr_proc: %d", data->nbr_cycle, data->nb_proc);
-			ft_putendl("");
-//			usleep(20000);
-			i++;
+			if ((data->option & 2))
+				ft_printf("It is now cycle %d\n",data->nbr_cycle);
+			if (data->option & VM_OPT_G)
+			{
+				system("clear");
+				vm_print_arena();
+				//ft_putnbr(i);
+				ft_printf("nbr_cycle: %d, nbr_proc: %d", data->nbr_cycle, data->nb_proc);
+				ft_putendl("");
+				//			usleep(20000);
+				i++;
+			}
 		}
 		if (((data->nbr_cycle) == (data->dump)) || 0 == data->nb_proc)
 			finish = 1;

@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:36:51 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/08 18:35:45 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/10 09:19:10 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	vm_fork(t_vm_data *data, t_vm_proc *proc, int pos)
 
 	param = vm_get_param(data, pos + 1, 2);
 	fork.pc = proc->pc + (param % IDX_MOD);
+	fork.pc = fork.pc >= 0 ? fork.pc : fork.pc + MEM_SIZE;
 	fork.beg = proc->beg;
 	fork.carry = proc->carry;
 	fork.champ = proc->champ;
