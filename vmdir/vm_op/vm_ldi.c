@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:43:54 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/08 19:01:32 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/10 02:04:08 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ void	vm_ldi(t_vm_data *data, t_vm_proc *proc, int pos)
 			}
 			i++;
 		}
-		ft_printf("1 : %d, 2 : %d, 3 %d\n!:%d, @:%d, #:%d i:%d" ,param[0], param[1],param[2], nb_octet[0], nb_octet[1], nb_octet[2], i);
 		i = param[0] + param[1];
 		tmp = vm_get_param(data, pos + (i % IDX_MOD), REG_SIZE);
 		ft_memcpy(proc->registre + param[2] * REG_SIZE, &tmp, REG_SIZE);
 	}
-	proc->carry = (int)(i == 0);
+	proc->carry = (int)(tmp == 0);
 }
 
