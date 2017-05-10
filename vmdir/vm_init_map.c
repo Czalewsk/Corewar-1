@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 09:24:16 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/10 09:46:27 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	proc.in_proc = (proc.next_op > 0 && proc.next_op < 17) ?
 				g_op_tab[(int)proc.next_op - 1].nb_cycle : 0;
 	// mettre les registre a 0 avec bzero
-	ft_bzero(proc.registre, REG_SIZE * (REG_NUMBER + 1));
+	ft_bzero(proc.registre, REG_SIZE * (REG_NUMBER));
 	ft_printf("%d num\n", champ->num);
 	j = (champ->num);
 	ft_memcpy(proc.registre + (1 * REG_SIZE), &j, REG_SIZE);

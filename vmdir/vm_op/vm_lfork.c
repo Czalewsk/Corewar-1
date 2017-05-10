@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_lfork.c                                         :+:      :+:    :+:   */
+/*   vm_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/04 15:40:19 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/08 15:33:55 by lduval           ###   ########.fr       */
+/*   Created: 2017/05/03 09:36:51 by lduval            #+#    #+#             */
+/*   Updated: 2017/05/10 09:53:08 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@ void	vm_lfork(t_vm_data *data, t_vm_proc *proc, int pos)
 	t_list		*temp;
 	t_vm_proc	fork;
 
-	proc->pc += 3;
 	param = vm_get_param(data, pos + 1, 2);
-	fork.beg = (proc->beg + proc->pc + param) % MEM_SIZE;
+	fork.pc = proc->pc + (param);
+	fork.pc = fork.pc >= 0 ? fork.pc : fork.pc + MEM_SIZE;
+	fork.beg = proc->beg;
 	fork.carry = proc->carry;
 	fork.champ = proc->champ;
-	fork.last_live = 0;
-	fork.in_proc = 0;
+	fork.last_live = proc->last_live;
+	fork.next_op = data->arena[(fork.beg  + fork.pc) % MEM_SIZE];
+	fork.in_proc = (fork.next_op > 0 && fork.next_op < 17) ?
+		g_op_tab[(int)fork.next_op - 1].nb_cycle : 0;
 	fork.prog = proc->prog;
 	fork.progsize = proc->progsize;
 	ft_memcpy(fork.registre, proc->registre, REG_SIZE * REG_NUMBER);
@@ -32,4 +35,5 @@ void	vm_lfork(t_vm_data *data, t_vm_proc *proc, int pos)
 		ft_error("proc list malloc failed", &vm_free_all);
 	data->nb_proc++;
 	ft_lstadd(&(data->tab_proc), temp);
+	proc->pc += 3;
 }
