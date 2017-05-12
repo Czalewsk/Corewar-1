@@ -27,7 +27,8 @@ SRCS =	vm_main.c \
 		vm_op/vm_xor.c \
 		vm_op/vm_zjmp.c \
 		vm_op/vm_aff.c \
-		vm_op/vm_lfork.c
+		vm_op/vm_lfork.c \
+		vm_ncurses.c
 
 INCLUDES = -I includes -I ../libft
 
@@ -40,7 +41,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): mylibft $(OBJS)
-	gcc $(LIB) $(FLAGS) $(OBJS) -o $(NAME) -lft
+	gcc $(LIB) $(FLAGS) $(OBJS) -o $(NAME) -lft -lncurses
 
 mylibft:
 	make -C ../libft/

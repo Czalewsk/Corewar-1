@@ -14,6 +14,7 @@
 # define VM_HEADER_H
 # include <stdlib.h>
 # include <stdio.h>
+# include <ncurses.h>
 # include "../libft/libft.h"
 # include "op.h"
 //# include "vm_op/vm_op.h"
@@ -83,6 +84,8 @@ void				vm_fight(void);
 void				vm_init_arena();
 int					vm_pars_param(int nb_parm, char **tab_parm);
 void				vm_read_champ(char *champ_name, t_vm_champ *data);
+
+void				vm_ncurses(void);
 
 //void     (*g_vm_exec_op[17])(t_vm_data *,t_vm_proc *,int );
 
