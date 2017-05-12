@@ -18,7 +18,7 @@ void	curse_print_globad_info(t_vm_data *data)
 	int		column;
 
 	i = 3;
-	column = 5 + (MEM_SIZE / LINES) * 3;
+	column = 5 + (MEM_SIZE / 64) * 3;
 	mvprintw((i = i + 2), column, "nbr_cycle: %d", data->nbr_cycle);
 	mvprintw((i = i + 2), column, "cycletodie: %d", data->cycletodie);
 	mvprintw((i = i + 2), column, "nb_proc: %d", data->nb_proc);
@@ -36,7 +36,7 @@ void	curse_print_arena(t_vm_data *data)
 	while (x < COLS / 3 && i < MEM_SIZE)
 	{
 		y = 0;
-		while (y < LINES && i < MEM_SIZE)
+		while (y < 64 && i < MEM_SIZE)
 		{
 			if ((data->col_arena[i] & 128))
 				attron(COLOR_PAIR(128));
