@@ -21,7 +21,6 @@ void	curse_print_player_info(t_vm_champ **tab_champ, int column, int i)
 	{
 		attron(COLOR_PAIR((ft_power(2, c))));
 		mvprintw((i = i + 2), column + 2, "Player name: %s (%d)", tab_champ[c]->name, tab_champ[c]->num);
-		mvprintw((i = i + 2), column + 2, "Alive: %d", tab_champ[c]->isalive);
 		attroff(COLOR_PAIR((ft_power(2, c))));
 		++i;
 		++c;
