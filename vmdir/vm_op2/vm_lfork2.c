@@ -22,6 +22,7 @@ void	vm_lfork2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 	fork.carry = proc->carry;
 	fork.champ = proc->champ;
 	fork.last_live = proc->last_live;
+	fork.color = proc->color;
 	fork.next_op = data->arena[(fork.pc) % MEM_SIZE];
 	fork.in_proc = (fork.next_op > 0 && fork.next_op < 17) ?
 		g_op_tab[(int)fork.next_op - 1].nb_cycle : 0;

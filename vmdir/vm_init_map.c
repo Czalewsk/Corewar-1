@@ -24,6 +24,7 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	proc.champ = champ->num;
 	proc.last_live = 0;
 	proc.pc = pos;
+	proc.color = i;
 	proc.in_proc = 0;
 	proc.next_op = champ->prog[0];
 	proc.in_proc = (proc.next_op > 0 && proc.next_op < 17) ?

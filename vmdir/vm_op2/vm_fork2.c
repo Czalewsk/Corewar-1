@@ -21,6 +21,7 @@ void	vm_fork2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 	fork.pc = fork.pc >= 0 ? fork.pc : fork.pc + MEM_SIZE;
 	fork.carry = proc->carry;
 	fork.champ = proc->champ;
+	fork.color = proc->color;
 	fork.last_live = proc->last_live;
 	fork.next_op = data->arena[(fork.pc) % MEM_SIZE];
 	fork.in_proc = (fork.next_op > 0 && fork.next_op < 17) ?

@@ -38,11 +38,11 @@ typedef struct		s_vm_proc
 	unsigned char	*prog;
 	int				progsize;
 	unsigned int			ocp;
+	int				color;
 }					t_vm_proc;
 
 typedef struct		s_vm_champ
 {
-	int				isalive;
 	char			*name;
 	t_header		header;
 	int				num;
