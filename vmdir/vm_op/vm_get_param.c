@@ -15,14 +15,13 @@
 int			vm_get_param(t_vm_data *data, unsigned int pos, int length)
 {
 	int					res;
-	unsigned char	value[5];
+	unsigned char	value[4];
 	int					i;
 
 	res = 0;
 	if (!data || length <= 0 || length > 4)
 		return (0);
 	i = length - 1;
-	value[i] = '\0';
 	while (i >= 0)
 	{
 		value[i] = (int)data->arena[(pos + (i)) % MEM_SIZE];

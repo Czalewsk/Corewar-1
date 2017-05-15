@@ -60,13 +60,15 @@ void		(*g_vm_exec_op2[17])(t_vm_data *, t_vm_proc *, int *, int *) =
 };
 
 
-static void	vm_get_param3(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *param)
+static void	vm_get_param3(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 {
 	int i;
 	
-	i = proc->ocp ? 2 : 1;
+	i = (proc->ocp) ? 2 : 1;
 	param[0] = vm_get_param(data, (proc->pc + i) % MEM_SIZE, nb_octet[0]);
-	param[1] = vm_get_param(data, (proc->pc + i + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
+	if (nb_octet[1])
+		param[1] = vm_get_param(data, (proc->pc + i + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
+	if (nb_octet[2])
 	param[2] = vm_get_param(data, (proc->pc + i + nb_octet[0] + nb_octet[1]) % MEM_SIZE, nb_octet[2]);
 	
 }
@@ -77,13 +79,15 @@ static int	vm_get_param2(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *p
 
 	ft_bzero(nb_octet, 4 * 3);
 	ft_bzero(param, 4 * 3);
+
 	if (proc->ocp)
 	{
 		noct = vm_get_nb_octet(nb_octet, proc->ocp, proc->next_op);
 	}
 	else
 	{
-		noct = proc->ocp == 1 ? 4 : 2;
+		
+		noct = (proc->next_op == 1) ? 4 : 2;
 		nb_octet[0] = noct;
 	}
 	vm_get_param3(data, proc, param, nb_octet);
@@ -96,10 +100,12 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 	int nb_octet[3];
 	int param[3];
 	int i;
-	
+	int nb2;
+
+		
 	proc->ocp = 0;
 	i = 0;
-	if (g_op_tab[(int)proc->next_op -1].octet)
+	if (g_op_tab[(int)(proc->next_op -1)].octet)
 	{
 		data->col_arena[(proc->pc + 1) % MEM_SIZE] |= 16;
 		proc->ocp = data->arena[(proc->pc + 1) % MEM_SIZE];
@@ -107,13 +113,16 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 	}
 	data->col_arena[(proc->pc) % MEM_SIZE] |= 128;
 	nb = vm_get_param2(data, proc, nb_octet, param);
-	while (nb)
+	nb2 = nb;
+	while (nb2)
 	{
-		data->col_arena[(proc->pc + i + nb) % MEM_SIZE] |= 64;
-		nb--;
+		data->col_arena[(proc->pc + i + nb2) % MEM_SIZE] |= 64;
+		nb2--;
 	}
 	if ((proc->ocp && vm_check_param(proc->ocp, proc->next_op - 1)) || !proc->ocp)
+	{	
 		(*g_vm_exec_op2[(int)proc->next_op - 1])(data,proc, param, nb_octet);
+	}
 	nb += proc->ocp ? 2: 1;
 	proc->pc += (proc->next_op) != 9 ? nb : 0;
 }
@@ -129,8 +138,12 @@ static void	vm_exec_proc(t_vm_data *data)
 		tmproc = (t_vm_proc *)tmp->content;
 		if (!tmproc->in_proc)
 		{
+
 			if (tmproc->next_op > 0 && tmproc->next_op < 17)
+			{
+				ft_printf("pute %d \n", tmproc->next_op);
 				vm_exec_op(data, tmproc);
+			}	
 			else
 				tmproc->pc++;
 			if (tmproc->pc < 0)

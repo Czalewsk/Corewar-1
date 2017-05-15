@@ -19,6 +19,7 @@ void		vm_live2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 
 	i = 0;
 	nchamp = NULL;
+
 	while (NULL == nchamp && data->tab_champ[i])
 	{
 		if (data->tab_champ[i]->num == param[0])
