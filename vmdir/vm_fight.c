@@ -108,7 +108,6 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 		proc->ocp = data->arena[(proc->pc + 1) % MEM_SIZE];
 		i = 1; 
 	}
-	data->col_arena[(proc->pc) % MEM_SIZE] |= 128;
 	nb = vm_get_param2(data, proc, nb_octet, param);
 	nb2 = nb;
 	while (nb2)
@@ -143,6 +142,7 @@ static void	vm_exec_proc(t_vm_data *data)
 	while (tmp)
 	{
 		tmproc = (t_vm_proc *)tmp->content;
+		data->col_arena[(tmproc->pc) % MEM_SIZE] &= ~128;
 		if (!tmproc->in_proc)
 		{
 
@@ -160,6 +160,7 @@ static void	vm_exec_proc(t_vm_data *data)
 		}
 		else
 			(tmproc->in_proc)--;
+		data->col_arena[(tmproc->pc) % MEM_SIZE] |= 128;
 		tmp = tmp->next;
 	}
 }
