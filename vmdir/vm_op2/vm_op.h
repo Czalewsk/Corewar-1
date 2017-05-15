@@ -17,8 +17,8 @@
 
 extern	t_op g_op_tab[];
 
-void	vm_set_param(t_vm_data *data, unsigned int pos,int num, int length);
-void	vm_set_color(t_vm_data *data, unsigned int pos,unsigned char *s, int length);
+void	vm_set_color(t_vm_data *data, unsigned int pos,int num, int length);
+void	vm_set_param(t_vm_data *data, unsigned int pos,unsigned char *s, int length);
 int	vm_get_param(t_vm_data *data, unsigned int pos, int size_param);
 void	vm_live2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
 void	vm_ld2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
