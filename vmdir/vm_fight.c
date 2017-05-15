@@ -39,29 +39,29 @@ void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int) =
 
 void		(*g_vm_exec_op2[17])(t_vm_data *, t_vm_proc *, int) =
 {
-	&vm_live,
-	&vm_ld,
-	&vm_st,
-	&vm_add,
-	&vm_sub,
-	&vm_and,
-	&vm_or,
-	&vm_xor,
-	&vm_zjmp,
-	&vm_ldi,
-	&vm_sti,
-	&vm_fork,
-	&vm_lld,
-	&vm_lldi,
-	&vm_lfork,
-	&vm_aff,
+	&vm_live2,
+	&vm_ld2,
+	&vm_st2,
+	&vm_add2,
+	&vm_sub2,
+	&vm_and2,
+	&vm_or2,
+	&vm_xor2,
+	&vm_zjmp2,
+	&vm_ldi2,
+	&vm_sti2,
+	&vm_fork2,
+	&vm_lld2,
+	&vm_lldi2,
+	&vm_lfork2,
+	&vm_aff2,
 	NULL
 };
 
 
 static void	vm_get_param3(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *param)
 {
-	
+		
 }
 
 static int	vm_get_param2(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *param)
@@ -99,15 +99,14 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 		i = 1; 
 	}
 	data->col_arena[(proc->pc) % MEM_SIZE] |= 128;
-	if (proc->ocp && !vm_check_param(proc->ocp, proc->next_op - 1))
-		return ;
 	nb = vm_get_param2(data, proc, nb_octet, param);
 	while (nb)
 	{
 		data->col_arena[(proc->pc + i + nb) % MEM_SIZE] |= 64;
 		nb--;
 	}
-	(*g_vm_exec_op2[(int)proc->next_op - 1])(data,proc, (proc->pc));
+	if ((proc->ocp && vm_check_param(proc->ocp, proc->next_op - 1)) || !proc->ocp)
+		(*g_vm_exec_op2[(int)proc->next_op - 1])(data,proc, (proc->pc));
 	proc->pc += (proc->next_op) != 9 ? nb : 0;
 }
 

@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_lld.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/03 09:47:29 by lduval            #+#    #+#             */
+/*   Updated: 2017/05/06 16:50:24 by lduval           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "vm_op.h"
+
+void	vm_lld(t_vm_data *data, t_vm_proc *proc, int pos)
+{
+	int	i;
+	int	param[3];
+	int	nb_octet[3];
+	int	ocp;
+
+	i = 0;
+	ocp = (int)data->arena[(pos + 1) % MEM_SIZE];
+	proc->pc += vm_get_nb_octet(nb_octet, ocp, 12);
+	if (ocp != 144 && ocp != 208)
+		return ;
+
+	param[0] = vm_get_param(data, (pos + 2) % MEM_SIZE, nb_octet[0]);
+	param[1] = vm_get_param(data, (pos + 2 + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
+	i = 1;
+	if (ft_intisbetween_inc(param[1], 0, 15))
+	{
+		i = (ocp == 208) ? vm_get_param(data, (pos) + (param[0]), 4) : param[0];
+		ft_memcpy(proc->registre + param[1] * REG_SIZE, &i, REG_SIZE);
+	}
+	proc->carry = (int)(i == 0);
+}
