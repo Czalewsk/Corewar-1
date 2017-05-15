@@ -42,3 +42,15 @@ void			vm_set_param(t_vm_data *data, unsigned int pos,unsigned char *s, int leng
 		i++;
 	}
 }
+
+void			vm_set_color(t_vm_data *data, unsigned int pos,int num, int length)
+{
+	int			i;
+	
+	i = 0;
+	while (i <  length)
+	{
+		data->col_arena[(pos + length - (i + 1)) % MEM_SIZE] = ft_power(2, num);
+		i++;
+	}
+}

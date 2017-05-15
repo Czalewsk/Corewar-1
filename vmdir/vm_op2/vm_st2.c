@@ -25,6 +25,7 @@ void	vm_st2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 			tmp =  ((proc->pc + (param[1] % IDX_MOD)) % MEM_SIZE);
 			(proc->ocp == 80) ? ft_memcpy(proc->registre + param[1] * REG_SIZE, &i, REG_SIZE) :
 			vm_set_param(data, tmp , (unsigned char *)&i, REG_SIZE);
+			vm_set_color(data, tmp, proc->champ, REG_SIZE);
 	}
 	(void)nb_octet;
 }
