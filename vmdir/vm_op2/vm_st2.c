@@ -18,6 +18,7 @@ void	vm_st2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 	int tmp;
 
 	i = 1;
+	ft_printf("param: %d, %d, %d\nnb_octet: %d, %d, %d\n", param[0],param[1],param[2],nb_octet[0],nb_octet[1],nb_octet[2]);	
 	if (ft_intisbetween_inc(param[0], 0, 15) && ((proc->ocp != 80) || ft_intisbetween_inc(param[1], 0, 15)))
 	{
 			ft_memcpy(&i, proc->registre + (param[0] * REG_SIZE), REG_SIZE);
