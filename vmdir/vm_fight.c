@@ -12,6 +12,7 @@
 
 #include "vm_header.h"
 #include "vm_op/vm_op.h"
+#include "vm_op2/vm_op.h"
 
 
 extern	t_op g_op_tab[];
@@ -37,7 +38,7 @@ void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int) =
 	NULL
 };
 
-void		(*g_vm_exec_op2[17])(t_vm_data *, t_vm_proc *, int) =
+void		(*g_vm_exec_op2[17])(t_vm_data *, t_vm_proc *, int *, int *) =
 {
 	&vm_live2,
 	&vm_ld2,
@@ -61,7 +62,13 @@ void		(*g_vm_exec_op2[17])(t_vm_data *, t_vm_proc *, int) =
 
 static void	vm_get_param3(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *param)
 {
-		
+	int i;
+	
+	i = proc->ocp ? 2 : 1;
+	param[0] = vm_get_param(data, (proc->pc + i) % MEM_SIZE, nb_octet[0]);
+	param[1] = vm_get_param(data, (proc->pc + i + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
+	param[2] = vm_get_param(data, (proc->pc + i + nb_octet[0] + nb_octet[1]) % MEM_SIZE, nb_octet[2]);
+	
 }
 
 static int	vm_get_param2(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *param)
@@ -79,7 +86,7 @@ static int	vm_get_param2(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *p
 		noct = proc->ocp == 1 ? 4 : 2;
 		nb_octet[0] = noct;
 	}
-	vm_get_param3(data, nb_octet, param, proc);
+	vm_get_param3(data, proc, param, nb_octet);
 	return (noct);			
 }
 
@@ -92,7 +99,7 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 	
 	proc->ocp = 0;
 	i = 0;
-	if (g_op_tab[(int)proc-next_op -1].octet)
+	if (g_op_tab[(int)proc->next_op -1].octet)
 	{
 		data->col_arena[(proc->pc + 1) % MEM_SIZE] |= 16;
 		proc->ocp = data->arena[(proc->pc + 1) % MEM_SIZE];
@@ -106,7 +113,8 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 		nb--;
 	}
 	if ((proc->ocp && vm_check_param(proc->ocp, proc->next_op - 1)) || !proc->ocp)
-		(*g_vm_exec_op2[(int)proc->next_op - 1])(data,proc, (proc->pc));
+		(*g_vm_exec_op2[(int)proc->next_op - 1])(data,proc, param, nb_octet);
+	nb += proc->ocp ? 2: 1;
 	proc->pc += (proc->next_op) != 9 ? nb : 0;
 }
 

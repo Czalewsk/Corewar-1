@@ -28,7 +28,24 @@ SRCS =	vm_main.c \
 		vm_op/vm_zjmp.c \
 		vm_op/vm_aff.c \
 		vm_op/vm_lfork.c \
-		vm_ncurses.c
+		vm_ncurses.c\
+		vm_op2/vm_live2.c \
+		vm_op2/vm_add2.c \
+		vm_op2/vm_and2.c \
+		vm_op2/vm_fork2.c \
+		vm_op2/vm_ld2.c \
+		vm_op2/vm_ldi2.c \
+		vm_op2/vm_lld2.c \
+		vm_op2/vm_lldi2.c \
+		vm_op2/vm_or2.c \
+		vm_op2/vm_st2.c \
+		vm_op2/vm_sti2.c \
+		vm_op2/vm_sub2.c \
+		vm_op2/vm_xor2.c \
+		vm_op2/vm_zjmp2.c \
+		vm_op2/vm_aff2.c \
+		vm_op2/vm_lfork2.c \
+
 
 INCLUDES = -I includes -I ../libft
 

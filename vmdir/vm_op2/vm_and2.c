@@ -12,22 +12,10 @@
 
 #include "vm_op.h"
 
-void	vm_and(t_vm_data *data, t_vm_proc *proc, int pos)
+void	vm_and2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 {
-	int				i;
-	int				param[3];
-	int				nb_octet[3];
-	unsigned int	ocp;
-	int				tmp;
-
-	i = 0;
-	ocp = data->arena[(pos + 1) % MEM_SIZE];
-	proc->pc += vm_get_nb_octet(nb_octet, ocp, 5);
-	if (!vm_check_param(ocp, 5))
-		return ;
-	param[0] = vm_get_param(data, (pos + 2) % MEM_SIZE, nb_octet[0]);
-	param[1] = vm_get_param(data, (pos + 2 + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
-	param[2] = vm_get_param(data, (pos + 2 + nb_octet[0] + nb_octet[1]) % MEM_SIZE, nb_octet[2]);
+	int	tmp;
+	int	i;
 	i = 1;
 	if (ft_intisbetween_inc(param[2], 0, 15) && (nb_octet[0] != 1 || ft_intisbetween_inc(param[0], 0, 15))
 			&& (nb_octet[1] != 1 || ft_intisbetween_inc(param[1], 0, 15)))
@@ -39,8 +27,7 @@ void	vm_and(t_vm_data *data, t_vm_proc *proc, int pos)
 				ft_memcpy(&(param[i]), proc->registre + (param[i] * REG_SIZE), REG_SIZE);
 			else if (nb_octet[i] == 2)
 			{
-				tmp = vm_get_param(data, pos + (param[i] % IDX_MOD) ,REG_SIZE);
-				ft_printf("\n%d", tmp);
+				tmp = vm_get_param(data, proc->pc + (param[i] % IDX_MOD) ,REG_SIZE);
 				ft_memcpy(&(param[i]), &tmp , REG_SIZE);
 			}
 			i++;

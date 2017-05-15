@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_aff.c                                           :+:      :+:    :+:   */
+/*   vm_zjmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/04 15:42:52 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 17:03:27 by lduval           ###   ########.fr       */
+/*   Created: 2017/05/03 10:05:46 by lduval            #+#    #+#             */
+/*   Updated: 2017/05/08 15:28:07 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_op.h"
 
-void	vm_aff(t_vm_data *data, t_vm_proc *proc, int pos)
-{
+void	vm_zjmp2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
+{ 
+	proc->pc += (proc->carry == 1) ? param[0] : 3;
+	(void)nb_octet;
 	(void)data;
-	(void)proc;
-	(void)pos;
-	return ;	
 }

@@ -10,32 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VM_OP_H
-# define VM_OP_H
+#ifndef VM_OP2_H
+# define VM_OP2_H
 
 # include "../vm_header.h"
 
 extern	t_op g_op_tab[];
 
 void	vm_set_param(t_vm_data *data, unsigned int pos,unsigned char *s, int length);
-int		vm_check_param(int ocp, unsigned int n_op);
-int		vm_get_nb_octet(int *nb_octet, unsigned int ocp, int nop);
-int		vm_get_param(t_vm_data *data, unsigned int pos, int size_param);
-void	vm_live(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_ld(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_st(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_add(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_sub(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_and(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_or(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_xor(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_zjmp(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_ldi(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_sti(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_fork(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_lld(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_lldi(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_lfork(t_vm_data *data, t_vm_proc *proc, int pos);
-void	vm_aff(t_vm_data *data, t_vm_proc *proc, int pos);
+int	vm_get_param(t_vm_data *data, unsigned int pos, int size_param);
+void	vm_live2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_ld2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_st2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_add2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_sub2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_and2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_or2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_xor2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_zjmp2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_ldi2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_sti2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_fork2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_lld2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_lldi2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_lfork2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
+void	vm_aff2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet);
 
 #endif
