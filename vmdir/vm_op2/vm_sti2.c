@@ -33,7 +33,7 @@ void	vm_sti2(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 			i++;
 		}
 		i = param[1] + param[2];
-		vm_set_param(data, proc->pc % MEM_SIZE, proc->registre + param[0] * REG_SIZE, REG_SIZE);
+		vm_set_param(data, proc->pc + i % MEM_SIZE, proc->registre + param[0] * REG_SIZE, REG_SIZE);
 		ft_memcpy(&i, proc->registre + (param[0] * REG_SIZE), REG_SIZE);
 	}
 }

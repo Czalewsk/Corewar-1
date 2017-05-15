@@ -66,10 +66,8 @@ static void	vm_get_param3(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_
 	
 	i = (proc->ocp) ? 2 : 1;
 	param[0] = vm_get_param(data, (proc->pc + i) % MEM_SIZE, nb_octet[0]);
-	if (nb_octet[1])
-		param[1] = vm_get_param(data, (proc->pc + i + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
-	if (nb_octet[2])
-		param[2] = vm_get_param(data, (proc->pc + i + nb_octet[0] + nb_octet[1]) % MEM_SIZE, nb_octet[2]
+	param[1] = vm_get_param(data, (proc->pc + i + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
+	param[2] = vm_get_param(data, (proc->pc + i + nb_octet[0] + nb_octet[1]) % MEM_SIZE, nb_octet[2]
 );
 }
 
@@ -82,11 +80,10 @@ static int	vm_get_param2(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *p
 
 	if (proc->ocp)
 	{
-		noct = vm_get_nb_octet(nb_octet, proc->ocp, proc->next_op);
+		noct = vm_get_nb_octet(nb_octet, proc->ocp, proc->next_op -1);
 	}
 	else
-	{
-		
+	{	
 		noct = (proc->next_op == 1) ? 4 : 2;
 		nb_octet[0] = noct;
 	}
@@ -119,16 +116,22 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 		data->col_arena[(proc->pc + i + nb2) % MEM_SIZE] |= 64;
 		nb2--;
 	}
-	
-	ft_printf("op : %d pc: %d, ocp: %d\n", proc->next_op, proc->pc, proc->ocp);
+	/*ft_printf("op %d , ocp: %d, \nparam: %d, %d, %d\nnb_octet %d, %d ,%d\n", 
+	proc->next_op,
+	proc->ocp,
+	param[0],
+	param[1],
+	param[2],
+	nb_octet[0],
+	nb_octet[1],
+	nb_octet[2]
+	);*/
 	if ((proc->ocp && vm_check_param(proc->ocp, proc->next_op - 1)) || !proc->ocp)
 	{
 		(*g_vm_exec_op2[(int)proc->next_op - 1])(data,proc, param, nb_octet);
 	}
 	nb += proc->ocp ? 2: 1;
-	ft_printf("pc : %d, nb %d\n", proc->pc, nb);
 	proc->pc += (proc->next_op) != 9 ? nb : 0;
-	ft_printf("pc : %d, nb %d\n", proc->pc, nb);
 }
 
 static void	vm_exec_proc(t_vm_data *data)
@@ -144,10 +147,7 @@ static void	vm_exec_proc(t_vm_data *data)
 		{
 
 			if (tmproc->next_op > 0 && tmproc->next_op < 17)
-			{
-				ft_printf("pute %d \n", tmproc->next_op);
 				vm_exec_op(data, tmproc);
-			}	
 			else
 				tmproc->pc++;
 			if (tmproc->pc < 0)
@@ -199,7 +199,7 @@ void		vm_fight(void)
 //	i = 0;
 	data = get_data();
 	ft_printf("nbr_cycle: %d, nbr_proc: %d\n", data->nbr_cycle, data->nb_proc);
-	/*if (data->option & VM_OPT_G)
+	if (data->option & VM_OPT_G)
 	{
 		initscr();
 		noecho();
@@ -209,7 +209,7 @@ void		vm_fight(void)
 		init_pair(4, COLOR_GREEN, COLOR_BLACK);
 		init_pair(8, COLOR_YELLOW, COLOR_BLACK);
 		init_pair(128, COLOR_WHITE, COLOR_RED);
-	}*/		
+	}	
 	while (!finish)
 	{
 		if (!(data->nbr_cycle % data->cycletodie))
@@ -220,13 +220,13 @@ void		vm_fight(void)
 				ft_printf("It is now cycle %d\n",data->nbr_cycle);
 			if (data->option & VM_OPT_G)
 			{
-				//vm_ncurses();
-				//usleep(10000);
-				system("clear");
-				vm_print_arena();
+				vm_ncurses();
+				usleep(10000);
+				/*system("clear");
+				vm_print_arena();*/
 				//ft_putnbr(i);
 				//ft_printf("nbr_cycle: %d, nbr_proc: %d", data->nbr_cycle, data->nb_proc);
-				ft_putendl("");
+				//ft_putendl("");
 				//			usleep(20000);
 				//i++;
 			}
