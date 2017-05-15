@@ -13,6 +13,7 @@
 #include "vm_header.h"
 #include "vm_op/vm_op.h"
 
+
 extern	t_op g_op_tab[];
 
 void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int) =
@@ -36,6 +37,80 @@ void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int) =
 	NULL
 };
 
+void		(*g_vm_exec_op2[17])(t_vm_data *, t_vm_proc *, int) =
+{
+	&vm_live,
+	&vm_ld,
+	&vm_st,
+	&vm_add,
+	&vm_sub,
+	&vm_and,
+	&vm_or,
+	&vm_xor,
+	&vm_zjmp,
+	&vm_ldi,
+	&vm_sti,
+	&vm_fork,
+	&vm_lld,
+	&vm_lldi,
+	&vm_lfork,
+	&vm_aff,
+	NULL
+};
+
+
+static void	vm_get_param3(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *param)
+{
+	
+}
+
+static int	vm_get_param2(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *param)
+{
+	int noct;
+
+	ft_bzero(nb_octet, 4 * 3);
+	ft_bzero(param, 4 * 3);
+	if (proc->ocp)
+	{
+		noct = vm_get_nb_octet(nb_octet, proc->ocp, proc->next_op);
+	}
+	else
+	{
+		noct = proc->ocp == 1 ? 4 : 2;
+		nb_octet[0] = noct;
+	}
+	vm_get_param3(data, nb_octet, param, proc);
+	return (noct);			
+}
+
+static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
+{
+	int nb;
+	int nb_octet[3];
+	int param[3];
+	int i;
+	
+	proc->ocp = 0;
+	i = 0;
+	if (g_op_tab[(int)proc-next_op -1].octet)
+	{
+		data->col_arena[(proc->pc + 1) % MEM_SIZE] |= 16;
+		proc->ocp = data->arena[(proc->pc + 1) % MEM_SIZE];
+		i = 1; 
+	}
+	data->col_arena[(proc->pc) % MEM_SIZE] |= 128;
+	if (proc->ocp && !vm_check_param(proc->ocp, proc->next_op - 1))
+		return ;
+	nb = vm_get_param2(data, proc, nb_octet, param);
+	while (nb)
+	{
+		data->col_arena[(proc->pc + i + nb) % MEM_SIZE] |= 64;
+		nb--;
+	}
+	(*g_vm_exec_op2[(int)proc->next_op - 1])(data,proc, (proc->pc));
+	proc->pc += (proc->next_op) != 9 ? nb : 0;
+}
+
 static void	vm_exec_proc(t_vm_data *data)
 {
 	t_list		*tmp;
@@ -45,12 +120,10 @@ static void	vm_exec_proc(t_vm_data *data)
 	while (tmp)
 	{
 		tmproc = (t_vm_proc *)tmp->content;
-		data->col_arena[(tmproc->pc) % MEM_SIZE] -= 4;
 		if (!tmproc->in_proc)
 		{
 			if (tmproc->next_op > 0 && tmproc->next_op < 17)
-				(*g_vm_exec_op[(int)tmproc->next_op - 1])(data,
-						tmproc, (tmproc->pc));
+				vm_exec_op(data, tmproc);
 			else
 				tmproc->pc++;
 			if (tmproc->pc < 0)
@@ -61,7 +134,6 @@ static void	vm_exec_proc(t_vm_data *data)
 		}
 		else
 			(tmproc->in_proc)--;
-		data->col_arena[(tmproc->pc) % MEM_SIZE] += 4;
 		tmp = tmp->next;
 	}
 }

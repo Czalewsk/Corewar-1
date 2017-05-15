@@ -34,6 +34,7 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	j = (champ->num);
 	ft_memcpy(proc.registre + (1 * REG_SIZE), &j, REG_SIZE);
 	//ft_printf("%d, %d\n", pos, champ->header.prog_size);
+	proc.ocp = 0;
 	if (!(temp = ft_lstnew(&proc, sizeof(t_vm_proc))))
 		ft_error("proc list malloc failed", &vm_free_all);
 	data->nb_proc++;

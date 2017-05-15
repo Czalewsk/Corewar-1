@@ -37,6 +37,7 @@ typedef struct		s_vm_proc
 	char			next_op;
 	unsigned char	*prog;
 	int				progsize;
+	unsigned int			ocp;
 }					t_vm_proc;
 
 typedef struct		s_vm_champ
