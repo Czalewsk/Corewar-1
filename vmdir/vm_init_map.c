@@ -41,7 +41,6 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	ft_lstadd(&(data->tab_proc), temp);
 	ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
 	ft_memset(data->col_arena + pos, ft_power(2, i), champ->header.prog_size);
-	data->col_arena[pos] += 4;
 	i++;
 }
 
