@@ -6,23 +6,22 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:36:51 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 10:03:54 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:29:24 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_op.h"
 
-void	vm_fork(t_vm_data *data, t_vm_proc *proc, int pos)
+void	vm_fork(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 {
-	int			param;
 	t_list		*temp;
 	t_vm_proc	fork;
 
-	param = vm_get_param(data, pos + 1, 2);
-	fork.pc = proc->pc + (param % IDX_MOD);
+	fork.pc = proc->pc + (param[0] % IDX_MOD);
 	fork.pc = fork.pc >= 0 ? fork.pc : fork.pc + MEM_SIZE;
 	fork.carry = proc->carry;
 	fork.champ = proc->champ;
+	fork.color = proc->color;
 	fork.last_live = proc->last_live;
 	fork.next_op = data->arena[(fork.pc) % MEM_SIZE];
 	fork.in_proc = (fork.next_op > 0 && fork.next_op < 17) ?
@@ -34,5 +33,5 @@ void	vm_fork(t_vm_data *data, t_vm_proc *proc, int pos)
 		ft_error("proc list malloc failed", &vm_free_all);
 	data->nb_proc++;
 	ft_lstadd(&(data->tab_proc), temp);
-	proc->pc += 3;
+	(void)nb_octet;
 }

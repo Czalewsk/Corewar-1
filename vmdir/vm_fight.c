@@ -6,18 +6,16 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 10:02:25 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:33:28 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_header.h"
 #include "vm_op/vm_op.h"
-#include "vm_op2/vm_op.h"
-
 
 extern	t_op g_op_tab[];
 
-void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int) =
+void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int *, int *) =
 {
 	&vm_live,
 	&vm_ld,
@@ -35,27 +33,6 @@ void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int) =
 	&vm_lldi,
 	&vm_lfork,
 	&vm_aff,
-	NULL
-};
-
-void		(*g_vm_exec_op2[17])(t_vm_data *, t_vm_proc *, int *, int *) =
-{
-	&vm_live2,
-	&vm_ld2,
-	&vm_st2,
-	&vm_add2,
-	&vm_sub2,
-	&vm_and2,
-	&vm_or2,
-	&vm_xor2,
-	&vm_zjmp2,
-	&vm_ldi2,
-	&vm_sti2,
-	&vm_fork2,
-	&vm_lld2,
-	&vm_lldi2,
-	&vm_lfork2,
-	&vm_aff2,
 	NULL
 };
 
@@ -127,7 +104,7 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 	);*/
 	if ((proc->ocp && vm_check_param(proc->ocp, proc->next_op - 1)) || !proc->ocp)
 	{
-		(*g_vm_exec_op2[(int)proc->next_op - 1])(data,proc, param, nb_octet);
+		(*g_vm_exec_op[(int)proc->next_op - 1])(data,proc, param, nb_octet);
 	}
 	nb += proc->ocp ? 2: 1;
 	proc->pc += (proc->next_op) != 9 ? nb : 0;

@@ -6,30 +6,17 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 10:00:13 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 03:19:05 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/16 16:31:24 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_op.h"
 
-void	vm_sub(t_vm_data *data, t_vm_proc *proc, int pos)
+void	vm_sub(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 {
 	int i;
-	int param[3];
-	int nb_octet[3];
-	int ocp;
 	int j;
 
-	i = 0;
-	ocp = (int)data->arena[(pos + 1) % MEM_SIZE];
-	proc->pc += vm_get_nb_octet(nb_octet, ocp, 4);
-	if (ocp != 84)
-		return ;
-	while (i < 3)
-	{
-		param[i] = vm_get_param(data, (pos + i + 2) % MEM_SIZE, 1);
-		i++;
-	}
 	i = 1;
 	if (ft_intisbetween_inc(param[0], 0, 15) && ft_intisbetween_inc(param[1], 0, 15)
 			&& ft_intisbetween_inc(param[2], 0, 15))
@@ -40,4 +27,6 @@ void	vm_sub(t_vm_data *data, t_vm_proc *proc, int pos)
 		ft_memcpy(proc->registre + param[2] * REG_SIZE, &i, REG_SIZE);
 	}
 	proc->carry = (int)(i == 0);
+	(void)nb_octet;
+	(void)data;
 }

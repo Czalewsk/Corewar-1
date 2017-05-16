@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:11:20 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/06 09:51:49 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/16 16:55:34 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int		vm_get_nb_octet(int *nb_octet, unsigned int ocp, int nop)
 {
-	int	noct;
-	int	i;
+	int				noct;
+	int				i;
 	unsigned int	tocp;
-	int j;
+	int				j;
 
 	j = g_op_tab[nop].nb_p;
-	i =	0;
+	i = 0;
 	noct = 0;
 	if (!((ocp & 1) == 1 || ((ocp >> 1) & 1) == 1))
 	{

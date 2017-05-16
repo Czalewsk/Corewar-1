@@ -6,21 +6,21 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:37:29 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/05 23:28:46 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:53:37 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_op.h"
 
-int	vm_check_param(int ocp, unsigned int n_op)
+int		vm_check_param(int ocp, unsigned int n_op)
 {
-	int				i;
+	int						i;
 	unsigned int			tocp;
 	unsigned char			ocp2;
 
 	i = 0;
 	if ((ocp & 1) == 1 || ((ocp >> 1) & 1) == 1)
-		return (i);	
+		return (0);
 	ocp >>= 2;
 	ocp2 = ocp << 2;
 	while (i < 3 && ocp2 > 0)
