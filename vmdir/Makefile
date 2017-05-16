@@ -28,7 +28,8 @@ SRCS =	vm_main.c \
 		vm_op/vm_zjmp.c \
 		vm_op/vm_aff.c \
 		vm_op/vm_lfork.c \
-		vm_ncurses.c\
+		vm_ncurses.c \
+		vm_ncurses_print.c \
 		vm_op2/vm_live2.c \
 		vm_op2/vm_add2.c \
 		vm_op2/vm_and2.c \

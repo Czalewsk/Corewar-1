@@ -192,25 +192,17 @@ static void	vm_check_live_proces(t_vm_data *data)
 
 void		vm_fight(void)
 {
-	int			finish;
-//	int			i;
-	t_vm_data	*data;
+	int				finish;
+//	int				i;
+	t_vm_data		*data;
+	t_ncurses_data	ncurses_data;
 
 	finish = 0;
 //	i = 0;
 	data = get_data();
 	ft_printf("nbr_cycle: %d, nbr_proc: %d\n", data->nbr_cycle, data->nb_proc);
 	if (data->option & VM_OPT_G)
-	{
-		initscr();
-		noecho();
-		start_color();
-		init_pair(1, COLOR_CYAN, COLOR_BLACK);
-		init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
-		init_pair(4, COLOR_GREEN, COLOR_BLACK);
-		init_pair(8, COLOR_YELLOW, COLOR_BLACK);
-		init_pair(128, COLOR_WHITE, COLOR_RED);
-	}	
+		vm_ncurses_init(data, &ncurses_data);
 	while (!finish)
 	{
 		if (!(data->nbr_cycle % data->cycletodie))
@@ -221,8 +213,8 @@ void		vm_fight(void)
 				ft_printf("It is now cycle %d\n",data->nbr_cycle);
 			if (data->option & VM_OPT_G)
 			{
-				vm_ncurses();
-				usleep(10000);
+				vm_ncurses(&ncurses_data);
+				usleep(ncurses_data.interval);
 				/*system("clear");
 				vm_print_arena();*/
 				//ft_putnbr(i);
@@ -238,7 +230,7 @@ void		vm_fight(void)
 		data->nbr_cycle += 1;
 	}
 	if (data->option & VM_OPT_G)
-		endwin();
+		vm_ncurses_free();
 	//vm_print_arena();
 	//ft_putnbr(data->dump);
 	//vm_print_winner(data);
