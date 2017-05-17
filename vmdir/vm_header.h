@@ -81,8 +81,6 @@ typedef struct	s_ncurses_data
 {
 	WINDOW		*w;
 	int			interval;
-	t_list		**list_proc;
-	int			cursor_proc;
 	t_vm_data	*data;
 }				t_ncurses_data;
 
@@ -100,7 +98,6 @@ void				vm_ncurses_init(t_vm_data *data, t_ncurses_data *ncurses_data);
 void				vm_ncurses_free(void);
 void				curses_print_globad_info(t_ncurses_data *ncurses_data);
 void				curses_print_arena(t_vm_data *data);
-void				curses_print_process(t_ncurses_data *ncurses_data);
 
 //void     (*g_vm_exec_op[17])(t_vm_data *,t_vm_proc *,int );
 

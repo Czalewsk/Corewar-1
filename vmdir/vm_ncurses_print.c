@@ -50,7 +50,7 @@ void		curses_print_globad_info(t_ncurses_data *ncurses_data)
 	mvprintw((i = i + 2), column + 2, "winner: %s", data->winner);
 	curses_print_player_info(data->tab_champ, column, i + 2);
 	attron(A_DIM);
-	mvprintw(LINES - 2, column + 2, "Up/Down to change speed|Left/Right to switch process (Pls give us 250/118)");
+	mvprintw(LINES - 2, column + 2, "Up/Down to change speed (Pls give us 250/118)");
 	attroff(A_DIM);
 }
 
@@ -84,26 +84,5 @@ void		curses_print_arena(t_vm_data *data)
 			++i;
 		}
 		++x;
-	}
-}
-
-void		curses_print_process(t_ncurses_data *ncurses_data)
-{
-	int					reg;
-	int					i;
-	t_vm_proc			*proc;
-	
-	if (!*(ncurses_data->list_proc))
-		return ;
-	proc = (*(ncurses_data->list_proc))->content;
-	mvprintw(64 + 1, 1, "PC: %-4d, Carry: %d, Next op: %.2x (%d) [%d/%d]",
-	proc->pc, proc->carry, proc->next_op, proc->champ, ncurses_data->cursor_proc,
-	ft_lstlen(ncurses_data->data->tab_proc));
-	i = 0;
-	while (i < REG_NUMBER)
-	{
-		ft_memcpy(&reg, proc->registre + (REG_SIZE * i), REG_SIZE);
-		mvprintw(64 + 3, 3 + (i * 11), "%d", reg);
-		i++;
 	}
 }
