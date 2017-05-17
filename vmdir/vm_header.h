@@ -81,7 +81,7 @@ typedef struct	s_ncurses_data
 {
 	WINDOW		*w;
 	int			interval;
-	t_list		*list_proc;
+	t_list		**list_proc;
 	int			cursor_proc;
 	t_vm_data	*data;
 }				t_ncurses_data;

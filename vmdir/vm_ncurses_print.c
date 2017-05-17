@@ -93,7 +93,9 @@ void		curses_print_process(t_ncurses_data *ncurses_data)
 	int					i;
 	t_vm_proc			*proc;
 	
-	proc = ncurses_data->list_proc->content;
+	if (!*(ncurses_data->list_proc))
+		return ;
+	proc = (*(ncurses_data->list_proc))->content;
 	mvprintw(64 + 1, 1, "PC: %-4d, Carry: %d, Next op: %.2x (%d) [%d/%d]",
 	proc->pc, proc->carry, proc->next_op, proc->champ, ncurses_data->cursor_proc,
 	ft_lstlen(ncurses_data->data->tab_proc));

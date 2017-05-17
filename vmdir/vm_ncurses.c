@@ -14,10 +14,13 @@
 
 void	vm_ncurses_init(t_vm_data *data, t_ncurses_data *ncurses_data)
 {
+	(void)data;
+	(void)ncurses_data;
 	ncurses_data->w = initscr();
-	ncurses_data->interval = 10000;
+	ncurses_data->interval = 1;
 	ncurses_data->data = data;
-	ncurses_data->list_proc = data->tab_proc;
+	ncurses_data->list_proc = (t_list **)malloc(sizeof(t_list *));
+	*(ncurses_data->list_proc) = data->tab_proc;
 	ncurses_data->cursor_proc = 1;
 	start_color();
 	noecho();
@@ -28,7 +31,7 @@ void	vm_ncurses_init(t_vm_data *data, t_ncurses_data *ncurses_data)
 	init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(4, COLOR_GREEN, COLOR_BLACK);
 	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(128, COLOR_WHITE, COLOR_RED);
+	init_pair(128, COLOR_WHITE, COLOR_RED); 
 }
 
 void	vm_ncurses_free(void)
@@ -48,20 +51,28 @@ void	curses_get_key(t_ncurses_data *ncurses_data)
 		ncurses_data->interval -= 100;
 	else if (ch == KEY_RIGHT)
 	{
-		if (ncurses_data->list_proc->next)
+		return ;
+		if (!*(ncurses_data->list_proc))
+		{
+			*(ncurses_data->list_proc) = ncurses_data->data->tab_proc;
+			ncurses_data->cursor_proc = 1;
+			return ;
+		}
+
+		if ((*(ncurses_data->list_proc))->next)
 		{
 			++(ncurses_data->cursor_proc);
-			ncurses_data->list_proc = ncurses_data->list_proc->next;
+			*(ncurses_data->list_proc) = (*(ncurses_data->list_proc))->next;
 		}	
 		else
 		{
-			ncurses_data->list_proc = ncurses_data->data->tab_proc;
+			*(ncurses_data->list_proc) = ncurses_data->data->tab_proc;
 			ncurses_data->cursor_proc = 1;
 		}
 	}
 	else if (ch == KEY_LEFT)
 	{
-		ncurses_data->list_proc = ncurses_data->data->tab_proc;
+		*(ncurses_data->list_proc) = ncurses_data->data->tab_proc;
 		ncurses_data->cursor_proc = 1;
 	}
 }
