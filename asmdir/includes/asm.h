@@ -140,6 +140,8 @@ void		get_arg(int *arg, char *av, int *nb_arg);
 
 t_gdata		*get_gdata(void);
 
+int			is_instruction(t_lx *lx);
+
 void		sp_free(void);
 
 #endif

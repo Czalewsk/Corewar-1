@@ -91,6 +91,8 @@ static	void	fix_lex(t_lx *lex, t_list **label)
 
 static	void	set_lex_ext(t_list *lst, t_lx *lx)
 {
+	static	t_lx	*last_inst = NULL;
+
 	if (lx->type != -1)
 		return ;
 	if (is_label(lx->word))
@@ -103,8 +105,13 @@ static	void	set_lex_ext(t_list *lst, t_lx *lx)
 		return ;
 	else if (lx->word[0] == SEPARATOR_CHAR)
 		lx->type = SEPARATEUR;
-	else
+	else if (!last_inst || last_inst->pos[0] != lx->pos[0])
+	{
 		lx->type = INSTRUCTION;
+		last_inst = lx;
+	}	
+	else
+		lx->error = 1;
 }
 
 void			set_lex(t_list *lst, t_list **label)

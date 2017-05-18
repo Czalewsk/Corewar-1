@@ -46,6 +46,8 @@ void	curses_get_key(t_ncurses_data *ncurses_data)
 		ncurses_data->interval += 100;
 	else if (ch == KEY_DOWN && ncurses_data->interval > 100)
 		ncurses_data->interval -= 100;
+	else if (ch == ' ')
+		curses_print_process(ncurses_data);
 }
 
 void	vm_ncurses(t_ncurses_data *ncurses_data)
@@ -53,7 +55,7 @@ void	vm_ncurses(t_ncurses_data *ncurses_data)
 	erase();
 	curses_print_arena(ncurses_data->data);
 	curses_print_globad_info(ncurses_data);
-//	curses_print_process(ncurses_data);
+	mvprintw(64 + 1, 1, "Press space to pause the program and see processes");
 	curses_get_key(ncurses_data);
 	refresh();
 }

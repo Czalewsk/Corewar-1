@@ -30,6 +30,7 @@ SRCS =	vm_main.c \
 		vm_op/vm_lfork.c \
 		vm_ncurses.c \
 		vm_ncurses_print.c \
+		vm_ncurses_print_process.c \
 
 INCLUDES = -I includes -I ../libft
 
