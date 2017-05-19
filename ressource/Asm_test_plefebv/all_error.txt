@@ -1,0 +1,9 @@
+aff.s : error not legit
+and.s : error not legit
+ld.s : error not legit
+ldi.s : error not legit
+lld.s : error not legit
+lldi.s : error not legit
+or.s : error not legit
+sti.s : error not legit
+xor.s : error not legit
