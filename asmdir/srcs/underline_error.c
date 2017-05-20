@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:34:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/03 14:41:12 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/20 02:35:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_lx				*get_wrong_arg(t_lx *lx, t_list **curs, int wrong)
 		while (*curs && lx &&
 				(lx->type == SEPARATEUR || lx->type == DIRECTCHAR))
 		{
+			if (!(*curs)->next)
+				break ;
 			(*curs) = (*curs)->next;
 			lx = ((*curs)->content) ? (*curs)->content : NULL;
 		}

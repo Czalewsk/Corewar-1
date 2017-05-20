@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 15:55:33 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/30 12:07:08 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/20 02:26:55 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		is_direct(t_list *lst)
 	if (!ft_strcmp(lx->word, "%:"))
 	{
 		lx->type = DIRECTCHAR;
+		if (!lst->next)
+			return (0);
 		lx = lst->next->content;
 		lx->type = DIRECT;
 		lx->label = lx->word;
