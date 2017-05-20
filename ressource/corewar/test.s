@@ -3,7 +3,7 @@
 
 lol:
 
-l2:		sti r1, %:live, %1
+l2:		sti r99, %:live, %1
 l3:		sti r1, %:live, %1
 
 live:	live %1
