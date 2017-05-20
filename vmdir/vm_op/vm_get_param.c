@@ -52,7 +52,7 @@ void	vm_set_color(t_vm_data *data, unsigned int pos, int num, int length)
 	while (i < length)
 	{
 		data->col_arena[(pos + length - (i + 1)) % MEM_SIZE] =
-		(data->col_arena[(pos + length - (i + 1)) % MEM_SIZE] & 0xfff0)
+		(data->col_arena[(pos + length - (i + 1)) % MEM_SIZE] & 0xf0)
 		| ft_power(2, num);
 		i++;
 	}
