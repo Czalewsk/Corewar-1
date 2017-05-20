@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 10:02:51 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/20 06:08:34 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 				g_op_tab[(int)proc.next_op - 1].nb_cycle : 0;
 	// mettre les registre a 0 avec bzero
 	ft_bzero(proc.registre, REG_SIZE * (REG_NUMBER));
-	ft_printf("%d num\n", champ->num);
 	j = (champ->num);
 	ft_memcpy(proc.registre + (1 * REG_SIZE), &j, REG_SIZE);
 	//ft_printf("%d, %d\n", pos, champ->header.prog_size);
 	proc.ocp = 0;
+	data->nb_proc++;
+	proc.nproc = data->nb_proc;
 	if (!(temp = ft_lstnew(&proc, sizeof(t_vm_proc))))
 		ft_error("proc list malloc failed", &vm_free_all);
-	data->nb_proc++;
 	ft_lstadd(&(data->tab_proc), temp);
 	ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
 	ft_memset(data->col_arena + pos, ft_power(2, i), champ->header.prog_size);

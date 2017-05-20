@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:47:29 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/16 17:37:06 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/20 05:19:14 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	vm_lld(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 	}
 	proc->carry = (int)(i == 0);
 	(void)nb_octet;
+	vm_verb(proc, param, nb_octet);
 }

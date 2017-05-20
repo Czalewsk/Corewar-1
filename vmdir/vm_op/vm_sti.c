@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:58:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/16 16:44:16 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/20 05:19:39 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void	vm_sti(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 	vm_set_param(data, (proc->pc + i) % MEM_SIZE, proc->registre + param[0] * REG_SIZE, REG_SIZE);
 	vm_set_color(data, (proc->pc + i) % MEM_SIZE, proc->color, REG_SIZE);
 	ft_memcpy(&i, proc->registre + (param[0] * REG_SIZE), REG_SIZE);
+	vm_verb(proc, param, nb_octet);
 }

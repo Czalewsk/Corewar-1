@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/16 16:33:28 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/20 06:13:48 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static void	vm_exec_proc(t_vm_data *data)
 				tmproc->pc -= MEM_SIZE;
 			tmproc->next_op = data->arena[(tmproc->pc) % MEM_SIZE];
 			tmproc->in_proc = (tmproc->next_op > 0 && tmproc->next_op < 17) ?
-				g_op_tab[(int)tmproc->next_op - 1].nb_cycle : 0;
+				g_op_tab[(int)tmproc->next_op - 1].nb_cycle -1 : 0;
 		}
 		else
 			(tmproc->in_proc)--;
@@ -182,8 +182,11 @@ void		vm_fight(void)
 		vm_ncurses_init(data, &ncurses_data);
 	while (!finish)
 	{
-		if (!(data->nbr_cycle % data->cycletodie))
+		if (data->nbr_cycle - data->lastcheck == data->cycletodie)
+		{
 			vm_check_live_proces(data);
+			data->lastcheck = data->nbr_cycle;
+		}
 		if (data->option)
 		{
 			if ((data->option & 2))

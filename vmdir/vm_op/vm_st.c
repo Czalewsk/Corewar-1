@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:57:47 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/16 17:48:50 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/20 05:19:35 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	vm_st(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 		vm_set_color(data, tmp, proc->color, REG_SIZE);
 	}
 	(void)nb_octet;
+	vm_verb(proc, param, nb_octet);
 }

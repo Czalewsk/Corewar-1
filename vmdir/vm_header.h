@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 10:03:06 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/20 05:46:43 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct		s_vm_proc
 	int				progsize;
 	unsigned int			ocp;
 	int				color;
+	int				nproc;
 }					t_vm_proc;
 
 typedef struct		s_vm_champ
@@ -55,6 +56,7 @@ typedef struct		s_vm_data
 	int				nbr_lives;
 	int				cycletodie;
 	int				lastcycledec;
+	int				lastcheck;
 	unsigned int	option;
 	int				dump;
 	t_vm_champ		*tab_champ[MAX_PLAYERS + 1];

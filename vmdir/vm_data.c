@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 01:41:04 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 08:59:57 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/20 05:58:41 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,22 @@ t_vm_data	*get_data(void)
 	{
 		if (!(data = (t_vm_data *)malloc(sizeof(t_vm_data))))
 			ft_error("malloc failed in t_vm_data", NULL);
-		data->dump = -1;
+		ft_bzero(&(data->tab_champ), sizeof(t_vm_data *) * (MAX_PLAYERS + 1));
 		while (i < MAX_PLAYERS + 1)
 		{
 			data->tab_champ[i] = NULL;
 			i++;
 		}
-		data->tab_proc = NULL;
-		data->option = 0;
+		data->nbr_cycle = 0;
 		data->nbr_lives = 0;
 		data->cycletodie = CYCLE_TO_DIE;
 		data->lastcycledec = 0;
-		data->nbr_cycle = 0;
+		data->option = 0;
+		data->dump = -1;
+		data->tab_proc = NULL;
 		data->nb_proc = 0;
 		data->winner = NULL;
+		data->lastcheck = 0;
 		ft_bzero(data->col_arena, MEM_SIZE);
 		ft_bzero(data->arena, MEM_SIZE);
 	}

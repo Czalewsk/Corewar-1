@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:12:50 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/16 16:49:27 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/20 05:07:57 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	vm_add(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 		i += j;
 		ft_memcpy(proc->registre + param[2] * REG_SIZE, &i, REG_SIZE);
 	}
+	vm_verb(proc, param, nb_octet);
 	(void)data;
 	(void)nb_octet;
 	proc->carry = (int)(i == 0);
