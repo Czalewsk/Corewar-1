@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 20:14:32 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/20 02:33:23 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/22 22:00:09 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern	t_tab_error	g_tab_error[];
 extern	t_op		g_op_tab[];
 extern	char		*g_type[];
 
-const	char	*g_type_arg[4] = {"Register", "Direct", "Indirect"};
+const	char	*g_type_arg[5] = {"Register", "Direct", "Indirect", "Unknown"};
 
 char			*get_type_wrong_arg(t_list *curs, int wrong)
 {
@@ -34,7 +34,7 @@ char			*get_type_wrong_arg(t_list *curs, int wrong)
 			lx = (curs->content) ? curs->content : NULL;
 		}
 	}
-	return (ft_strdup(g_type[lx->type]));
+	return (ft_strdup(g_type[lx->type != -1 ? lx->type : 11]));
 }
 
 char			*set_arg_msg(t_op *op, int arg_index)
@@ -52,7 +52,7 @@ char			*set_arg_msg(t_op *op, int arg_index)
 	arg = op->type_param[arg_index - 1];
 	while (bit_one-- > 0 && (i = -1))
 	{
-		while (++i < 3)
+		while (++i < 4)
 		{
 			if (arg & (1 << i))
 			{
@@ -103,7 +103,8 @@ int				check_error(t_list *curs)
 		lx->error = (lx->error > 29) ? 29 : lx->error; // A delete
 		if (lx->error > 0)
 		{
-			force_quit = (!g_tab_error[lx->error - 1].warning) ? 1 : 0;
+			force_quit = (force_quit || !g_tab_error[lx->error - 1].warning) ?
+				1 : 0;
 			g_tab_error[lx->error - 1].warning ? ft_printf("{yellow}Warning  ")
 				: ft_printf("{red}Error  ");
 			nb_free = set_error_msg(lx, msg, curs);

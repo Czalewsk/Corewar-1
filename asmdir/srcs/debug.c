@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:41:57 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/01 10:53:53 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/22 22:00:03 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 const	char	*g_type[] = {"Direct", "Indirect", "Declaration Label",
 	"Registre", "Instruction", "Separateur", "Name", "Comment",
-	"Direct_Char", "Label", "Label Indirect"};
+	"Direct_Char", "Label", "Label Indirect", "Unknown"};
 
 void	debug_lxcontent(t_list *lst)
 {
