@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 00:15:13 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/20 06:08:00 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/21 05:40:56 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	vm_read_champ_extend(t_buf *buffer, t_header *header)
 	ft_memcpy(header->prog_name, p + 4, PROG_NAME_LENGTH);
 	header->prog_size = ft_atoi_bigendian(p + 4 + PROG_NAME_LENGTH + 4, 4);
 	ft_memcpy(header->comment, p + 4 + PROG_NAME_LENGTH + 4 + 4, COMMENT_LENGTH);
-	ft_printf("%x, %s, %u, %s\n" ,header->magic, header->prog_name, header->prog_size, header->comment);
-	ft_printf("%u\n" ,buffer->size - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16));
 	if (header->prog_size != (buffer->size - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16)))
         ft_error("Champ size invalid", &vm_free_all);
     if (header->prog_size > CHAMP_MAX_SIZE)

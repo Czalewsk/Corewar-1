@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/20 06:08:34 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/22 21:32:45 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	ft_memcpy(data->arena + pos, champ->prog, champ->header.prog_size);
 	ft_memset(data->col_arena + pos, ft_power(2, i), champ->header.prog_size);
 	i++;
+	if (data->option & VM_OPT_V)
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i, champ->header.prog_size, champ->header.prog_name, champ->header.comment);
+	champ->posnum = i;
 }
 
 static void		vm_init_champ(t_vm_data *data)
@@ -67,6 +70,8 @@ void			vm_init_arena(void)
 	int			i;
 
 	data = get_data();
+	if (data->option & VM_OPT_V)
+		ft_printf("Introducing contestants...\n");
 	i = 0;
 	while (i < MEM_SIZE)
 	{

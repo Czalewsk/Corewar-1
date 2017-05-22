@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/20 05:46:43 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/22 21:31:22 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "op.h"
 //# include "vm_op/vm_op.h"
 # define VM_OPT_G 1
-
+# define VM_OPT_V 2 
 typedef struct		s_buf
 {
 	void			*data;
@@ -48,6 +48,7 @@ typedef struct		s_vm_champ
 	t_header		header;
 	int				num;
 	unsigned char	*prog;
+	int				posnum;
 }					t_vm_champ;
 
 typedef struct		s_vm_data

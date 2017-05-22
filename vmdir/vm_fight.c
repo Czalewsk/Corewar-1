@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/20 06:13:48 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/22 20:55:46 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void		(*g_vm_exec_op[17])(t_vm_data *, t_vm_proc *, int *, int *) =
 static void	vm_get_param3(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 {
 	int i;
-	
+
 	i = (proc->ocp) ? 2 : 1;
 	param[0] = vm_get_param(data, (proc->pc + i) % MEM_SIZE, nb_octet[0]);
 	param[1] = vm_get_param(data, (proc->pc + i + nb_octet[0]) % MEM_SIZE, nb_octet[1]);
 	param[2] = vm_get_param(data, (proc->pc + i + nb_octet[0] + nb_octet[1]) % MEM_SIZE, nb_octet[2]
-);
+			);
 }
 
 static int	vm_get_param2(t_vm_data *data, t_vm_proc *proc, int *nb_octet, int *param)
@@ -76,7 +76,7 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 	int i;
 	int nb2;
 
-		
+
 	proc->ocp = 0;
 	i = 0;
 	if (g_op_tab[(int)(proc->next_op -1)].octet)
@@ -93,15 +93,15 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 		nb2--;
 	}
 	/*ft_printf("op %d , ocp: %d, \nparam: %d, %d, %d\nnb_octet %d, %d ,%d\n", 
-	proc->next_op,
-	proc->ocp,
-	param[0],
-	param[1],
-	param[2],
-	nb_octet[0],
-	nb_octet[1],
-	nb_octet[2]
-	);*/
+	  proc->next_op,
+	  proc->ocp,
+	  param[0],
+	  param[1],
+	  param[2],
+	  nb_octet[0],
+	  nb_octet[1],
+	  nb_octet[2]
+	  );*/
 	if ((proc->ocp && vm_check_param(proc->ocp, proc->next_op - 1)) || !proc->ocp)
 	{
 		(*g_vm_exec_op[(int)proc->next_op - 1])(data,proc, param, nb_octet);
@@ -149,8 +149,13 @@ static int	vm_check_last_live(t_list *l)
 
 	data = get_data();
 	proc = (t_vm_proc *)l->content;
-	if (data->nbr_cycle - proc->last_live >= CYCLE_TO_DIE)
+	if (data->nbr_cycle - proc->last_live >= data->cycletodie)
+	{
+		if (data->option & VM_OPT_V)
+			ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", proc->nproc, data->nbr_cycle - proc->last_live, data->cycletodie);
+		data->nb_proc--;
 		return (1);
+	}
 	return (0);
 }
 
@@ -161,7 +166,9 @@ static void	vm_check_live_proces(t_vm_data *data)
 	if (data->nbr_lives >= NBR_LIVE || data->lastcycledec == MAX_CHECKS)
 	{
 		data->lastcycledec = 0;
-		data->cycletodie -= CYCLE_DELTA;
+		data->cycletodie = !(data->cycletodie - CYCLE_DELTA < 1) ? data->cycletodie - CYCLE_DELTA : data->cycletodie;
+		if (data->option & VM_OPT_V)
+			ft_printf("Cycle to die is now %d\n", data->cycletodie);
 	}
 	else
 		data->lastcycledec++;
@@ -170,39 +177,38 @@ static void	vm_check_live_proces(t_vm_data *data)
 void		vm_fight(void)
 {
 	int				finish;
-//	int				i;
+	//	int				i;
 	t_vm_data		*data;
 	t_ncurses_data	ncurses_data;
 
 	finish = 0;
-//	i = 0;
+	//	i = 0;
 	data = get_data();
-	ft_printf("nbr_cycle: %d, nbr_proc: %d\n", data->nbr_cycle, data->nb_proc);
 	if (data->option & VM_OPT_G)
 		vm_ncurses_init(data, &ncurses_data);
 	while (!finish)
 	{
-		if (data->nbr_cycle - data->lastcheck == data->cycletodie)
-		{
-			vm_check_live_proces(data);
-			data->lastcheck = data->nbr_cycle;
-		}
 		if (data->option)
 		{
-			if ((data->option & 2))
+			if ((data->option & VM_OPT_V) && data->nbr_cycle != 0)
 				ft_printf("It is now cycle %d\n",data->nbr_cycle);
 			if (data->option & VM_OPT_G)
 			{
 				vm_ncurses(&ncurses_data);
 				usleep(ncurses_data.interval);
 				/*system("clear");
-				vm_print_arena();*/
+				  vm_print_arena();*/
 				//ft_putnbr(i);
 				//ft_printf("nbr_cycle: %d, nbr_proc: %d", data->nbr_cycle, data->nb_proc);
 				//ft_putendl("");
 				//			usleep(20000);
 				//i++;
 			}
+		}
+		if (data->nbr_cycle - data->lastcheck == data->cycletodie)
+		{
+			vm_check_live_proces(data);
+			data->lastcheck = data->nbr_cycle;
 		}
 		if (((data->nbr_cycle) == (data->dump)) || 0 == data->nb_proc)
 			finish = 1;
