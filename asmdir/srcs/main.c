@@ -70,6 +70,8 @@ void			do_stuff_reverse(char *av)
 		return ;
 	vm_read_champ(av, champ);
 	write_player_reverse(av, champ);
+	free(champ->prog);
+	free(champ);
 }
 
 int				main(int ac, char **av)
