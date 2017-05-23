@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 00:15:13 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/01 11:00:09 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 11:50:45 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_atoi_bigendian(unsigned char *array, int nb_octet)
 	return (j);
 }
 
-void	vm_read_champ_extend(t_buf *buffer, header_t *header)
+void	vm_read_champ_extend(t_buf *buffer, t_header *header)
 {
 	unsigned char *p;
 

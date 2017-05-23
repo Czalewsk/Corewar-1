@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/23 09:45:56 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 11:51:52 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			main_error(char *str, int forcequit)
 		exit(1);
 }
 
-void			buffer_init(header_t *header, char *name)
+void			buffer_init(t_header *header, char *name)
 {
 	t_gdata	*gdata;
 
@@ -40,7 +40,7 @@ void			buffer_init(header_t *header, char *name)
 
 void			do_stuff(int i, char *av)
 {
-	header_t	header;
+	t_header	header;
 	t_gdata		*gdata;
 
 	gdata = get_gdata();
@@ -55,7 +55,7 @@ void			do_stuff(int i, char *av)
 	if (check_error(gdata->lex))
 		return (main_error("Error in lexer/parser", 0));
 	write_player(&(gdata->buffer_prog), gdata->lex, gdata->label, &header);
-	header_to_buffer(&(gdata->buffer_header), &header);
+	t_headero_buffer(&(gdata->buffer_header), &header);
 	write_to_buffer(&(gdata->buffer_header), gdata->buffer_prog.data,
 		gdata->buffer_prog.size);
 	write_bin(av, &(gdata->buffer_header));

@@ -6,13 +6,13 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 18:53:05 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/22 19:51:30 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 11:50:38 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	fill_header(header_t *header, t_list *list_lex, t_buf *buffer)
+void	fill_header(t_header *header, t_list *list_lex, t_buf *buffer)
 {
 	(void)list_lex;
 	header->magic = COREWAR_EXEC_MAGIC;

@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:49:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/23 11:22:42 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 11:49:17 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				check_multiple_dquote(t_list **lst2)
 	return (0);
 }
 
-void			fill_header_name_cmt(header_t *header, int i, char *tmp,
+void			fill_header_name_cmt(t_header *header, int i, char *tmp,
 		int len_total)
 {
 	if (len_total < 3)
@@ -43,7 +43,7 @@ void			fill_header_name_cmt(header_t *header, int i, char *tmp,
 		ft_strcpy(header->prog_name, tmp + 1);
 }
 
-void			check_comment(t_list **lst, header_t *header)
+void			check_comment(t_list **lst, t_header *header)
 {
 	t_lx	*lx;
 	int		nb;
@@ -72,7 +72,7 @@ void			check_comment(t_list **lst, header_t *header)
 	free(tmp);
 }
 
-void			check_name(t_list **lst, header_t *header)
+void			check_name(t_list **lst, t_header *header)
 {
 	t_lx	*lx;
 	int		nb;
