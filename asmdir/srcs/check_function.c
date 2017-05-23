@@ -51,12 +51,12 @@ void		check_comment(t_list **lst, header_t *header)
 
 	lx = NULL;
 	nb = 0;
-	tmp = ft_strdup("");
 	if (*lst && (lx = (*lst)->content)
 			&& !ft_strcmp(lx->word, COMMENT_CMD_STRING))
 		*lst = (*lst)->next;
 	else if ((lx && (lx->error += 15)) || !check_multiple_dquote(lst))
 		return ;
+	tmp = ft_strdup("");
 	while (*lst && (lx = (*lst)->content) && lx->type == COMMENT && ++nb)
 	{
 		tmp = ft_strjoin_free(tmp, 1, lx->word, 0);
@@ -69,6 +69,7 @@ void		check_comment(t_list **lst, header_t *header)
 	if (lx && !*lst)
 		lx->error = 25;
 	fill_header_name_cmt(header, 1, tmp, ft_strlen(tmp));
+	free(tmp);
 }
 
 void		check_name(t_list **lst, header_t *header)
@@ -79,13 +80,13 @@ void		check_name(t_list **lst, header_t *header)
 
 	lx = NULL;
 	nb = 0;
-	tmp = ft_strdup("");
 	if (*lst && (lx = (*lst)->content) && !ft_strcmp(lx->word, NAME_CMD_STRING))
 		*lst = (*lst)->next;
 	else if (lx && (lx->error = 14))
 		return ;
 	if (!check_multiple_dquote(lst))
 		return ;
+	tmp = ft_strdup("");
 	while (*lst && (lx = (*lst)->content) && lx->type == NAME && ++nb)
 	{
 		tmp = ft_strjoin_free(tmp, 1, lx->word, 0);
@@ -96,7 +97,7 @@ void		check_name(t_list **lst, header_t *header)
 	if (lx && !nb)
 		lx->error = 24;
 	fill_header_name_cmt(header, 0, tmp, ft_strlen(tmp));
-	ft_strdel(&tmp);
+	free(tmp);
 }
 
 int			check_label_chars(t_list *lst)
