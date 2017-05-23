@@ -39,11 +39,27 @@ t_vm_data	*get_data(void)
 	return (data);
 }
 
+void		del_tab_proc(void *content, size_t size)
+{
+	(void)size;
+	ft_printf("DELETE\n");
+	free(content);
+}
+
 void		vm_free_all(void)
 {
-	t_vm_data *data;
+	t_vm_data	*data;
+	int			i;
 
+	i = 0;
 	data = get_data();
+	while (data->tab_champ[i])
+	{
+		free(data->tab_champ[i]->name);
+		free(data->tab_champ[i]->prog);
+		free(data->tab_champ[i]);
+		++i;
+	}
 	if (data)
 		free(data);
 }

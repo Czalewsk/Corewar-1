@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 11:33:57 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/03/28 05:19:24 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 13:59:39 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ char	*ft_strrstr(const char *big, const char *little)
 		return ((char*)big);
 	while (big <= tmp)
 	{
-		while (tmp[i] == little[i]){
+		while (tmp[i] == little[i])
 			if (++i == n)
 				return (tmp);
-		}
 		i = 0;
 		tmp--;
 	}

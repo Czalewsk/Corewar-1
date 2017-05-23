@@ -108,4 +108,5 @@ void				curses_print_process(t_ncurses_data *ncurses_data);
 void				vm_adv_verb(t_vm_proc *proc, int *nb_octet);
 void				ft_say(char *input);
 void				ft_afplay(char *input);
+void				del_tab_proc(void *content, size_t size);
 #endif

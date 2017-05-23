@@ -39,5 +39,6 @@ int		main(int argc, char **argv)
 	vm_pars_param(argc, argv);
 	vm_init_arena();
 	vm_fight();
+	vm_free_all();
 	return (EXIT_SUCCESS);
 }

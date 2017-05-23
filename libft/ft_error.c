@@ -6,13 +6,13 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 04:17:08 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 04:36:06 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 13:56:34 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_error(char *str, void (*f)(void))
+void	ft_error(char *str, void (*f)(void))
 {
 	if (f)
 		(*f)();
