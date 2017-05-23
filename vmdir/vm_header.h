@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/20 05:46:43 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 07:02:50 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include <ncurses.h>
 # include "../libft/libft.h"
 # include "op.h"
-//# include "vm_op/vm_op.h"
-# define VM_OPT_G 1
 
+# define VM_OPT_G 1
+# define VM_OPT_V 2
+# define VM_OPT_S 4
 typedef struct		s_buf
 {
 	void			*data;
@@ -37,7 +38,7 @@ typedef struct		s_vm_proc
 	char			next_op;
 	unsigned char	*prog;
 	int				progsize;
-	unsigned int			ocp;
+	unsigned int	ocp;
 	int				color;
 	int				nproc;
 }					t_vm_proc;
@@ -48,6 +49,7 @@ typedef struct		s_vm_champ
 	t_header		header;
 	int				num;
 	unsigned char	*prog;
+	int				posnum;
 }					t_vm_champ;
 
 typedef struct		s_vm_data
@@ -65,26 +67,27 @@ typedef struct		s_vm_data
 	t_list			*tab_proc;
 	int				nb_proc;
 	char			*winner;
+	unsigned char	affchar;
 }					t_vm_data;
 
-typedef struct	s_op
+typedef struct		s_op
 {
-	char		*name;
-	int			nb_p;
-	int			type_param[3];
-	int			op_code;
-	int			nb_cycle;
-	char		*cmt;
-	int			octet;
-	int			index;
-}				t_op;
+	char			*name;
+	int				nb_p;
+	int				type_param[3];
+	int				op_code;
+	int				nb_cycle;
+	char			*cmt;
+	int				octet;
+	int				index;
+}					t_op;
 
-typedef struct	s_ncurses_data
+typedef struct		s_ncurses_data
 {
-	WINDOW		*w;
-	int			interval;
-	t_vm_data	*data;
-}				t_ncurses_data;
+	WINDOW			*w;
+	int				interval;
+	t_vm_data		*data;
+}					t_ncurses_data;
 
 t_vm_data			*get_data();
 void				vm_free_all();
@@ -96,12 +99,11 @@ int					vm_pars_param(int nb_parm, char **tab_parm);
 void				vm_read_champ(char *champ_name, t_vm_champ *data);
 
 void				vm_ncurses(t_ncurses_data *ncurses_data);
-void				vm_ncurses_init(t_vm_data *data, t_ncurses_data *ncurses_data);
+void				vm_ncurses_init(t_vm_data *data,
+		t_ncurses_data *ncurses_data);
 void				vm_ncurses_free(void);
 void				curses_print_globad_info(t_ncurses_data *ncurses_data);
 void				curses_print_arena(t_vm_data *data);
 void				curses_print_process(t_ncurses_data *ncurses_data);
-
-//void     (*g_vm_exec_op[17])(t_vm_data *,t_vm_proc *,int );
-
+void				vm_adv_verb(t_vm_proc *proc, int *nb_octet);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:11:20 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/16 16:55:34 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 06:24:07 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,19 @@ int		vm_get_nb_octet(int *nb_octet, unsigned int ocp, int nop)
 	j = g_op_tab[nop].nb_p;
 	i = 0;
 	noct = 0;
-	if (!((ocp & 1) == 1 || ((ocp >> 1) & 1) == 1))
+	while (i < j)
 	{
-		while (i < j)
-		{
-			tocp = (ocp >> ((3 - i) * 2)) & 3;
-			if (tocp == 1)
-				nb_octet[i] = 1;
-			else if (tocp == 2)
-				nb_octet[i] = g_op_tab[nop].index ? 2 : 4;
-			else if (tocp == 3)
-				nb_octet[i] = 2;
-			else
-				nb_octet[i] = 0;
-			noct += nb_octet[i];
-			i++;
-		}
+		tocp = (ocp >> ((3 - i) * 2)) & 3;
+		if (tocp == 1)
+			nb_octet[i] = 1;
+		else if (tocp == 2)
+			nb_octet[i] = g_op_tab[nop].index ? 2 : 4;
+		else if (tocp == 3)
+			nb_octet[i] = 2;
+		else
+			nb_octet[i] = 0;
+		noct += nb_octet[i];
+		i++;
 	}
 	return (noct);
 }

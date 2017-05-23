@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 22:48:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/10 03:24:11 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 00:11:05 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		curses_print_arena(t_vm_data *data)
 				attron(COLOR_PAIR(128));
 			else
 				attron(COLOR_PAIR((data->col_arena[i] & 0xf)));
-			mvprintw(y, x * 3, "%.2x ", data->arena[i]);
+			mvprintw(x, y * 3, "%.2x ", data->arena[i]);
 			if ((data->col_arena[i] & 128))
 				attroff(COLOR_PAIR(128));
 			else
