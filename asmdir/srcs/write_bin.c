@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:21:45 by xesnault          #+#    #+#             */
-/*   Updated: 2017/05/07 16:30:32 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 11:52:03 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			write_to_buffer(t_buf *buffer, void *data, size_t size)
 	return (1);
 }
 
-void		header_to_buffer(t_buf *buffer, header_t *header)
+void		t_headero_buffer(t_buf *buffer, t_header *header)
 {
 	unsigned int	idk;
 

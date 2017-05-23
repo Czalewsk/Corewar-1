@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/04/17 12:47:27 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 11:51:46 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	write_line(t_buf *buffer, t_list **list_lex, t_list *list_label)
 }
 
 void	write_player(t_buf *buffer, t_list *list_lex, t_list *list_label,
-		header_t *header)
+		t_header *header)
 {
 	t_list	*backup;
 

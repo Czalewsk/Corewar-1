@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:07:23 by xesnault          #+#    #+#             */
-/*   Updated: 2017/05/01 11:11:50 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 11:52:00 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	int		r_parse_instruction(unsigned char *prog,
 	return (0);
 }
 
-static	char	*header_to_str(t_vm_champ *champ)
+static	char	*t_headero_str(t_vm_champ *champ)
 {
 	char	*text;
 
@@ -105,7 +105,7 @@ void			write_player_reverse(char *av, t_vm_champ *champ)
 	char	*text;
 
 	text = NULL;
-	text = header_to_str(champ);
+	text = t_headero_str(champ);
 	prog_to_str(&text, champ);
 	ft_printf("%s\n", text);
 	if (text)
