@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 07:01:05 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 08:57:03 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	vm_exec_op(t_vm_data *data, t_vm_proc *proc)
 	{
 		(*g_vm_exec_op[(int)proc->next_op - 1])(data, proc, param, nb_octet);
 	}
-	else if (proc->ocp)
+	else if (proc->ocp && (data->option & VM_OPT_V))
 		vm_adv_verb(proc, nb_octet);
 	nb += proc->ocp ? 2 : 1;
 	proc->pc += (proc->next_op) != 9 ? nb : 0;
@@ -162,6 +162,18 @@ static void	vm_check_live_proces(t_vm_data *data)
 	data->nbr_lives = 0;
 }
 
+/*void		vm_print_winner(t_vm_data *data)
+{
+	
+	if (data->nbr_cycle == data->dump)
+		//print_arena_32();
+	else if (!data->option)
+		ft_printf("le joueur %d(%s) a gagne\n",);
+	//if (data->option & VM_OPT_S)
+	else if (data->option & VM_OPT_V && data->winner)
+		ft_printf("Conterstant %d, \"%s\", has won !\n");
+}*/
+
 void		vm_fight(void)
 {
 	int				finish;
@@ -174,6 +186,8 @@ void		vm_fight(void)
 		vm_ncurses_init(data, &ncurses_data);
 	while (!finish)
 	{
+		if (((data->nbr_cycle) == (data->dump)) || 0 == data->nb_proc)
+			break;
 		if (data->option)
 		{
 			if ((data->option & VM_OPT_V) && data->nbr_cycle != 0)
@@ -184,8 +198,6 @@ void		vm_fight(void)
 				usleep(ncurses_data.interval);
 			}
 		}
-		if (((data->nbr_cycle) == (data->dump)) || 0 == data->nb_proc)
-			finish = 1;
 		vm_exec_proc(data);
 		if (data->nbr_cycle - data->lastcheck == data->cycletodie)
 		{
