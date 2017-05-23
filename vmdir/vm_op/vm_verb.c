@@ -6,7 +6,7 @@
 /*   By: lduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 05:04:20 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/22 22:11:01 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 06:29:11 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		vm_lns_verb(t_vm_proc *proc, int *param)
 	int			i;
 	t_vm_data	*data;
 	t_vm_champ	*champ;
-	
+
 	champ = NULL;
 	if (proc->next_op == 1)
 	{
@@ -31,30 +31,41 @@ void		vm_lns_verb(t_vm_proc *proc, int *param)
 		}
 	}
 	if (champ)
-		ft_printf("\nPlayer %d (%s) is said to be alive", champ->posnum, champ->header.prog_name);
+		ft_printf("Player %d (%s) is said to be alive\n", champ->posnum, champ->header.prog_name);
 	if (proc->next_op == 0xb)
-		ft_printf("\n       | -> store to %d + %d = %d (with pc and mod %d)", param[1], param[2], param[1] + param[2], (proc->pc + param[1] + param[2]) % MEM_SIZE);
+		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", param[1], param[2], param[1] + param[2], (proc->pc + param[1] + param[2]) % MEM_SIZE);
 	else if (proc->next_op == 0xa)
-		ft_printf("\n       | -> load from %d + %d = %d (with pc and mod %d)", param[0], param[1], param[0] + param[1], (proc->pc + param[0] + param[1]) % MEM_SIZE);
+		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", param[0], param[1], param[0] + param[1], (proc->pc + param[0] + param[1]) % MEM_SIZE);
 }
 
 void		vm_adv_verb(t_vm_proc *proc, int *nb_octet)
 {
-	int i;
-	int j;
-	t_vm_data *data;
+	int			i;
+	int			j;
+	t_vm_data	*data;
+	int			l;
 
 	j = 0;
 	data = get_data();
 	i = nb_octet[0] + nb_octet[1] + nb_octet[2];
 	i += proc->ocp ? 1 : 0;
-	i ++;
-	ft_printf("\nADV %d (0x%0.4x -> 0x%0.4x) ", i, proc->pc, (proc->pc + i) % MEM_SIZE);
+	i++;
+	while (proc->pc < 0)
+		proc->pc += MEM_SIZE;
+	while (proc->pc > MEM_SIZE)
+		proc->pc -= MEM_SIZE;
+	l = proc->pc + i;
+	while (l < 0)
+		l += MEM_SIZE;
+	while (l > MEM_SIZE)
+		l -= MEM_SIZE;
+	ft_printf("ADV %d (0x%0.4x -> 0x%0.4x) ", i, proc->pc, proc->pc + i);
 	while (j < i)
 	{
-		ft_printf("%.2x ",data->arena[(proc->pc + j) % MEM_SIZE]); 
+		ft_printf("%.2x ", data->arena[(proc->pc + j) % MEM_SIZE]);
 		j++;
 	}
+	ft_printf("\n");
 }
 
 void		vm_verb(t_vm_proc *proc, int *param, int *nb_octet)
@@ -75,12 +86,12 @@ void		vm_verb(t_vm_proc *proc, int *param, int *nb_octet)
 		}
 		if (proc->next_op == 9)
 			proc->carry ? ft_printf(" OK") : ft_printf(" FAILED");
-		if (proc->next_op == 0xc)
+		if (proc->next_op == 0xc || proc->next_op == 0xf)
 			ft_printf(" (%d)", proc->pc + param[0]);
+		ft_printf("\n");
 		vm_lns_verb(proc, param);
 		if (proc->next_op != 9 || !proc->carry)
 			vm_adv_verb(proc, nb_octet);
-		ft_printf("\n");
 	}
 }
 

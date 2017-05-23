@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:36:51 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/20 05:25:58 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 06:23:45 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	vm_fork(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 	fork.last_live = proc->last_live;
 	fork.next_op = data->arena[(fork.pc) % MEM_SIZE];
 	fork.in_proc = (fork.next_op > 0 && fork.next_op < 17) ?
-		g_op_tab[(int)fork.next_op - 1].nb_cycle - 1: 0;
+		g_op_tab[(int)fork.next_op - 1].nb_cycle - 1 : 0;
 	fork.prog = proc->prog;
 	fork.progsize = proc->progsize;
 	ft_memcpy(fork.registre, proc->registre, REG_SIZE * REG_NUMBER);

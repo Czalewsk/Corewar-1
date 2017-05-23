@@ -6,12 +6,12 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 00:15:13 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/21 05:40:56 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 06:21:38 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fcntl.h>
-# include "vm_header.h"
+#include <fcntl.h>
+#include "vm_header.h"
 
 void	vm_read_champ_extend(t_buf *buffer, t_header *header)
 {
@@ -25,12 +25,12 @@ void	vm_read_champ_extend(t_buf *buffer, t_header *header)
 	header->prog_size = ft_atoi_bigendian(p + 4 + PROG_NAME_LENGTH + 4, 4);
 	ft_memcpy(header->comment, p + 4 + PROG_NAME_LENGTH + 4 + 4, COMMENT_LENGTH);
 	if (header->prog_size != (buffer->size - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16)))
-        ft_error("Champ size invalid", &vm_free_all);
-    if (header->prog_size > CHAMP_MAX_SIZE)
-        ft_error("Champion too big", &vm_free_all);
+		ft_error("Champ size invalid", &vm_free_all);
+	if (header->prog_size > CHAMP_MAX_SIZE)
+		ft_error("Champion too big", &vm_free_all);
 }
 
-void    vm_read_champ(char *path_champion, t_vm_champ *champ)
+void	vm_read_champ(char *path_champion, t_vm_champ *champ)
 {
 	int				fd;
 	int				ret;
@@ -50,7 +50,7 @@ void    vm_read_champ(char *path_champion, t_vm_champ *champ)
 		buffer.size += ret;
 	}
 	vm_read_champ_extend(&buffer, &(champ->header));
-    champ->prog = ft_memdup(buffer.data + (PROG_NAME_LENGTH + COMMENT_LENGTH + 16), champ->header.prog_size);
-    close(fd);
-    free(buffer.data);
+	champ->prog = ft_memdup(buffer.data + (PROG_NAME_LENGTH + COMMENT_LENGTH + 16), champ->header.prog_size);
+	close(fd);
+	free(buffer.data);
 }

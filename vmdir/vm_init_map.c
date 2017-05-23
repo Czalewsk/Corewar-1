@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/22 21:32:45 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 06:13:10 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	t_list		*temp;
 	t_vm_proc	proc;
 	static int	i = 0;
-	int j = 0;
+	int			j;
 
+	j = 0;
 	proc.carry = 0;
 	proc.champ = champ->num;
 	proc.last_live = 0;
@@ -29,11 +30,9 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	proc.next_op = champ->prog[0];
 	proc.in_proc = (proc.next_op > 0 && proc.next_op < 17) ?
 				g_op_tab[(int)proc.next_op - 1].nb_cycle : 0;
-	// mettre les registre a 0 avec bzero
-	ft_bzero(proc.registre, REG_SIZE * (REG_NUMBER));
+	ft_bzero(proc.registre, REG_SIZE *(REG_NUMBER));
 	j = (champ->num);
-	ft_memcpy(proc.registre + (1 * REG_SIZE), &j, REG_SIZE);
-	//ft_printf("%d, %d\n", pos, champ->header.prog_size);
+	ft_memcpy(proc.registre + (4), &j, 4);
 	proc.ocp = 0;
 	data->nb_proc++;
 	proc.nproc = data->nb_proc;

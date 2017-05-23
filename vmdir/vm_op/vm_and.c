@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 09:21:22 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/20 05:18:14 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 06:22:45 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	vm_and(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 	int	tmp;
 	int	i;
 
-	proc->carry = 0;
 	if (!(ft_intisbetween_inc(param[2], 0, 15)
 				&& (nb_octet[0] != 1 || ft_intisbetween_inc(param[0], 0, 15))
 				&& (nb_octet[1] != 1 || ft_intisbetween_inc(param[1], 0, 15))))
