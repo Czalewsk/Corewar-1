@@ -91,7 +91,7 @@ t_list			*get_lex(char *filename)
 	gdata = get_gdata();
 	if ((fd = open(filename, O_RDONLY)) <= 0)
 	{
-		ft_printf("Ceci n'a pas marche (fichier introuvable)\n");
+		ft_printf("Can't open file\n");
 		return (NULL);
 	}
 	while (get_next_line(fd, &line) > 0 && ++ln)
@@ -100,6 +100,7 @@ t_list			*get_lex(char *filename)
 		ft_lst_pushend(&(gdata->g_files), ft_lstnew(&line, sizeof(&line)));
 	}
 	ft_strdel(&line);
-	close(fd);
+	if (fd != -1)
+		close(fd);
 	return (lexem);
 }
