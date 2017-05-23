@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 06:00:52 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 07:02:50 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define VM_OPT_G 1
 # define VM_OPT_V 2
-
+# define VM_OPT_S 4
 typedef struct		s_buf
 {
 	void			*data;
@@ -67,6 +67,7 @@ typedef struct		s_vm_data
 	t_list			*tab_proc;
 	int				nb_proc;
 	char			*winner;
+	unsigned char	affchar;
 }					t_vm_data;
 
 typedef struct		s_op

@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 06:06:40 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 07:01:05 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,8 +165,6 @@ static void	vm_check_live_proces(t_vm_data *data)
 void		vm_fight(void)
 {
 	int				finish;
-	int				i;
-	char			*line;
 	t_vm_data		*data;
 	t_ncurses_data	ncurses_data;
 
