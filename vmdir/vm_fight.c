@@ -148,7 +148,7 @@ static int	vm_check_last_live(t_list *l)
 
 static void	vm_check_live_proces(t_vm_data *data)
 {
-	ft_lst_remove_if(&(data->tab_proc), &vm_check_last_live, NULL);
+	ft_lst_remove_if(&(data->tab_proc), &vm_check_last_live, &del_tab_proc);
 	data->nb_proc = ft_lstlen(data->tab_proc);
 	if (data->nbr_lives >= NBR_LIVE || data->lastcycledec == MAX_CHECKS)
 	{
