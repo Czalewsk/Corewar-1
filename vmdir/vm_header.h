@@ -102,7 +102,7 @@ void				vm_ncurses(t_ncurses_data *ncurses_data);
 void				vm_ncurses_init(t_vm_data *data,
 		t_ncurses_data *ncurses_data);
 void				vm_ncurses_free(void);
-void				curses_print_globad_info(t_ncurses_data *ncurses_data);
+void				curses_print_globad_info(t_ncurses_data *ncurses_data, WINDOW *border);
 void				curses_print_arena(t_vm_data *data);
 void				curses_print_process(t_ncurses_data *ncurses_data);
 void				vm_adv_verb(t_vm_proc *proc, int *nb_octet);
