@@ -6,7 +6,7 @@
 /*   By: czalewsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 14:37:53 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/03 14:44:10 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 14:00:26 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void			ft_error(char *str, void (*f)(void));
 char			ft_strcstr(char *str, char *chaine);
 int				ft_isdouble(char *str);
 long int		ft_atol(const char *str);
-t_list		*ft_lst_return_index(t_list *lst, size_t index);
+t_list			*ft_lst_return_index(t_list *lst, size_t index);
 int				ft_isprint_wsp(int c);
 char			*ft_cfextension(char *filename, char *extension);
 

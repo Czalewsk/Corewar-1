@@ -6,16 +6,16 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 02:55:55 by lduval            #+#    #+#             */
-/*   Updated: 2017/03/28 03:23:04 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 14:01:25 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
+#include "libft.h"
 
-char    *ft_strstr(const char *big, const char *little)
+char	*ft_strstr(const char *big, const char *little)
 {
-	int     n;
-	int     i;
+	int		n;
+	int		i;
 
 	i = 0;
 	n = ft_strlen(little);
