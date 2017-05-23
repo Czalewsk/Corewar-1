@@ -30,6 +30,7 @@ void	ft_afplay(char *input)
 {
 	static pid_t	sound_process = -2;
 	char			**inp;
+	int				i;
 
 	inp = ft_strsplit(input, ' ');
 	if (sound_process != -2)
@@ -39,4 +40,6 @@ void	ft_afplay(char *input)
 		execve("/usr/bin/afplay", inp, NULL);
 		exit(0);
 	}
+	i  = 0;
+
 }
