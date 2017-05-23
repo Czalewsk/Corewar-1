@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 13:21:55 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 14:28:38 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct		s_vm_proc
 	int				last_live;
 	int				in_proc;
 	char			next_op;
-	unsigned char	*prog;
 	int				progsize;
 	unsigned int	ocp;
 	int				color;
