@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/04 10:16:53 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 08:43:08 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void			get_arg(int *arg, char *av, int *nb_arg)
 	if (!ft_strcmp(av, "-d"))
 		*arg = *arg | 1;
 	else if (!ft_strcmp(av, "-r"))
-		*arg =* arg | 2;
+		*arg = *arg | 2;
 	++(*nb_arg);
 }

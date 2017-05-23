@@ -6,7 +6,7 @@
 /*   By: xesnault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:23:30 by xesnault          #+#    #+#             */
-/*   Updated: 2017/05/02 09:36:38 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 09:37:45 by czalewsk         ###   ########.fr       */
 /*   Updated: 2017/04/16 20:49:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -86,7 +86,9 @@ int			arg_isvalid(t_list **list_lex, t_lx *lx, t_op *op, t_list *label);
 
 char		get_arg_type(int type);
 
-void		check_name_and_cmt(t_list **lst, header_t *header);
+void		check_name(t_list **lst, header_t *header);
+
+void		check_comment(t_list **lst, header_t *header);
 
 void		write_player(t_buf *buffer, t_list *list_lex, t_list *label,
 		header_t *header);
