@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/05/06 14:26:15 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 04:23:11 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_tab_error		g_tab_error[50] =
 	{21, "White space between LABEL_CHAR and label", 0, 0},
 	{22, "Separator \"%s\" at the end of the line", 1, 0},
 	{23, "Multiple label define on the same line", 0, 0},
-	{24, "Missing terminating quote", 0, 0},
-	{25, "Not defined", 0, 0},
+	{24, "Missing quote", 0, 0},
+	{25, "No program", 0, 0},
 	{26, "Not defined", 0, 0},
 	{27, "Not defined", 0, 0},
 	{28, "Not defined", 0, 0},
