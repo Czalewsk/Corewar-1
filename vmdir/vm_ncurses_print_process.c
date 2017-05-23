@@ -57,7 +57,6 @@ static int	curses_print_process_gk(int *key_space, int *cursor_proc,
 void		curses_print_process(t_ncurses_data *ncurses_data)
 {
 	int				key_space;
-	
 	t_list			*list_proc;
 	t_vm_proc		*proc;
 	int				cursor_proc;
@@ -69,14 +68,15 @@ void		curses_print_process(t_ncurses_data *ncurses_data)
 	{
 		erase();
 		curses_print_arena(ncurses_data->data);
-		curses_print_globad_info(ncurses_data);	
+		curses_print_globad_info(ncurses_data, NULL);
 		proc = list_proc->content;
 		mvprintw(64 + 1, 1, "PC: %-4d, Carry: %d, Next op: %.2x (%d) [%d/%d]",
 		proc->pc, proc->carry, proc->next_op, proc->champ, cursor_proc,
 		ft_lstlen(ncurses_data->data->tab_proc));
 		curses_print_process_reg(proc);
 		refresh();
-		if (curses_print_process_gk(&key_space, &cursor_proc, &list_proc, ncurses_data))
+		if (curses_print_process_gk(&key_space,
+			&cursor_proc, &list_proc, ncurses_data))
 			break ;
 	}
 }

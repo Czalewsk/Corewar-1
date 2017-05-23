@@ -28,14 +28,13 @@ void	vm_ncurses_init(t_vm_data *data, t_ncurses_data *ncurses_data)
 	init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(4, COLOR_GREEN, COLOR_BLACK);
 	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(128, COLOR_WHITE, COLOR_RED); 
+	init_pair(128, COLOR_WHITE, COLOR_RED);
 }
 
 void	vm_ncurses_free(void)
 {
 	endwin();
 }
-
 
 void	curses_get_key(t_ncurses_data *ncurses_data)
 {
@@ -54,7 +53,7 @@ void	vm_ncurses(t_ncurses_data *ncurses_data)
 {
 	erase();
 	curses_print_arena(ncurses_data->data);
-	curses_print_globad_info(ncurses_data);
+	curses_print_globad_info(ncurses_data, NULL);
 	mvprintw(64 + 1, 1, "Press space to pause the program and see processes");
 	curses_get_key(ncurses_data);
 	refresh();
