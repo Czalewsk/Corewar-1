@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 20:14:32 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/22 22:00:09 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 09:40:30 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int				check_error(t_list *curs)
 	force_quit = 0;
 	while (curs && (lx = curs->content))
 	{
-		lx->error = (lx->error > 29) ? 29 : lx->error; // A delete
+		lx->error = (lx->error > 29) ? 29 : lx->error;
 		if (lx->error > 0)
 		{
 			force_quit = (force_quit || !g_tab_error[lx->error - 1].warning) ?

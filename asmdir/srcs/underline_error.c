@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:34:28 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/20 02:35:11 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 09:44:23 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void				underline_error(t_lx *lx, t_list *curs, t_gdata *gdata)
 	if (lx->error == 11 || lx->error == 12 || lx->error == 14 ||
 			lx->error == 15 || lx->error == 29)
 		return ;
-	line = *(char**)ft_lst_return_index(gdata->g_files, lx->pos[0] - 1)->content;
+	line =
+		*(char**)ft_lst_return_index(gdata->g_files, lx->pos[0] - 1)->content;
 	ft_printf("%s\n", line);
 	begin = find_begin_error(lx, &curs, line);
 	c = (lx->error == 24 || lx->error == 22) ? '^' : '~';

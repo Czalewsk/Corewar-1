@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:43:51 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/23 06:56:13 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 09:43:38 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void			find_double_quote_end(t_list **lst2, int first_double,
 		*lst2 = (*lst2)->next;
 		if (first_double && tmp[0] != tmp[1] && !*(tmp[1] + 1))
 			return ;
-		else if (!first_double && tmp[1]  && !*(tmp[1] + 1))
+		else if (!first_double && tmp[1] && !*(tmp[1] + 1))
 			return ;
 		first_double = 0;
 	}
@@ -64,9 +64,9 @@ void			set_name_comment(t_list **lst2, t_lx **last_inst)
 	{
 		*last_inst = lst->content;
 		((t_lx *)lst->content)->type = INSTRUCTION;
-		*lst2 = lst->next; 
+		*lst2 = lst->next;
 		if (*((t_lx*)((*lst2)->content))->word == '"')
-		find_double_quote_end(lst2, 1, 1);
+			find_double_quote_end(lst2, 1, 1);
 	}
 }
 
@@ -102,6 +102,7 @@ static	void	fix_lex(t_lx *lex, t_list **label)
 static	void	set_lex_ext(t_list *lst, t_lx *lx, t_lx *last_inst0)
 {
 	static	t_lx	*last_inst = NULL;
+
 	if (!last_inst)
 		last_inst = last_inst0;
 	if (lx->type != -1)
@@ -120,7 +121,7 @@ static	void	set_lex_ext(t_list *lst, t_lx *lx, t_lx *last_inst0)
 	{
 		lx->type = INSTRUCTION;
 		last_inst = lx;
-	}	
+	}
 	else
 		lx->error = 1;
 }

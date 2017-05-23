@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 19:53:04 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/04/22 19:54:45 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 09:45:07 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_if_already_exist(t_lx *lx, t_list *list_label)
 {
 	t_label	*label;
-	
+
 	while (list_label)
 	{
 		label = list_label->content;

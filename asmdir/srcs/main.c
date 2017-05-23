@@ -6,7 +6,7 @@
 /*   By: czalewsk <czalewsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 23:45:22 by czalewsk          #+#    #+#             */
-/*   Updated: 2017/05/06 15:13:47 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/23 09:45:56 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,20 @@ void			do_stuff(int i, char *av)
 
 	gdata = get_gdata();
 	buffer_init(&header, av);
-	
-//Lexer
 	if ((gdata->lex = get_lex(av)) == NULL)
 		return (main_error("get_lex error", 0));
 	set_lex(gdata->lex, &(gdata->label));
-//Parser
 	parse(gdata->lex, gdata->label, &header);
-//Affichage && Debug
 	i ? ft_lstiter(gdata->lex, &debug_lxcontent) : 0;
 	i ? ft_lstiter(gdata->label, &debug_labelcontent) : 0;
 	i ? ft_lstiter(gdata->g_files, &debug_print_line) : 0;
-//Error Manager
 	if (check_error(gdata->lex))
 		return (main_error("Error in lexer/parser", 0));
-//Ecriture du player
 	write_player(&(gdata->buffer_prog), gdata->lex, gdata->label, &header);
 	header_to_buffer(&(gdata->buffer_header), &header);
 	write_to_buffer(&(gdata->buffer_header), gdata->buffer_prog.data,
 		gdata->buffer_prog.size);
 	write_bin(av, &(gdata->buffer_header));
-//Free lst-> Lx && Label
 	sp_free();
 }
 
@@ -93,7 +86,7 @@ int				main(int ac, char **av)
 	--i;
 	while (++i < ac && ac > 1)
 	{
-		ft_printf("[%d/%d] %s:\n", i - nb_arg, (ac - 1) - nb_arg, av[i]);	
+		ft_printf("[%d/%d] %s:\n", i - nb_arg, (ac - 1) - nb_arg, av[i]);
 		if (!(arg & 2))
 			do_stuff(arg & 1, av[i]);
 		else if (arg & 2)
