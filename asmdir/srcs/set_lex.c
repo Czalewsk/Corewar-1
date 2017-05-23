@@ -99,11 +99,11 @@ static	void	fix_lex(t_lx *lex, t_list **label)
 	}
 }
 
-static	void	set_lex_ext(t_list *lst, t_lx *lx, t_lx *last_inst0)
+static	void	set_lex_ext(t_list *lst, t_lx *lx, t_lx *last_inst0, int *reset)
 {
 	static	t_lx	*last_inst = NULL;
 
-	if (!last_inst)
+	if (*reset && !(*reset = 0))
 		last_inst = last_inst0;
 	if (lx->type != -1)
 		return ;
@@ -130,13 +130,15 @@ void			set_lex(t_list *lst, t_list **label)
 {
 	t_lx	*lx;
 	t_lx	*last_inst;
+	int		reset;
 
 	last_inst = NULL;
+	reset = 1;
 	set_name_comment(&lst, &last_inst);
 	while (lst)
 	{
 		lx = lst->content;
-		set_lex_ext(lst, lx, last_inst);
+		set_lex_ext(lst, lx, last_inst, &reset);
 		fix_lex(lx, label);
 		lst = lst->next;
 	}
