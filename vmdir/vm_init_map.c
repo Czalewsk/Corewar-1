@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 06:13:10 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 13:09:41 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,18 @@ static void		vm_init_champ(t_vm_data *data)
 		++n;
 	while (data->tab_champ[i])
 	{
+		if (data->option & VM_OPT_S)
+			ft_say(data->tab_champ[i]->header.prog_name);
 		vm_init_proc(data, data->tab_champ[i], (i * MEM_SIZE) / n);
 		i++;
+		if (data->tab_champ[i] && (data->option & VM_OPT_S))
+			ft_say(" versus");
+	}
+	if (data->option & VM_OPT_S)
+	{
+		ft_say(" fight");
+		usleep(100000);
+		ft_afplay("afplay vmdir/gampok.mp3");
 	}
 }
 

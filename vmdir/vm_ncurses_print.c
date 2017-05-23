@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 22:48:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 00:11:05 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 11:52:54 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		curses_print_globad_info(t_ncurses_data *ncurses_data,
 		data->nbr_cycle, ncurses_data->interval);
 	mvprintw((i = i + 2), column + 2, "cycletodie: %d", data->cycletodie);
 	mvprintw((i = i + 2), column + 2, "nb_proc: %d", data->nb_proc);
-	mvprintw((i = i + 2), column + 2, "winner: %s", data->winner);
+	mvprintw((i = i + 2), column + 2, "winner: %d", data->winner);
 	curses_print_player_info(data->tab_champ, column, i + 2);
 	attron(A_DIM);
 	mvprintw(LINES - 2, column + 2,

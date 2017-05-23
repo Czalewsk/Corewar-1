@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 08:57:03 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 13:47:07 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,17 +162,24 @@ static void	vm_check_live_proces(t_vm_data *data)
 	data->nbr_lives = 0;
 }
 
-/*void		vm_print_winner(t_vm_data *data)
+void		vm_print_winner(t_vm_data *data)
 {
-	
 	if (data->nbr_cycle == data->dump)
-		//print_arena_32();
-	else if (!data->option)
-		ft_printf("le joueur %d(%s) a gagne\n",);
-	//if (data->option & VM_OPT_S)
-	else if (data->option & VM_OPT_V && data->winner)
-		ft_printf("Conterstant %d, \"%s\", has won !\n");
-}*/
+		vm_print_arena();
+	else if (data->winner > 0)
+	{
+		if (!data->option)
+			ft_printf("le joueur %d(%s) a gagne\n",data->winner, data->tab_champ[data->winner - 1]->header.prog_name);
+		if (data->option & VM_OPT_S)
+		{
+			ft_afplay("afplay vmdir/winpok.mp3");
+			ft_say(data->tab_champ[data->winner - 1]->header.prog_name);
+			ft_say("wins");
+		}
+		else if (data->option & VM_OPT_V && data->winner)
+			ft_printf("Conterstant %d, \"%s\", has won !\n", data->winner, data->tab_champ[data->winner - 1]->header.prog_name);
+	}
+}
 
 void		vm_fight(void)
 {
@@ -208,5 +215,5 @@ void		vm_fight(void)
 	}
 	if (data->option & VM_OPT_G)
 		vm_ncurses_free();
-//	vm_print_winner(data);
+	vm_print_winner(data);
 }

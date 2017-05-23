@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 22:48:45 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 06:15:18 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 11:57:28 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	vm_print_arena(void)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		if (i % 64 == 0)
+		if (i % 32 == 0)
 			ft_printf("\n");
 		if (dat->col_arena[i] != 0)
 			ft_printf("\033[%dm", 90 + dat->col_arena[i]);

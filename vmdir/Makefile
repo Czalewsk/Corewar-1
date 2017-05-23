@@ -32,7 +32,7 @@ SRCS =	vm_main.c \
 		vm_ncurses.c \
 		vm_ncurses_print.c \
 		vm_ncurses_print_process.c \
-
+		ft_say.c
 INCLUDES = -I includes -I ../libft
 
 DEP = Makefile includes/

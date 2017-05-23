@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:03:10 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 08:34:55 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 11:27:22 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ static void		vm_pars_option(int nb_param, char **tab_param, int i, t_vm_data *da
 			data->option |= 1;
 		else if (ft_strequ(tab_param[i], "-v"))
 			data->option = 2;
+		else if (ft_strequ(tab_param[i], "-s"))
+			data->option |= 4;
 		else
 		{
 			ft_printf("%s ", tab_param[i]);

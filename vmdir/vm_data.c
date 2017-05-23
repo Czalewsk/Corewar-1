@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 01:41:04 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 05:58:46 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 11:45:14 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_vm_data	*get_data(void)
 		data->dump = -1;
 		data->tab_proc = NULL;
 		data->nb_proc = 0;
-		data->winner = NULL;
+		data->winner = 0;
 		data->lastcheck = 0;
 		ft_bzero(data->col_arena, MEM_SIZE);
 		ft_bzero(data->arena, MEM_SIZE);

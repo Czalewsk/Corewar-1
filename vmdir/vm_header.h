@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 07:02:50 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 13:21:55 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ typedef struct		s_vm_data
 	unsigned char	col_arena[MEM_SIZE];
 	t_list			*tab_proc;
 	int				nb_proc;
-	char			*winner;
+	int				winner;
 	unsigned char	affchar;
+	pid_t			sound_process;
 }					t_vm_data;
 
 typedef struct		s_op
@@ -106,4 +107,6 @@ void				curses_print_globad_info(t_ncurses_data *ncurses_data, WINDOW *border);
 void				curses_print_arena(t_vm_data *data);
 void				curses_print_process(t_ncurses_data *ncurses_data);
 void				vm_adv_verb(t_vm_proc *proc, int *nb_octet);
+void				ft_say(char *input);
+void				ft_afplay(char *input);
 #endif
