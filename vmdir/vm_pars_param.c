@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:03:10 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 06:20:50 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 08:34:55 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ static void		vm_pars_option(int nb_param, char **tab_param, int i, t_vm_data *da
 {
 	while (i < nb_param)
 	{
-		if (ft_strequ(tab_param[i], "-g") /*&& ((data->option & 1) != 0)*/)
+		if (ft_strequ(tab_param[i], "-g"))
 			data->option |= 1;
 		else if (ft_strequ(tab_param[i], "-v"))
-			data->option |= 2;
+			data->option = 2;
 		else
 		{
 			ft_printf("%s ", tab_param[i]);
@@ -107,17 +107,22 @@ static void		vm_pars_option(int nb_param, char **tab_param, int i, t_vm_data *da
 	}
 }
 
-static void		vm_pars_dump(char **tab_param, t_vm_data *data)
+static void		vm_pars_dump(char **tab_param, t_vm_data *data, 
+		int nb_param, int *i)
 {
 	int dump;
 
-	dump = 0;
-	if (!ft_strequ(tab_param[1], "-dump"))
-		ft_error("first parameter must be '-dump'", &vm_free_all);
-	if (!ft_strisnumber(tab_param[2]))
-		ft_error("second parameter must be a number", &vm_free_all);
-	if ((dump = ft_atoi(tab_param[2])) <= 0)
-		ft_error("second parameter must be positive", &vm_free_all);
+	dump = -1;
+	if (ft_strequ(tab_param[1], "-dump"))
+	{
+		if (nb_param < 4)
+			ft_error("not enought parameter", &vm_free_all);
+		if (!ft_strisnumber(tab_param[2]))
+			ft_error("second parameter must be a number", &vm_free_all);
+		if ((dump = ft_atoi(tab_param[2])) <= 0)
+			ft_error("second parameter must be positive", &vm_free_all);
+		*i = 3;
+	}
 	data->dump = dump;
 }
 
@@ -128,11 +133,9 @@ int				vm_pars_param(int nb_param, char **tab_param)
 	int			i;
 
 	error = 0;
-	i = 3;
+	i = 1;
 	data = get_data();
-	if (nb_param < 4)
-		ft_error("not enought parametre", &vm_free_all);
-	vm_pars_dump(tab_param, data);
+	vm_pars_dump(tab_param, data,nb_param, &i);
 	vm_pars_champions(nb_param, tab_param, &i, data);
 	vm_pars_option(nb_param, tab_param, i, data);
 	return (error);
