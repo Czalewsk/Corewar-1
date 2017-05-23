@@ -6,14 +6,14 @@
 /*   By: lduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 12:20:19 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 13:31:19 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/23 15:16:33 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_header.h"
 #include <signal.h>
 
-void ft_say(char *input)
+void	ft_say(char *input)
 {
 	char *s;
 	char *l;
@@ -26,7 +26,7 @@ void ft_say(char *input)
 	free(l);
 }
 
-void ft_afplay(char *input)
+void	ft_afplay(char *input)
 {
 	static pid_t	sound_process = -2;
 	char			**inp;
