@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/26 16:13:57 by czalewsk         ###   ########.fr       */
+/*   Updated: 2017/05/26 17:30:40 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,14 @@ static void	vm_check_live_proces(t_vm_data *data)
 {
 	ft_lst_remove_if(&(data->tab_proc), &vm_check_last_live, &del_tab_proc);
 	data->nb_proc = ft_lstlen(data->tab_proc);
+	data->lastcycledec++;
 	if (data->nbr_lives >= NBR_LIVE || data->lastcycledec == MAX_CHECKS)
 	{
 		data->lastcycledec = 0;
-		data->cycletodie = !(data->cycletodie - CYCLE_DELTA < 1) ?
-			data->cycletodie - CYCLE_DELTA : data->cycletodie;
+		data->cycletodie = data->cycletodie - CYCLE_DELTA;
 		if (data->option & VM_OPT_V)
 			ft_printf("Cycle to die is now %d\n", data->cycletodie);
 	}
-	else
-		data->lastcycledec++;
 	data->nbr_lives = 0;
 }
 
@@ -100,7 +98,7 @@ void		vm_fight(void)
 	data = get_data();
 	if (data->option & VM_OPT_G)
 		vm_ncurses_init(data, &ncurses_data);
-	while (!finish)
+	while (data->cycletodie > 0)
 	{
 		if (((data->nbr_cycle) == (data->dump)) || 0 == data->nb_proc)
 			break ;
