@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 14:28:38 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/26 11:44:01 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define VM_OPT_G 1
 # define VM_OPT_V 2
 # define VM_OPT_S 4
+
 typedef struct		s_buf
 {
 	void			*data;
@@ -102,7 +103,8 @@ void				vm_ncurses(t_ncurses_data *ncurses_data);
 void				vm_ncurses_init(t_vm_data *data,
 		t_ncurses_data *ncurses_data);
 void				vm_ncurses_free(void);
-void				curses_print_globad_info(t_ncurses_data *ncurses_data, WINDOW *border);
+void				curses_print_globad_info(t_ncurses_data *ncurses_data,
+		WINDOW *border);
 void				curses_print_arena(t_vm_data *data);
 void				curses_print_process(t_ncurses_data *ncurses_data);
 void				vm_adv_verb(t_vm_proc *proc, int *nb_octet);

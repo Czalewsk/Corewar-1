@@ -6,12 +6,26 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 00:54:44 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/23 13:09:41 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/26 11:55:59 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_header.h"
 #include "vm_op/vm_op.h"
+
+static void		vm_init_proc_ext(t_vm_proc *p, t_vm_champ *champ, int o, int i)
+{
+	p->carry = 0;
+	p->champ = champ->num;
+	p->last_live = 0;
+	p->pc = o;
+	p->color = i;
+	p->in_proc = 0;
+	p->next_op = champ->prog[0];
+	p->in_proc = (p->next_op > 0 && p->next_op < 17) ?
+				g_op_tab[(int)p->next_op - 1].nb_cycle : 0;
+	ft_bzero(p->registre, REG_SIZE *(REG_NUMBER));
+}
 
 static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 {
@@ -20,17 +34,7 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	static int	i = 0;
 	int			j;
 
-	j = 0;
-	proc.carry = 0;
-	proc.champ = champ->num;
-	proc.last_live = 0;
-	proc.pc = pos;
-	proc.color = i;
-	proc.in_proc = 0;
-	proc.next_op = champ->prog[0];
-	proc.in_proc = (proc.next_op > 0 && proc.next_op < 17) ?
-				g_op_tab[(int)proc.next_op - 1].nb_cycle : 0;
-	ft_bzero(proc.registre, REG_SIZE *(REG_NUMBER));
+	vm_init_proc_ext(&proc, champ, pos, i);
 	j = (champ->num);
 	ft_memcpy(proc.registre + (4), &j, 4);
 	proc.ocp = 0;
@@ -43,7 +47,8 @@ static void		vm_init_proc(t_vm_data *data, t_vm_champ *champ, int pos)
 	ft_memset(data->col_arena + pos, ft_power(2, i), champ->header.prog_size);
 	i++;
 	if (data->option & VM_OPT_V)
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i, champ->header.prog_size, champ->header.prog_name, champ->header.comment);
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+i, champ->header.prog_size, champ->header.prog_name, champ->header.comment);
 	champ->posnum = i;
 }
 
