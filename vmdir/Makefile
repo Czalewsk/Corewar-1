@@ -34,8 +34,8 @@ SRCS =	vm_main.c \
 		vm_ncurses_print.c \
 		vm_ncurses_print_process.c \
 		vm_exec_op.c\
-		ft_say.c
-		
+		ft_say.c\
+		vm_print_winner.c
 
 INCLUDES = -I ../libft
 

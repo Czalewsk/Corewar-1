@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:22:43 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/26 13:06:58 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/26 16:13:57 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,14 @@ static void	vm_check_live_proces(t_vm_data *data)
 	data->nbr_lives = 0;
 }
 
-void		vm_print_winner(t_vm_data *data)
+static void	vm_fight_option(t_vm_data *data, t_ncurses_data ncurses_data)
 {
-	if (data->nbr_cycle == data->dump)
-		vm_print_arena();
-	else if (data->winner > 0)
+	if ((data->option & VM_OPT_V) && data->nbr_cycle != 0)
+		ft_printf("It is now cycle %d\n", data->nbr_cycle);
+	if (data->option & VM_OPT_G)
 	{
-		if (!data->option)
-			ft_printf("le joueur %d(%s) a gagne\n",
-			data->winner, data->tab_champ[data->winner - 1]->header.prog_name);
-		if (data->option & VM_OPT_S)
-		{
-			ft_afplay("afplay vmdir/winpok.mp3");
-			ft_say(data->tab_champ[data->winner - 1]->header.prog_name);
-			ft_say("wins");
-		}
-		else if (data->option & VM_OPT_V && data->winner)
-			ft_printf("Conterstant %d, \"%s\", has won !\n",
-			data->winner, data->tab_champ[data->winner - 1]->header.prog_name);
+		vm_ncurses(&ncurses_data);
+		usleep(ncurses_data.interval);
 	}
 }
 
@@ -115,15 +105,7 @@ void		vm_fight(void)
 		if (((data->nbr_cycle) == (data->dump)) || 0 == data->nb_proc)
 			break ;
 		if (data->option)
-		{
-			if ((data->option & VM_OPT_V) && data->nbr_cycle != 0)
-				ft_printf("It is now cycle %d\n", data->nbr_cycle);
-			if (data->option & VM_OPT_G)
-			{
-				vm_ncurses(&ncurses_data);
-				usleep(ncurses_data.interval);
-			}
-		}
+			vm_fight_option(data, ncurses_data);
 		vm_exec_proc(data, NULL);
 		if (data->nbr_cycle - data->lastcheck == data->cycletodie)
 		{

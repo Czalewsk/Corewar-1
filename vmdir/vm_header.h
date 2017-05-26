@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/26 13:19:49 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/26 16:12:46 by czalewsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,5 @@ void				vm_exec_op(t_vm_data *data, t_vm_proc *proc);
 int					vm_fill_champion(char *champ_name, int n, t_vm_data *data);
 int					vm_isalready_set(int n, t_vm_data *data);
 int					get_next_player(t_vm_data *data);
+void				vm_print_winner(t_vm_data *data);
 #endif
