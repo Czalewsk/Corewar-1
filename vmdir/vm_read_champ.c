@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 00:15:13 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/26 12:26:38 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/26 18:11:03 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	vm_read_champ(char *path_champion, t_vm_champ *champ)
 		buffer.size += ret;
 	}
 	vm_read_champ_extend(&buffer, &(champ->header));
-	champ->prog = ft_memdup(buffer.data +
-			(PROG_NAME_LENGTH + COMMENT_LENGTH + 16), champ->header.prog_size);
+	champ->prog = champ->header.prog_size ? ft_memdup(buffer.data +
+		(PROG_NAME_LENGTH + COMMENT_LENGTH + 16), champ->header.prog_size) : 
+		ft_strnew(1);
 	close(fd);
 	free(buffer.data);
 }
