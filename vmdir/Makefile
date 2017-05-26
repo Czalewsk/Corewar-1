@@ -5,6 +5,7 @@ FLAGS = -Wall -Werror -Wextra -g
 SRCS =	vm_main.c \
 		op.c \
 		vm_pars_param.c \
+		vm_pars_param2.c \
 		vm_data.c \
 		vm_read_champ.c \
 		vm_init_map.c \
@@ -32,7 +33,9 @@ SRCS =	vm_main.c \
 		vm_ncurses.c \
 		vm_ncurses_print.c \
 		vm_ncurses_print_process.c \
+		vm_exec_op.c\
 		ft_say.c
+
 INCLUDES = -I includes -I ../libft
 
 DEP = Makefile includes/

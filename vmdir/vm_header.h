@@ -6,7 +6,7 @@
 /*   By: lduval <lduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 19:06:07 by lduval            #+#    #+#             */
-/*   Updated: 2017/05/26 11:44:01 by lduval           ###   ########.fr       */
+/*   Updated: 2017/05/26 13:14:42 by lduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,8 @@ void				vm_adv_verb(t_vm_proc *proc, int *nb_octet);
 void				ft_say(char *input);
 void				ft_afplay(char *input);
 void				del_tab_proc(void *content, size_t size);
+void				vm_exec_op(t_vm_data *data, t_vm_proc *proc);
+int		vm_fill_champion(char *champ_name, int n, t_vm_data *data);
+int		vm_isalready_set(int n, t_vm_data *data);
+int		get_next_player(t_vm_data *data);
 #endif
