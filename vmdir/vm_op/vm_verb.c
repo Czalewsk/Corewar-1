@@ -21,21 +21,23 @@ void		vm_lns_verb(t_vm_proc *proc, int *param)
 	champ = NULL;
 	if (proc->next_op == 1)
 	{
-		i = 0;
+		i = -1;
 		data = get_data();
-		while (!champ && data->tab_champ[i])
-		{
+		while (!champ && data->tab_champ[++i])
 			if (data->tab_champ[i]->num == param[0])
 				champ = data->tab_champ[i];
-			i++;
-		}
 	}
 	if (champ)
-		ft_printf("Player %d (%s) is said to be alive\n", champ->posnum, champ->header.prog_name);
+		ft_printf("Player %d (%s) is said to be alive\n",
+			champ->posnum, champ->header.prog_name);
 	if (proc->next_op == 0xb)
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", param[1], param[2], param[1] + param[2], (proc->pc + param[1] + param[2]) % MEM_SIZE);
+		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
+			param[1], param[2], param[1] + param[2],
+			(proc->pc + param[1] + param[2]) % MEM_SIZE);
 	else if (proc->next_op == 0xa)
-		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", param[0], param[1], param[0] + param[1], (proc->pc + param[0] + param[1]) % MEM_SIZE);
+		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
+			param[0], param[1], param[0] + param[1],
+			(proc->pc + param[0] + param[1]) % MEM_SIZE);
 }
 
 void		vm_adv_verb(t_vm_proc *proc, int *nb_octet)
@@ -45,7 +47,7 @@ void		vm_adv_verb(t_vm_proc *proc, int *nb_octet)
 	t_vm_data	*data;
 	int			l;
 
-	j = 0;
+	j = -1;
 	data = get_data();
 	i = nb_octet[0] + nb_octet[1] + nb_octet[2];
 	i += proc->ocp ? 1 : 0;
@@ -60,11 +62,8 @@ void		vm_adv_verb(t_vm_proc *proc, int *nb_octet)
 	while (l > MEM_SIZE)
 		l -= MEM_SIZE;
 	ft_printf("ADV %d (0x%0.4x -> 0x%0.4x) ", i, proc->pc, proc->pc + i);
-	while (j < i)
-	{
+	while (++j < i)
 		ft_printf("%.2x ", data->arena[(proc->pc + j) % MEM_SIZE]);
-		j++;
-	}
 	ft_printf("\n");
 }
 
@@ -94,4 +93,3 @@ void		vm_verb(t_vm_proc *proc, int *param, int *nb_octet)
 			vm_adv_verb(proc, nb_octet);
 	}
 }
-

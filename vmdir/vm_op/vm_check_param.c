@@ -18,12 +18,12 @@ int		vm_check_param(int ocp, unsigned int n_op)
 	unsigned int			tocp;
 	unsigned char			ocp2;
 
-	i = 0;
+	i = -1;
 	if ((ocp & 1) == 1 || ((ocp >> 1) & 1) == 1)
 		return (0);
 	ocp >>= 2;
 	ocp2 = ocp << 2;
-	while (i < 3 && ocp2 > 0)
+	while (++i < 3 && ocp2 > 0)
 	{
 		if (i >= g_op_tab[n_op].nb_p)
 			return (0);
@@ -36,7 +36,6 @@ int		vm_check_param(int ocp, unsigned int n_op)
 			return (0);
 		else if (tocp == 0)
 			return (0);
-		i++;
 		ocp2 <<= 2;
 	}
 	return (i == g_op_tab[n_op].nb_p);

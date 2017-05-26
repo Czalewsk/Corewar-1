@@ -25,10 +25,12 @@ void	vm_or(t_vm_data *data, t_vm_proc *proc, int *param, int *nb_octet)
 	while (i < 2)
 	{
 		if (nb_octet[i] == 1)
-			ft_memcpy(&(param[i]), proc->registre + (param[i] * REG_SIZE), REG_SIZE);
+			ft_memcpy(&(param[i]),
+				proc->registre + (param[i] * REG_SIZE), REG_SIZE);
 		else if (nb_octet[i] == 2)
 		{
-			tmp = vm_get_param(data, proc->ocp + (param[i] % IDX_MOD), REG_SIZE);
+			tmp = vm_get_param(data,
+				proc->ocp + (param[i] % IDX_MOD), REG_SIZE);
 			ft_memcpy(&(param[i]), &tmp, REG_SIZE);
 		}
 		i++;
