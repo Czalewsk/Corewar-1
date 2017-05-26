@@ -12,15 +12,15 @@ SRCS =	main.c write_bin.c debug.c get_lex.c set_lex.c \
 
 INCLUDES = -I includes -I ../libft
 
-DEP = Makefile includes/
+DEP = Makefile includes/asm.h includes/lexer.h includes/op.h
 
 LIB = -L ../libft
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: mylibft $(NAME)
 
-$(NAME): mylibft $(OBJS)
+$(NAME): $(OBJS)
 	gcc $(LIB) $(FLAGS) $(OBJS) -o $(NAME) -lft
 
 mylibft:
