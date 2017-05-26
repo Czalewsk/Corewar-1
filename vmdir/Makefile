@@ -37,9 +37,9 @@ SRCS =	vm_main.c \
 		ft_say.c
 		
 
-INCLUDES = -I includes -I ../libft
+INCLUDES = -I ../libft
 
-DEP = Makefile includes/header.h
+DEP = Makefile vm_header.h
 
 LIB = -L ../libft
 

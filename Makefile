@@ -1,5 +1,8 @@
+NAME = corewar_project
 
-all:
+all: $(NAME)
+
+corewar_project:
 	make -C asmdir
 	make -C vmdir
 
