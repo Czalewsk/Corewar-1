@@ -35,24 +35,25 @@ SRCS =	vm_main.c \
 		vm_ncurses_print_process.c \
 		vm_exec_op.c\
 		ft_say.c
+		
 
 INCLUDES = -I includes -I ../libft
 
-DEP = Makefile includes/
+DEP = Makefile includes/header.h
 
 LIB = -L ../libft
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: mylibft $(NAME)
 
-$(NAME): mylibft $(OBJS)
+$(NAME): $(OBJS)
 	gcc $(LIB) $(FLAGS) $(OBJS) -o $(NAME) -lft -lncurses
 
 mylibft:
 	make -C ../libft/
 
-%.o: %.c
+%.o: %.c $(DEP)
 	gcc $(FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:

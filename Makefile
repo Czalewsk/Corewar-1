@@ -1,13 +1,6 @@
 
-
-ASM = asm
-VM = vm
-
-all: $(ASM) $(VM)
-
-$(ASM):
+all:
 	make -C asmdir
-$(VM) :
 	make -C vmdir
 
 clean:
