@@ -46,7 +46,7 @@ int			write_bin(char *filename, t_buf *buffer)
 	int	fd;
 	int	ret;
 
-	filename = ft_cfextension(filename, "CX.cor");
+	filename = ft_cfextension(filename, ".cor");
 	if (!filename)
 		filename = ft_strdup("NameError.cor");
 	ft_printf("Writing output program to {cyan}%s{eoc}\n", filename);

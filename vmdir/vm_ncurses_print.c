@@ -49,7 +49,8 @@ void		curses_print_globad_info(t_ncurses_data *ncurses_data,
 		data->nbr_cycle, ncurses_data->interval);
 	mvprintw((i = i + 2), column + 2, "cycletodie: %d", data->cycletodie);
 	mvprintw((i = i + 2), column + 2, "nb_proc: %d", data->nb_proc);
-	mvprintw((i = i + 2), column + 2, "winner: %d", data->winner);
+	data->winner ? mvprintw((i = i + 2), column + 2, "winner: %s",
+		data->tab_champ[data->winner - 1]->header.prog_name) : 0;
 	curses_print_player_info(data->tab_champ, column, i + 2);
 	attron(A_DIM);
 	mvprintw(LINES - 2, column + 2,
